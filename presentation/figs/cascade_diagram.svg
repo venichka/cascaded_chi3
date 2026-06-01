@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 473.46902 292.71399"
+   font-family="'Helvetica Neue', Arial, sans-serif"
+   font-size="14px"
+   version="1.1"
+   id="svg16"
+   sodipodi:docname="cascade_diagram.svg"
+   width="473.46902"
+   height="292.71399"
+   inkscape:version="1.4.4 (dcaf3e7, 2026-05-05)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <sodipodi:namedview
+     id="namedview16"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="0.79003827"
+     inkscape:cx="255.68382"
+     inkscape:cy="380.9942"
+     inkscape:window-width="1720"
+     inkscape:window-height="1043"
+     inkscape:window-x="4"
+     inkscape:window-y="42"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg16" />
+  <defs
+     id="defs1">
+    <marker
+       id="ar"
+       viewBox="0 0 10 10"
+       refX="9"
+       refY="5"
+       markerWidth="7"
+       markerHeight="7"
+       orient="auto">
+      <path
+         d="M 0,0 10,5 0,10 Z"
+         fill="#aa4444"
+         id="path1" />
+    </marker>
+  </defs>
+  <!-- ground state -->
+  <line
+     x1="19.983913"
+     y1="265.13998"
+     x2="400.93668"
+     y2="265.13998"
+     stroke="#222222"
+     stroke-width="1.88119"
+     id="line1" />
+  <text
+     x="-1.0009956"
+     y="270.13998"
+     font-size="13px"
+     id="text1">|0⟩</text>
+  <!-- ω₁ resonance (qBIC) -->
+  <line
+     x1="18.906506"
+     y1="172.13998"
+     x2="402.01407"
+     y2="172.13998"
+     stroke="#1a4f8b"
+     stroke-width="1.82852"
+     id="line2" />
+  <text
+     x="409.27121"
+     y="182.83038"
+     fill="#1a4f8b"
+     font-size="13px"
+     id="text2">ω₁ (qBIC)</text>
+  <!-- 2ω₁ photon (virtual marker) -->
+  <line
+     x1="20.999004"
+     y1="80.139992"
+     x2="400.99899"
+     y2="80.139992"
+     stroke="#888888"
+     stroke-dasharray="5, 4"
+     stroke-width="1.2"
+     id="line3" />
+  <text
+     x="405.99899"
+     y="85.139992"
+     fill="#666666"
+     font-size="13px"
+     id="text3">2ω₁</text>
+  <!-- ω₂ resonance (BIC) -->
+  <line
+     x1="20.999004"
+     y1="43.139992"
+     x2="400.99899"
+     y2="43.139992"
+     stroke="#aa4444"
+     stroke-width="2.4"
+     id="line4" />
+  <text
+     x="405.99899"
+     y="38.139992"
+     fill="#aa4444"
+     font-size="13px"
+     id="text4">ω₂ (BIC, Q₂)</text>
+  <!-- detuning bracket Δω -->
+  <line
+     x1="395.99899"
+     y1="43.139992"
+     x2="395.99899"
+     y2="80.139992"
+     stroke="#000000"
+     stroke-width="0.8"
+     id="line5" />
+  <line
+     x1="390.99899"
+     y1="43.139992"
+     x2="400.99899"
+     y2="43.139992"
+     stroke="#000000"
+     stroke-width="0.8"
+     id="line6" />
+  <line
+     x1="390.99899"
+     y1="80.139992"
+     x2="400.99899"
+     y2="80.139992"
+     stroke="#000000"
+     stroke-width="0.8"
+     id="line7" />
+  <text
+     x="415.99899"
+     y="63.139992"
+     font-size="15px"
+     id="text7">Δω</text>
+  <!-- SHG: two ω₁ up arrows -->
+  <line
+     x1="60.999004"
+     y1="263.13998"
+     x2="60.999004"
+     y2="174.26541"
+     stroke="#aa4444"
+     stroke-width="2"
+     marker-end="url(#ar)"
+     id="line8" />
+  <text
+     x="40.255291"
+     y="219.01917"
+     fill="#aa4444"
+     font-size="14px"
+     id="text9">ω₁</text>
+  <text
+     x="40.999004"
+     y="13.139992"
+     font-weight="bold"
+     font-size="15px"
+     id="text11">SHG (χ⁽²⁾)</text>
+  <!-- DFG: two ω₁ down arrows -->
+  <text
+     x="300.99899"
+     y="13.139992"
+     font-weight="bold"
+     font-size="15px"
+     id="text14">DFG (χ⁽²⁾)</text>
+  <!-- SH propagator dashed connector -->
+  <path
+     d="m 135.999,80.139992 q 65,26.999998 120,0"
+     stroke="#666666"
+     stroke-width="1"
+     fill="none"
+     stroke-dasharray="3, 2"
+     id="path14" />
+  <text
+     x="104.43123"
+     y="124.35198"
+     font-size="12px"
+     fill="#666666"
+     font-style="italic"
+     id="text15">SH propagator G(2ω₁) ~ 1/(Δω + iγ₂/2)</text>
+  <!-- net process caption -->
+  <text
+     x="20.999004"
+     y="290.13998"
+     font-size="13px"
+     fill="#0d2c54"
+     id="text16">Net: ω₁ + ω₁ → (2ω₁) → ω₁ + ω₁ — effective χ⁽³⁾ on the fundamental.</text>
+  <line
+     x1="60.999004"
+     y1="171.13998"
+     x2="60.999004"
+     y2="82.265419"
+     stroke="#aa4444"
+     stroke-width="2"
+     marker-end="url(#ar)"
+     id="line16" />
+  <text
+     x="40.255291"
+     y="129.01917"
+     fill="#aa4444"
+     font-size="14px"
+     id="text17">ω₁</text>
+  <line
+     x1="330.99899"
+     y1="80.865425"
+     x2="330.99899"
+     y2="169.73999"
+     stroke="#aa4444"
+     stroke-width="2"
+     marker-end="url(#ar)"
+     id="line17" />
+  <line
+     x1="330.99899"
+     y1="172.86542"
+     x2="330.99899"
+     y2="261.73999"
+     stroke="#aa4444"
+     stroke-width="2"
+     marker-end="url(#ar)"
+     id="line18" />
+  <text
+     x="340.25528"
+     y="219.01917"
+     fill="#aa4444"
+     font-size="14px"
+     id="text18">ω₁</text>
+  <text
+     x="340.25528"
+     y="129.01917"
+     fill="#aa4444"
+     font-size="14px"
+     id="text19">ω₁</text>
+</svg>

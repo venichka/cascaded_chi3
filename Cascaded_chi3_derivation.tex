@@ -1,0 +1,537 @@
+\documentclass[11pt,a4paper]{article}
+
+% --- packages -----------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{bm}
+\usepackage{mathtools}
+
+% --- convenient macros --------------------------------------------------
+\newcommand{\eps}{\varepsilon}
+\newcommand{\epstilde}{\widetilde{\varepsilon}}
+\newcommand{\bvec}[1]{\mathbf{#1}}
+\newcommand{\E}{\bvec{E}}
+\newcommand{\f}{\bvec{f}}
+\newcommand{\h}{\bvec{h}}
+\newcommand{\ri}{\bvec{r}}
+\newcommand{\dthreer}{\,d^{3}r}
+\newcommand{\chitwo}{\chi^{(2)}}
+\newcommand{\chithree}{\chi^{(3)}}
+\newcommand{\Dom}{\Delta\omega}
+
+\setlength{\parskip}{0.4em}
+
+\begin{document}
+
+\title{Cascaded $\chi^{(2)}{:}\chi^{(2)} \to \chi^{(3)}_\text{eff}$ \\
+       in a Doubly-Resonant Metasurface\\[2pt]
+       }
+\author{Nikita Nefedkin}
+\date{\today}
+\maketitle
+
+% =======================================================================
+\section{Conventions}\label{sec:conventions}
+
+Real fields written as sums of complex envelopes,
+\begin{equation}
+  \mathcal{E}_i(\ri,t)=\tfrac12\sum_n\!\bigl[E_{n,i}(\ri,t)\,e^{-i\omega_n t}+\mathrm{c.c.}\bigr],\qquad
+  \mathcal{P}_i(\ri,t)=\tfrac12\sum_n\!\bigl[P_{n,i}(\ri,t)\,e^{-i\omega_n t}+\mathrm{c.c.}\bigr],
+\end{equation}
+with $E_{n,i},P_{n,i}$ slowly varying. The second-order polarisation
+\begin{equation}
+  P_i^{(2)}(\omega_\sigma)=\eps_0\!\!\sum_{(p,q)}\!\chitwo_{ijk}(\omega_\sigma;\omega_p,\omega_q)\,E_j(\omega_p)\,E_k(\omega_q),
+\end{equation}
+gives for the two relevant channels
+\begin{align}
+  P_i^{(2)}(2\omega_1)&=\eps_0\,\chitwo_{ijk}(2\omega_1;\omega_1,\omega_1)\,E_j(\omega_1)\,E_k(\omega_1) &&\text{(SHG)}\label{eq:PSHG}\\
+  P_i^{(2)}(\omega_1)&=2\eps_0\,\chitwo_{ijk}(\omega_1;2\omega_1,-\omega_1)\,E_j(2\omega_1)\,E_k^*(\omega_1) &&\text{(DFG)}\label{eq:PDFG}
+\end{align}
+The factor $2$ counts orderings $(2\omega_1,-\omega_1)$ and $(-\omega_1,2\omega_1)$. The native Kerr response is
+\begin{equation}
+  P_i^{(3)}(\omega_1)=3\eps_0\,\chithree_{ijkl}(\omega_1;\omega_1,\omega_1,-\omega_1)\,
+                     E_j(\omega_1)E_k(\omega_1)E_l^*(\omega_1).
+\end{equation}
+Under Kleinman symmetry
+\begin{equation}
+  \chitwo_{ijk}(2\omega_1;\omega_1,\omega_1)=\chitwo_{kij}(\omega_1;2\omega_1,-\omega_1)\equiv\chitwo_{ijk}(\ri).
+\end{equation}
+
+\paragraph{Scalar $\chitwo$.}
+The symbol $\chitwo_{ijk}(\ri)$ \emph{with} indices is always the
+full position-dependent rank-3 tensor introduced above. The
+\emph{unsubscripted} symbol $\chitwo$ (and its modulus $|\chitwo|$) is a
+single scalar magnitude characterising the active component of that
+tensor inside the nonlinear region $V_\text{NL}\subseteq V_\text{eff}$:
+\begin{equation}
+  \boxed{\;|\chitwo|\;\equiv\;\max_{\,(ijk),\,\ri\in V_\text{NL}}
+        \bigl|\chitwo_{ijk}(\ri)\bigr|.\;}
+  \label{eq:scalar-chi2}
+\end{equation}
+For a homogeneous host with a single dominant tensor element, $|\chitwo|$
+is just that element (e.g.\ $|\chitwo|\!=\!2d_{33}$ in LiNbO$_3$ with the
+$z$-polarised eigenmodes; $|\chitwo|\!=\!2d_{14}$ in GaAs/GaP/AlGaAs; etc.). In the bulk SVEA expressions of
+\S\ref{sec:tensorder}(a), $\chitwo$ denotes the same scalar projected
+onto the plane-wave polarisations, taken real and positive by an overall
+choice of phase.
+
+This scalar is the dimensional prefactor that we pull out of the
+tensorial integrals to make the geometric coefficients $\widetilde\eta$
+and $\eta_\text{geom}$ in \S\ref{sec:adiab} dimensionless. With this
+convention, $|\chitwo|^2$ in \eqref{eq:chi3casc-bulk} and
+\eqref{eq:chi3casc_explicit} carries the material units, and all
+mode-shape, fill-fraction, and tensor-projection information sits in
+$\eta_\text{geom}$ with $0\le\eta_\text{geom}\le 1$.
+
+% =======================================================================
+\section{Modes and energy normalisation}
+
+Linear eigenmodes $\f_n(\ri),\h_n(\ri)$ satisfy
+\begin{equation}
+  \nabla\!\times\!\nabla\!\times\!\f_n(\ri)
+  =\frac{\omega_n^2}{c^2}\,\eps_r(\ri,\omega_n)\,\f_n(\ri),
+\end{equation}
+with $\h_n=-i\nabla\!\times\!\f_n/(\omega_n\mu_0)$. Brillouin energy normalisation:
+\begin{equation}
+  \tfrac12\!\int\!\!\bigl[\,\eps_0\,\epstilde_n(\ri)\,|\f_n|^2+\mu_0|\h_n|^2\,\bigr]\dthreer=1,
+  \qquad
+  \epstilde_n(\ri)\equiv\left.\frac{\partial(\omega\,\eps_r(\ri,\omega))}{\partial\omega}\right|_{\omega=\omega_n}.
+\label{eq:Brillouin}
+\end{equation}
+Modal amplitude $a_n(t)$ defined by $E_{n,i}(\ri,t)=a_n(t)\,f_{n,i}(\ri)$; time-averaged energy in mode $n$ is $|a_n|^2$.
+
+% =======================================================================
+\section{Cascaded polarisation from $\chitwo\!\cdot G\!\cdot\chitwo$}\label{sec:tensorder}
+
+The SH field at leading order solves
+\begin{equation}
+  \bigl[\nabla\!\times\!\nabla\!\times\,-\,k_2^2\,\eps_r(\ri,2\omega_1)\bigr]
+  \mathbf E(2\omega_1)=k_2^2\,\mu_0 c^2\,\mathbf P^{\text{NL}}(2\omega_1),
+  \qquad k_2\equiv 2\omega_1/c,
+\label{eq:waveeq-SH}
+\end{equation}
+with dyadic Green's function $\overline{\overline G}(\ri,\ri';2\omega_1)$:
+\begin{equation}
+  E_j(\ri,2\omega_1)
+    = k_2^2\!\int\!d^3r'\;
+      G_{jl}(\ri,\ri';2\omega_1)\,\chitwo_{lmn}(\ri')\,
+      E_m(\ri',\omega_1)\,E_n(\ri',\omega_1).
+  \label{eq:Esh-Green}
+\end{equation}
+Substituting into the DFG polarisation \eqref{eq:PDFG},
+\begin{equation}
+  P_i^{\text{casc}}(\ri,\omega_1)
+  = 2\eps_0\,k_2^2\!\int\!d^3r'\;
+    \underbrace{\chitwo_{ijk}(\ri)\,
+                G_{jl}(\ri,\ri';2\omega_1)\,
+                \chitwo_{lmn}(\ri')}_{\equiv\,\Xi^{\text{casc}}_{ikmn}(\ri,\ri')}
+    E_m(\ri',\omega_1)\,E_n(\ri',\omega_1)\,E_k^*(\ri,\omega_1).
+  \label{eq:Pcasc-nonlocal}
+\end{equation}
+
+\subsection*{(a) Bulk, phase-mismatched (SVEA)}
+For plane waves $E(\omega_n,z)=A_n(z)\,e^{i k_n z}$, \eqref{eq:waveeq-SH} with \eqref{eq:PSHG} as source yields
+\begin{equation}
+  \frac{dA_2}{dz}=\frac{i\,\omega_2}{2\,n_2\,c}\,\chitwo\,A_1^{2}\,e^{-i\Delta k z},
+  \qquad \Delta k=k_2-2k_1.
+\end{equation}
+For undepleted pump and $A_2(0)=0$,
+\begin{equation}
+  A_2(z)=\frac{\omega_2\,\chitwo\,A_1^{2}}{2\,n_2\,c\,\Delta k}\bigl(1-e^{-i\Delta k z}\bigr).
+\end{equation}
+Substituting into \eqref{eq:PDFG} and projecting back into the SVEA equation at $\omega_1$,
+$dA_1/dz=(i\omega_1/(2 n_1 c))\,P^\text{NL}(\omega_1)/\eps_0\cdot e^{-i k_1 z}$, produces $dA_1/dz\supset iK_\text{casc}|A_1|^2 A_1$ with
+\begin{equation*}
+  K_\text{casc}=\frac{\omega_1\,\omega_2}{2 n_1 n_2 c^2\,\Delta k}|\chitwo|^2\times(\text{phase factor}).
+\end{equation*}
+Matching to $dA_1/dz=i(3\omega_1/(2n_1c))\,\chithree_\text{casc}|A_1|^2A_1$:
+\begin{equation}
+  \boxed{\;\chithree_{\text{casc,\,bulk}}(\omega_1)
+        =-\frac{2\,\omega_1}{3\,c\,n_2\,\Delta k}\,|\chitwo|^{2}\,\mathcal{F}(\Delta k\,L),\;}
+  \label{eq:chi3casc-bulk}
+\end{equation}
+with $\mathcal{F}\to 1$ for $\Delta k L\gg 1$ and $\mathcal{F}\to\Delta k L/2$ for $\Delta k L\ll 1$.
+
+\subsection*{(b) Single SH resonance (QNM)}
+Near an isolated SH quasi-normal mode,
+\begin{equation}
+  G_{jl}(\ri,\ri';2\omega_1)=
+  \frac{c^2}{2\omega_2}\,
+  \frac{f_{2,j}(\ri)\,f_{2,l}^*(\ri')}{\Dom+i\gamma_2/2}+(\text{bg}),
+  \qquad \Dom=2\omega_1-\omega_2.
+\label{eq:G-QNM}
+\end{equation}
+With $E_m(\ri,\omega_1)=a_1\,f_{1,m}(\ri)$, define
+\begin{equation}
+  M\equiv\!\int\!\chitwo_{ijk}(\ri)\,f_{2,i}^*\,f_{1,j}\,f_{1,k}\,\dthreer,
+  \qquad
+  \overline M\equiv\!\int\!\chitwo_{ijk}(\ri)\,f_{1,i}^*\,f_{2,j}\,f_{1,k}^*\,\dthreer=M^*.
+  \label{eq:M-overline-M}
+\end{equation}
+Substituting \eqref{eq:G-QNM} into \eqref{eq:Pcasc-nonlocal} gives
+\begin{equation}
+  P_i^{\text{casc}}(\ri,\omega_1)\propto
+    \frac{M\,|a_1|^{2}\,a_1}{\Dom+i\gamma_2/2}\,
+    \chitwo_{ijk}(\ri)\,f_{2,j}(\ri)\,f_{1,k}^{*}(\ri).
+  \label{eq:Pcasc-modal}
+\end{equation}
+Projecting onto $f_{1,i}^*$ and equating to the native-Kerr projection
+$\int f_{1,i}^* P_i^\text{nat}\dthreer=3\eps_0\,\chithree_\text{casc}\,|a_1|^2 a_1\!\int|\f_1|^4\dthreer$:
+\begin{equation}
+  \boxed{\;\chithree_{\text{casc}}=
+    -\,\frac{\eps_0\,\omega_1}{6}\cdot
+    \frac{|M|^2}{(\Dom+i\gamma_2/2)\!\int\!|\f_1|^4\dthreer}\;}
+  \label{eq:chi3casc-tensor}
+\end{equation}
+
+% =======================================================================
+\section{Coupled-mode equations}\label{sec:tcmt}
+
+Projecting Maxwell's equations onto $\f_n^*$ (slowly-varying envelope) with phenomenological loss rates:
+\begin{align}
+  \frac{da_2}{dt}&=\bigl(i\Dom-\tfrac{\gamma_2}{2}\bigr)a_2+i\beta\,a_1^2\label{eq:a2}\\[2pt]
+  \frac{da_1}{dt}&=-\tfrac{\gamma_1}{2}a_1+i\beta^*\,a_1^*\,a_2+i\alpha_3\,|a_1|^2 a_1+\sqrt{\gamma_1^{(\text{rad})}}\,s_+\label{eq:a1}
+\end{align}
+with $s_-=-s_++\sqrt{\gamma_1^{(\text{rad})}}\,a_1$, $\Dom\equiv 2\omega_1-\omega_2$, $\gamma_1=\gamma_1^{(\text{rad})}+\gamma_1^{(\text{nr})}$.
+
+\paragraph{Manley--Rowe.} In the lossless limit, differentiating $|a_n|^2$ from \eqref{eq:a2}--\eqref{eq:a1}:
+\begin{equation}
+  \frac{d|a_2|^{2}}{dt}=2\,\mathrm{Im}[\beta\,a_1^{*2}a_2],\qquad
+  \frac{d|a_1|^{2}}{dt}=-2\,\mathrm{Im}[\beta^{(1)}\,a_1^{*2}a_2],
+\end{equation}
+\begin{equation}
+  \frac{d}{dt}(|a_1|^{2}+|a_2|^{2})=2\,\mathrm{Im}[(\beta-\beta^{(1)})\,a_1^{*2}a_2],
+\end{equation}
+which vanishes $\forall a_1,a_2$ iff $\beta^{(1)}=\beta$.
+
+\paragraph{Modal coefficients.} Substituting $\mathbf E(\ri,2\omega_1)=a_2(t)\f_2(\ri)$ in \eqref{eq:waveeq-SH}, in the slow-envelope limit:
+\begin{equation*}
+  \mathrm{LHS}=\bigl[\,-2i\omega_2\,\dot a_2 + 2\omega_2\Dom\,a_2\bigr]/\eps_0,
+\end{equation*}
+\begin{equation*}
+  \mathrm{RHS}=k_2^{2}\,a_1^{2}\!\int\!\chitwo_{ijk}\,f_{2,i}^{*}\,f_{1,j}\,f_{1,k}\,\dthreer=k_2^{2}\,a_1^{2}\,M.
+\end{equation*}
+Adopting the standard cavity-QED normalisation,
+\begin{equation}
+  \boxed{\;\beta=\frac{\eps_0\,\omega_1}{4}\!\int\!\chitwo_{ijk}(\ri)\,
+                f_{2,i}^*\,f_{1,j}\,f_{1,k}\,\dthreer\;}
+\label{eq:beta}
+\end{equation}
+\begin{equation}
+  \boxed{\;\alpha_3=\frac{3\,\eps_0\,\omega_1}{8}\!\int\!\chithree_{ijkl}(\ri)\,
+                  f_{1,i}^*\,f_{1,j}\,f_{1,k}\,f_{1,l}^*\,\dthreer\;}
+\label{eq:alpha3}
+\end{equation}
+
+% =======================================================================
+\section{Adiabatic elimination $\Rightarrow$ effective $\chithree$}\label{sec:adiab}
+
+Assume $|\Dom|\gg\gamma_2/2$, $|\dot a_2|\ll|\Dom a_2|$. Setting $da_2/dt\to 0$:
+\begin{equation}
+  a_2=\frac{-\beta\,a_1^2}{\Dom+i\gamma_2/2}
+     \simeq\frac{-\beta\,a_1^2}{\Dom}\!\left(1-\frac{i\gamma_2}{2\Dom}\right).
+\end{equation}
+Substituting into \eqref{eq:a1}:
+\begin{equation}
+  \frac{da_1}{dt}=
+   \Bigl[-\tfrac{\gamma_1}{2}-\tfrac{|\beta|^2\gamma_2}{2\Dom^{2}}|a_1|^2\Bigr]a_1
+   +i\Bigl[\alpha_3-\tfrac{|\beta|^2}{\Dom}\Bigr]|a_1|^2 a_1
+   +\sqrt{\gamma_1^{(\text{rad})}}\,s_+ .
+\end{equation}
+
+\textbf{Effective Kerr.}
+\begin{equation}
+  \boxed{\;\alpha_3^{\text{eff}}=\alpha_3-\frac{|\beta|^2}{\Dom}\;}
+\end{equation}
+
+\textbf{Two-photon-like loss.}
+\begin{equation}
+  \gamma_3^\text{eff}=\frac{|\beta|^{2}\,\gamma_2}{2\,\Dom^{2}},
+  \qquad
+  \gamma_3^\text{eff}(\Dom)=\frac{|\beta|^{2}(\gamma_2/2)}{\Dom^{2}+(\gamma_2/2)^{2}}.
+  \label{eq:gamma3-adiab}
+\end{equation}
+
+\textbf{Cascaded $\chithree$.} Inverting $\alpha_3=(3\eps_0\omega_1/8)\,\chithree_\text{eff}\!\int|\f_1|^4\dthreer$:
+\begin{equation}
+  \chithree_{\text{casc}}=-\frac{|\beta|^2/\Dom}{(3\eps_0\omega_1/8)\!\int\!|\f_1|^4\dthreer}
+                      =-\frac{8}{3\eps_0\omega_1\Dom}\,
+                           \frac{|\beta|^2}{\int|\f_1|^4\dthreer}.
+\end{equation}
+With $\beta=\eps_0\omega_1\,I/4$, $I\equiv\int\chitwo_{ijk}\,f_{2,i}^*f_{1,j}f_{1,k}\dthreer$:
+\begin{equation}
+  \boxed{\;\chithree_{\text{casc}}=-\frac{\eps_0\,\omega_1}{6\,\Dom}\,
+       \frac{\bigl|\!\int\!\chitwo_{ijk}(\ri)\,f_{2,i}^*\,f_{1,j}\,f_{1,k}\dthreer\bigr|^{2}}
+            {\int|\f_1|^4\dthreer}\;.}
+\label{eq:chi3casc}
+\end{equation}
+
+\paragraph{Explicit $n$-dependence.} Using $|\f_n|\sim 1/\sqrt{\eps_0 n_n^2 V_\text{eff}}$:
+\begin{align}
+  \int|\f_1|^4\dthreer&\sim\frac{\zeta_1}{\eps_0^{\,2}\,n_1^{\,4}\,V_\text{eff}},
+  \\[2pt]
+  \Bigl|\!\int\!\chitwo_{ijk}f_{2,i}^*f_{1,j}f_{1,k}\dthreer\Bigr|^{2}
+        &\sim\frac{|\chitwo|^{2}\,\widetilde\eta^{2}}{\eps_0^{\,3}\,n_2^{\,2}\,n_1^{\,4}\,V_\text{eff}}.
+\end{align}
+All $n_1$ powers cancel:
+\begin{equation}
+  \boxed{\;\chithree_{\text{casc}}\sim-\frac{\omega_1}{6\,n_2^{\,2}\,\Dom}\;|\chitwo|^{2}\;\eta_\text{geom},
+        \quad \eta_\text{geom}\equiv\widetilde\eta^{2}/\zeta_1\;}
+\label{eq:chi3casc_explicit}
+\end{equation}
+
+\paragraph{Explicit form of $\eta_\text{geom}$.}
+Introduce dimensionless mode profiles $u_n(\ri)$ by stripping the
+dimensional scale from $\f_n$,
+\begin{equation}
+  \f_n(\ri)\equiv\frac{u_n(\ri)}{\sqrt{\eps_0\,n_n^{\,2}\,V_\text{eff}}},
+  \qquad
+  \int|u_n(\ri)|^{2}\dthreer\;=\;V_\text{eff},
+  \label{eq:dimless-modes}
+\end{equation}
+where $V_\text{eff}$ is the common effective mode volume (the
+normalisation \eqref{eq:Brillouin} is reproduced for non-magnetic media
+with $\widetilde\eps_n\!\sim\!n_n^{\,2}$ inside the mode and electric/magnetic
+equipartition). The $u_n$ are $O(1)$ where the mode is concentrated and
+vanish far from it. Inserting \eqref{eq:dimless-modes} into the integrals
+introduced for the scaling estimate,
+\begin{align}
+  \int|\f_1|^{4}\dthreer
+    &=\frac{1}{\eps_0^{\,2}\,n_1^{\,4}\,V_\text{eff}^{\,2}}\!\int|u_1|^{4}\dthreer,\\[2pt]
+  \Bigl|\!\int\!\chitwo_{ijk}\,f_{2,i}^{*}\,f_{1,j}\,f_{1,k}\,\dthreer\Bigr|^{2}
+    &=\frac{1}{\eps_0^{\,3}\,n_1^{\,4}\,n_2^{\,2}\,V_\text{eff}^{\,3}}\,
+       \Bigl|\!\int\!\chitwo_{ijk}\,u_{2,i}^{*}\,u_{1,j}\,u_{1,k}\,\dthreer\Bigr|^{2},
+\end{align}
+fixes the dimensionless geometric factors as
+\begin{equation}
+  \boxed{\;
+  \zeta_{1}\;\equiv\;\frac{1}{V_\text{eff}}\!\int|u_{1}(\ri)|^{4}\dthreer,
+  \qquad
+  \widetilde\eta\;\equiv\;\frac{1}{|\chitwo|\,V_\text{eff}}\,
+        \Bigl|\!\int\!\chitwo_{ijk}(\ri)\,u_{2,i}^{*}(\ri)\,u_{1,j}(\ri)\,u_{1,k}(\ri)\,\dthreer\Bigr|.
+  \;}
+  \label{eq:zeta1-etatilde}
+\end{equation}
+Combining the two yields the closed-form
+\begin{equation}
+  \boxed{\;
+  \eta_\text{geom}\;=\;\frac{\widetilde\eta^{\,2}}{\zeta_1}
+   \;=\;
+   \frac{\Bigl|\!\int\!\chitwo_{ijk}(\ri)\,u_{2,i}^{*}\,u_{1,j}\,u_{1,k}\,\dthreer\Bigr|^{2}}
+        {|\chitwo|^{2}\,V_\text{eff}\!\int|u_{1}(\ri)|^{4}\dthreer}.
+  \;}
+  \label{eq:eta-geom-explicit}
+\end{equation}
+
+Equivalently, eliminating the dimensionless profiles in favour of the
+Brillouin-normalised $\f_n$,
+\begin{equation}
+  \eta_\text{geom}
+   =\frac{\eps_0\,n_2^{\,2}\,
+          \bigl|\!\int\!\chitwo_{ijk}(\ri)\,f_{2,i}^{*}\,f_{1,j}\,f_{1,k}\,\dthreer\bigr|^{2}}
+         {|\chitwo|^{2}\!\int|\f_1(\ri)|^{4}\dthreer},
+  \label{eq:eta-geom-f}
+\end{equation}
+which back-substituted into \eqref{eq:chi3casc_explicit} reproduces
+\eqref{eq:chi3casc} exactly (the $n_2^{\,2}$ cancels the $1/n_2^{\,2}$ in the
+prefactor and the $\eps_0$ restores the tensorial form).
+
+\paragraph{Bounds and limits.} By Cauchy--Schwarz on the integrand of
+\eqref{eq:eta-geom-explicit}, with $|\chitwo(\ri)|\!\leq\!|\chitwo|$ on its
+support and $\int|u_2|^{2}\dthreer=V_\text{eff}$,
+\[
+  \Bigl|\!\int\!\chitwo_{ijk}\,u_{2,i}^{*}\,u_{1,j}\,u_{1,k}\,\dthreer\Bigr|^{2}
+  \;\leq\;
+  |\chitwo|^{2}\,V_\text{eff}\!\int|u_{1}|^{4}\dthreer
+  \quad\Longrightarrow\quad
+  0\;\leq\;\eta_\text{geom}\;\leq\;1.
+\]
+For a uniform $\chitwo$ filling a fraction $V_\text{NL}/V_\text{eff}$ of the
+mode with perfectly aligned, top-hat profiles inside the nonlinear region,
+$\widetilde\eta,\zeta_1\sim V_\text{NL}/V_\text{eff}$ and hence
+$\eta_\text{geom}\sim V_\text{NL}/V_\text{eff}$ — the nonlinear fill
+fraction weighted by the tensor projection. Realistic (I guess) BIC/qBIC LiNbO$_3$
+designs give $\eta_\text{geom}\approx 0.1\text{--}0.5$; a value
+$\eta_\text{geom}\!\approx\!0.3$ is used in the numerical
+estimates (in the presentation particularly).
+
+% =======================================================================
+\section{Bandwidth--enhancement sum rule}\label{sec:sumrule}
+
+For $|a_1|^2$ modulated at $\Omega$, $\delta a_2=i\beta\,\delta(a_1^2)/(-i(\Dom-\Omega)+\gamma_2/2)$. The frequency-dependent cascaded Kerr:
+\begin{equation}
+  \alpha_3^{\text{eff}}(\Omega)=\frac{i\,|\beta|^{2}}{\gamma_2/2+i(\Omega-\Dom)},
+  \qquad
+  |\alpha_3^{\text{eff}}(\Omega)|=\frac{|\beta|^{2}}{\sqrt{(\gamma_2/2)^{2}+(\Omega-\Dom)^{2}}}.
+  \label{eq:alpha3-AC}
+\end{equation}
+$|\alpha_3^\text{eff}(\Omega)|^2$ is Lorentzian, FWHM $\gamma_2$, peak $4|\beta|^4/\gamma_2^2$, area
+\begin{equation}
+  \int\!d\Omega\,|\alpha_3^{\text{eff}}(\Omega)|^{2}=\frac{2\pi\,|\beta|^{4}}{\gamma_2}.
+\end{equation}
+At $|\Dom|\sim\gamma_2$, $|\alpha_3^\text{eff}|_\text{max}\sim|\beta|^2/\gamma_2$, $\Delta\Omega\sim\gamma_2$. With $\omega_1/\gamma_2=Q_2/2$:
+\begin{equation}
+  |\chithree_\text{casc}|_\text{max}\sim
+       \frac{Q_2}{12\,n_2^{\,2}}\,|\chitwo|^2\,\eta_\text{geom}.
+  \label{eq:chi3-max}
+\end{equation}
+Multiplying by $\Delta f_\text{usable}\sim\gamma_2/(2\pi)$:
+\begin{equation}
+  \boxed{\;|\chithree_\text{casc}|_\text{max}\times\Delta f_\text{usable}
+          \lesssim\frac{\omega_1\,|\chitwo|^2\,\eta_\text{geom}}{12\pi\,n_2^{\,2}}
+          \quad\text{($Q_2$-independent)}.\;}
+  \label{eq:sum-rule}
+\end{equation}
+
+% =======================================================================
+\section{Per-photon nonlinear phase}\label{sec:phi}
+
+On-resonance pump, fully-radiative limit $\gamma_1^{(\text{rad})}=\gamma_1$: $|a_1|^2=(4/\gamma_1)|s_+|^2$, $\phi_\text{NL}=\alpha_3^\text{eff}|a_1|^2\cdot(2/\gamma_1)$.
+\begin{equation}
+  \boxed{\;\frac{\phi_\text{NL}}{|s_+|^{2}}=\frac{8\,\alpha_3^\text{eff}}{\gamma_1^{2}}\;}
+  \label{eq:phi-per-photon}
+\end{equation}
+For Architecture A (native), $\alpha_3^\text{eff,A}=\alpha_3\propto\chithree_\text{native}$. For B (cascade),
+\begin{equation}
+  \alpha_3^\text{eff,B}=-\frac{|\beta|^{2}}{\Dom+i\gamma_2/2}\propto\frac{|\chitwo|^{2}\eta_\text{geom}}{n_2^{2}\Dom}\propto Q_2.
+\end{equation}
+Define
+\begin{equation}
+  \boxed{\;R\equiv\frac{|\alpha_3^\text{eff,B}|}{|\alpha_3^\text{eff,A}|}
+        =\frac{|\beta|^{2}}{|\alpha_3|\,|\Dom+i\gamma_2/2|}
+        \stackrel{\Dom\gg\gamma_2}{\simeq}\frac{|\chithree_\text{casc}|}{|\chithree_\text{native}|}.\;}
+  \label{eq:R-def}
+\end{equation}
+
+% =======================================================================
+\section{Kerr-driven observables}\label{sec:obs}
+
+\paragraph{SPM.} Linear in $\alpha_3^\text{eff}$:
+\begin{equation}
+  \boxed{\;\frac{\phi_\text{NL}^{\text{A+B}}}{\phi_\text{NL}^{\text{A}}}=1+R.\;}
+\end{equation}
+
+\paragraph{XPM.} Same scaling, with $\alpha_3^\text{XPM}=2\alpha_3^\text{SPM}$:
+\begin{equation}
+  \boxed{\;\frac{\alpha_3^\text{XPM,\,A+B}}{\alpha_3^\text{XPM,\,A}}=1+R.\;}
+\end{equation}
+
+\paragraph{Bistability / switching.} Steady state of \eqref{eq:a1} at detuning $\delta_p$:
+\begin{equation}
+  \bigl[\tfrac{\gamma_1}{2}-i(\delta_p+\alpha_3^\text{eff}|a_1|^2)\bigr]a_1=\sqrt{\gamma_1^\text{rad}}s_+.
+  \label{eq:bist-SS}
+\end{equation}
+Scaling $y=\alpha_3^\text{eff}|a_1|^2/(\gamma_1/2)$, $x=\delta_p/(\gamma_1/2)$, $u=|\alpha_3^\text{eff}||s_+|^2\gamma_1^\text{rad}/(\gamma_1/2)^3$:
+\begin{equation}
+  y[1+(x-y)^2]=u.
+\end{equation}
+Three roots iff
+\begin{equation}
+  \mathrm{sign}(\delta_p)=-\mathrm{sign}(\alpha_3^\text{eff}),
+  \qquad |\delta_p|>\sqrt{3}\,\gamma_1/2.
+\end{equation}
+Cusp threshold $|a_1|^2_c=\sqrt{3}\gamma_1/(2|\alpha_3^\text{eff}|)$:
+\begin{equation}
+  |s_+|^{2}_\text{bist}\propto\frac{\gamma_1^{2}}{|\alpha_3^\text{eff}|},
+\end{equation}
+\begin{equation}
+  \boxed{\;\frac{|s_+|^{2,\,\text{A+B}}_\text{bist}}{|s_+|^{2,\,\text{A}}_\text{bist}}
+        =\frac{E_\text{switch}^{\text{A+B}}}{E_\text{switch}^{\text{A}}}=\frac{1}{1+R}.\;}
+\end{equation}
+
+\paragraph{FWM.} Write $a_1=a_p+a_s e^{-i\Omega t}+a_i e^{+i\Omega t}$ with $|a_s|,|a_i|\ll|a_p|$. Collecting the $e^{+i\Omega t}$ component of $|a_1|^2 a_1$ gives source $\mathcal{S}_i=i\alpha_3^\text{eff}a_p^2 a_s^*$ and detuning renormalisation $2|a_p|^2 a_i$ (dropped below). Idler steady state:
+\begin{equation}
+  a_i=\frac{i\,\alpha_3^\text{eff}\,a_p^{2}\,a_s^{*}}{\gamma_1/2-i\Omega}
+   \simeq\frac{i\,\alpha_3^\text{eff}\,a_p^{2}\,a_s^{*}}{\gamma_1/2}\quad(|\Omega|<\gamma_1/2).
+\end{equation}
+Using $|s_-^{(i)}|^2=\gamma_1^\text{rad}|a_i|^2$ and $|a_s|=2\sqrt{\gamma_1^\text{rad}}|s_+^{(s)}|/\gamma_1$:
+\begin{equation}
+  \eta_\text{FWM}\equiv\frac{|s_-^{(i)}|^{2}}{|s_+^{(s)}|^{2}}\propto
+       \frac{|\alpha_3^\text{eff}|^{2}\,|a_p|^{4}}{(\gamma_1/2)^{2}}.
+\end{equation}
+\begin{equation}
+  \boxed{\;\frac{\eta_\text{FWM}^{\text{A+B}}}{\eta_\text{FWM}^{\text{A}}}=(1+R)^{2}.\;}
+\end{equation}
+
+% =======================================================================
+\section{Imaginary part: cascaded saturable absorber}
+
+From \eqref{eq:chi3casc-tensor}, writing $1/(\Dom+i\gamma_2/2)=(\Dom-i\gamma_2/2)/[\Dom^2+(\gamma_2/2)^2]$:
+\begin{equation}
+  \mathrm{Im}\,\chithree_\text{casc}(\Dom)
+   =\frac{\eps_0\,\omega_1}{6}\cdot
+        \frac{|M|^{2}\,(\gamma_2/2)}{[\Dom^{2}+(\gamma_2/2)^{2}]\,\int|\f_1|^{4}\dthreer},
+\end{equation}
+\begin{equation}
+  \gamma_3^\text{eff}(\Dom)=\frac{|\beta|^{2}(\gamma_2/2)}{\Dom^{2}+(\gamma_2/2)^{2}},
+  \qquad
+  \gamma_3^\text{eff}(0)=\frac{|\beta|^{2}}{\gamma_2/2}=\frac{2 Q_2}{\omega_2}|\beta|^{2}.
+\end{equation}
+At $\Dom=0$ (Lorentzian peak, FWHM $\gamma_2$):
+\begin{equation}
+  \mathrm{Im}\,\chithree_\text{casc}\big|_{\Dom=0}
+       \sim\frac{Q_2}{6\,n_2^{\,2}}\,|\chitwo|^{2}\,\eta_\text{geom}.
+\end{equation}
+
+% =======================================================================
+\section{Amplitude modulator: $\Dom(t)$ transfer function}
+
+Linearise $\Dom(t)=\Dom_0+\delta\Omega\cos(\Omega_\text{mod}t)$ in the SH equation \eqref{eq:a2}. The positive-frequency sideband of $\delta a_2$:
+\begin{equation}
+  A_+(\Omega_\text{mod})=\frac{(\delta\Omega/2)\,a_{2,0}}{\gamma_2/2+i(\Omega_\text{mod}-\Dom_0)},
+  \qquad a_{2,0}=\frac{-\beta\,a_1^{2}}{\Dom_0+i\gamma_2/2}.
+\end{equation}
+\begin{equation}
+  \left|\frac{\delta a_2}{a_{2,0}}\right|_{\Omega_\text{mod}}
+   =\frac{\delta\Omega/2}{\sqrt{(\gamma_2/2)^{2}+(\Omega_\text{mod}-\Dom_0)^{2}}}.
+\end{equation}
+Peak at $\Omega_\text{mod}=\Dom_0$, DC at $\Omega_\text{mod}=0$:
+\begin{equation}
+  \left|\frac{\delta a_2}{a_{2,0}}\right|_\text{peak}=\frac{\delta\Omega}{\gamma_2},
+  \quad
+  \left|\frac{\delta a_2}{a_{2,0}}\right|_\text{DC}=\frac{\delta\Omega}{\sqrt{\Dom_0^{2}+(\gamma_2/2)^{2}}}.
+\end{equation}
+AC-peak/DC enhancement:
+\begin{equation}
+  \boxed{\;
+  \frac{|\delta\alpha_3^\text{eff}|_\text{peak}}{|\delta\alpha_3^\text{eff}|_\text{DC}}
+  =\frac{\sqrt{\Dom_0^{2}+(\gamma_2/2)^{2}}}{\gamma_2}
+  \xrightarrow[\Dom_0\gg\gamma_2]{}\frac{|\Dom_0|}{\gamma_2}.\;}
+  \label{eq:AC-peak-enhancement}
+\end{equation}
+
+% =======================================================================
+\section{Sensor: $d\alpha_3^\text{casc}/d\Dom$}
+
+With $b\equiv\gamma_2/2$, $\alpha_3^\text{casc}(\Dom)=-|\beta|^{2}\Dom/[\Dom^{2}+b^{2}]$:
+\begin{equation}
+  \frac{d\alpha_3^\text{casc}}{d\Dom}=-|\beta|^{2}\,
+        \frac{b^{2}-\Dom^{2}}{[\Dom^{2}+b^{2}]^{2}}.
+\end{equation}
+Extrema: global max at $\Dom=0$, local max at $|\Dom|=b\sqrt{3}$ (factor 8 smaller).
+\begin{equation}
+  \boxed{\;\left|\frac{d\alpha_3^\text{casc}}{d\Dom}\right|_{\Dom=0}
+     =\frac{|\beta|^{2}}{b^{2}}=\frac{4|\beta|^{2}}{\gamma_2^{\,2}}\propto Q_2^{\,2}.\;}
+\end{equation}
+Using \eqref{eq:phi-per-photon},
+\begin{equation}
+   \left|\frac{d\phi_\text{NL}}{d\Dom}\right|_\text{max}
+     =\frac{32\,|s_+|^{2}\,|\beta|^{2}}{\gamma_1^{\,2}\,\gamma_2^{\,2}}
+     \propto Q_1^{\,2}\,Q_2^{\,2}.
+\end{equation}
+
+% =======================================================================
+\section{Principal result}
+
+\begin{equation}
+  \boxed{\;\chithree_\text{casc}(\omega_1)
+        =-\frac{\eps_0\,\omega_1}{6\,\Dom}\;
+          \frac{\bigl|\!\int\!\chitwo_{ijk}(\ri)\,f_{2,i}^*\,f_{1,j}\,f_{1,k}\dthreer\bigr|^{2}}
+               {\int|\f_1(\ri)|^{4}\dthreer}
+        \;\sim\;-\frac{\omega_1}{6\,n_2^{\,2}\,\Dom}\;|\chitwo|^{2}\;\eta_\text{geom}\,,\;}
+\end{equation}
+valid for $\gamma_2/2\ll|\Dom|\ll\omega_1$, $|\beta a_1|\ll|\Dom|$.
+
+\end{document}

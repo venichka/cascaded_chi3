@@ -1,0 +1,1117 @@
+\documentclass[11pt,a4paper]{article}
+
+% --- packages -----------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{bm}
+\usepackage{mathtools}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue!50!black, citecolor=blue!50!black,
+            urlcolor=blue!50!black}
+
+% --- macros (kept identical to the main note for cross-readability) -----
+\newcommand{\eps}{\varepsilon}
+\newcommand{\epstilde}{\widetilde{\varepsilon}}
+\newcommand{\bvec}[1]{\mathbf{#1}}
+\newcommand{\E}{\bvec{E}}
+\newcommand{\f}{\bvec{f}}
+\newcommand{\h}{\bvec{h}}
+\newcommand{\ri}{\bvec{r}}
+\newcommand{\dthreer}{\,d^{3}r}
+\newcommand{\chitwo}{\chi^{(2)}}
+\newcommand{\chithree}{\chi^{(3)}}
+\newcommand{\Dom}{\Delta\omega}
+\newcommand{\Einc}{\E_{\text{loc}}}
+\newcommand{\chicascOneR}{\chi^{(3)}_{\text{casc},(1\mathrm R)}}
+\newcommand{\chicascTwoR}{\chi^{(3)}_{\text{casc},(2\mathrm R)}}
+\newcommand{\chicasc}{\chi^{(3)}_{\text{casc}}}
+\newcommand{\Vunit}{V_{\text{cell}}}
+\newcommand{\VNL}{V_{\text{NL}}}
+\newcommand{\Veff}{V_{\text{eff}}}
+
+\setlength{\parskip}{0.4em}
+
+\begin{document}
+
+\title{Cascaded $\chi^{(2)}{:}\chi^{(2)} \to \chi^{(3)}_\text{eff}$\\
+       in a Singly-Resonant (SH-only) Metasurface \\[2pt]
+       \large derivation and comparison with the doubly-resonant case}
+\author{}
+\date{\today}
+\maketitle
+
+% =======================================================================
+\section{Setting and goal}\label{sec:setting}
+
+The companion note \emph{Cascaded $\chithree$ in a doubly-resonant dielectric
+metasurface} derives the cascaded Kerr response when both the fundamental
+($\omega_1$) and the second harmonic ($\omega_2\approx 2\omega_1$) are
+sharp resonances of the same meta-atom.  Here we ask what changes when the
+metasurface has \emph{only} the SH resonance: the FM is in the linear
+transmission band, with no field build-up at $\omega_1$.
+
+This is a relevant question for two reasons.  First, designing two
+spectrally-aligned co-localised resonances (qBIC at $\omega_1$ and a high-$Q$
+BIC near $2\omega_1$) requires significant mode-engineering and fabrication
+control; a single SH resonance is much cheaper.  Second, the SH-only
+configuration is the cleanest experimental platform for \emph{isolating}
+the $\chitwo\!\cdot\!G\!\cdot\!\chitwo$ kernel from FM-lineshape effects,
+because the FM transmission is featureless across the relevant tuning
+range.  We therefore want the cascaded $\chithree$ for this geometry in
+closed form, with the same conventions and overlap structure as in the main
+note, so the two boxed results can be compared term by term.
+
+\paragraph{Result preview.}
+The structural form
+$\chithree_{\text{casc}}\sim -\omega_1\,|\chitwo|^{2}\,\eta_\text{geom}/(6\,n_2^{2}\,\Dom)$
+\emph{survives} the loss of the FM resonance.  The geometric overlap
+$\eta_\text{geom}$ takes a different (typically smaller) value, set by how
+well the spatially-uniform incident pump can drive $\f_2$ through
+$\chitwo(\ri)$.  The headline change is \emph{not} in $\chithree_\text{casc}$
+itself but in the per-photon nonlinear phase observable on a finite-thickness
+metasurface, which loses the $Q_1^{2}$ build-up factor that doubly-resonant
+operation provides.  Section~\ref{sec:compare} makes this quantitative.
+
+\paragraph{Conventions.}
+Boyd field convention $\mathcal{E}=\tfrac12(E e^{-i\omega t}+\text{c.c.})$,
+SHG and DFG polarisations with degeneracies $1$ and $2$ respectively, SPM
+with degeneracy $3$, Kleinman symmetry, Brillouin energy normalisation
+$\tfrac12\!\int[\eps_0\epstilde_n|\f_n|^{2}+\mu_0|\h_n|^{2}]\dthreer=1$.
+All identical to the main note's \S 2--\S 3; we use them without further
+comment.  Frequency detuning $\Dom\equiv 2\omega_1-\omega_2$.
+
+% =======================================================================
+\section{The FM field without a resonance}\label{sec:Eloc}
+
+In the doubly-resonant case the FM field inside the meta-atom is
+$\E(\ri,\omega_1)=a_1\,\f_1(\ri)$, with the modal amplitude $a_1\in
+\mathbb{C}$ carrying the resonant build-up:
+$|a_1|^{2}\sim |s_+|^{2}\,Q_1/\omega_1$ at coupled-FM resonance.
+
+With no FM resonance, the modal expansion of $\E(\omega_1)$ has no large
+near-pole term.  In the linear (zero-nonlinearity) limit at $\omega_1$,
+write the field inside the meta-atom as
+\begin{equation}
+  \E(\ri,\omega_1)\;=\;\Einc(\ri)\,,
+  \label{eq:Eloc-def}
+\end{equation}
+the steady-state response of the metasurface to an incident plane wave
+$\E_\text{in}(\ri,\omega_1)=E_0\,\hat{\bm e}\,e^{i\mathbf k_1\!\cdot\ri}$
+at frequency $\omega_1$, computed in the absence of nonlinearity.
+$\Einc(\ri)$ is a c-number field, not a dynamical mode amplitude: it is
+fixed by the incident drive and does not have an independent equation of
+motion.
+
+\paragraph{Magnitude and spatial profile.}
+Inside a high-index dielectric meta-atom of refractive index $n_1$ embedded
+in air, the off-resonant Mie / slab-Fresnel regime gives
+\begin{equation}
+  |\Einc(\ri)|\;\sim\;\frac{T_\text{geom}}{n_1}\,E_0,
+  \qquad \text{(inside the dielectric, for }\ri\in\VNL\text{),}
+  \label{eq:Eloc-magnitude}
+\end{equation}
+with $T_\text{geom}\sim\mathcal O(1)$ a geometric prefactor absorbing the
+shape-dependent depolarisation factor and Fresnel transmission at the
+interface.  (Two limiting cases bracket this: a thin slab gives
+$2/(1+n_1)\sim 1/n_1$, and a small dielectric sphere in the
+Clausius--Mossotti limit gives $3/(n_1^{2}+2)\sim 1/n_1^{2}$ -- typical
+sub-wavelength LiNbO$_3$ pillars sit closer to the slab/Fresnel regime
+because the depth of the meta-atom is not deep in the quasi-static limit;
+we adopt $1/n_1$ as the conservative default and absorb $\mathcal O(1)$
+shape residuals into $T_\text{geom}$.)  The crucial point is the absence
+of any factor of $Q_1$: the linear FM response is broadband, and a
+plane-wave intensity $I_\text{in}=\tfrac12\eps_0 c n_\text{ext}|E_0|^{2}$
+($n_\text{ext}=1$ in air) translates to local energy density
+$\tfrac12\eps_0 n_1^{2}|\Einc|^{2}\sim T_\text{geom}^{2}\,I_\text{in}/c$
+inside the dielectric, with no resonant enhancement.
+
+\paragraph{Polarisation pattern.}
+For a meta-atom whose lowest electric multipole is dipolar, $\Einc(\ri)$ is
+to leading order spatially uniform inside $\VNL$ and parallel to
+$\hat{\bm e}$.  We will use this uniform-pump approximation throughout, so
+\begin{equation}
+  \Einc(\ri)\;\approx\;E_\text{loc}\,\hat{\bm e},
+  \qquad
+  E_\text{loc}\equiv \frac{T_\text{geom}}{n_1}\,E_0,
+  \qquad \ri\in\VNL.
+  \label{eq:Eloc-uniform}
+\end{equation}
+Corrections to this approximation are at most $\mathcal O(1)$ shape factors
+inside the meta-atom and can be absorbed into a redefinition of
+$T_\text{geom}$; they do not alter the structural form derived below.
+
+% =======================================================================
+\section{TCMT for the SH-only mode}\label{sec:tcmt-1R}
+
+Repeating the projection-onto-$\f_2^{*}$ argument of the main note's \S 5
+with the SHG polarisation source
+$P_i^{(2)}(\ri,2\omega_1)=\eps_0\,\chitwo_{ijk}(\ri)\,E_{\text{loc},j}(\ri)\,E_{\text{loc},k}(\ri)$
+gives the SH-mode equation
+\begin{equation}
+  \boxed{\;\frac{da_2}{dt}=\bigl(i\Dom-\tfrac{\gamma_2}{2}\bigr)\,a_2
+                          \;+\;i\,\hat\beta\,,\;}
+  \label{eq:a2-1R}
+\end{equation}
+where the SH-mode amplitude $a_2$ is again Brillouin-normalised so that
+$|a_2|^{2}$ is the stored SH energy.  The crucial difference from the
+doubly-resonant equation $\dot a_2=(i\Dom-\gamma_2/2)a_2+i\beta a_1^{2}$ is
+that the drive $\hat\beta$ is a c-number set by the incident pump --
+\emph{not} a quadratic function of a dynamical FM amplitude.  Explicitly,
+\begin{equation}
+  \boxed{\;\hat\beta\;=\;\frac{\eps_0\,\omega_1}{4}\!\int_{\VNL}\!
+                \chitwo_{ijk}(\ri)\,f_{2,i}^{*}(\ri)\,
+                E_{\text{loc},j}(\ri)\,E_{\text{loc},k}(\ri)\,\dthreer\,,\;}
+  \qquad [\text{units}:\ \mathrm{J}^{1/2}\mathrm{s}^{-1}].
+  \label{eq:betahat}
+\end{equation}
+This is the singly-resonant analogue of the main note's coupling
+$\beta=(\eps_0\omega_1/4)\!\int\chitwo f_2^{*}f_1 f_1\dthreer$
+(main note Eq.~(beta)).  The prefactor convention $\eps_0\omega_1/4$ is
+inherited from the same Brillouin/projection chain (see main note \S 5);
+factor-of-two ambiguities discussed there propagate identically here, so
+the $\hat\beta\leftrightarrow\beta$ correspondence is exact at the
+prefactor level.
+
+\paragraph{Steady-state SH amplitude.}
+Equation~\eqref{eq:a2-1R} is driven at frequency $2\omega_1$ (in the lab
+frame) by the externally-imposed $\hat\beta$.  Setting $\dot a_2\to 0$,
+\begin{equation}
+  a_2^{\text{ss}}\;=\;\frac{i\,\hat\beta}{\gamma_2/2-i\,\Dom}
+              \;=\;-\,\frac{\hat\beta}{\Dom+i\,\gamma_2/2}\,,
+  \label{eq:a2ss-1R}
+\end{equation}
+identical in structure to the doubly-resonant
+$a_2=-\beta a_1^{2}/(\Dom+i\gamma_2/2)$ with the replacement
+$\beta\,a_1^{2}\;\longleftrightarrow\;\hat\beta$.  In the doubly-resonant
+case $|\beta a_1^{2}|$ scales with the FM-resonant build-up
+$|a_1|^{2}\propto Q_1$; here $|\hat\beta|\propto|E_\text{loc}|^{2}\propto
+|E_0|^{2}/n_1^{2}$ has no such enhancement.  Quantifying this gap is the
+main work of Section~\ref{sec:compare}.
+
+\paragraph{No FM equation.}
+There is no $a_1$ degree of freedom and hence no equation for it.  The
+DFG back-action at $\omega_1$ does not feed an FM resonance; instead it
+generates a local nonlinear polarisation $P^{\text{casc}}(\ri,\omega_1)$
+that radiates and modifies the transmitted FM field directly through the
+metasurface response.  We derive this polarisation next.
+
+% =======================================================================
+\section{Cascaded back-polarisation at \texorpdfstring{$\omega_1$}{ω₁}}\label{sec:Pcasc-1R}
+
+The SH field generated inside the meta-atom is, in the single-resonance
+approximation,
+\begin{equation}
+  E_m(\ri,2\omega_1)\;=\;a_2^{\text{ss}}\,f_{2,m}(\ri)
+   \;=\;-\,\frac{\hat\beta\,f_{2,m}(\ri)}{\Dom+i\,\gamma_2/2}\,.
+  \label{eq:Esh-1R}
+\end{equation}
+Substituting into the DFG polarisation source
+$P_i^{(2)}(\ri,\omega_1)=2\eps_0\chitwo_{ikm}(\ri)\,E_m(\ri,2\omega_1)
+E_k^{*}(\ri,\omega_1)$ and using
+$E_k^{*}(\ri,\omega_1)=E_{\text{loc},k}^{*}(\ri)$ from \eqref{eq:Eloc-def},
+\begin{equation}
+  P_i^{\text{casc}}(\ri,\omega_1)
+   \;=\;-\,\frac{2\eps_0\,\hat\beta}{\Dom+i\,\gamma_2/2}\,
+        \chitwo_{ikm}(\ri)\,f_{2,m}(\ri)\,E_{\text{loc},k}^{*}(\ri)\,.
+  \label{eq:Pcasc-1R-raw}
+\end{equation}
+Two structural features deserve emphasis.
+
+\textbf{Non-locality reduces to a global amplitude $\times$ local pattern.}
+Equation~\eqref{eq:Pcasc-1R-raw} is the singly-resonant collapse of the
+general $\chitwo\!\cdot\!G(2\omega_1)\!\cdot\!\chitwo$ kernel of the main
+note's \S 4 (the boxed non-local $\chitwo\!\cdot\!G\!\cdot\!\chitwo$ kernel).  The non-local
+integral over $\ri'$ has been performed exactly by the single-pole QNM
+expansion of $G(2\omega_1)$: the SH-driving overlap $\hat\beta$ in
+\eqref{eq:betahat} integrates the $\chitwo\!\cdot\!\Einc\!\cdot\!\Einc$
+source against $\f_2^{*}$ at $\ri'$, while the remaining local factor
+$\chitwo_{ikm}(\ri)f_{2,m}(\ri)E_{\text{loc},k}^{*}(\ri)$ at $\ri$ has the spatial
+pattern of the SH mode profile, weighted by $\chitwo(\ri)$.  In the
+doubly-resonant case the local factor projects further onto $\f_1^{*}$ to
+yield an SPM-shaped Kerr; here, in the absence of $\f_1$, the cascaded
+polarisation \emph{retains} its $\chitwo\cdot\f_2$ spatial signature.
+
+\textbf{Kerr-like cubic dependence on the pump.}
+$\hat\beta\propto E_\text{loc}^{2}$ and the second power of $\Einc$ in
+\eqref{eq:betahat}, combined with the explicit $E_{\text{loc},k}^{*}$ in
+\eqref{eq:Pcasc-1R-raw}, give a polarisation that is bilinear in
+$\Einc^{*}\!\cdot\!\Einc$ and linear in $\Einc$, i.e.\ the standard
+$|E|^{2}E$ structure of an SPM-type Kerr.  This is what justifies calling
+\eqref{eq:Pcasc-1R-raw} an ``effective $\chithree$'' response at $\omega_1$
+even without an FM modal description.
+
+\paragraph{Substituting $\hat\beta$ explicitly.}
+Using \eqref{eq:betahat} in \eqref{eq:Pcasc-1R-raw},
+\begin{multline}
+  P_i^{\text{casc}}(\ri,\omega_1)\;=\;
+   -\,\frac{\eps_0^{2}\,\omega_1/2}{\Dom+i\,\gamma_2/2}\,\,
+     \chitwo_{ikm}(\ri)\,f_{2,m}(\ri)\,E_{\text{loc},k}^{*}(\ri)\\
+   \times\!\int_{\VNL}\!\chitwo_{jpq}(\ri')\,f_{2,j}^{*}(\ri')\,
+                    E_{\text{loc},p}(\ri')\,E_{\text{loc},q}(\ri')\,d^{3}r'.
+  \label{eq:Pcasc-1R-explicit}
+\end{multline}
+Under the uniform-pump approximation \eqref{eq:Eloc-uniform}
+(field $E_\text{loc}\,\hat{\bm e}$ inside the dielectric), define the
+two scalar overlaps
+\begin{align}
+  \widetilde M
+   &\equiv\!\int_{\VNL}\!\chitwo_{jpq}(\ri')\,f_{2,j}^{*}(\ri')\,
+            \hat e_p\,\hat e_q\,d^{3}r',
+   \label{eq:Mtilde-def}\\[3pt]
+  \widetilde M'_i
+   &\equiv\!\int_{\VNL}\!\chitwo_{ikm}(\ri)\,f_{2,m}(\ri)\,
+            \hat e_k^{*}\,d^{3}r.
+   \label{eq:Mtildeprime-def}
+\end{align}
+By Kleinman symmetry $\chitwo_{ikm}=\chitwo_{mki}=\chitwo_{kmi}=\cdots$,
+and for a real pump polarisation $\hat{\bm e}^{*}=\hat{\bm e}$,
+$\widetilde M'_i\,\hat e_i = \widetilde M^{*}$ (relabelling indices and
+using full permutation symmetry of the three pairs in $\chitwo_{jpq}$
+followed by complex conjugation of the SH-mode profile).  Carrying out the
+$\ri'$ integration in \eqref{eq:Pcasc-1R-explicit} produces \emph{one}
+factor of $\widetilde M$ multiplying the local pattern at $\ri$:
+\begin{equation}
+  P_i^{\text{casc}}(\ri,\omega_1)\,\hat e_i
+   \;=\;-\,\frac{\eps_0^{2}\,\omega_1/2}{\Dom+i\,\gamma_2/2}\,
+        \,\widetilde M\,\,|E_\text{loc}|^{2}\,E_\text{loc}\,
+        \,\bigl[\chitwo_{ikm}(\ri)\,f_{2,m}(\ri)\,\hat e_k\,\hat e_i\bigr],
+  \label{eq:Pcasc-1R-collected}
+\end{equation}
+the bracketed factor being $r$-dependent.  The second power of $\widetilde M$
+will appear only after the $\ri$ integration in
+Section~\ref{sec:chi3-1R}, where the bracketed factor integrates to
+$\widetilde M'_i\,\hat e_i=\widetilde M^{*}$ by Kleinman.
+
+% =======================================================================
+\section{Effective \texorpdfstring{$\chicascOneR$}{χ³\_casc^(1R)} of the SH-only metasurface}\label{sec:chi3-1R}
+
+A spatially-resolved $\chithree(\ri)$ is not the right object for a
+sub-wavelength metasurface: the relevant observable is the unit-cell dipole
+moment, which determines the radiated field at $\omega_1$.  We therefore
+define $\chicascOneR$ such that a uniform slab of
+this susceptibility filling the unit cell would radiate the same
+$|E|^{2}E$-dependent far field.
+
+\paragraph{Unit-cell-averaged cascaded polarisation.}
+Integrate \eqref{eq:Pcasc-1R-explicit} over the unit cell, project onto
+$\hat{\bm e}$:
+\begin{align}
+  \int_{\Vunit}\!P_i^{\text{casc}}(\ri,\omega_1)\,\hat e_i\,\dthreer
+   &\;=\;
+   -\,\frac{\eps_0^{2}\,\omega_1\,/2}{\Dom+i\,\gamma_2/2}\,
+      \,|\widetilde M|^{2}\,|E_\text{loc}|^{2}\,E_\text{loc}\,,
+   \label{eq:Pcasc-1R-integrated}
+\end{align}
+where we have used \eqref{eq:Mtildeprime-def} to perform the $\ri$
+integration (the integrand vanishes outside $\VNL$ by construction).
+Equating to the dipole moment of a fictitious uniform-slab Kerr
+$\overline P^{(3)}_\text{eff}=3\eps_0\,\chicascOneR\,
+|E_\text{loc}|^{2}E_\text{loc}$
+filling the same unit cell,
+\begin{equation}
+  3\,\eps_0\,\chicascOneR\,|E_\text{loc}|^{2}E_\text{loc}\,\Vunit
+   \;=\;-\,\frac{\eps_0^{2}\,\omega_1\,/2}{\Dom+i\,\gamma_2/2}\,
+            \,|\widetilde M|^{2}\,|E_\text{loc}|^{2}E_\text{loc}\,,
+\end{equation}
+and dividing through,
+\begin{equation}
+  \boxed{\;\chicascOneR(\omega_1)
+            \;=\;-\,\frac{\eps_0\,\omega_1}{6}\,
+              \frac{|\widetilde M|^{2}}{(\Dom+i\,\gamma_2/2)\,\Vunit}\,.\;}
+  \label{eq:chi3-1R-boxed}
+\end{equation}
+This is the singly-resonant analogue of the doubly-resonant boxed result
+of the main note Eq.~(chi3casc),
+\begin{equation*}
+  \chicascTwoR\;=\;-\,\frac{\eps_0\,\omega_1}{6}\,
+       \frac{|M|^{2}}{(\Dom+i\gamma_2/2)\!\int\!|\f_1|^{4}\dthreer}\,.
+\end{equation*}
+The two formulas have \emph{exactly the same structure}; only the overlap
+and the normalisation volume differ:
+\begin{equation}
+  \frac{|M|^{2}}{\int|\f_1|^{4}\dthreer}
+  \;\longleftrightarrow\;
+  \frac{|\widetilde M|^{2}}{\Vunit}.
+  \label{eq:swap-rule}
+\end{equation}
+
+\paragraph{Scaling out canonical units.}
+Using $|\f_2|^{2}\sim 1/(\eps_0\,n_2^{2}\,\Veff)$ from the Brillouin
+normalisation, $|\widetilde M|^{2}\sim|\chitwo|^{2}\VNL^{2}/(\eps_0 n_2^{2}\Veff)$,
+so $|\widetilde M|^{2}/\Vunit\sim|\chitwo|^{2}\VNL^{2}/(\eps_0 n_2^{2}\Veff\,\Vunit)$.
+Define the singly-resonant geometric overlap
+\begin{equation}
+  \eta_\text{geom}^{(1\mathrm R)}
+   \;\equiv\;\frac{|\widetilde M|^{2}}{\Vunit}
+              \cdot\frac{\eps_0\,n_2^{2}}{|\chitwo|^{2}}
+   \;\sim\;\frac{\VNL^{2}}{\Veff\,\Vunit}\,,
+  \label{eq:eta-1R-def}
+\end{equation}
+which is $\mathcal O(1)$ in the optimistic limit $\Veff=\VNL=\Vunit$ (mode
+tightly confined to a fully nonlinear meta-atom that fills the unit
+cell), and reduces by the partial-filling factor $\VNL/\Vunit$ when the
+nonlinear region is smaller than the unit cell.  With this definition,
+\begin{equation}
+  \boxed{\;\chicascOneR(\omega_1)\;\sim\;
+        -\,\frac{\omega_1}{6\,n_2^{2}\,\Dom}\,|\chitwo|^{2}\,
+        \eta_\text{geom}^{(1\mathrm R)}\,,\;}
+  \label{eq:chi3-1R-explicit}
+\end{equation}
+identical in form to the doubly-resonant
+$\chicascTwoR\sim
+-\omega_1|\chitwo|^{2}\eta_\text{geom}/(6 n_2^{2}\Dom)$, with the
+geometric overlap reinterpreted.
+
+% =======================================================================
+\section{What changes in $\eta_\text{geom}$}\label{sec:eta-compare}
+
+The doubly-resonant geometric overlap is
+$\eta_\text{geom}=\widetilde\eta^{2}/\zeta_1$ with
+\begin{align}
+  \widetilde\eta^{2}
+   &\propto\,\bigl|\,{\textstyle\int}\chitwo_{ijk}(\ri)\,
+                       f_{2,i}^{*}\,f_{1,j}\,f_{1,k}\,\dthreer\bigr|^{2}\,,
+   \\[2pt]
+  \zeta_1
+   &\propto\,{\textstyle\int}|\f_1|^{4}\dthreer\,.
+\end{align}
+In the singly-resonant case, with the pump uniform inside the meta-atom and
+of fixed polarisation $\hat{\bm e}$, the integrand $f_{1,j}f_{1,k}$ is
+replaced by $\hat e_j\hat e_k$; the normalisation by $\int|\f_1|^{4}$ is
+replaced by the unit-cell volume $\Vunit$.
+
+\paragraph{Symmetry consequence (load-bearing).}
+$\f_1(\ri)$ in the 2R case is engineered to be a qBIC -- a mode that
+couples to free space precisely because of a small symmetry-breaking
+perturbation.  Its squared pattern $f_{1,j}(\ri)f_{1,k}(\ri)$ can be
+deliberately matched to the parity of $\f_2(\ri)$ (symmetry-protected BIC
+near $2\omega_1$), so that $\widetilde\eta^{2}$ is not symmetry-forbidden
+even when $\f_2$ has odd parity under a unit-cell symmetry.
+
+Replacing $f_{1,j}f_{1,k}\to\hat e_j\hat e_k$ removes one major spatial
+degree of freedom from the integrand.  If $\f_2$ has odd parity under,
+e.g., $\sigma_x:x\to-x$ (typical of a symmetry-protected BIC), then for
+\emph{unpatterned} $\chitwo$ (uniform $\chitwo_{jpq}$ inside $\VNL$) the
+constant tensor pulls out of \eqref{eq:Mtilde-def},
+$\widetilde M=\bigl(\chitwo_{jpq}\hat e_p\hat e_q\bigr)\!\int_{\VNL}\!
+f_{2,j}^{*}\,d^{3}r=0$ by symmetry of $\f_2$ over the unit cell.  Three escape routes
+restore a nonzero $\widetilde M$:
+
+\begin{itemize}\setlength{\itemsep}{3pt}
+  \item \textbf{Patterned $\chitwo(\ri)$.}  Periodically-poled
+        $\chitwo(\ri)$ with a real-space periodicity matched to the
+        spatial Fourier content of $\f_2(\ri)$ provides the odd
+        symmetry needed to make $\widetilde M\neq 0$.  This is the
+        analogue of quasi-phase-matching, applied at the unit-cell
+        scale rather than over millimetres.  For LiNbO$_3$
+        meta-atoms with sub-domain poling, $\eta_\text{geom}^{(1\mathrm R)}$
+        can reach $\sim 0.05\!-\!0.2$ -- typically a factor $\sim$ few
+        below the doubly-resonant value.
+  \item \textbf{Quasi-BIC at $2\omega_1$.}  A symmetry-broken
+        $\f_2$ (qBIC instead of BIC) acquires a non-vanishing
+        spatial average, with magnitude controlled by the asymmetry
+        parameter $\alpha$ as $\bar{\f}_2\propto\alpha$ and
+        $\gamma_2^{(\text{rad})}\propto\alpha^{2}$
+        \cite{Koshelev2018}.  The relevant figure of merit is
+        $|\widetilde M|^{2}\cdot Q_2$, with two regimes:
+        \begin{itemize}\setlength{\itemsep}{2pt}
+          \item \emph{Radiation-limited Q}
+                ($\gamma_2^{(\text{rad})}\!\gg\!\gamma_2^{(\text{nr})}$):
+                $Q_2\!\propto\!1/\alpha^{2}$ tracks the radiative
+                channel, so
+                $|\widetilde M|^{2}Q_2\!\propto\!\alpha^{2}/\alpha^{2}
+                \!=\!\mathcal O(1)$ -- a flat trade-off contour, with
+                $\eta_\text{geom}^{(1\mathrm R)}$ and $Q_2$ exchanged
+                one-for-one.
+          \item \emph{Absorption-limited Q}
+                ($\gamma_2^{(\text{nr})}\!\gtrsim\!\gamma_2^{(\text{rad})}$):
+                $Q_2$ is set by intrinsic absorption and is
+                $\alpha$-independent up to the value of $\alpha$ at
+                which $\gamma_2^{(\text{rad})}$ catches up with
+                $\gamma_2^{(\text{nr})}$.  In this regime
+                $|\widetilde M|^{2}Q_2\propto\alpha^{2}$ and one wins
+                directly by increasing $\alpha$.  This is the
+                main-note design target for the SH mode (under-coupled
+                qBIC dominated by intrinsic absorption), so the qBIC
+                route is the most productive of the three escape
+                paths.
+        \end{itemize}
+  \item \textbf{Oblique incidence.}  Tilting the pump introduces a
+        nonzero in-plane wave vector $\mathbf k_\parallel$ that breaks
+        the parity used in symmetry-protecting the BIC; the SH mode
+        then couples to oblique plane waves and acquires a non-vanishing
+        $\widetilde M$.  Bandwidth and angle of incidence become the new
+        design knobs.
+\end{itemize}
+
+In all three escape routes the singly-resonant
+$\eta_\text{geom}^{(1\mathrm R)}$ is typically a factor $\sim 2\!-\!10$
+below the doubly-resonant $\eta_\text{geom}$ for comparable meta-atom
+material choice.  We will quote $\eta_\text{geom}^{(1\mathrm R)}\sim 0.1$
+as a working number, against the main note's
+$\eta_\text{geom}\sim 0.3$.
+
+% =======================================================================
+\section{Comparison with the doubly-resonant cascade}\label{sec:compare}
+
+The comparison has two layers.  At the level of the effective material
+susceptibility $\chithree_\text{casc}$ (in $\mathrm{m}^{2}/\mathrm{V}^{2}$),
+the two cases differ only by $\eta_\text{geom}^{(1\mathrm R)}/\eta_\text{geom}$,
+a factor of order $1/3\!-\!1/10$.  At the level of the observable
+per-photon nonlinear phase $\varphi_\text{NL}$, the gap is much larger,
+typically $10^{5}\!-\!10^{7}$, because the doubly-resonant case
+\emph{also} field-builds the FM by $Q_1$.
+
+\subsection*{Layer 1: \texorpdfstring{$\chithree_\text{casc}$}{χ³\_casc} ratio}
+
+Comparing \eqref{eq:chi3-1R-explicit} with the doubly-resonant boxed result,
+\begin{equation}
+  \frac{\chicascOneR}{\chicascTwoR}
+   \;=\;\frac{\eta_\text{geom}^{(1\mathrm R)}}{\eta_\text{geom}}\,,
+  \label{eq:chi3-ratio}
+\end{equation}
+at fixed $\Dom$, $Q_2$, and material.  Taking the working values
+$\eta_\text{geom}\sim 0.3$ and $\eta_\text{geom}^{(1\mathrm R)}\sim 0.1$,
+the singly-resonant susceptibility is suppressed by only a factor of
+$\sim 3$ relative to the doubly-resonant value.  For the LiNbO$_3$
+metasurface at $Q_2=4\!\times\!10^{3}$, $\Dom=2\gamma_2$,
+$\eta_\text{geom}^{(1\mathrm R)}=0.1$, $|\chitwo|=5\!\times\!10^{-11}\,
+\mathrm{m/V}$, $n_2=2.26$:
+\begin{align}
+  |\chicascOneR|
+   &\;\simeq\;\frac{\omega_1\,|\chitwo|^{2}\,\eta_\text{geom}^{(1\mathrm R)}}
+                  {12\,n_2^{2}\,\gamma_2}
+   \;=\;\frac{Q_2\,|\chitwo|^{2}\,\eta_\text{geom}^{(1\mathrm R)}}{24\,n_2^{2}}\nonumber\\[2pt]
+   &\;\sim\;\frac{4\times 10^{3}\,(5\!\times\!10^{-11})^{2}\,0.1}
+                  {24\,(2.26)^{2}}
+   \;\sim\;8\times 10^{-21}\,\mathrm{m^{2}/V^{2}}\,,
+\end{align}
+i.e.\ about $4\times$ the native LiNbO$_3$ Kerr $\chithree\sim
+2\times 10^{-21}\,\mathrm{m^{2}/V^{2}}$.  Still a real enhancement at the
+\emph{material} level.  The doubly-resonant case at the same conditions
+gave $|\chicascTwoR|\sim 2\!\times\!10^{-20}\,
+\mathrm{m^{2}/V^{2}}$ (main note \S 10), a factor $\sim 3$ larger as
+expected from \eqref{eq:chi3-ratio}.
+
+\subsection*{Layer 2: per-photon nonlinear phase}
+
+The observable that the deck and main note quote is the FM nonlinear phase
+$\varphi_\text{NL}$ per incident photon.  This is where the two cases
+diverge dramatically.
+
+\paragraph{Doubly-resonant.}
+Main note \S 11 gives, in the lossless / fully-radiative
+($\gamma_1^{(\text{rad})}=\gamma_1$) limit,
+\begin{equation}
+  \varphi_\text{NL}^{(2\mathrm R)}\;=\;
+   \frac{8\,\alpha_3^\text{eff}\,|s_+|^{2}}{\gamma_1^{2}}
+   \;=\;-\,\frac{8\,|\beta|^{2}\,|s_+|^{2}}{\gamma_1^{2}\,\Dom}\,,
+  \label{eq:phi-2R}
+\end{equation}
+with $|s_+|^{2}$ the incident power.  The factor $\gamma_1^{-2}\sim
+Q_1^{2}/\omega_1^{2}$ is the FM field-buildup squared:
+$|a_1|^{2}\propto |s_+|^{2}/\gamma_1$, and the cubic SPM produces
+$\varphi\propto|a_1|^{2}\propto Q_1$, while a second $1/\gamma_1$ comes
+from the phase being read out over the cavity lifetime.
+
+\paragraph{Singly-resonant.}
+With no FM resonance the phase shift is acquired in a single pass through
+the metasurface of thickness $L_\text{meta}\sim\lambda_1/(2 n_1)\!-\!\lambda_1$
+(sub-wavelength):
+\begin{equation}
+  \varphi_\text{NL}^{(1\mathrm R)}
+   \;=\;\frac{\omega_1}{c}\,n_1\,
+        \frac{3\,\chicascOneR\,|E_\text{loc}|^{2}}{2\,n_1^{2}}\,L_\text{meta}
+   \;=\;\frac{3\,\omega_1}{2\,c\,n_1}\,
+        \chicascOneR\,|E_\text{loc}|^{2}\,L_\text{meta},
+  \label{eq:phi-1R}
+\end{equation}
+using the SVEA relation
+$d\varphi/dz=(\omega_1/(2 n_1 c))\cdot 3\,\chithree |E|^{2}$.
+Substituting
+\begin{equation*}
+  |E_\text{loc}|^{2}\;=\;\frac{2\,T_\text{geom}^{2}\,P_\text{in}}
+                              {\eps_0\,c\,n_1^{2}\,A_\text{cell}}
+\end{equation*}
+from \eqref{eq:Eloc-magnitude}, with $|s_+|^{2}=P_\text{in}$ the incident
+power per unit cell,
+\begin{equation}
+  \varphi_\text{NL}^{(1\mathrm R)}
+   \;\sim\;\frac{3\,\omega_1\,L_\text{meta}\,T_\text{geom}^{2}}
+               {\eps_0\,c^{2}\,n_1^{3}\,A_\text{cell}}\,
+           \chicascOneR\,|s_+|^{2}\,.
+  \label{eq:phi-1R-pow}
+\end{equation}
+
+\paragraph{The ratio.}
+Forming $\varphi_\text{NL}^{(2\mathrm R)}/\varphi_\text{NL}^{(1\mathrm R)}$
+at the same incident power $|s_+|^{2}$ and the same $\Dom$, and using the
+swap rule \eqref{eq:swap-rule} together with $|\beta|^{2}\propto
+|\chitwo|^{2}\eta_\text{geom}/(\eps_0 n_2^{2})$ in the 2R case,
+\begin{equation}
+  \boxed{\;\frac{\varphi_\text{NL}^{(2\mathrm R)}}{\varphi_\text{NL}^{(1\mathrm R)}}
+   \;\sim\;
+   \underbrace{\frac{\eta_\text{geom}}{\eta_\text{geom}^{(1\mathrm R)}}}_{\sim 3}
+   \,\times\,
+   \underbrace{\left(\!\frac{Q_1}{\omega_1 L_\text{meta}/c}\!\right)^{\!2}}_{\sim Q_1^{2}\cdot(\lambda_1/L_\text{meta})^{2}}\,.\;}
+  \label{eq:phi-ratio}
+\end{equation}
+For $Q_1=10^{3}$ (a modest qBIC), $\lambda_1=1.55\,\mu$m,
+$L_\text{meta}=400$\,nm, so $\omega_1 L_\text{meta}/c=2\pi
+L_\text{meta}/\lambda_1\simeq 1.62$ and the second factor is
+$(Q_1/1.62)^{2}\!\simeq\!3.8\!\times\!10^{5}$; with the geometry factor
+$\sim 3$ in front, $\varphi^{(2\mathrm R)}/\varphi^{(1\mathrm R)}\sim
+10^{6}$.  Equivalently, to reach the same nonlinear phase the
+singly-resonant metasurface needs $\sim 10^{6}\times$ more incident power.
+
+\paragraph{Why the gap is so large.}
+The cascade kernel $\chitwo G(2\omega_1)\chitwo$ is enhanced by the SH
+resonance only.  In the 2R case the FM resonance separately enhances the
+\emph{local intensity} that drives the cascade by $Q_1$, and the
+\emph{readout} of the cascaded phase by another $Q_1$ (field circulates
+through the cavity for $Q_1$ round-trips, accumulating phase coherently);
+hence $Q_1^{2}$.  Throwing away $Q_1$ throws away both factors.
+
+\subsection*{Layer 3: what dies, what survives}
+
+The following table maps Section~12 of the main note's observables onto
+the 1R case.
+
+\begin{center}\small
+\begin{tabular}{p{0.30\linewidth}p{0.30\linewidth}p{0.34\linewidth}}
+  \toprule
+  Observable
+   & Scaling with $Q_1$
+   & Status in 1R \\
+  \midrule
+  SPM phase per photon
+   & $\propto Q_1^{2}$
+   & $\sim 10^{-6}\times$ 2R; usable only at high peak power \\[2pt]
+  Cascaded Im $\chithree$ (saturable absorber)
+   & $\propto Q_1^{2}$ (per photon)
+   & survives as a material property; observable contrast tiny \\[2pt]
+  Optical bistability
+   & requires $\varphi_\text{NL}\!\gtrsim\!1$ at cavity threshold
+   & \emph{dies}; no FM resonance to be detuned by self-shift \\[2pt]
+  AM modulator (FM-lineshape transduction)
+   & uses FM Lorentzian slope $\propto Q_1$
+   & \emph{dies}; no FM lineshape to slope-detect \\[2pt]
+  Cascade-mediated FWM
+   & $\propto Q_1^{2}\cdot Q_2$ for degenerate FM signals
+   & survives as bulk-like FWM, $\propto Q_2$ only \\[2pt]
+  Sum-rule peak $\times$ bandwidth at $\omega_1$
+   & $\propto Q_1\,Q_2$ in 2R
+   & reduces to $\propto Q_2$ \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+Observables that need an FM-resonance feedback loop (bistability, AM
+modulator, frequency-selective FWM) \emph{die} qualitatively; observables
+that depend only on the material $\chithree_\text{casc}$ (SPM phase,
+Im $\chithree$, broadband cascaded FWM) survive but with the $\sim 10^{6}$
+suppression of \eqref{eq:phi-ratio}.  The metasurface is then competing
+with bulk PPLN on raw nonlinear strength, not on the per-photon-phase axis
+where doubly-resonant cascading shines.
+
+The next section makes the observable-by-observable mapping explicit.
+
+% =======================================================================
+\section{Application landscape: observable-by-observable comparison}\label{sec:applications-1R}
+
+This section traces each Kerr-driven observable of the main note's \S 12
+through the 1R reduction.  The structural finding is uniform: every
+observable governed by the local cascaded susceptibility
+$\chicasc(\omega_1)$ \emph{survives} in 1R with the substitution
+$\eta_\text{geom}\to\eta_\text{geom}^{(1\mathrm R)}$ but loses the
+$Q_1^{2}$ FM-cavity leverage, while every observable that requires
+\emph{feedback through the FM cavity dynamics} -- bistability, all-optical
+switching, the parametric ceiling, the FM-lineshape-based AM
+modulator -- \emph{dies qualitatively}.
+
+We define the 1R analogue of the main-note ratio
+$R\equiv|\chicascTwoR|/|\chithree_\text{native}|$ as
+\begin{equation*}
+  R^{(1\mathrm R)}\;\equiv\;\bigl|\chicascOneR\bigr|/\bigl|\chithree_\text{native}\bigr|\,.
+\end{equation*}
+For the LiNbO$_3$ design point of \S\ref{sec:numbers},
+$R^{(1\mathrm R)}\!\approx\!4$ vs.\ $R\!\approx\!12$ (both with
+$\eta_\text{geom}$-dependent prefactor uncertainty); the ratio
+$R^{(1\mathrm R)}/R\approx\eta_\text{geom}^{(1\mathrm R)}/\eta_\text{geom}\sim 1/3$.
+
+For each item we state the 2R result, give the 1R analogue, quote the
+\emph{architecture ratio} (cascade vs.\ native within the same
+configuration) and the \emph{configuration ratio} (2R vs.\ 1R at the
+same observable).
+
+\subsection*{Tier 1: \texorpdfstring{$R$}{R}-scaling observables}
+
+\paragraph{1. Self-phase modulation (SPM).}
+2R:
+$\varphi_\text{NL}^{(2\mathrm R)}=8\,\alpha_3^\text{eff}|s_+|^{2}/\gamma_1^{2}$
+in the fully-radiative limit (main note \S 12 item 1), with the
+architecture ratio
+$(\varphi^\text{A+B}/\varphi^\text{A})^{(2\mathrm R)}=1+R$.
+1R: $\varphi_\text{NL}^{(1\mathrm R)}$ from \eqref{eq:phi-1R-pow}, with
+$\chithree_\text{eff}=\chithree_\text{native}+\chicascOneR$ and the same
+architecture form
+$(\varphi^\text{A+B}/\varphi^\text{A})^{(1\mathrm R)}=1+R^{(1\mathrm R)}$.
+Configuration ratio
+$\varphi^{(2\mathrm R)}/\varphi^{(1\mathrm R)}\!\sim\!10^{6}$ from
+\eqref{eq:phi-ratio}.
+\textbf{Architecture lever survives ($1+R^{(1\mathrm R)}\!\sim\!5$ vs.\
+$1+R\!\sim\!13$); absolute per-photon phase $Q_1^{2}$-suppressed and
+unobservable at CW (see N3 of \S\ref{sec:numbers}).}
+
+\paragraph{2. Cross-phase modulation (XPM).}
+A separate probe at $\omega_s$ (co-resonant with FM in 2R, or merely
+inside the linear transmission band in 1R) sees an intensity-dependent
+refractive index driven by the pump.  The Boyd index-permutation factor
+gives $\alpha_3^\text{XPM}=2\alpha_3^\text{SPM}$ in both configurations,
+and the cascade contributes via pump$\to$SH$\to$DFG-with-signal.  The
+architecture ratio is the same as SPM ($1+R$ in 2R, $1+R^{(1\mathrm R)}$
+in 1R).  In 1R the probe is also unenhanced, so the configuration ratio
+acquires the same $Q_1^{2}$ from the pump field plus a further $Q_1$
+from the probe build-up that survives in 2R but not 1R, totalling
+$\sim Q_1^{3}$.  \textbf{Architecture lever survives; absolute
+$Q_1^{3}$-suppressed.}
+
+\paragraph{3. Bistability threshold and 4. all-optical switching.}
+2R: $|s_+|^{2}_\text{bist}\propto\gamma_1^{2}|\delta_p|/(|\alpha_3^\text{eff}|\gamma_1^\text{rad})$
+with cusp condition $|\delta_p|>\sqrt{3}\gamma_1/2$, giving architecture
+ratios $|s_+|^{2,\text{A+B}}_\text{bist}/|s_+|^{2,\text{A}}_\text{bist}=1/(1+R)$
+and $E_\text{switch}^\text{A+B}/E_\text{switch}^\text{A}=1/(1+R)$
+(main note \S 12 item 3 -- the canonical photonic-computing application).
+\textbf{1R: both die qualitatively.}  The cusp condition requires an FM
+cavity that the pump can nonlinearly detune; without one there is no
+fixed-point bifurcation in the pump's own resonance.  The metasurface
+transmission at $\omega_1$ acquires a small intensity-dependent phase
+shift but no hysteresis.  This is the most consequential single
+qualitative loss in 1R: bistability-derived switching is unavailable
+\emph{at any pump power}, not merely suppressed.
+
+\paragraph{5. Four-wave mixing (FWM).}
+2R: $\eta_\text{FWM}\propto|\alpha_3^\text{eff}|^{2}|a_p|^{4}/(\gamma_1/2)^{2}$,
+architecture ratio $(1+R)^{2}$, the most differentiating Tier-1
+test of the cascade (main note \S 12 item 4).  Bandwidth limited by
+$\min(\gamma_1,\gamma_2)$, $\!\sim\!$GHz at telecom $Q$'s.
+1R: integrating the SVEA idler equation with $\chicascOneR$ as the
+four-wave susceptibility,
+\begin{equation}
+  \frac{dA_i}{dz}\;=\;i\,\frac{3\omega_1}{2 n_1 c}\,
+        \chicascOneR\,A_p^{2}\,A_s^{*}\,e^{-i\Delta k z}\,,
+  \label{eq:FWM-1R-SVEA}
+\end{equation}
+the idler amplitude after a sub-wavelength metasurface is
+$A_i\simeq i\,(3\omega_1/(2 n_1 c))\,\chicascOneR\,A_p^{2}A_s^{*}\,L_\text{meta}$
+(the sub-wavelength meta-atom automatically satisfies $\Delta k L_\text{meta}\!\ll\!1$,
+so $\mathrm{sinc}(\Delta k L_\text{meta}/2)\to 1$ -- the bulk PPLN
+phase-matching constraint does not apply).  Conversion efficiency
+\begin{equation}
+  \eta_\text{FWM}^{(1\mathrm R)}\;\equiv\;\bigl|A_i/A_s\bigr|^{2}
+   \;\propto\;|\chicascOneR|^{2}\,|A_p|^{4}\,L_\text{meta}^{2}\,,
+\end{equation}
+inherits the architecture ratio $(1+R^{(1\mathrm R)})^{2}$ at fixed local
+pump intensity.  Configuration ratio: 2R wins by $|a_p|^{4}/|A_p|^{4}_\text{1R}\sim Q_1^{2}$
+(pump field build-up squared) times $1/(\gamma_1/2)^{2}\sim Q_1^{2}$
+(FM cavity propagator on the idler) times the $R$-ratio squared, total
+$\eta^{(2\mathrm R)}/\eta^{(1\mathrm R)}\sim Q_1^{4}(R/R^{(1\mathrm R)})^{2}\sim 10^{13}$
+for $Q_1\!=\!10^{3}$.
+\textbf{Architecture lever survives; absolute efficiency severely
+$Q_1^{4}$-suppressed.}  Broadband phase-free operation is the one
+silver lining: a 1R FWM device tolerates the full $\gamma_2$ bandwidth at
+its full single-pass efficiency, with no FM-bandwidth restriction --
+useful, perhaps, when bandwidth $\times$ efficiency matters more than
+efficiency alone (cascaded broadband wavelength conversion as a
+diagnostic of $\chicascOneR$, rather than as a device).
+
+\subsection*{Tier 2: cascade-only capabilities}
+
+\paragraph{6. Sign-tunable saturable absorber.}
+2R: $\mathrm{Im}\,\alpha_3^\text{eff}$ peaks at $\Dom=0$ with Lorentzian
+profile $|\beta|^{2}(\gamma_2/2)/[\Dom^{2}+(\gamma_2/2)^{2}]$;
+$\Dom$-detunable from peak by sweeping pump or SH resonance, suppressing
+the loss as $(\gamma_2/\Dom)^{2}$ (main note \S 12 item 5).
+1R: $\mathrm{Im}\,\chicascOneR(\Dom)$ has the identical Lorentzian
+structure with peak value \eqref{eq:Im-chi3-1R}.  Observable single-pass
+intensity-dependent loss
+\begin{equation*}
+  \Delta T/T\;\sim\;\frac{3\,\omega_1\,\mathrm{Im}\,\chicascOneR\,|E_\text{loc}|^{2}\,L_\text{meta}}
+                         {n_1\,c}
+\end{equation*}
+inherits the same $Q_1^{2}$ suppression of $|E_\text{loc}|^{2}$ as
+$\varphi_\text{NL}$.  Configuration ratio at fixed $|s_+|^{2}$ is
+$\sim Q_1^{2}(R/R^{(1\mathrm R)})\!\sim\!10^{6}$.
+\textbf{Mechanism and $\Dom$-tunability survive intact; contrast at
+fixed pump power is $Q_1^{2}$-suppressed.}
+
+\paragraph{7. All-optical amplitude modulator via $\Dom$ tuning.}
+2R: modulating $\Dom(t)=\Dom_0+\delta\Omega\cos(\Omega_\text{mod}t)$
+modulates $\alpha_3^\text{eff}$, which modulates the FM transmission via
+the FM-cavity Lorentzian slope; transfer function has a low-pass
+shoulder ($\Omega_\text{mod}\lesssim\gamma_2/2$) plus an AC band-pass
+peak at $\Omega_\text{mod}=|\Dom_0|$ of FWHM $\gamma_2$ and peak-to-DC
+ratio $\sim 4\Dom_0^{2}/\gamma_2^{2}$ (main note \S 12 item 6).
+1R: $\delta\chicascOneR(t)$ via $\Dom(t)$ modulates the single-pass
+nonlinear phase $\delta\varphi_\text{NL}^{(1\mathrm R)}(t)$, and the AC
+band-pass structure $\chicascOneR(\Omega_\text{mod})$ peaked at
+$\Omega_\text{mod}=|\Dom_0|$ persists as a property of the cascade
+sum-rule kernel (\S\ref{sec:sum-1R}).  But (i) there is no FM Lorentzian
+to slope-detect against -- the FM transmission is broadband -- and
+(ii) $\varphi_\text{NL}^{(1\mathrm R)}$ at attainable CW pump powers is
+at the $\mu$rad level (\S\ref{sec:numbers}).  \textbf{The
+\emph{transduction} from $\Dom(t)$ to readable FM amplitude modulation
+dies as a practical capability.}  The cascade still carries the AC
+band-pass signature, but it is not coupled into an observable signal
+channel.
+
+\paragraph{8. Passive optical limiter (parametric ceiling).}
+2R: hard cap $|a_1|^{2}_\text{cap}=(\Dom/\beta)^{2}$ above which the FM
+trivial fixed point destabilises (cascaded OPO threshold); the FM clamps
+regardless of further pump increase, with excess input dissipated through
+the cascaded TPA channel (main note \S 12 item 7).
+1R: \textbf{the parametric-instability mechanism dies}.  The FM is not a
+dynamical mode in 1R; its amplitude inside the meta-atom is fixed
+externally by the incident pump and the linear scattering response of the
+structure, not by a fixed point of a TCMT equation.  There is no trivial
+fixed point to lose stability, no OPO-like clamping.  A weaker form of
+intensity clamping does survive -- the cascaded TPA of item 6 gives
+$\Delta T/T\propto\mathrm{Im}\,\chicascOneR\,|E_\text{loc}|^{2}$, which
+at extreme pump intensities approaches unity -- but this is the saturable
+absorber re-framed as a power limiter, not the hard dispersive ceiling of
+the 2R parametric instability.
+
+\paragraph{9. \texorpdfstring{$\Dom$}{Δω}-readout sensor.}
+2R: at $\Dom=0$,
+$|d\alpha_3^\text{casc}/d\Dom|=|\beta|^{2}/(\gamma_2/2)^{2}\propto Q_2^{2}$,
+giving sensor sensitivity
+$|d\varphi_\text{NL}/d\Dom|=32|s_+|^{2}|\beta|^{2}/(\gamma_1^{2}\gamma_2^{2})\propto Q_1^{2}Q_2^{2}$
+(main note \S 12 item 8); shot-noise-limited FoM
+slope$/\sqrt{\gamma_3^\text{eff}}\propto Q_2^{3/2}$.
+1R: differentiating $\chicascOneR=-\eps_0\omega_1|\widetilde M|^{2}/[6(\Dom+i\gamma_2/2)\Vunit]$,
+\begin{equation}
+  \left|\frac{d\chicascOneR}{d\Dom}\right|_{\Dom=0}
+   \;=\;\frac{\eps_0\,\omega_1\,|\widetilde M|^{2}}{6\,(\gamma_2/2)^{2}\,\Vunit}
+   \;=\;\frac{2\,Q_2^{2}\,|\chitwo|^{2}\,\eta_\text{geom}^{(1\mathrm R)}}
+              {3\,\omega_2^{2}\,n_2^{2}}
+   \;\propto\;Q_2^{2}\,,
+  \label{eq:sensor-1R-slope}
+\end{equation}
+the same $Q_2^{2}$ scaling of the \emph{material slope} as 2R.  The
+observable single-pass phase sensitivity inherits this:
+$|d\varphi_\text{NL}^{(1\mathrm R)}/d\Dom|\propto Q_2^{2}$ (no $Q_1^{2}$).
+The shot-noise FoM scales as $Q_2^{3/2}$ as in 2R, since both slope and
+$\mathrm{Im}\,\chithree$ have the same $Q_2$ dependence and cancel one
+power.  \textbf{Mechanism and $Q_2$ scaling survive intact;
+absolute sensitivity per unit perturbation is $Q_1^{2}$-suppressed,
+matching the $\varphi_\text{NL}$ suppression.}
+
+\subsection*{Compact comparison table}
+
+\begin{center}\small
+\begin{tabular}{p{0.21\linewidth}p{0.16\linewidth}p{0.20\linewidth}p{0.32\linewidth}}
+\toprule
+Observable & 2R archit.\ ratio & 1R archit.\ ratio & Config.\ ratio $X^{(2\mathrm R)}/X^{(1\mathrm R)}$ \\
+\midrule
+SPM phase
+ & $1+R$
+ & $1+R^{(1\mathrm R)}$
+ & $\sim Q_1^{2}\cdot(R/R^{(1\mathrm R)})\sim 10^{6}$ \\[2pt]
+XPM phase (probe)
+ & $1+R$
+ & $1+R^{(1\mathrm R)}$
+ & $\sim Q_1^{3}\cdot(R/R^{(1\mathrm R)})\sim 10^{9}$ \\[2pt]
+Bistability threshold
+ & $1/(1+R)$
+ & --- (dies)
+ & --- \\[2pt]
+All-optical switching energy
+ & $1/(1+R)$
+ & --- (dies)
+ & --- \\[2pt]
+FWM efficiency
+ & $(1+R)^{2}$
+ & $(1+R^{(1\mathrm R)})^{2}$
+ & $\sim Q_1^{4}\cdot(R/R^{(1\mathrm R)})^{2}\sim 10^{13}$ \\[2pt]
+\midrule
+Saturable absorber ($\Delta T/T$)
+ & cascade-only
+ & cascade-only
+ & contrast $\sim Q_1^{2}\sim 10^{6}$ \\[2pt]
+AM modulator (readout)
+ & cascade-only
+ & --- (dies as readout)
+ & --- \\[2pt]
+Optical limiter (parametric)
+ & cascade-only
+ & --- (dies)
+ & --- \\[2pt]
+Sensor slope $d\chithree/d\Dom$
+ & $\propto Q_2^{2}$
+ & $\propto Q_2^{2}$
+ & material-slope: $\sim 1$ \\[2pt]
+Sensor phase sensitivity
+ & $\propto Q_1^{2}Q_2^{2}$
+ & $\propto Q_2^{2}$
+ & $\sim Q_1^{2}\sim 10^{6}$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Pattern.}
+Items that \emph{die qualitatively} in 1R are precisely those that
+require the FM cavity to be \emph{the nonlinear oscillator}: bistability
+turns the FM cavity into a self-referenced nonlinear element via the
+detuning $\alpha_3^\text{eff}|a_1|^{2}$; the parametric ceiling is the
+instability of the FM cavity's trivial fixed point under SH back-action;
+the AM modulator transduces $\Dom(t)$ through the FM cavity's Lorentzian
+slope into a transmission modulation.  Removing the FM cavity removes
+all three.
+
+Items that \emph{survive but suppress} are those where $\chicasc(\omega_1)$
+is the material input to a single-pass or small-signal observable -- SPM,
+XPM, cascaded TPA, FWM, sensor material-slope.  Each is suppressed by
+the $Q_1$-related buildup/readout factor specific to that observable
+(quadratic for SPM/saturable absorber/sensor, cubic for XPM, quartic for
+FWM).  None recover an observable signal at CW pump powers below
+material damage.
+
+% =======================================================================
+\section{Bandwidth, sum rule, and sign-tunability in 1R}\label{sec:sum-1R}
+
+Three structural features of the doubly-resonant case generalise.
+
+\textbf{Sign tunability.}  The denominator $(\Dom+i\gamma_2/2)$ in
+\eqref{eq:chi3-1R-boxed} is identical to the doubly-resonant case, so
+$\mathrm{Re}\,\chicascOneR\propto-\Dom/(\Dom^{2}+
+\gamma_2^{2}/4)$ flips sign at $\Dom=0$.  Sweeping the pump wavelength
+through $\Dom=0$ tunes between self-focusing ($\Dom<0$) and self-defocusing
+($\Dom>0$).  In the 1R case this sweep is bounded only by how broadband the
+incident source is and by the dispersion of $E_\text{loc}$ across the
+sweep; in particular, there is no FM resonance to fall off.  This is
+\emph{cleaner} than the 2R case, where the pump-tuning range is bounded by
+$\gamma_1$.
+
+\textbf{Two-photon-like loss.}
+$\mathrm{Im}\,\chicascOneR\propto-(\gamma_2/2)/
+(\Dom^{2}+\gamma_2^{2}/4)$ peaks at $\Dom=0$ with the same Lorentzian
+profile as in 2R.  Setting $\Dom=0$ in \eqref{eq:chi3-1R-boxed} and using
+$|\widetilde M|^{2}/\Vunit=\eta_\text{geom}^{(1\mathrm R)}|\chitwo|^{2}/(\eps_0 n_2^{2})$
+together with $\omega_1/\gamma_2=Q_2/2$,
+\begin{equation}
+  \mathrm{Im}\,\chicascOneR\bigl|_{\Dom=0}
+   \;=\;\frac{Q_2\,|\chitwo|^{2}\,\eta_\text{geom}^{(1\mathrm R)}}{6\,n_2^{2}}\,,
+  \label{eq:Im-chi3-1R}
+\end{equation}
+in $\mathrm{m^{2}/V^{2}}$, of the same magnitude as the doubly-resonant
+value with the $\eta$-substitution.  Whether this loss is observable as a saturable
+absorption at the metasurface level depends on
+$\varphi_\text{NL}^{(1\mathrm R)}$ being measurable -- which, per
+Section~\ref{sec:compare}, requires extreme pump intensities.
+
+\textbf{Sum rule (modified).}  The doubly-resonant sum rule
+$|\chithree_\text{casc}|_\text{max}\!\times\!\Delta f\!\lesssim\!
+\omega_1|\chitwo|^{2}\eta_\text{geom}/(12\pi n_2^{2})$ generalises with
+$\eta_\text{geom}\to\eta_\text{geom}^{(1\mathrm R)}$; the $Q_2$-independent
+peak$\times$bandwidth product survives because it is an SH-resonance
+property only.  The frequency-domain bandwidth at the design point is
+unchanged: $\Delta f_\text{usable}\sim\gamma_2/(2\pi)\simeq 97$~GHz at
+$Q_2=4\!\times\!10^{3}$.
+
+% =======================================================================
+\section{Worked numerical estimate}\label{sec:numbers}
+
+Use the LiNbO$_3$ design point: $\lambda_1=1.55\,\mu$m so $\omega_1=2\pi\cdot
+193.5\,$THz, $|\chitwo|=5\!\times\!10^{-11}\,$m/V, $n_1\!\simeq\!2.21$,
+$n_2\!\simeq\!2.26$.  SH resonance $Q_2=4\!\times\!10^{3}$ giving
+$\gamma_2/(2\pi)\simeq 97\,$GHz; conservative detuning $\Dom=2\gamma_2$;
+geometric overlap $\eta_\text{geom}^{(1\mathrm R)}=0.1$ (the 1R working
+number from Section~\ref{sec:eta-compare}).  Meta-atom thickness
+$L_\text{meta}=400$\,nm; $T_\text{geom}=1$; unit cell area
+$A_\text{cell}=(500\,\text{nm})^{2}$.
+
+\paragraph{Effective $\chicascOneR$.}
+From \eqref{eq:chi3-1R-explicit},
+\begin{equation}
+  |\chicascOneR|
+   \;\sim\;\frac{\omega_1\,|\chitwo|^{2}\,\eta_\text{geom}^{(1\mathrm R)}}
+                  {12\,n_2^{2}\,\gamma_2}
+   \;=\;\frac{Q_2}{24\,n_2^{2}}\,|\chitwo|^{2}\,\eta_\text{geom}^{(1\mathrm R)}
+   \;\simeq\;8\!\times\!10^{-21}\,\mathrm{m^{2}/V^{2}}\,,
+\end{equation}
+a factor of $\sim 4$ above bulk LiNbO$_3$ Kerr, factor of $\sim 3$ below
+the 2R prediction.
+
+\paragraph{Per-photon nonlinear phase.}
+From \eqref{eq:phi-1R-pow} with $|s_+|^{2}=P_\text{in}=1\,$mW per unit cell
+(an unrealistically optimistic per-meta-atom power, used here only for
+benchmarking):
+\begin{equation}
+  \varphi_\text{NL}^{(1\mathrm R)}
+   \;\sim\;\frac{3\,\omega_1\,L_\text{meta}}{\eps_0\,c^{2}\,n_1^{3}\,A_\text{cell}}\,
+            \chicascOneR\,P_\text{in}
+   \;\sim\;5\!\times\!10^{-9}\,\text{rad}.
+\end{equation}
+Compare with the doubly-resonant case at the same per-cell power and
+$Q_1=10^{3}$: $\varphi_\text{NL}^{(2\mathrm R)}\sim 8\!\times\!10^{-3}\,$rad.
+Ratio $\sim 1.6\!\times\!10^{6}$, consistent with \eqref{eq:phi-ratio}.
+
+\paragraph{Damage threshold check.}
+To reach $0.1$\,rad in 1R requires $P_\text{in}\sim 0.1/(5\!\times\!10^{-9})
+\times 1\,\text{mW}\simeq 20\,$kW per unit cell.  At unit-cell area
+$A_\text{cell}=(500\,\text{nm})^{2}=2.5\!\times\!10^{-13}\,\text{m}^{2}$
+this is an intensity $\sim 8\!\times\!10^{12}\,\text{W/cm}^{2}$, three to
+four orders of magnitude above the ns-pulse damage threshold for
+LiNbO$_3$ ($\sim 1\!-\!10\,\text{GW/cm}^{2}$).  Even at damage-threshold
+intensity ($\sim 25\,$W per unit cell for $10\,\text{GW/cm}^{2}$), the
+accumulated nonlinear phase is only
+$\varphi_\text{NL}^{(1\mathrm R)}\sim 10^{-4}\,$rad -- borderline
+interferometrically detectable but well below operating regimes for any
+Kerr-based device.  The single-pass SH-only metasurface therefore does not
+deliver an observable CW or quasi-CW Kerr nonlinearity at $\omega_1$;
+quoting it as ``high peak power'' overstates the case.
+
+\paragraph{Bandwidth-integrated nonlinear strength
+$|\chithree|\!\cdot\!\Delta f$.}
+At $\Delta f\sim\gamma_2/(2\pi)\simeq 97\,$GHz,
+\begin{equation}
+  |\chicascOneR|\cdot\Delta f
+   \;\sim\;8\!\times\!10^{-21}\cdot 9.7\!\times\!10^{10}
+   \;\sim\;7.7\!\times\!10^{-10}\,\mathrm{m^{2}\,Hz/V^{2}}\,.
+\end{equation}
+Bulk PPLN at conservative parameters gives
+$|\chithree_\text{casc,bulk}|\cdot\Delta f\sim 2\!\times\!10^{-8}\,
+\mathrm{m^{2}\,Hz/V^{2}}$ (main note \S 10, after the 2026-05 $1/n_2$
+correction; cm path length).  The 1R metasurface is a factor $\sim 30$
+\emph{below} bulk PPLN in this benchmark -- a gap that the doubly-resonant
+case can only \emph{partially} close (factor $\sim 3$ from $\eta_\text{geom}$).
+The metasurface's value proposition with one resonance only is therefore
+chip-scale form factor and CW operation at modest threshold, not raw
+$|\chithree|\!\cdot\!\Delta f$ competitiveness.
+
+% =======================================================================
+\section{Summary}\label{sec:summary}
+
+\paragraph{Boxed principal result.}
+\begin{equation*}
+  \boxed{\;
+   \chicascOneR(\omega_1)
+    \;=\;-\,\frac{\eps_0\,\omega_1}{6}\,
+         \frac{|\widetilde M|^{2}}{(\Dom+i\,\gamma_2/2)\,\Vunit}
+    \;\sim\;-\,\frac{\omega_1\,|\chitwo|^{2}\,\eta_\text{geom}^{(1\mathrm R)}}
+                    {6\,n_2^{2}\,\Dom}\,,
+   \;}
+\end{equation*}
+with the singly-resonant SHG overlap and geometric factor
+\begin{equation*}
+  \widetilde M\;\equiv\!\int_{\VNL}\!\chitwo_{ijk}(\ri)\,f_{2,i}^{*}(\ri)\,
+    \hat e_j\,\hat e_k\,\dthreer,
+  \qquad
+  \eta_\text{geom}^{(1\mathrm R)}\;\equiv\;\frac{|\widetilde M|^{2}\,\eps_0\,n_2^{2}}
+                                          {\Vunit\,|\chitwo|^{2}}
+  \;\sim\;0.05\!-\!0.2\,.
+\end{equation*}
+
+\paragraph{Comparison table.}
+\begin{center}\small
+\begin{tabular}{p{0.27\linewidth}p{0.32\linewidth}p{0.32\linewidth}}
+  \toprule
+  Quantity & 2R (doubly-resonant) & 1R (SH-only) \\
+  \midrule
+  SHG overlap
+   & $M=\!\int\chitwo f_{2}^{*}\f_{1}\f_{1}$
+   & $\widetilde M=\!\int\chitwo f_{2}^{*}\hat{\bm e}\hat{\bm e}$ \\[2pt]
+  Normalisation volume
+   & $\int|\f_1|^{4}\dthreer$
+   & $\Vunit$ \\[2pt]
+  Geometric overlap $\eta_\text{geom}$
+   & $\widetilde\eta^{2}/\zeta_1\sim 0.1\!-\!0.5$
+   & $|\widetilde M|^{2}\eps_0 n_2^{2}/(\Vunit|\chitwo|^{2})\sim 0.05\!-\!0.2$ \\[2pt]
+  Structural form of $\chicasc$
+   & \multicolumn{2}{p{0.66\linewidth}}{\quad identical: $-\,\omega_1|\chitwo|^{2}\eta_\text{geom}/(6 n_2^{2}\Dom)$} \\[2pt]
+  Sign tunability by $\Dom$
+   & yes
+   & yes (broader tuning window) \\[2pt]
+  Two-photon-like loss
+   & $\propto Q_2/(12 n_2^{2})$ at $\Dom=0$
+   & same prefactor with $\eta\to\eta^{(1\mathrm R)}$ \\[2pt]
+  Sum rule $|\chicasc|\!\cdot\!\Delta f$
+   & $\sim\omega_1|\chitwo|^{2}\eta_\text{geom}/(12\pi n_2^{2})$
+   & same with $\eta\to\eta^{(1\mathrm R)}$ \\[2pt]
+  Per-photon $\varphi_\text{NL}$
+   & $\propto Q_1^{2}\cdot Q_2$
+   & $\propto Q_2$ only \\[2pt]
+  Bistability, AM modulator
+   & yes
+   & no \\[2pt]
+  $|\chicasc|\!\cdot\!\Delta f$ vs.\ bulk PPLN
+   & factor $\sim 0.05$ (PPLN wins by $\sim 20\times$)
+   & factor $\sim 0.03$ (PPLN wins by $\sim 30\times$) \\
+  \bottomrule
+\end{tabular}
+\end{center}
+
+\paragraph{Take-away.}
+The cascaded $\chithree$ \emph{mechanism} is essentially intact when the
+FM resonance is removed: $G(2\omega_1)$ alone carries the resonant kernel
+and the boxed structural form is unchanged.  What collapses is the
+\emph{leverage} of that material response on the observable per-photon
+phase, because $Q_1$ enters twice in the doubly-resonant phase
+(once in field build-up, once in readout) and is absent in the SH-only
+case.  Designs that need only $\chithree_\text{casc}$ as a material
+parameter (e.g.\ broadband cascaded FWM, certain pulsed-saturable-absorber
+schemes) tolerate the SH-only configuration; designs that need feedback
+through an FM resonance (bistability, AM modulator, resonant phase
+matching for SPM-based switching at CW thresholds) do not.
+
+% =======================================================================
+\appendix
+\section{Quick prefactor check from the doubly-resonant limit}\label{app:check}
+
+A useful sanity check is to recover the doubly-resonant boxed result by
+``adding back'' an FM resonance.  The substitution is not literal --
+$M$ and $\widetilde M$ have different units, since $\f_1$ carries
+$\mathrm{V}/(\mathrm{m}\sqrt{\mathrm J})$ while $\hat{\bm e}$ is
+dimensionless -- but a structural correspondence holds at the level of
+the SHG drive.  Read \eqref{eq:betahat} as the projection of
+$P^{(2)}(\ri,2\omega_1)=\eps_0\chitwo\,E(\ri,\omega_1)\,E(\ri,\omega_1)$
+onto $\f_2^{*}$, with the \emph{local FM field} substituted for
+$E(\ri,\omega_1)$.  In the 1R case that field is $E_\text{loc}\,\hat{\bm e}$
+(uniform c-number, magnitude scaled out as $E_\text{loc}^{2}$ outside the
+integral), giving $\hat\beta=(\eps_0\omega_1/4)\,E_\text{loc}^{2}\widetilde M$;
+in the 2R case it is $a_1\f_1(\ri)$ (modal, amplitude scaled out as
+$a_1^{2}$ outside), giving $\beta a_1^{2}=(\eps_0\omega_1/4)\,a_1^{2}M$.
+
+Identifying $E_\text{loc}^{2}\leftrightarrow a_1^{2}$ and
+$\hat{\bm e}\hat{\bm e}\leftrightarrow\f_1(\ri)\f_1(\ri)/[\f_1\text{-normalisation}]$
+at the integrand level, and likewise replacing the unit-cell volume
+$\Vunit$ in the cascade-back-projection denominator of
+\eqref{eq:chi3-1R-boxed} by the modal participation volume
+$\int|\f_1|^{4}\dthreer$, the structural form
+\begin{equation*}
+  \chicascOneR\;\longleftrightarrow\;
+   -\,\frac{\eps_0\,\omega_1}{6}\,
+   \frac{|M|^{2}}{(\Dom+i\gamma_2/2)\!\int\!|\f_1|^{4}\dthreer}
+   \;=\;\chicascTwoR\,,
+\end{equation*}
+matches the main note Eq.~(chi3casc).  The prefactor $\eps_0\omega_1/6$
+and the denominator structure $\Dom+i\gamma_2/2$ are common to the two
+cases; what transforms together is the choice of \emph{local-FM-field
+parameterisation} (uniform-pump c-number vs.\ modal amplitude) and the
+matching overlap-volume normalisation (unit cell volume vs.\ modal
+participation volume).
+
+% =======================================================================
+\begin{thebibliography}{99}
+\bibitem{Koshelev2018}
+K.~Koshelev, S.~Lepeshov, M.~Liu, A.~Bogdanov, and Y.~Kivshar,
+\emph{Asymmetric Metasurfaces with High-$Q$ Resonances Governed by Bound
+States in the Continuum},
+Phys.\ Rev.\ Lett.\ \textbf{121}, 193903 (2018).
+\end{thebibliography}
+
+\end{document}

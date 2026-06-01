@@ -1,0 +1,80 @@
+/* Custom styling for the cascaded-chi3 presentation. */
+
+/* Global font scale: default ~36px is too big for our content. */
+.reveal {
+  font-size: 24px;
+}
+
+/* Slide titles a touch tighter so content gets more room. */
+.reveal h1 {
+  font-size: 1.6em;
+  margin-bottom: 0.3em;
+}
+.reveal h2 {
+  font-size: 1.35em;
+  margin-bottom: 0.35em;
+}
+.reveal h3 {
+  font-size: 1.15em;
+}
+
+/* Tighter paragraph and list spacing. */
+.reveal p,
+.reveal li {
+  line-height: 1.30;
+  margin-bottom: 0.35em;
+}
+.reveal ul, .reveal ol {
+  margin-bottom: 0.4em;
+}
+
+/* Two-column blocks: keep them from pushing each other awkwardly. */
+.reveal .columns {
+  align-items: flex-start;
+  gap: 1.5em;
+}
+
+/* Equations: slightly reduce the math font so display blocks fit. */
+.reveal .math.display {
+  font-size: 0.95em;
+}
+
+/* Figure captions smaller so they don't crowd the panel below. */
+.reveal figcaption {
+  font-size: 0.7em;
+  line-height: 1.2;
+  margin-top: 0.2em;
+  color: #555;
+}
+
+/* Tables: tighten and shrink for the dense observable-leverage table. */
+.reveal table {
+  font-size: 0.85em;
+}
+.reveal table th, .reveal table td {
+  padding: 0.25em 0.5em;
+}
+
+/* Section break slides (dark background): bigger and centered. */
+.reveal section[data-background-color="#0d2c54"] h1 {
+  color: #fff;
+  font-size: 2.2em;
+  text-align: center;
+}
+
+/* Callouts: slightly smaller, less margin. */
+.reveal .callout {
+  font-size: 0.85em;
+  margin: 0.6em 0;
+}
+
+/* .smaller class -- override the Quarto default so it shrinks more. */
+.reveal .smaller {
+  font-size: 0.85em;
+}
+
+/* Images: cap at full slide width so we never overflow. */
+.reveal .slide figure img {
+  max-width: 100%;
+  height: auto;
+}

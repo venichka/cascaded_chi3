@@ -1,0 +1,2199 @@
+\documentclass[11pt,a4paper]{article}
+
+% --- packages -----------------------------------------------------------
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{bm}
+\usepackage{mathtools}        % for \boxed inside align*, \DeclarePairedDelimiter, etc.
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true, linkcolor=blue!50!black, citecolor=blue!50!black,
+            urlcolor=blue!50!black}
+
+% --- convenient macros --------------------------------------------------
+\newcommand{\eps}{\varepsilon}
+\newcommand{\epstilde}{\widetilde{\varepsilon}}
+\newcommand{\bvec}[1]{\mathbf{#1}}
+\newcommand{\E}{\bvec{E}}
+\newcommand{\f}{\bvec{f}}
+\newcommand{\h}{\bvec{h}}
+\newcommand{\ri}{\bvec{r}}
+\newcommand{\dthreer}{\,d^{3}r}
+\newcommand{\chitwo}{\chi^{(2)}}
+\newcommand{\chithree}{\chi^{(3)}}
+\newcommand{\Dom}{\Delta\omega}
+
+% spacing tweaks
+\setlength{\parskip}{0.4em}
+
+% =======================================================================
+\begin{document}
+
+\title{Cascaded $\chi^{(2)}{:}\chi^{(2)} \to \chi^{(3)}_\text{eff}$ \\
+       in a Doubly-Resonant Dielectric Metasurface}
+\author{}
+\date{\today}
+\maketitle
+
+% =======================================================================
+\section{Setting and goal}
+
+The objective is to engineer a metasurface whose effective third-order
+nonlinear susceptibility, \emph{driven only at the fundamental frequency}
+$\omega_1$, exceeds the bulk $\chithree$ of the constituent material by
+orders of magnitude.  The mechanism is the well-known \emph{cascade} of
+two $\chitwo$ processes:
+$\omega_1+\omega_1\to 2\omega_1$ followed by $2\omega_1-\omega_1\to\omega_1$.
+When the second-harmonic (SH) channel is \emph{off-resonant} (or
+phase-mismatched), the SH amplitude follows the fundamental adiabatically
+and its back-action produces a Kerr-like response on the fundamental
+\cite{Ostrovskii1967,DeSalvo1992,Stegeman1996}.
+
+The metasurface platform we have in mind consists of an array of
+high-index dielectric resonators (LiNbO$_3$, GaAs, GaP, Si) supporting two
+co-localised resonances:
+\begin{itemize}
+  \item a fundamental resonance at $\omega_1$ -- a \emph{quasi}-bound
+        state in the continuum (qBIC) with controlled radiative coupling
+        $\gamma_1^{(\text{rad})}$ to free space, designed for
+        in-coupling at $\omega_1$;
+  \item a second resonance at $\omega_2 \approx 2\omega_1$ -- a
+        symmetry-protected BIC (or strongly under-coupled qBIC) whose
+        total decay $\gamma_2$ is dominated by intrinsic absorption,
+        giving the largest accessible quality factor
+        $Q_2 = \omega_2/\gamma_2$.
+\end{itemize}
+
+The relevant tensor of $\chitwo$ is patterned in space (via the geometry
+of the meta-atoms, by periodic poling, or by symmetry-breaking
+perturbations) so that the SHG overlap integral does not vanish
+(Section~\ref{sec:tensor}).  High-$Q$ metasurface SHG of exactly this
+kind has been demonstrated in AlGaAs and LiNbO$_3$
+\cite{Carletti2018,Koshelev2020,Anthur2020}.  These experiments measure
+the SH radiation leaving the sample and therefore probe the
+$\chitwo$-driven up-conversion channel; the \emph{cascaded}
+$\chithree$ regime is the complementary observable -- an
+intensity-dependent phase shift on the FM in conditions where the SH
+radiation is intentionally suppressed -- and has not, to our
+knowledge, been isolated experimentally in a metasurface platform.
+A literature audit before submission is warranted, since
+$\chitwo$:$\chitwo$ cascading in waveguides and bulk PPLN
+\cite{DeSalvo1992,Stegeman1996,Bache2007} is well-established and the
+metasurface extension is a natural step.
+
+% =======================================================================
+\section{Conventions}\label{sec:conventions}
+
+Several factors of $2$ and $3$ in the final answer come from book-keeping
+in the field/polarisation conventions; we fix them once and for all.
+
+\paragraph{Real fields.}
+Physical real fields are written as a sum of complex envelopes,
+\begin{equation}
+  \mathcal{E}_i(\ri,t)=\tfrac12\sum_n\!\bigl[E_{n,i}(\ri,t)\,e^{-i\omega_n t}+\mathrm{c.c.}\bigr],\qquad
+  \mathcal{P}_i(\ri,t)=\tfrac12\sum_n\!\bigl[P_{n,i}(\ri,t)\,e^{-i\omega_n t}+\mathrm{c.c.}\bigr],
+\end{equation}
+with $E_{n,i},P_{n,i}$ slowly varying compared with $1/\omega_n$.
+
+\paragraph{Susceptibility tensors (Boyd convention).}
+With this field convention,
+\begin{equation}
+  P_i^{(2)}(\omega_\sigma)=\eps_0\!\!\sum_{(p,q)}\!\chitwo_{ijk}(\omega_\sigma;\omega_p,\omega_q)\,E_j(\omega_p)\,E_k(\omega_q),
+\end{equation}
+where the sum runs over distinct ordered pairs of frequencies summing to
+$\omega_\sigma$.  Indices are summed by Einstein convention.
+
+For the two processes at hand,
+\begin{align}
+  \boxed{\;P_i^{(2)}(2\omega_1)=\eps_0\,\chitwo_{ijk}(2\omega_1;\omega_1,\omega_1)\,E_j(\omega_1)\,E_k(\omega_1)\;}
+  &\qquad\text{(SHG)} \label{eq:PSHG}\\[4pt]
+  \boxed{\;P_i^{(2)}(\omega_1)=2\eps_0\,\chitwo_{ijk}(\omega_1;2\omega_1,-\omega_1)\,E_j(2\omega_1)\,E_k^*(\omega_1)\;}
+  &\qquad\text{(DFG)}\label{eq:PDFG}
+\end{align}
+The factor $2$ in DFG counts the orderings $(2\omega_1,-\omega_1)$ and
+$(-\omega_1,2\omega_1)$.  \textbf{This is the factor missing in the
+original note}, and dropping it violates Manley--Rowe (Section~\ref{sec:tcmt}).
+
+The native Kerr response on the fundamental, for comparison, is
+\begin{equation}
+  P_i^{(3)}(\omega_1)=3\eps_0\,\chithree_{ijkl}(\omega_1;\omega_1,\omega_1,-\omega_1)\,
+                     E_j(\omega_1)E_k(\omega_1)E_l^*(\omega_1),
+\end{equation}
+with the factor $3$ counting the distinct orderings of
+$(\omega_1,\omega_1,-\omega_1)$.
+
+We assume Kleinman symmetry (full permutation symmetry across all index
+pairs), valid for both LiNbO$_3$ and GaAs at telecom-band fundamentals
+well below the electronic gap.  In particular,
+\begin{equation}
+  \chitwo_{ijk}(2\omega_1;\omega_1,\omega_1)=\chitwo_{kij}(\omega_1;2\omega_1,-\omega_1)\equiv\chitwo_{ijk}(\ri),
+\end{equation}
+i.e.\ a single symmetric tensor $\chitwo_{ijk}(\ri)$ in what follows.
+
+% =======================================================================
+\section{Modes and energy normalisation}
+
+Let $\f_n(\ri),\h_n(\ri)$ be the eigenmodes of the linear, lossless,
+dispersive Maxwell problem,
+\begin{equation}
+  \nabla\!\times\!\nabla\!\times\!\f_n(\ri)
+  =\frac{\omega_n^2}{c^2}\,\eps_r(\ri,\omega_n)\,\f_n(\ri),
+\end{equation}
+with $\f_n$ a complex vector field encoding the polarisation pattern of
+mode $n$ (and the magnetic mode
+$\h_n=\nabla\!\times\!\f_n/(i\omega_n\mu_0)=-i\nabla\!\times\!\f_n/(\omega_n\mu_0)$,
+following Faraday's law $\nabla\!\times\!\E=-\partial_t\mathbf B$ under the
+$e^{-i\omega t}$ convention of \S\ref{sec:conventions}).
+Note that both the \emph{vectorial} nature of $\f_n$ and the dispersion
+of $\eps_r$ are essential; the original note's scalar, dispersionless
+$f(\ri)$ drops information needed for the tensorial overlap below.
+
+The mode is energy-normalised so that
+\begin{equation}
+  \boxed{\;\frac12\!\int\!\!\bigl[\,\eps_0\,\epstilde_n(\ri)\,|\f_n|^2+\mu_0|\h_n|^2\,\bigr]\dthreer=1,
+  \qquad
+  \epstilde_n(\ri)\equiv\left.\frac{\partial(\omega\,\eps_r(\ri,\omega))}{\partial\omega}\right|_{\omega=\omega_n}\;}
+\label{eq:Brillouin}
+\end{equation}
+(Brillouin's expression for the energy density of a time-harmonic field
+in a dispersive medium \cite[\S 80]{LandauLifshitz}).  Defining the
+modal amplitude $a_n(t)$ by
+\begin{equation}
+  E_{n,i}(\ri,t)=a_n(t)\,f_{n,i}(\ri),
+\end{equation}
+the time-averaged energy stored in mode $n$ is exactly $|a_n|^2$
+(so $a_n$ has units of $\sqrt{\mathrm J}$ and $|a_n|^2$ has units of $\mathrm J$).
+
+For non-dispersive lossless dielectrics one may replace
+$\epstilde_n\to\eps_r(\ri,\omega_n)\equiv n^2(\ri,\omega_n)$.
+\textbf{Do not use a single $n$ for both modes}: in LiNbO$_3$ at
+$\lambda_1=1550$~nm, $n_o(\omega_1)\simeq 2.21$ and $n_o(2\omega_1)\simeq 2.26$
+(a $\sim 2\%$ difference), and the magnitude of $\chitwo_{ijk}$ also
+differs at the two frequencies via Miller's rule.
+
+% =======================================================================
+\section{Polarisation-tensor derivation: $\chithree_{\text{casc}}$ from $\chitwo\!\cdot G\!\cdot\chitwo$}\label{sec:tensorder}
+
+Before introducing modal amplitudes it is instructive to derive
+$\chithree_{\text{casc}}$ directly from the polarisation expansion and
+Maxwell's equations, without invoking coupled-mode theory.  This route
+makes the structural form
+$\chithree_{\text{casc}}\sim\chitwo\!\cdot G(2\omega_1)\!\cdot\chitwo$
+manifest, exposes a non-local kernel that single-mode TCMT silently
+collapses, and shows that the temporal coupled-mode result of
+Section~\ref{sec:tcmt} is the same calculation re-expressed in a
+single-resonance approximation.
+
+\paragraph{The SH field as the response to a $\chitwo$ source.}
+At leading order in the nonlinearity the SH field is determined by
+Maxwell's equations with the SHG polarisation \eqref{eq:PSHG} as a
+source,
+\begin{equation}
+  \bigl[\nabla\!\times\!\nabla\!\times\,-\,k_2^2\,\eps_r(\ri,2\omega_1)\bigr]
+  \mathbf E(2\omega_1)=k_2^2\,\mu_0 c^2\,\mathbf P^{\text{NL}}(2\omega_1),
+  \qquad k_2\equiv 2\omega_1/c.
+\label{eq:waveeq-SH}
+\end{equation}
+Define $\overline{\overline G}(\ri,\ri';2\omega_1)$ as the linear,
+retarded, dispersive dyadic Green's function for the operator on the
+left -- i.e.\ the field at $\ri$ produced by a unit polarisation source
+at $\ri'$ in the same structure.  Substituting \eqref{eq:PSHG},
+\begin{equation}
+  \boxed{\;
+    E_j(\ri,2\omega_1)
+    = k_2^2\!\int\!d^3r'\;
+      G_{jl}(\ri,\ri';2\omega_1)\,\chitwo_{lmn}(\ri')\,
+      E_m(\ri',\omega_1)\,E_n(\ri',\omega_1).
+  \;}
+  \label{eq:Esh-Green}
+\end{equation}
+This is the \emph{only} step that goes beyond the susceptibility
+tensors: it tells us how the SH field is geometrically related to its
+$\chitwo$ source in the chosen structure (bulk medium, waveguide,
+metasurface, photonic crystal, $\ldots$).
+
+\paragraph{Cascaded polarisation at $\omega_1$.}
+Substituting \eqref{eq:Esh-Green} into the DFG term \eqref{eq:PDFG}
+gives, with summation over repeated indices,
+\begin{equation}
+  \boxed{\;
+  P_i^{\text{casc}}(\ri,\omega_1)
+  = 2\eps_0\,k_2^2\!\int\!d^3r'\;
+    \underbrace{\chitwo_{ijk}(\ri)\,
+                G_{jl}(\ri,\ri';2\omega_1)\,
+                \chitwo_{lmn}(\ri')}_{\equiv\,\Xi^{\text{casc}}_{ikmn}(\ri,\ri')}
+    E_m(\ri',\omega_1)\,E_n(\ri',\omega_1)\,E_k^*(\ri,\omega_1).
+  \;}\label{eq:Pcasc-nonlocal}
+\end{equation}
+Two structural features of \eqref{eq:Pcasc-nonlocal} are worth
+emphasising before specialising.
+
+\textbf{The cascade is non-local.}  In general
+$P_i^{\text{casc}}(\ri,\omega_1)$ depends on the FM field at a different
+point $\ri'$ through the SH Green's function.  A genuinely \emph{local}
+effective $\chithree(\ri)$ exists only when $G(\ri,\ri';2\omega_1)$ is
+sufficiently sharply peaked at $\ri=\ri'$, or when the FM field varies
+slowly on the support of $G$.  This is automatic in bulk media
+(translational invariance shrinks the kernel to a
+$\Delta k$-dependent local response) and in single-mode metasurface
+unit cells, but \emph{not} in regimes where, e.g., the FM is a tightly
+focused beam probing a weakly coupled lattice resonance.  In such
+regimes the local-$\chithree$ description breaks down even though the
+underlying cascaded mechanism is unchanged.
+
+\textbf{The factor $2/3$ from the Boyd degeneracies is universal.}
+Comparing \eqref{eq:Pcasc-nonlocal} with the native-Kerr definition
+$P^{(3)}(\omega_1)=3\eps_0\chithree|E|^2 E$ shows that the cascaded
+$\chithree$ inherits a factor $2/3$ relative to a naive product
+$|\chitwo|^2/G$, simply because the DFG channel has degeneracy $2$
+while the SPM channel has degeneracy $3$.  This shifts the answer in
+\emph{both} the bulk and resonant limits below.
+
+\paragraph{Two specialisations.}
+Different physical contexts correspond to different forms of $G$:
+\begin{itemize}\setlength{\itemsep}{3pt}
+  \item \textbf{(a) Bulk, phase-mismatched.}  A translationally
+    invariant medium has $G(\ri,\ri';2\omega_1)$ that depends only on
+    $\ri-\ri'$; in $\mathbf k$-space it has a smooth dependence peaked
+    at $|\mathbf k|=2\omega_1 n_2/c$.  For plane-wave fundamental
+    fields with wave-vector mismatch
+    $\Delta\mathbf k=\mathbf k_2-2\mathbf k_1\neq 0$ the integral in
+    \eqref{eq:Pcasc-nonlocal} collapses to a local response.  The
+    SVEA reduction \cite{DeSalvo1992,Stegeman1996,Boyd} proceeds as
+    follows.  Writing the fields as
+    $E(\omega_n,z)=A_n(z)\,e^{i k_n z}$ with slowly varying envelopes
+    $A_n$, the wave equation \eqref{eq:waveeq-SH} at $2\omega_1$ with
+    the SHG polarisation \eqref{eq:PSHG} as source reduces (after
+    dropping $\partial_z^{2}A_2$ relative to $k_2\partial_z A_2$) to
+    \cite[\S 2.4]{Boyd}
+    \begin{equation}
+      \frac{dA_2}{dz}\;=\;\frac{i\,\omega_2}{2\,n_2\,c}\,\chitwo\,A_1^{2}\,
+                      e^{-i\Delta k z}.
+      \label{eq:SVEA-A2}
+    \end{equation}
+    For undepleted pump ($A_1=$const) and $A_2(0)=0$ this integrates to
+    \begin{equation}
+      A_2(z)\;=\;\frac{\omega_2\,\chitwo\,A_1^{2}}{2\,n_2\,c\,\Delta k}\,
+                \bigl(1-e^{-i\Delta k z}\bigr).
+      \label{eq:A2-of-z}
+    \end{equation}
+    Substituting \eqref{eq:A2-of-z} into the DFG polarisation
+    \eqref{eq:PDFG} and projecting the result back into the SVEA
+    equation at $\omega_1$,
+    $dA_1/dz=(i\omega_1/(2 n_1 c)) \cdot P^\text{NL}(\omega_1)/\eps_0
+    \cdot e^{-i k_1 z}$, gives an intensity-dependent term
+    $dA_1/dz\supset iK_\text{casc}|A_1|^{2}A_1$ with
+    \begin{equation*}
+      K_\text{casc}\;=\;\frac{\omega_1\,\omega_2}{2\,n_1\,n_2\,c^{2}\,\Delta k}
+                       \,|\chitwo|^{2}\;\times\;(\text{phase factor}).
+    \end{equation*}
+    Identifying with the effective-Kerr SVEA equation
+    $dA_1/dz=i\,(3\omega_1/(2 n_1 c))\,\chithree_\text{casc}\,|A_1|^{2}A_1$
+    (where the factor of $3$ is the SPM Boyd degeneracy from \eqref{eq:PSHG}--\eqref{eq:PDFG})
+    gives $\chithree_\text{casc}=K_\text{casc}\,2n_1c/(3\omega_1)$; the
+    explicit $n_1$ from the FM projection cancels against the $n_1$ in
+    $K_\text{casc}$, leaving only the SH refractive index:
+    \begin{equation}
+      \boxed{\;\chithree_{\text{casc,\,bulk}}(\omega_1)
+              \;=\;-\,\frac{2\,\omega_1}{3\,c\,n_2\,\Delta k}\;
+                   |\chitwo|^{2}\,\mathcal{F}(\Delta k\,L),\;}
+      \label{eq:chi3casc-bulk}
+    \end{equation}
+    with $\mathcal{F}(\Delta k L)$ a dimensionless phase factor that
+    averages to $\mathcal{F}\!\to\!1$ for $\Delta k L\!\gg\!1$
+    (broadband bulk cascading; the regime exploited in soliton
+    compression) and to $\mathcal{F}\!\to\!\Delta k L/2$ for
+    $\Delta k L\!\ll\!1$ (where SHG conversion competes with the
+    cascade).  Dimensionally $[\omega_1/(c\,\Delta k)]$ is dimensionless
+    and $[|\chitwo|^{2}/n_2]=\mathrm{m}^{2}/\mathrm{V}^{2}$ as required;
+    the explicit factor $2/3$ is the DFG-to-SPM Boyd degeneracy ratio
+    inherited from \eqref{eq:Pcasc-nonlocal}.  Note that only $n_2$
+    (the SH-mode index) survives in the end, paralleling the metasurface
+    result \eqref{eq:chi3casc_explicit} below.  The
+    cascaded contribution is sign-tunable through $\mathrm{sign}(\Delta k)$
+    and bounded by the coherence length $\pi/\Delta k$ over which the
+    cascade builds up coherently before reversing.  Equation
+    \eqref{eq:chi3casc-bulk} is used in Section~\ref{sec:numerical} to
+    estimate the bulk PPLN cascaded $\chithree$ for LiNbO$_3$.
+  \item \textbf{(b) Single resonance (the metasurface case).}  Near an
+    isolated SH quasi-normal mode at $\omega_2\approx 2\omega_1$ with
+    vectorial profile $\f_2(\ri)$ and decay rate $\gamma_2$, the QNM
+    expansion~\cite{Kristensen2020,Sauvan2013,Lalanne2018} gives, near
+    the pole,
+    \begin{equation}
+      G_{jl}(\ri,\ri';2\omega_1)\;=\;
+      \frac{c^2}{2\omega_2}\,
+      \frac{f_{2,j}(\ri)\,f_{2,l}^*(\ri')}{\Dom+i\gamma_2/2}
+      \;+\;(\text{non-resonant background}),
+      \qquad\Dom=2\omega_1-\omega_2,
+    \label{eq:G-QNM}
+    \end{equation}
+    with $\f_2$ in the Brillouin normalisation \eqref{eq:Brillouin}.
+    The $c^2/(2\omega_2)$ prefactor is the standard residue of the
+    one-pole QNM expansion in the wave-equation form
+    $[\nabla\!\times\!\nabla\!\times\,-\,(\omega/c)^{2}\eps_r]^{-1}$
+    (see~\cite[Eq.~(31)]{Sauvan2013}); we will not need its exact
+    numerical value because the chain ending in
+    \eqref{eq:chi3casc-tensor} is anchored against the TCMT route of
+    Sections~\ref{sec:tcmt}--\ref{sec:adiab}, where the prefactor is
+    fixed independently by the Brillouin energy normalisation.
+    If the FM field is also dominated by a single mode,
+    $E_m(\ri,\omega_1)=a_1\,f_{1,m}(\ri)$, substituting \eqref{eq:G-QNM}
+    into the kernel
+    $\Xi^{\text{casc}}_{ikmn}(\ri,\ri')=\chitwo_{ijk}(\ri)\,G_{jl}(\ri,\ri';2\omega_1)\,\chitwo_{lmn}(\ri')$
+    of \eqref{eq:Pcasc-nonlocal} and using
+    $E_m(\ri',\omega_1)E_n(\ri',\omega_1)=a_1^{2}f_{1,m}(\ri')f_{1,n}(\ri')$
+    isolates two overlap integrals
+    \begin{equation}
+      M\equiv \!\int\!\chitwo_{ijk}(\ri)\,f_{2,i}^*\,f_{1,j}\,f_{1,k}\,\dthreer,
+      \qquad
+      \overline M\equiv \!\int\!\chitwo_{ijk}(\ri)\,f_{1,i}^*\,f_{2,j}\,f_{1,k}^*\,\dthreer,
+      \label{eq:M-overline-M}
+    \end{equation}
+    related by Kleinman symmetry as $\overline M=M^*$ (the integrand
+    of $\overline M$ is the complex conjugate of the integrand of $M$
+    under the symmetry $\chitwo_{ijk}=\chitwo_{kij}$ of
+    Section~\ref{sec:conventions}).  The integration over $\ri'$
+    contracts $f_{2,l}^*(\ri')$ with $\chitwo_{lmn}(\ri')\,f_{1,m}(\ri')\,f_{1,n}(\ri')$
+    -- precisely $M$ -- while the remaining factor at $\ri$,
+    $\chitwo_{ijk}(\ri)\,f_{2,j}(\ri)\,E_k^*(\ri)=a_1^*\,\chitwo_{ijk}\,f_{2,j}\,f_{1,k}^*$,
+    has the modal polarisation pattern of $\f_1(\ri)$ when projected
+    appropriately.  The cascaded polarisation is therefore
+    \begin{equation}
+      P_i^{\text{casc}}(\ri,\omega_1)\;\propto\;
+        \frac{M\,|a_1|^{2}\,a_1}{\Dom+i\gamma_2/2}\,
+        \chitwo_{ijk}(\ri)\,f_{2,j}(\ri)\,f_{1,k}^{*}(\ri),
+      \label{eq:Pcasc-modal}
+    \end{equation}
+    Kerr-like in the modal sense: it carries the SPM time-dependence
+    $|a_1|^{2}a_1$ and inherits the single-pole Lorentzian
+    $1/(\Dom+i\gamma_2/2)$ from $G$.  Projecting \eqref{eq:Pcasc-modal}
+    onto $f_{1,i}^{*}(\ri)$ replaces the spatial factor by
+    $\overline M=M^{*}$, so $\int f_{1,i}^{*}P_i^{\text{casc}}\dthreer
+     \propto |M|^{2}\,|a_1|^{2}\,a_1/(\Dom+i\gamma_2/2)$; equating
+    this to the modal projection of the native Kerr term
+    $\int f_{1,i}^{*}P_i^{\text{nat}}\dthreer
+     =3\eps_0\,\chithree_\text{casc}\,|a_1|^{2}\,a_1\!\int|\f_1|^{4}\dthreer$
+    identifies the effective $\chithree$,
+    \begin{equation}
+      \boxed{\;\chithree_{\text{casc}}\;=\;
+        -\,\frac{\eps_0\,\omega_1}{6}\cdot
+        \frac{|M|^2}{(\Dom+i\gamma_2/2)\!\int\!|\f_1|^4\dthreer}\;}
+      \label{eq:chi3casc-tensor}
+    \end{equation}
+    whose real part recovers \eqref{eq:chi3casc} exactly in the
+    adiabatic limit $|\Dom|\gg\gamma_2$, and whose imaginary part is
+    the cascaded two-photon-like loss derived in
+    Section~\ref{sec:adiab}.  The overall prefactor $\eps_0\omega_1/6$
+    depends on the QNM Green's-function normalisation in \eqref{eq:G-QNM}
+    and on the Brillouin energy normalisation \eqref{eq:Brillouin};
+    in the convention adopted here it is most cleanly fixed by the
+    TCMT route of Sections~\ref{sec:tcmt}--\ref{sec:adiab}, where the
+    same answer is obtained from the modal projection of Maxwell's
+    equations directly.
+\end{itemize}
+
+\paragraph{Equivalence with the TCMT derivation.}
+Using the resonant Green's function \eqref{eq:G-QNM} directly in
+\eqref{eq:Esh-Green} gives $\mathbf E(\ri,2\omega_1)=a_2\f_2(\ri)$
+with
+\begin{equation}
+  a_2\;\propto\;\frac{a_1^2}{\Dom+i\gamma_2/2}\,,
+\end{equation}
+which is precisely the steady state of the TCMT equation
+\eqref{eq:a2}.  Matching prefactors recovers the explicit coupling
+$\beta=(\eps_0\omega_1/4)\,M$ in \eqref{eq:beta}; the precise numerical
+coefficient depends on the field/normalisation convention adopted in
+Section~\ref{sec:conventions}.  \textbf{The temporal coupled-mode
+theory is therefore the same calculation as \eqref{eq:Pcasc-nonlocal}
+written in mode-amplitude language}, with $G(2\omega_1)$ replaced by
+its single-pole Lorentzian.
+
+\paragraph{What this reframing buys.}
+\begin{itemize}\setlength{\itemsep}{3pt}
+  \item The structural formula
+    $\chithree_{\text{casc}}\sim\chitwo\!\cdot G(2\omega_1)\!\cdot\chitwo$
+    makes clear that one can engineer the cascade through \emph{any}
+    feature of $G$ at $2\omega_1$: phase mismatch, BIC, photonic-crystal
+    band edge, polariton, slow light.  The high-$Q$ SH mode of
+    Section~\ref{sec:tcmt} is one (very effective) choice, not the only
+    one.
+  \item The non-local kernel $\Xi^{\text{casc}}(\ri,\ri')$ becomes
+    important whenever the FM field varies on the scale of the SH mode
+    -- relevant for lattice resonances, surface-bound modes, or
+    metasurfaces probed by tightly focused beams.  In those regimes
+    the local single-mode picture used in
+    Sections~\ref{sec:tcmt}--\ref{sec:tensor} should be replaced by a
+    full evaluation of \eqref{eq:Pcasc-nonlocal}.
+  \item The factor $2/3$ from Boyd degeneracies is the same in bulk
+    and resonant cases -- a useful sanity check whenever comparing to
+    a Stegeman-style bulk estimate~\cite{Stegeman1996}.
+\end{itemize}
+
+% =======================================================================
+\section{Coupled-mode equations}\label{sec:tcmt}
+
+Substituting the modal expansion into Maxwell's equations and projecting
+onto $\f_n^*$ (slowly-varying-envelope approximation; e.g.\
+\cite{SuhWangFan2004,Rodriguez2007}) gives, after adding phenomenological
+loss rates and the input port for the FM:
+\begin{align}
+  \boxed{\;\frac{da_2}{dt}=\bigl(i\Dom-\tfrac{\gamma_2}{2}\bigr)a_2+i\beta\,a_1^2\;}
+  \label{eq:a2}\\[4pt]
+  \boxed{\;\frac{da_1}{dt}=-\tfrac{\gamma_1}{2}a_1
+                        +i\beta^*\,a_1^*\,a_2
+                        +i\alpha_3\,|a_1|^2 a_1
+                        +\sqrt{\gamma_1^{(\text{rad})}}\,s_+\;}
+  \label{eq:a1}
+\end{align}
+where $\Dom\equiv 2\omega_1-\omega_2$, $s_+$ is the input wave amplitude
+normalised so that $|s_+|^2$ is incident power, and the input--output
+relation is $s_-=-s_++\sqrt{\gamma_1^{(\text{rad})}}\,a_1$.  The total
+FM decay is $\gamma_1=\gamma_1^{(\text{rad})}+\gamma_1^{(\text{nr})}$;
+for the SH mode we have, by design,
+$\gamma_2\simeq\gamma_2^{(\text{nr})}$.
+
+\textbf{The SHG and DFG couplings carry the same coupling constant
+$\beta$.}  This is the Manley--Rowe / energy-conservation requirement and
+can be checked directly: in the lossless limit ($\gamma_n,s_+\!\to 0$, no
+Kerr), differentiating $|a_n|^{2}$ from the bare TCMT equations
+\eqref{eq:a2}--\eqref{eq:a1} gives, per channel,
+\begin{equation}
+  \frac{d|a_2|^{2}}{dt}=2\,\mathrm{Im}\bigl[\beta\,a_1^{*2}a_2\bigr],
+  \qquad
+  \frac{d|a_1|^{2}}{dt}=-2\,\mathrm{Im}\bigl[\beta^{(1)}\,a_1^{*2}a_2\bigr],
+  \label{eq:MR-perchannel}
+\end{equation}
+where $\beta^{(1)}$ denotes the (a priori unknown) coupling appearing
+in the FM equation \eqref{eq:a1} (we wrote $i\beta^{*}\,a_1^{*}a_2$
+there anticipating the result $\beta^{(1)}=\beta$).  The total
+mode-energy rate is therefore
+\begin{equation}
+  \frac{d}{dt}(|a_1|^{2}+|a_2|^{2})
+  =2\,\mathrm{Im}\!\bigl[(\beta-\beta^{(1)})\,a_1^{*2}a_2\bigr],
+  \label{eq:MR-total}
+\end{equation}
+which vanishes for arbitrary $a_1,a_2$ if and only if
+$\beta^{(1)}=\beta$, identifying the SH-equation coupling and the
+FM-equation coupling as complex conjugates of a single $\beta$.  The
+same conclusion follows from the Hamiltonian formulation in
+\cite[Eqs.~8--9]{Rodriguez2007}, where energy conservation is built
+in from the start.  \textbf{The factor $2$ in the DFG polarisation
+\eqref{eq:PDFG} is exactly what produces this equality} -- without
+it the SHG and DFG couplings would differ by a factor of $2$ and
+energy would not be conserved.  The original note's
+``$\kappa$ vs.\ $\kappa/2$'' form violates Manley--Rowe.
+
+\paragraph{Derivation of the modal coefficients $\beta$ and $\alpha_3$.}
+The boxed equations \eqref{eq:a2}--\eqref{eq:a1} are obtained by
+projecting Maxwell's equations onto $\f_n^*$, starting from the wave
+equation \eqref{eq:waveeq-SH}.  We sketch the steps for $\beta$ here;
+$\alpha_3$ follows identically with the appropriate $\chithree$ source.
+
+Substitute the single-mode ansatz $\mathbf E(\ri,2\omega_1)=a_2(t)\f_2(\ri)$
+into \eqref{eq:waveeq-SH}.  In the slow-envelope limit the
+$\partial_t^{2}\mathbf E$ piece of the wave operator contributes
+$-2i\omega_2\,\dot a_2\,\f_2$; the spatial part
+$[\nabla\!\times\!\nabla\!\times\,-\,k_2^{2}\eps_r]\f_2$ vanishes
+on-resonance by the modal definition, and produces $2(\omega_2-2\omega_1)
+\omega_2 \eps_0 \tilde\eps_2 \f_2/c^{2}=-2\omega_2\Dom \eps_0\tilde\eps_2\f_2/c^{2}$
+off-resonance.  Multiplying through by $\f_2^*(\ri)$, integrating
+over space, and using the Brillouin energy normalisation
+\eqref{eq:Brillouin} (so that $\int \eps_0 \tilde\eps_2 |\f_2|^{2}\,\dthreer
+=1$ in our units), the LHS reduces to
+\begin{equation*}
+  \mathrm{LHS}\;=\;\bigl[\,-2i\omega_2\,\dot a_2 + 2\omega_2\Dom\,a_2\bigr]\cdot
+                   (1/\eps_0).
+\end{equation*}
+The RHS, using $E_j(\omega_1)E_k(\omega_1)=a_1^{2}f_{1,j}f_{1,k}$ in
+\eqref{eq:PSHG}, becomes
+\begin{equation*}
+  \mathrm{RHS}\;=\;k_2^{2}\,a_1^{2}\!\int\!\chitwo_{ijk}\,f_{2,i}^{*}\,f_{1,j}\,f_{1,k}\,\dthreer
+            \;=\;k_2^{2}\,a_1^{2}\,M.
+\end{equation*}
+Equating and dividing by the prefactor of $\dot a_2$ identifies the
+free-evolution term $i\Dom\,a_2$ already present in \eqref{eq:a2} and
+the SHG drive $i\beta\,a_1^{2}$ with
+\begin{equation*}
+  \beta = \frac{\eps_0\,k_2^{2}\,c^{2}}{4\,\omega_2}\,M
+        = \frac{\eps_0\,\omega_2}{4}\,M
+        = \frac{\eps_0\,\omega_1}{2}\,M
+\end{equation*}
+(using $k_2=\omega_2/c$ and $\omega_2=2\omega_1$).  The conventional
+prefactor written in \eqref{eq:beta} below uses $\eps_0\omega_1/4$
+rather than $\eps_0\omega_1/2$; the precise numerical coefficient
+depends on whether one absorbs $\f_2$-normalisation conventions
+$\eps_0\tilde\eps_n |\f_n|^2\to 2$ or $\to 1$ in the Brillouin energy
+integral, and on factor-of-2 ambiguities between $|E|^{2}$ and
+$|\f_n|^2 |a_n|^2$ when complex envelopes are extracted as in
+\eqref{eq:PSHG}--\eqref{eq:PDFG}.  We adopt the standard cavity-QED
+choice~\cite{Rodriguez2007,SuhWangFan2004} giving
+\begin{equation}
+  \boxed{\;\beta=\frac{\eps_0\,\omega_1}{4}\!\int\!\chitwo_{ijk}(\ri)\,
+                f_{2,i}^*(\ri)\,f_{1,j}(\ri)\,f_{1,k}(\ri)\,\dthreer\;}
+  \qquad[\text{units:}\ \mathrm{J}^{-1/2}\mathrm{s}^{-1}].
+\label{eq:beta}
+\end{equation}
+The same projection applied to the wave equation at $\omega_1$ with
+the SPM source $P^{(3)}(\omega_1)=3\eps_0\chithree|E|^{2}E$ produces
+the FM equation \eqref{eq:a1} with the bare Kerr coefficient
+\begin{equation}
+  \boxed{\;\alpha_3=\frac{3\,\eps_0\,\omega_1}{8}\!\int\!\chithree_{ijkl}(\ri)\,
+                  f_{1,i}^*\,f_{1,j}\,f_{1,k}\,f_{1,l}^*\,\dthreer\;}
+  \qquad[\text{units:}\ \mathrm{J}^{-1}\mathrm{s}^{-1}].
+\label{eq:alpha3}
+\end{equation}
+The factor $3$ is the SPM Boyd degeneracy of
+\S\ref{sec:conventions}; the factor $1/8$ tracks the same
+$\eps_0\omega_1/4$ envelope/normalisation chain as $\beta$ in
+\eqref{eq:beta}, with one additional factor of $1/2$ from extracting
+the $|E|^{2}E$ piece of $|\mathcal{E}|^{2}\mathcal{E}$ at frequency
+$\omega_1$ in the Boyd field convention (\S\ref{sec:conventions}).
+The full derivation parallels the $\beta$ derivation above; see
+\cite[Eq.~(8)]{Rodriguez2007} for an explicit treatment.
+The DFG source $P^{(2)}(\omega_1)$ of \eqref{eq:PDFG} projects onto
+$\f_1^*$ to give the term $i\beta^{*}a_1^{*}a_2$ in \eqref{eq:a1};
+this is most cleanly seen via the conservative Hamiltonian
+$H=\beta^{*}a_1^{*2}a_2+\beta\,a_1^{2}a_2^{*}$, whose equations of
+motion $i\dot a_n=\partial H/\partial a_n^{*}$ produce \eqref{eq:a2}
+and the DFG term in \eqref{eq:a1} simultaneously with the
+\emph{same} $\beta$, automatically satisfying \eqref{eq:MR-total}.
+
+The numerical prefactors $\eps_0\omega_1/4$ and $3\eps_0\omega_1/8$
+depend on the chosen normalisation and field convention; the
+structure of the integrals -- full contraction of the tensor with the
+vectorial mode profiles, weighted by $\eps_0$ from the
+polarisation--field relation -- is convention-independent and is the
+practical input for full-wave numerical evaluation.  The factor $3$
+in $\alpha_3$ is the SPM degeneracy from
+Section~\ref{sec:conventions} and was absent in the original note.
+
+\paragraph{Equivalence with the polarisation-tensor derivation.}
+The TCMT route here and the Green's-function route of
+Section~\ref{sec:tensorder} are the same calculation in different
+representations.  Substituting the QNM Green's function
+\eqref{eq:G-QNM} into \eqref{eq:Esh-Green} gives
+$\mathbf E(\ri,2\omega_1)=a_2\,\f_2(\ri)$ with the steady-state
+$a_2\propto a_1^{2}/(\Dom+i\gamma_2/2)$ of \eqref{eq:a2}, with
+overall prefactor fixed by \eqref{eq:beta}.  This consistency
+determines the QNM Green's-function normalisation in \eqref{eq:G-QNM}
+and confirms that the cascaded $\chithree$ identified there and
+in the adiabatic-elimination route of Section~\ref{sec:adiab}
+(eq.~\eqref{eq:chi3casc}) agree.
+
+% =======================================================================
+\section{Adiabatic elimination and the effective $\chithree$}\label{sec:adiab}
+
+Assume $|\Dom|\gg\gamma_2/2$ and $|\dot a_2|\ll|\Dom\,a_2|$ (slow
+modulation of the FM compared with the SH response time).  Setting
+$da_2/dt\to 0$ in \eqref{eq:a2},
+\begin{equation}
+  a_2 = \frac{i\beta\,a_1^2}{-i\Dom+\gamma_2/2}
+      = \frac{-\beta\,a_1^2}{\Dom+i\gamma_2/2}
+      \simeq \frac{-\beta\,a_1^2}{\Dom}\!\left(1-\frac{i\gamma_2}{2\Dom}\right).
+\end{equation}
+Substituting into \eqref{eq:a1},
+\begin{equation}
+  \frac{da_1}{dt}=
+   \Bigl[-\tfrac{\gamma_1}{2}-\underbrace{\tfrac{|\beta|^2\gamma_2}{2\Dom^{2}}}_{\text{cascaded loss}}|a_1|^2\Bigr]a_1
+   +i\Bigl[\underbrace{\alpha_3-\tfrac{|\beta|^2}{\Dom}}_{\text{effective Kerr}}\Bigr]|a_1|^2 a_1
+   +\sqrt{\gamma_1^{(\text{rad})}}\,s_+ .
+\end{equation}
+
+\paragraph{(i) Effective Kerr coefficient.}
+\begin{equation}
+  \boxed{\;\alpha_3^{\text{eff}}=\alpha_3-\frac{|\beta|^2}{\Dom}\;}
+\end{equation}
+The cascaded contribution can have \emph{either} sign relative to the
+bare Kerr response, depending on whether $\Dom\equiv 2\omega_1-\omega_2$
+is positive or negative.  This sign-tunability is one of the hallmarks
+of cascaded nonlinearity: the same metasurface can be tuned through
+zero, used for self-defocusing, or used for self-focusing simply by
+walking the SH resonance through twice the FM frequency.  This was used
+dramatically in soliton compression experiments \cite{DeSalvo1992,Liu1999}.
+
+\paragraph{(ii) Two-photon-like loss.}
+The cascaded loss coefficient -- defined as the coefficient $X$ in the
+bracket form $da_1/dt = [-\gamma_1/2 - X|a_1|^{2}]a_1 + \ldots$ on
+\eqref{eq:Pcasc-nonlocal} above -- is, in the adiabatic limit
+$|\Dom|\gg\gamma_2/2$,
+\begin{equation}
+  \gamma_3^\text{eff}\;=\;\frac{|\beta|^{2}\,\gamma_2}{2\,\Dom^{2}},
+  \label{eq:gamma3-adiab}
+\end{equation}
+with full Lorentzian form
+$\gamma_3^\text{eff}(\Dom)=|\beta|^{2}(\gamma_2/2)/[\Dom^{2}+(\gamma_2/2)^{2}]$
+peaking at $\Dom=0$ with value $2|\beta|^{2}/\gamma_2$.  It is the
+analogue of two-photon absorption (here governed by $\gamma_2$ rather
+than by $\mathrm{Im}\,\chithree$) and is unavoidable as the price of
+the resonant enhancement.  In the same convention, the cascaded
+loss-to-Kerr ratio at the design point is
+$\gamma_3^\text{eff}/|\alpha_3^\text{eff}|=\gamma_2/(2|\Dom|)$.
+
+\bigskip
+
+To compare with bulk material parameters, invert the definition of
+$\alpha_3$ in \eqref{eq:alpha3}: a uniform bulk $\chithree_{\text{eff}}$
+filling the mode produces
+$\alpha_3=(3\eps_0\omega_1/8)\,\chithree_{\text{eff}}\!\int\!|\f_1|^4\dthreer$,
+so the cascaded contribution corresponds to
+\begin{equation}
+  \chithree_{\text{casc}}=-\frac{|\beta|^2/\Dom}{(3\eps_0\omega_1/8)\!\int\!|\f_1|^4\dthreer}
+                       =-\frac{8}{3\eps_0\omega_1\Dom}\,
+                            \frac{|\beta|^2}{\int|\f_1|^4\dthreer}.
+\end{equation}
+Inserting the explicit $\beta=\eps_0\omega_1\,I/4$ from \eqref{eq:beta} (with
+$I\equiv\int\chitwo_{ijk}\,f_{2,i}^*f_{1,j}f_{1,k}\dthreer$) and using
+$|\beta|^2=\eps_0^2\omega_1^2|I|^2/16$,
+\begin{equation}
+  \boxed{\;\chithree_{\text{casc}}=-\frac{\eps_0\,\omega_1}{6\,\Dom}\,
+       \frac{\bigl|\!\int\!\chitwo_{ijk}(\ri)\,f_{2,i}^*\,f_{1,j}\,f_{1,k}\dthreer\bigr|^{2}}
+            {\int|\f_1|^4\dthreer}\;.}
+\label{eq:chi3casc}
+\end{equation}
+\paragraph{Explicit $n$-dependence.}
+The $n$ that one might have expected in a ``naïve'' (plane-wave-style)
+derivation is hidden in the energy normalisation
+\eqref{eq:Brillouin}: at unit stored energy $|a_n|^2=1$~J, the typical
+field magnitude in the dielectric is
+\begin{equation}
+  |\f_n(\ri)|\;\sim\;\frac{1}{\sqrt{\eps_0\,n_n^{\,2}\,V_\text{eff}}},
+\end{equation}
+where $n_n$ is the effective refractive index seen by mode $n$ (close
+to the bulk index at $\omega_n$ for a tightly confined dielectric mode)
+and $V_\text{eff}$ is the mode volume.  Substituting these scalings,
+\begin{align}
+  \int|\f_1|^4\dthreer&\sim\frac{\zeta_1}{\eps_0^{\,2}\,n_1^{\,4}\,V_\text{eff}},
+  \\[4pt]
+  \Bigl|\!\int\!\chitwo_{ijk}f_{2,i}^*f_{1,j}f_{1,k}\dthreer\Bigr|^{2}
+        &\sim\frac{|\chitwo|^{2}\,\widetilde\eta^{2}}{\eps_0^{\,3}\,n_2^{\,2}\,n_1^{\,4}\,V_\text{eff}},
+\end{align}
+where $\zeta_1,\widetilde\eta$ are purely geometric, dimensionless numbers of
+order unity (perfect overlap $\widetilde\eta\to 1$).  All four powers of
+$n_1$ cancel between numerator and denominator, and one $\eps_0$
+cancels against the $\eps_0$ prefactor in \eqref{eq:chi3casc}, giving
+the final explicit form
+\begin{equation}
+  \boxed{\;\chithree_{\text{casc}}\;\sim\;-\frac{\omega_1}{6\,n_2^{\,2}\,\Dom}\;|\chitwo|^{2}\;\eta_\text{geom}\;,
+        \qquad \eta_\text{geom}\equiv\frac{\widetilde\eta^{\,2}}{\zeta_1}\sim 0.01\!-\!0.5\;}
+\label{eq:chi3casc_explicit}
+\end{equation}
+with $\eta_\text{geom}$ a purely geometric overlap.  Three things are
+worth emphasising about this form:
+\begin{itemize}
+  \item \textbf{Only} $n_2$ \textbf{(the SH-mode effective index) survives.}
+        The $n_1$ powers cancel between numerator and denominator
+        because $|\f_1|^4$ appears symmetrically in both, leaving the
+        SH-mode normalisation $|\f_2|^2\propto 1/(\eps_0 n_2^{\,2}V)$
+        as the only residue.  Physically, modes in high-index material
+        concentrate \emph{less} field per unit stored energy, so the
+        $\f_2{:}\f_1\f_1$ coupling is weaker by $1/n_2$.
+  \item \textbf{The dielectric constant $\eps_0$ does not appear} in the
+        final result.  This is a non-trivial consistency check: $\chi^{(3)}_\text{eff}$
+        is a material parameter (m$^2$/V$^2$ in SI), and dimensional
+        analysis of $|\chitwo|^{2}$ alone gives the right units.
+  \item The overall coefficient (here $1/6$) is convention-dependent;
+        the structure $\omega_1/(n_2^{\,2}\Dom)\cdot|\chitwo|^{2}\cdot\eta_\text{geom}$
+        is universal.
+\end{itemize}
+
+% =======================================================================
+\section{The bandwidth--enhancement sum rule}\label{sec:sumrule}
+
+The peak enhancement is bounded above by the SH linewidth.  The
+cleanest derivation is from the AC frequency response of the cascade.
+If $|a_1|^{2}$ is modulated at frequency $\Omega$ (so the FM intensity
+has a Fourier component $\delta|a_1|^{2}\,e^{-i\Omega t}$ on top of a
+DC value), the SH equation \eqref{eq:a2} generates a corresponding
+SH-amplitude sideband
+$\delta a_2 = i\beta\,\delta(a_1^{2})/(-\!i(\Dom-\Omega)+\gamma_2/2)$,
+and the DFG back-action on the FM acts as an effective \emph{frequency-dependent}
+Kerr coefficient
+\begin{equation}
+  \alpha_3^{\text{eff}}(\Omega)
+   \;=\;\frac{i\,|\beta|^{2}}{\gamma_2/2+i(\Omega-\Dom)},
+  \qquad
+  |\alpha_3^{\text{eff}}(\Omega)|
+   \;=\;\frac{|\beta|^{2}}{\sqrt{(\gamma_2/2)^{2}+(\Omega-\Dom)^{2}}}.
+  \label{eq:alpha3-AC}
+\end{equation}
+The \emph{Lorentzian} in $\Omega$ here is $|\alpha_3^{\text{eff}}(\Omega)|^{2}$,
+centred at $\Omega=\Dom$ with FWHM $=\gamma_2$, peak
+$(2|\beta|^{2}/\gamma_2)^{2}=4|\beta|^{4}/\gamma_2^{2}$, and area
+\begin{equation}
+  \int\!d\Omega\,|\alpha_3^{\text{eff}}(\Omega)|^{2}
+   \;=\;\frac{2\pi\,|\beta|^{4}}{\gamma_2}.
+  \label{eq:area-rule}
+\end{equation}
+$|\alpha_3^{\text{eff}}(\Omega)|$ itself is the square root of this
+Lorentzian, so it is \emph{broader}: FWHM$(|\alpha|)=\sqrt{3}\,\gamma_2$
+(taking the square root widens by $\sqrt{3}$).  Its peak is
+$|\alpha_3^{\text{eff}}|_\text{peak}=|\beta|^{2}/(\gamma_2/2)=2|\beta|^{2}/\gamma_2$
+at $\Omega=\Dom$, and the peak-times-FWHM product
+\begin{equation}
+  |\alpha_3^{\text{eff}}|_\text{peak}\times \text{FWHM}(|\alpha_3^{\text{eff}}|)
+  \;=\;2\sqrt{3}\,|\beta|^{2},
+\end{equation}
+is conserved as $Q_2$ varies (since $|\beta|^{2}\propto|\chitwo|^{2}\eta_\text{geom}/n_2^{\,2}$
+of Section~\ref{sec:adiab} is set by material constants and overlap
+geometry alone, independent of $Q_2$).  The cascaded coefficient has
+resonant gain when the FM modulation frequency matches the SH detuning.
+
+In design terms, at the conventional operating point $|\Dom|\!\sim\!\gamma_2$:
+$|\alpha_3^{\text{eff}}|_\text{max}\!\sim\!|\beta|^{2}/\gamma_2$ and
+the usable bandwidth is $\Delta\Omega\!\sim\!\gamma_2$, so combining
+with \eqref{eq:chi3casc_explicit} (using $\omega_1/\gamma_2 = Q_2/2$
+since $\gamma_2 = \omega_2/Q_2 = 2\omega_1/Q_2$):
+\begin{equation}
+  \bigl|\chithree_\text{casc}\bigr|_\text{max}\;\sim\;
+       \frac{\omega_1}{6\,n_2^{\,2}\,\gamma_2}\,|\chitwo|^2\,\eta_\text{geom}
+       \;=\;\frac{Q_2}{12\,n_2^{\,2}}\,|\chitwo|^2\,\eta_\text{geom}\,,
+  \label{eq:chi3-max}
+\end{equation}
+and (multiplying by $\Delta f_\text{usable}\sim\gamma_2/(2\pi)$, so that
+$\gamma_2$ cancels)
+\begin{equation}
+  \boxed{\;\bigl|\chithree_\text{casc}\bigr|_\text{max}\,\times\,\Delta f_\text{usable}
+          \;\lesssim\;\frac{\omega_1\,|\chitwo|^2\,\eta_\text{geom}}{12\pi\,n_2^{\,2}}
+          \quad\text{(independent of }Q_2\text{).}\;}
+  \label{eq:sum-rule}
+\end{equation}
+$Q_2$ does not enter the product: \textbf{resonant enhancement
+redistributes nonlinear action into a tall, narrow peak; it does not
+increase the area under the curve.}  This is the same rule that
+limits resonant linear absorption (oscillator-strength sum rule),
+purely classical, and it is what disqualifies high-$Q$
+double-resonance schemes from delivering ``fast'' $\chithree$ in the
+ultrafast sense.  For the nominal numbers below ($Q_2\sim 4{\times}10^3$
+at $\lambda_1=1.55\,\mu$m, so $\gamma_2=\omega_2/Q_2=2\omega_1/Q_2$),
+$\Delta f_\text{usable}\sim\gamma_2/(2\pi)\simeq 97$~GHz: narrowband
+by Kerr-electronics standards (THz), broadband by photonic-cavity
+standards.
+
+For non-resonant (phase-mismatched bulk) cascading the same sum rule
+applies with $\gamma_2$ replaced by the inverse coherence time
+$|\Delta k|\,v_g$, giving modest enhancement over a much larger
+bandwidth -- the regime exploited in soliton compression and bulk
+all-optical switching.
+
+Equation \eqref{eq:alpha3-AC} describes the cascade response to a
+modulation of $|a_1|^{2}$ at frequency $\Omega$ (relevant for slow
+envelope modulation of the FM amplitude); the input is the pump
+intensity and the AC-peak/DC enhancement of $|\alpha_3^\text{eff}|$ is
+$|\Dom|/(\gamma_2/2)$ asymptotically.  A \emph{distinct} transfer
+function (different input, different output) is treated in
+Section~\ref{sec:applications}, item~6: there one modulates the
+SH-cavity detuning $\Dom(t)$ at frequency $\Omega_\text{mod}$ -- this
+is the cascade-based amplitude modulator -- and its AC-peak/DC
+enhancement is $\sqrt{\Dom_0^{2}+(\gamma_2/2)^{2}}/\gamma_2\approx
+|\Dom_0|/\gamma_2$ (eq.~\eqref{eq:AC-peak-enhancement}), smaller by a
+factor of $2$ than the FM-modulation result because the SH-detuning
+modulation only drives one sideband per Fourier component of $\Dom(t)$.
+
+% =======================================================================
+\section{Tensor structure and phase matching}\label{sec:tensor}
+
+The overlap that defines $\beta$,
+\begin{equation*}
+  \beta\propto\!\int\!\chitwo_{ijk}(\ri)\,f_{2,i}^*\,f_{1,j}\,f_{1,k}\dthreer,
+\end{equation*}
+vanishes identically for several reasons, each of which must be
+addressed in the metasurface design:
+\begin{enumerate}
+  \item \textbf{Bulk inversion symmetry.} If a meta-atom has inversion
+        symmetry, $\chitwo_{ijk}\equiv 0$.  Hence one needs a
+        non-centrosymmetric crystal substrate (LiNbO$_3$, point group
+        $3m$; GaAs/GaP, point group $\bar{4}3m$ ($T_d$); AlGaAs;\,\dots)
+        \emph{and} a meta-atom geometry that does not impose inversion
+        symmetry on the mode profile.
+
+  \item \textbf{Mode-symmetry mismatch.} Even with $\chitwo_{ijk}\neq 0$
+        in the material, the integrand has a definite parity under any
+        spatial symmetry shared by both modes.  If the FM mode is, say,
+        magnetic-dipole-like (odd under a mirror) and the SH is
+        electric-dipole-like (even), the integrand may be odd under
+        that mirror and the integral vanishes.  Quasi-BIC engineering
+        is precisely the controlled breaking of one such symmetry to
+        lift this constraint while keeping $Q_2$ large.
+
+  \item \textbf{Quasi-phase matching across the metasurface period.}
+        For an extended metasurface, the integrand carries Bloch phase
+        factors $e^{i(2\bvec{k}_1-\bvec{k}_2)\cdot\bvec{R}}$.  Periodic
+        poling or spatial modulation of $\chitwo_{ijk}(\ri)$ across
+        unit cells provides a reciprocal-lattice vector $\bvec{G}$ that
+        compensates the residual momentum
+        $2\bvec{k}_1-\bvec{k}_2-\bvec{G}=0$.  In a single-unit-cell
+        metasurface with both modes at $\bvec{k}_\parallel=0$
+        ($\Gamma$ point), this momentum-matching is automatic and the
+        only requirement is on the \emph{internal} symmetry of the mode
+        profiles.
+\end{enumerate}
+
+For LiNbO$_3$ (point group $3m$), the non-zero independent components of
+$\chitwo_{ijk}$ in contracted notation are
+$d_{15}=d_{31}$, $d_{22}=-d_{21}=-d_{16}$, and $d_{33}$, with
+$|d_{33}|\simeq 25$~pm/V at 1064~nm being the largest.  With the
+$\hat{z}$ axis parallel to the optic axis, the largest overlap is
+achieved by mode profiles with strong $|f_{1,z}|^{2}f_{2,z}^{*}$ content
+over the meta-atom volume.  Z-cut LiNbO$_3$ with field components
+engineered along the optic axis is therefore preferred.  The same
+considerations apply, with the appropriate tensor structure, for
+$\bar{4}3m$ semiconductors (largest component $d_{14}=d_{25}=d_{36}\simeq 100$~pm/V
+for GaAs).
+
+For LiNbO$_3$, $\chitwo\equiv 2d_{33}\simeq 50$~pm/V $=5\times10^{-11}$~m/V;
+for GaAs, $\chitwo\simeq 2\times10^{-10}$~m/V.
+
+% =======================================================================
+\section{Metasurface implementation: BIC and quasi-BIC platforms}
+
+The high-$Q_2$ requirement is the key technical hurdle, and bound states
+in the continuum (BIC) provide a particularly elegant route
+\cite{Hsu2016}.  A symmetry-protected BIC is a guided-wave-like solution
+that lies inside the radiation continuum but is \emph{symmetry-forbidden}
+from coupling to plane waves at $\bvec{k}_\parallel=0$.  Realistic
+structures are quasi-BICs (qBICs): finite arrays, slight disorder, or
+deliberate symmetry breaking convert the ideal BIC into a high-$Q$ leaky
+resonance, whose $Q$ scales as $1/\alpha^{2}$ with the asymmetry
+parameter $\alpha$ \cite{Koshelev2018,Bulgakov2017}.  Demonstrated $Q$ factors in
+dielectric metasurfaces are routinely $10^{3}$--$10^{4}$ and have
+reached $\sim 10^{5}$ in carefully optimised devices.
+
+Two practical architectures:
+\begin{enumerate}
+  \item[\textbf{(a)}] \textbf{Two-mode qBIC pair.}  Both the FM and SH
+        are qBICs of the same array, with the SH qBIC very close to the
+        symmetry-protected limit (large $Q_2$) and the FM qBIC
+        moderately broadened ($Q_1\sim 10^{2}$--$10^{3}$) to allow
+        efficient in-coupling at $\omega_1$.  The SH leakage to the
+        radiation continuum is irrelevant for the cascaded process --
+        we \emph{don't want} SH out-coupling here.
+
+  \item[\textbf{(b)}] \textbf{FM Mie--qBIC + SH symmetry-protected BIC.}
+        The FM is a low-$Q$ Mie resonance (dipolar, easy to pump); the
+        SH lives in a true BIC mode of the array, with $\gamma_2$ set
+        by absorption only.  Best for maximum enhancement, hardest to
+        fabricate.
+\end{enumerate}
+
+In both cases the requirement on the SH mode is purely \emph{internal}:
+high $Q_2$, large field overlap with the FM-squared, no need for any
+external connection.
+
+A subtle point: the cascaded $\chithree$ effect manifests at the FM, so
+the experimental signature is \textbf{intensity-dependent
+reflection/transmission at $\omega_1$} (self-phase modulation,
+intensity-dependent line shape, optical bistability for sufficient pump),
+not SH light leaving the sample.  In fact, a \emph{good} implementation
+produces \emph{no measurable} SH radiation while the back-action on the
+fundamental is maximum.  This is also the experimental fingerprint that
+distinguishes the cascaded process from the bare Kerr response.
+
+% =======================================================================
+\section{A worked numerical estimate (LiNbO$_3$ metasurface)}\label{sec:numerical}
+
+Take
+
+\begin{center}
+\begin{tabular}{ll}
+\toprule
+quantity & value \\
+\midrule
+$\lambda_1$               & $1.55\,\mu$m \\
+$\omega_1$                & $1.22\times10^{15}$ rad/s \\
+$n_1,\,n_2$               & $2.21,\,2.26$ \\
+$n_2^{\,2}$               & $\simeq 5.1$ \\
+$|\chitwo|$ ($=2d_{33}$)  & $5\times10^{-11}$ m/V \\
+$|\chithree|_\text{native}$ & $\sim 2\times10^{-21}$ m$^2$/V$^2$ \\
+$Q_2$                     & $4\times10^{3}$ \\
+$\gamma_2=\omega_2/Q_2=2\omega_1/Q_2$ & $6.1\times10^{11}$ rad/s
+                                       ($\gamma_2/2\pi\simeq 97$~GHz) \\
+$\Dom$ (safely adiabatic, $|\Dom|\gtrsim 2\gamma_2$) &
+   $2\gamma_2 = 4\omega_1/Q_2 = 1.22\times10^{12}$ rad/s \\
+$\eta_\text{geom}$ (purely geometric overlap, eq.~\eqref{eq:chi3casc_explicit})
+                          & $\sim 0.3$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+Using the explicit form \eqref{eq:chi3casc_explicit} with $\Dom=2\gamma_2$,
+so $\omega_1/\Dom = Q_2/4$:
+\begin{align*}
+  \bigl|\chithree_\text{casc}\bigr|\;&\sim\;
+        \frac{\omega_1}{6\,n_2^{\,2}\,\Dom}\,|\chitwo|^{2}\,\eta_\text{geom}
+   \;=\;\frac{Q_2}{24\,n_2^{\,2}}\;|\chitwo|^{2}\,\eta_\text{geom}\\[2pt]
+   &\sim\;\frac{4000}{24\times 5.1}\times 0.3\times|\chitwo|^{2}
+   \;\sim\;10\times|\chitwo|^{2},
+\end{align*}
+that is
+\begin{equation*}
+  \bigl|\chithree_\text{casc}\bigr|\sim
+       10\times(5\times10^{-11})^{2}\ \mathrm{m^{2}/V^{2}}
+       \;\simeq\;2.5\times10^{-20}\ \mathrm{m^{2}/V^{2}},
+\end{equation*}
+i.e.\ roughly \textbf{12$\boldsymbol{\times}$ the native bulk}
+$\chithree$ of LiNbO$_3$, available over a usable bandwidth
+$\sim\gamma_2/(2\pi)\simeq 97$~GHz centred at the FM resonance
+(Section~\ref{sec:sumrule}).  The $1/n_2^{\,2}$ factor costs a factor
+of $\sim 5$ relative to a ``naïve'' estimate that drops it -- it is
+not negligible, and an honest design has to compensate it with either
+larger $\eta_\text{geom}$ or larger $Q_2/|\Dom|$.
+
+\paragraph{Operating-point sensitivity.}
+Pushing $\Dom$ from the safely adiabatic $2\gamma_2$ down toward the
+edge-of-validity $\Dom\!\sim\!\gamma_2$ (Section~\ref{sec:validity},
+item~1) roughly doubles the enhancement to $R\!\sim\!25$, at the
+cost of working at the edge of the adiabatic approximation where the
+cascaded TPA (Section~\ref{sec:adiab}(ii)) becomes comparable to the
+Kerr response: indeed at $|\Dom|=\gamma_2$, the loss-to-Kerr ratio
+$\gamma_\text{eff}^{(2)}/|\alpha_3^\text{eff,casc}|=\gamma_2/(2|\Dom|)=1/2$.
+Several earlier estimates in the cascade literature implicitly sit at
+this operating point and quote $R\!\sim\!25$ for LiNbO$_3$.  We adopt
+the conservative $\Dom=2\gamma_2$, $R\!\sim\!12$ throughout the rest of
+this note, and remind the reader of the factor-of-$\sim\!2$ headroom
+when interpreting numerical claims downstream.
+
+\paragraph{Prefactor uncertainty.}  The numerical estimate
+$R\!\sim\!12$ carries an additional $O(1)$ multiplicative uncertainty
+inherited from the convention dependence of the modal-coupling prefactor
+in $\beta=(\eps_0\omega_1/4)\,M$ (see the discussion before
+\eqref{eq:beta}: the alternative $\eps_0\omega_1/2$ convention would
+shift $|\beta|^2$, and hence $R$, by a factor of $4$).  Together with
+the $\eta_\text{geom}\!\sim\!0.3$ assumption -- which is itself
+geometry-specific -- the $R$ values quoted here should be read as
+\emph{order-of-magnitude} predictions; settling the prefactor requires
+a full-wave evaluation of the modes and overlap integrals in a
+specific meta-atom design.
+
+With $Q_2=10^{4}$ (achievable in optimised qBIC LiNbO$_3$
+metasurfaces) and the same $\eta_\text{geom}=0.3$, the estimate gives
+$\sim 30\times$ enhancement at the cost of a $\sim 40$~GHz bandwidth.
+
+For comparison, a phase-mismatched bulk PPLN slab at the same
+$|\chitwo|$ gives non-resonant cascaded $\chithree$ via the
+SVEA-derived formula \eqref{eq:chi3casc-bulk}.  Inserting
+$|\Delta k|\sim 3\!\times\!10^{5}$~m$^{-1}$ (corresponding to a
+LiNbO$_3$ coherence length $\pi/|\Delta k|\sim 10\,\mu$m at telecom;
+the bare $\Delta n\!\simeq\!0.05$ between $\omega_1$ and $2\omega_1$
+gives $|\Delta k|\!\simeq\!4\!\times\!10^{5}$~m$^{-1}$, so this is
+a representative order-of-magnitude figure), $n_2\simeq 2.26$, and
+$\omega_1/c\simeq 4\!\times\!10^{6}$~m$^{-1}$,
+\begin{equation*}
+  \bigl|\chithree_\text{casc,\,bulk}\bigr|\;\sim\;
+    \frac{2\cdot 4\!\times\!10^{6}}{3\cdot 2.26\cdot 3\!\times\!10^{5}}
+    \cdot (5\!\times\!10^{-11})^{2}
+  \;\sim\;10^{-20}\ \mathrm{m^{2}/V^{2}},
+\end{equation*}
+roughly $5\times$ the native $\chithree_\mathrm{LiNbO_3}$, available
+over $\sim\!10$~THz bandwidth -- the regime exploited in soliton
+compression and bulk all-optical switching.
+
+Comparing $|\chithree|\!\times\!\Delta f$ products honestly: bulk
+PPLN gives $|\chithree_\text{casc,\,bulk}|\!\times\!\Delta f\sim
+10^{-20}\cdot 10^{13}\!=\!10^{-7}$~m$^{2}$V$^{-2}$Hz;
+the metasurface at $Q_2=4{\times}10^{3}$ gives
+$|\chithree_\text{casc,\,meta}|_\text{peak}\!\times\!\Delta f\sim
+2.5\!\times\!10^{-20}\cdot 10^{11}\!=\!2.5\!\times\!10^{-9}$~m$^{2}$V$^{-2}$Hz,
+about a factor $\sim\!40$ \emph{less} than bulk (the $\eta_\text{geom}$
+and $1/n_2^{2}$ penalties are not free).  The metasurface's appeal
+is therefore not in the integrated nonlinear strength but in
+\textbf{the chip-scale form factor and CW-low-threshold operation}:
+narrow-band high-peak operation in a $\sim 100$-nm-thick film, with
+$\mu$W-scale CW pumping rather than the $>\!100$~W pulsed pumping
+of bulk PPLN cascading.  Both regimes have their applications; the
+high-$Q$ regime is suited to CW-pumped bistability, parametric
+oscillation thresholds and frequency-comb stabilisation, rather
+than to ultrafast switching.
+
+% =======================================================================
+\section{Comparison with a native-$\chithree$ resonance: when does cascading help?}\label{sec:comparison}
+
+The numerical estimate of the previous section -- $|\chithree_\text{casc}|
+\simeq 12\,|\chithree_\text{native}|$ at $Q_2=4{\times}10^{3}$ and
+$\Dom=2\gamma_2$ (Section~\ref{sec:numerical}) -- begs
+the question: is the cascaded route actually preferable to engineering
+a single high-$Q$ resonance that enhances the \emph{native} bulk
+$\chithree$?  Both architectures use the same trick (a high-$Q$
+dielectric resonance at the fundamental) to build up intracavity
+intensity; they differ only in what mechanism inside the cavity then
+turns that intensity into a phase shift.  The comparison is delicate
+because the two architectures have different bandwidth structures and
+different saturation channels, and the naive ratio
+$|\chithree_\text{casc}|/|\chithree_\text{native}|$ does not by itself
+settle the matter.  We answer it here within the same TCMT framework.
+
+% --------------------------------------------------------------
+\subsection*{Unified TCMT for both architectures}
+
+Consider a single FM cavity of frequency $\omega_1$ and total decay
+$\gamma_1$, identical in both architectures.  The TCMT equations
+\eqref{eq:a2}--\eqref{eq:a1} already include both candidate sources of
+$\chithree_\text{eff}$ on the FM: the bulk-Kerr coefficient $\alpha_3$
+and the cascaded back-action via $\beta$ and the SH mode $a_2$.  The
+two architectures are limits of the same model:
+
+\begin{itemize}\setlength{\itemsep}{3pt}
+  \item \textbf{Architecture A (native-$\chithree$ resonance):}
+        $\beta\to 0$ (no SH mode engineered, or $|\Dom|\!\to\!\infty$).
+        Only the FM resonance is used; the cubic on the FM is the bulk
+        $\alpha_3$.
+  \item \textbf{Architecture B (cascaded $\chitwo{:}\chitwo$):}
+        $\alpha_3\to 0$ (work in a material with negligible native
+        Kerr, or simply isolate the cascaded contribution from a
+        full-Kerr model).  All the action comes from $\beta$ and the
+        SH mode at $\omega_2\approx 2\omega_1$.
+  \item \textbf{Architecture A+B (combined):} both terms present;
+        relevant for materials with appreciable $\chitwo$ \emph{and}
+        $\chithree$.
+\end{itemize}
+
+\noindent
+Because the FM cavity is the same, the (linear-cavity, on-resonance)
+build-up factor $|a_1|^{2}/|s_+|^{2}=4\gamma_1^\text{rad}/\gamma_1^{2}$
+(which equals $4/\gamma_1$ in the lossless / fully-radiative limit
+$\gamma_1^\text{rad}=\gamma_1$, and $2/\gamma_1$ at the conventional
+critical-coupling point $\gamma_1^\text{rad}=\gamma_1/2$ -- the
+formulae below assume the former), and the
+interaction time $2/\gamma_1$ are identical.  Any architectural
+advantage must therefore come from what multiplies these factors.
+
+% --------------------------------------------------------------
+\subsection*{Per-photon nonlinear phase: the $Q$-scaling}
+
+At pump frequency $\omega_p=\omega_1$ and small signal (no saturation,
+no bistability) the steady-state intracavity intensity is $|a_1|^{2}=
+(4/\gamma_1)\,|s_+|^{2}$, so the accumulated nonlinear phase
+$\phi_\text{NL}=\alpha_3^\text{eff}\,|a_1|^{2}\cdot(2/\gamma_1)$ per
+input photon takes the simple form
+\begin{equation}
+  \boxed{\;\frac{\phi_\text{NL}}{|s_+|^{2}}\;=\;\frac{8\,\alpha_3^\text{eff}}{\gamma_1^{2}}\;}
+  \label{eq:phi-per-photon}
+\end{equation}
+where $\alpha_3^\text{eff}$ is whichever Kerr coefficient drives the
+FM cavity.  For the two architectures,
+\begin{align}
+  \text{Architecture A:}\qquad &
+   \alpha_3^\text{eff,A}=\alpha_3\;\propto\;\chithree_\text{native},
+   \label{eq:alpha-A}\\[3pt]
+  \text{Architecture B:}\qquad &
+   \alpha_3^\text{eff,B}=-\frac{|\beta|^{2}}{\Dom+i\gamma_2/2}
+            \;\propto\;\frac{|\chitwo|^{2}\,\eta_\text{geom}}{n_2^{\,2}\,\Dom}
+            \;\propto\;Q_2.
+   \label{eq:alpha-B}
+\end{align}
+The structural difference is condensed in one parameter: the
+\emph{cascaded enhancement ratio}
+\begin{equation}
+  \boxed{\;R\;\equiv\;\frac{|\alpha_3^\text{eff,B}|}{|\alpha_3^\text{eff,A}|}
+        \;=\;\frac{|\beta|^{2}}{|\alpha_3|\,|\Dom+i\gamma_2/2|}
+        \;\stackrel{\Dom\gg\gamma_2}{\simeq}\;
+        \frac{|\chithree_\text{casc}|}{|\chithree_\text{native}|}\;.}
+  \label{eq:R-def}
+\end{equation}
+$R$ is the proper figure of merit because it depends only on the
+material constants and the SH-resonance design ($Q_2$, $\Dom$, the
+overlap $\eta_\text{geom}$), \emph{not} on the FM cavity properties
+$Q_1,\,\gamma_1^\text{rad}$ which both architectures share.  Note that
+$R$ as defined uses $|\alpha_3^\text{eff,B}|$ (the modulus, including
+$i\gamma_2/2$), while the asymptotic identification with
+$|\chithree_\text{casc}|/|\chithree_\text{native}|$ uses the real part
+of $\alpha_3^\text{eff,B}$ only; the two agree to within $\sim 3\%$ at
+$\Dom=2\gamma_2$ and to $\sim 11\%$ at $\Dom=\gamma_2$.
+
+\paragraph{Q-scaling.}  Combining \eqref{eq:phi-per-photon} with
+\eqref{eq:alpha-A}--\eqref{eq:alpha-B}:
+\begin{align}
+  \phi_\text{NL}^\text{A} &\;\propto\;Q_1^{2}\,\chithree_\text{native},
+  \label{eq:phi-A-scaling}\\[2pt]
+  \phi_\text{NL}^\text{B} &\;\propto\;Q_1^{2}\,Q_2\,\frac{|\chitwo|^{2}\,\eta_\text{geom}}{n_2^{\,2}}.
+  \label{eq:phi-B-scaling}
+\end{align}
+\emph{Both architectures benefit equally from $Q_1$} (the FM-cavity
+build-up scales as $Q_1$ and the interaction time scales as $Q_1$,
+giving the $Q_1^{2}$ factor common to both).  The cascade adds an
+\emph{extra} $Q_2$ factor: increasing the SH quality factor at fixed
+detuning ratio $\Dom/\gamma_2$ pulls more action out of the same
+intracavity FM intensity.
+
+% --------------------------------------------------------------
+\subsection*{The phase--bandwidth locus}
+
+Pushing either $Q_1$ or $Q_2$ to gain phase costs bandwidth.  The
+useful operational bandwidth of each architecture is
+\begin{align*}
+  \text{Architecture A:}\qquad &\Delta f_\text{A}=\gamma_1/(2\pi)
+        =\omega_1/(2\pi Q_1),\\
+  \text{Architecture B:}\qquad &\Delta f_\text{B}=\min(\gamma_1,\gamma_2)/(2\pi).
+\end{align*}
+For architecture B, $\gamma_2$ enters because the cascaded coefficient
+itself has finite bandwidth (Section~\ref{sec:sumrule} sum rule); whichever
+of $\gamma_1$ or $\gamma_2$ is smaller bottlenecks the device.
+
+Plotting $\phi_\text{NL}/|s_+|^{2}$ versus $\Delta f$ in log--log
+reveals three distinct families with three distinct slopes:
+
+\begin{center}
+\begin{tabular}{lll}
+\toprule
+Family & Operating mode & Slope on log--log \\
+\midrule
+A: native, sweep $Q_1$            &
+   $\phi\!\propto\! Q_1^{2}$, $\Delta f\!\propto\!1/Q_1$ &
+   $-2$ \\
+B$_\text{II}$: cascade, fix $Q_1$, sweep $Q_2$ &
+   $\phi\!\propto\!Q_2$, $\Delta f\!\propto\!1/Q_2$ &
+   $-1$ (sum-rule) \\
+B$_\text{I}$: cascade, fix $Q_2$, sweep $Q_1$ &
+   $\phi\!\propto\!Q_1^{2}$, $\Delta f\!\propto\!1/Q_1$ &
+   $-2$ \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+The native locus A is a single line; the cascade is a two-parameter
+\emph{region} in $(\phi,\Delta f)$ bounded by B$_\text{I}$ and
+B$_\text{II}$.  Three qualitative features follow:
+
+\begin{enumerate}
+  \item \textbf{Vertical offset.} At a given bandwidth, the cascade
+    locus is shifted above the native locus by the structural ratio
+    $R$ of \eqref{eq:R-def}.  $R\gg 1$ is the regime in which
+    cascading wins outright; $R\lesssim 1$ is the regime in which
+    native wins.
+
+  \item \textbf{Slopes differ.} A slope-$-1$ line and a slope-$-2$
+    line cross. For $R\gg 1$, the crossover happens at very narrow
+    bandwidth -- well past anything experimentally interesting,
+    so cascade wins everywhere.  For $R\sim 1$, the crossover sits in
+    the experimentally relevant range and the architecture choice
+    depends on the bandwidth target.
+
+  \item \textbf{Cascade beats native by an extra $Q_1$ if you can push
+    $Q_1$.}  Comparing slopes within the cascade region itself,
+    family B$_\text{I}$ (varying $Q_1$ at fixed $Q_2$) lies above
+    B$_\text{II}$ (varying $Q_2$ at fixed $Q_1$) in the high-$Q_1$
+    direction.  To make this quantitative, define the
+    phase-bandwidth product $\Pi\equiv\phi_\text{NL}\cdot\Delta f$.
+    At $Q_1=Q_2=Q$ (matched-$Q$ corner, $\gamma_1=\gamma_2$), using
+    \eqref{eq:phi-A-scaling}--\eqref{eq:phi-B-scaling} and
+    $\Delta f=\gamma_1/(2\pi)\propto 1/Q$:
+    \begin{align*}
+      \Pi^\text{A}\bigl|_{Q_1=Q}
+          &\;\propto\;\chithree_\text{native}\,Q^{2}\cdot Q^{-1}
+          \;=\;\chithree_\text{native}\,Q,\\
+      \Pi^\text{B}\bigl|_{Q_1=Q_2=Q}
+          &\;\propto\;\frac{|\chitwo|^{2}\,\eta_\text{geom}}{n_2^{\,2}}\,Q^{2}\,Q
+              \cdot Q^{-1}
+          \;=\;\frac{|\chitwo|^{2}\,\eta_\text{geom}}{n_2^{\,2}}\,Q^{2}.
+    \end{align*}
+    The cascade phase-bandwidth product at the matched-$Q$ corner
+    scales as $Q^{2}\cdot R^{(0)}$, where
+    $R^{(0)}\equiv|\chitwo|^{2}\eta_\text{geom}/(n_2^{\,2}\chithree_\text{native})$
+    is the structural factor at unit $Q_2$.  The native architecture
+    scales only as $Q$.  The cascade therefore beats native in
+    phase-bandwidth by a factor of $Q$ at the matched corner -- one
+    extra power of $Q$ relative to the slope-only comparison.
+\end{enumerate}
+
+% --------------------------------------------------------------
+\subsection*{The crossover bandwidth}
+
+Equating the native phase \eqref{eq:phi-A-scaling} to the cascade
+phase \eqref{eq:phi-B-scaling} at the bandwidth-matched point
+$\gamma_1=\gamma_2$ (the SH bottleneck balances the FM bandwidth)
+and using the operating point $\Dom=2\gamma_2$ of
+Section~\ref{sec:numerical} (so $|\chithree_\text{casc}|\sim
+Q_2/(24\,n_2^{\,2})\cdot|\chitwo|^{2}\eta_\text{geom}$):
+\begin{equation}
+  \chithree_\text{native}\,Q_1^{2}\;\sim\;
+  \frac{|\chitwo|^{2}\,\eta_\text{geom}}{24\,n_2^{\,2}}\,Q_1^{2}\,Q_2
+  \;\Longrightarrow\;
+  Q_2^\text{crossover}\;\sim\;
+       \frac{24\,n_2^{\,2}\,\chithree_\text{native}}{|\chitwo|^{2}\,\eta_\text{geom}}.
+  \label{eq:Q2-crossover}
+\end{equation}
+For LiNbO$_3$ at the values of Section~\ref{sec:numerical},
+$Q_2^\text{crossover}\sim 3\!\times\!10^{2}$: any SH cavity with $Q_2$
+above this threshold tips the comparison in favour of the cascade.
+Since $Q_2 \sim 4000$ is routine in qBIC metasurfaces, LiNbO$_3$
+\emph{always} prefers cascade in this regime.
+
+For AlGaAs near the band edge, native $\chithree_\text{native}\sim
+10^{-18}$~m$^{2}$/V$^{2}$ is enhanced by two-photon-resonance proximity
+while $|\chitwo|\sim 10^{-10}$~m/V is only modestly larger than
+LiNbO$_3$; \eqref{eq:Q2-crossover} gives $Q_2^\text{crossover}\sim
+10^{5}$, which is above routinely achievable qBIC $Q$'s, so native
+wins at all practical SH cavities.
+
+For Si and Si$_3$N$_4$ the comparison is moot: $\chitwo\to 0$ by
+inversion symmetry, and cascading is simply not available.  These
+materials have to rely on native-Kerr resonance (or move to
+periodically-poled cousin materials).
+
+% --------------------------------------------------------------
+\subsection*{Material survey}
+
+Combining \eqref{eq:R-def} with the explicit form
+\eqref{eq:chi3casc_explicit} at the nominal design point ($Q_2=
+4{\times}10^{3}$, $\Dom=2\gamma_2$, $\eta_\text{geom}=0.3$, $n_2$ from
+the material) gives the cascaded enhancement ratio for a few
+representative materials:
+
+\begin{center}
+\begin{tabular}{lccccc}
+\toprule
+Material & $|\chitwo|$ [m/V] & $|\chithree_\text{native}|$ [m$^{2}$/V$^{2}$]
+         & $n_2$ & $R$ at $Q_2{=}4{\times}10^{3}$ & $Q_2^\text{cross}$ \\
+\midrule
+LiNbO$_3$ (telecom)     & $5\!\times\!10^{-11}$   & $2\!\times\!10^{-21}$ & 2.26 & $\sim\!12$ & $\sim 3\!\times\!10^{2}$ \\
+GaP (NIR)               & $1\!\times\!10^{-10}$   & $\sim\!10^{-19}$      & 3.1  & $\sim\!0.5$ & $\sim 8\!\times\!10^{3}$ \\
+AlGaAs ($\sim$\,1550~nm)& $1\!\times\!10^{-10}$   & $\sim\!10^{-18}$      & 3.3  & $\sim\!0.05$ & $\sim 9\!\times\!10^{4}$ \\
+AlN                     & $1\!\times\!10^{-11}$   & $\sim\!2\!\times\!10^{-21}$ & 2.1 & $\sim\!0.5$ & $\sim 7\!\times\!10^{3}$ \\
+Si                      & $\equiv 0$              & $\sim\!4\!\times\!10^{-18}$ & 3.5  & \multicolumn{2}{c}{--- (no cascade)} \\
+Si$_3$N$_4$             & $\sim 0$                & $\sim\!2.5\!\times\!10^{-21}$ & 2.0  & \multicolumn{2}{c}{--- (no cascade)} \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+Three regimes emerge.  In materials where the native $\chithree$ is
+small relative to $|\chitwo|^{2}/(n_2^{2}\omega_1)$ -- chiefly
+LiNbO$_3$ -- the cascade wins by an order of magnitude at routine
+$Q_2$ and increasing $Q_2$ buys further linear gain.  In materials of
+intermediate $\chithree_\text{native}$ such as GaP, the cascade and
+native channels are comparable at $Q_2\sim 4\!\times\!10^{3}$, and the
+architecture choice depends on whether one can push $Q_2$ above the
+crossover \eqref{eq:Q2-crossover} into the cascade-dominated regime.
+In materials where native $\chithree$ is enhanced by electronic
+resonances near the band edge (AlGaAs, GaAs), the comparison flips:
+native bulk-Kerr resonance is stronger at any practical $Q_2$, and
+the engineering simplicity of a single resonance is a free bonus.
+Si and Si$_3$N$_4$ have no cascade at all.  (At the
+edge-of-adiabatic operating point $\Dom\!\sim\!\gamma_2$ of
+Section~\ref{sec:numerical}, the $R$ values above double; the
+qualitative picture is unchanged.)
+
+% --------------------------------------------------------------
+\subsection*{Caveats specific to this comparison}
+
+\begin{enumerate}\setlength{\itemsep}{2pt}
+  \item \emph{Cascade-specific loss.}  The cascaded TPA-like
+        coefficient $\gamma_\text{eff}^{(2)}=|\beta|^{2}\gamma_2/\Dom^{2}$
+        of Section~\ref{sec:adiab}(ii) has no analogue in low-loss native materials
+        like LiNbO$_3$.  At fixed phase shift, cascade always carries
+        more loss than native, by a factor $\gamma_2/(2\Dom)$ for the
+        Kerr-to-loss ratio.  This penalises cascade in
+        all-optical-switching contrast and in low-noise applications.
+
+  \item \emph{Lower saturation.}  The cascade saturates at
+        $|\beta||a_1|\sim|\Dom|$, beyond which the trivial fixed
+        point becomes parametrically unstable
+        (Section~\ref{sec:validity}, item~2).  At fixed
+        $\Dom/\gamma_2$, the saturated FM amplitude
+        $|a_1|_\text{sat}=|\Dom|/|\beta|\propto\gamma_2\propto 1/Q_2$
+        (because $|\Dom|\propto\gamma_2\propto 1/Q_2$ while $|\beta|$
+        is set by the modal overlap and is $Q_2$-independent), so
+        the maximum useful stored energy
+        $|a_1|^{2}_\text{sat}\propto 1/Q_2^{\,2}$.  Native-$\chithree$
+        saturation, by contrast, is set by thermal/damage limits
+        typically orders of magnitude higher.
+
+  \item \emph{Fabrication complexity.}  Architecture A requires one
+        high-$Q$ resonance at $\omega_1$; architecture B requires
+        \emph{two} high-$Q$ resonances at $\omega_1$ and $2\omega_1$
+        with simultaneously high spatial overlap.  Disorder broadens
+        $\gamma_2$ inhomogeneously and can wash out the cascade-enhancement
+        long before it affects a single-resonance native design.
+
+  \item \emph{Speed.}  Native Kerr is essentially instantaneous
+        ($\lesssim 10$~fs in dielectrics); cascade has bandwidth
+        $\gamma_2$, i.e.\ ps-scale for routine $Q_2$.  For
+        ultrafast applications (sub-ps), only native-Kerr is fast
+        enough; cascade is locked out by its own sum rule.
+\end{enumerate}
+
+% --------------------------------------------------------------
+\subsection*{Summary of the comparison}
+
+\begin{center}
+\begin{tabular}{p{0.27\textwidth}p{0.30\textwidth}p{0.36\textwidth}}
+\toprule
+Question & Answer & When it matters \\
+\midrule
+At fixed BW, who wins? &
+Cascade by factor $R$; native if $R<1$. &
+Sets the architecture decision for any narrowband application. \\
+
+How does it scale with $Q$? &
+$\phi^\text{A}\!\propto\!Q_1^{2}$; $\phi^\text{B}\!\propto\!Q_1^{2}Q_2$. &
+Cascade has a free extra Q-knob; useful in high-Q regime. \\
+
+What's the price of more $Q$? &
+A: BW shrinks linearly; B: BW shrinks linearly in $Q_1$, also in $Q_2$. &
+Both pay the sum rule; cascade more so. \\
+
+Saturation? &
+A: thermal/damage. B: $|\beta a_1|\sim|\Dom|$, much lower. &
+Cascade is the limited one at high powers. \\
+
+Ultrafast? &
+A: $\sim$~fs; B: $\sim 1/\gamma_2$~ps. &
+Use native for pulses $\lesssim 1$ ps. \\
+
+Material choice? &
+A: any high-$\chithree_\text{native}$ low-loss dielectric. B: needs $\chitwo\neq 0$. &
+$\chitwo$-active materials only for cascade. \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+The take-away: the cascade is the right choice for \emph{narrowband,
+CW-driven nonlinear photonics in $\chitwo$-active materials} (LiNbO$_3$,
+GaP at telecom).  For Si/Si$_3$N$_4$ photonics, ultrafast switching,
+high-power operation, or applications where two-photon loss is
+intolerable, a native-$\chithree$ resonance is the right answer.
+
+% =======================================================================
+\section{Application landscape: Kerr-driven observables and devices}\label{sec:applications}
+
+The previous section reduced the architecture question to a single
+structural ratio
+$R\equiv|\chithree_\text{casc}|/|\chithree_\text{native}|$.  But $R$
+is only directly observable through a specific class of measurements:
+those that depend on the FM-cavity Kerr coefficient
+$\alpha_3^\text{eff}=\alpha_3+\alpha_3^\text{casc}$.  Different Kerr-driven
+observables scale differently with $\alpha_3^\text{eff}$ -- linearly,
+inversely, or quadratically -- and the cascade therefore appears in
+each at a different "leverage".  In addition, several capabilities
+exist that have \emph{no} native-Kerr analogue at all, and these are
+where the cascaded route is uniquely useful rather than merely
+quantitatively better.
+
+We organise the discussion in three tiers.  Tier~1 collects
+observables that admit a clean architecture-vs-architecture comparison
+of the form (A+B)/(A)$=f(R)$.  Tier~2 collects capabilities specific
+to the cascade with no native counterpart.  Tier~3 lists applications
+that lie outside the single-cavity TCMT framework and require
+extensions we do not develop here.
+
+% --------------------------------------------------------------
+\subsection{Tier 1: observables with quantitative \texorpdfstring{$R$}{R}-scaling}
+
+% ............................................................
+\paragraph{1. Self-phase modulation (SPM).}
+Already established in Section~\ref{sec:comparison}.  On-resonance pump
+at $\omega_p=\omega_1$ in the fully-radiative limit
+$\gamma_1^{(\text{rad})}=\gamma_1$ gives a nonlinear phase
+$\phi_\text{NL}=8\alpha_3^\text{eff}|s_+|^{2}/\gamma_1^{2}$ per input
+photon \eqref{eq:phi-per-photon} (at the conventional critical-coupling
+point $\gamma_1^{(\text{rad})}=\gamma_1/2$, $|a_1|^{2}=2|s_+|^{2}/\gamma_1$
+and $\phi_\text{NL}=4\alpha_3^\text{eff}|s_+|^{2}/\gamma_1^{2}$; we
+quote the lossless value to match \eqref{eq:phi-per-photon}).  Since $\phi_\text{NL}$ is linear
+in $\alpha_3^\text{eff}=\alpha_3+\alpha_3^\text{casc}$, and using
+the cascaded ratio \eqref{eq:R-def}, the architecture comparison gives
+\begin{equation}
+  \boxed{\;\frac{\phi_\text{NL}^{\text{A+B}}}{\phi_\text{NL}^{\text{A}}}
+        =\frac{\alpha_3+\alpha_3^\text{casc}}{\alpha_3}
+        =1+R\;.}
+  \label{eq:SPM-ratio}
+\end{equation}
+Linear in $R$; the foundational observable.  Read off as
+intensity-dependent transmission lineshape distortion or via
+heterodyne phase measurement at the FM port.
+
+% ............................................................
+\paragraph{2. Cross-phase modulation (XPM).}
+A separate weak signal beam, co-resonant with the FM cavity but
+distinguishable by polarisation or by frequency offset
+$|\Omega|<\gamma_1$, experiences a refractive-index shift driven by
+the pump intensity $|a_1^\text{pump}|^{2}$.  In the cascade picture,
+the pump generates an SH field that mediates DFG mixing onto the
+signal; in the native picture, the bulk $\chithree$ provides the
+mixing directly.  Both channels carry the same Boyd degeneracy factor
+of $6$ (the index-permutation factor $2(2-\delta_{ij})$ for distinct
+fields), so the relative architecture ratio inherits the SPM result:
+\begin{equation}
+  \boxed{\;\frac{\alpha_3^\text{XPM,\,A+B}}{\alpha_3^\text{XPM,\,A}}=1+R\;,\qquad
+          \alpha_3^\text{XPM}=2\,\alpha_3^\text{SPM}\;.}
+\end{equation}
+The factor $2$ between XPM and SPM holds independently in both
+architectures.  Experimentally: pump-probe transmission, with the
+probe phase shift versus pump intensity read out via interferometry or
+heterodyne.
+
+\textbf{Important restriction.}  XPM in the strict sense requires a
+second beam (distinguishable from the pump).  A single beam at
+$\omega_p$ with a weak modulation at $\omega_p\pm\Omega$ instead drives
+\emph{four-wave mixing} (item~4 below), not XPM, because the cascade
+generates the conjugate sideband through DFG rather than a phase
+shift.  The XPM coefficient as defined here applies to a genuinely
+separate signal channel.
+
+\textbf{Tensor-channel caveat.}  The $1+R$ ratio holds in the
+\emph{scalar} TCMT picture used here.  In a real metasurface, the
+cascade XPM goes through pump${\to}$SH${\to}$DFG-with-signal, which
+involves $\chitwo_{ijk}$ contracted with mixed polarisation indices
+($e{\cdot}e{\to}{\rm SH}$, then ${\rm SH}{\cdot}o{\to}{\rm signal}$ for
+a $3m$ crystal with e-polarised pump and o-polarised signal, for
+example).  These tensor contractions can differ from the
+$\chitwo_{eee}$ that mediates SHG of the pump alone -- in some
+polarisation channels they vanish by selection rule, in others they
+are comparable.  The native-XPM channel by contrast uses
+$\chithree_{eooe}$ or similar, which is governed by the host
+$\chithree$ tensor.  The $1+R$ ratio holds for tensor channels in
+which both cascade and native pieces are non-vanishing and
+geometrically similar; in mixed-channel experiments the relative
+factor may differ.  A practical experiment should verify the relevant
+tensor contraction for the intended polarisation geometry.
+
+% ............................................................
+\paragraph{3. Bistability threshold and all-optical switching energy.}
+The steady-state amplitude equation at pump detuning
+$\delta_p\equiv\omega_p-\omega_1$, obtained by setting $\dot a_1=0$ in
+\eqref{eq:a1} (with $a_2$ adiabatically eliminated and the cascaded
+TPA neglected for the cusp analysis), is
+\begin{equation}
+  \bigl[\tfrac{\gamma_1}{2}-i\bigl(\delta_p+\alpha_3^\text{eff}|a_1|^{2}\bigr)\bigr]\,a_1
+   \;=\;\sqrt{\gamma_1^\text{rad}}\,s_+.
+  \label{eq:bist-SS}
+\end{equation}
+Taking moduli squared and writing $y\equiv\alpha_3^\text{eff}|a_1|^{2}/(\gamma_1/2)$,
+$x\equiv\delta_p/(\gamma_1/2)$, $u\equiv|\alpha_3^\text{eff}|\,|s_+|^{2}\,
+\gamma_1^\text{rad}/(\gamma_1/2)^{3}$ (a dimensionless input intensity),
+\eqref{eq:bist-SS} becomes the standard Kerr-bistability cubic
+$y[1+(x-y)^{2}]=u$.  This cubic has three real roots
+$y_-<y_\text{mid}<y_+$ -- the bistable regime -- iff the discriminant
+condition is satisfied, which is well known
+\cite{DrummondWalls1980,Boyd} to require
+\begin{equation}
+  \mathrm{sign}(\delta_p)=-\mathrm{sign}(\alpha_3^\text{eff}),
+  \qquad
+  \frac{|\delta_p|}{\gamma_1/2}>\sqrt{3}\;\Longleftrightarrow\;
+  |\delta_p|>\frac{\sqrt{3}}{2}\,\gamma_1.
+  \label{eq:bist-cusp}
+\end{equation}
+The sign condition is automatic: a positive (self-focusing)
+$\alpha_3^\text{eff}>0$ pulls the cavity resonance down with growing
+intensity, so a red-detuned pump ($\delta_p<0$) gets pulled into
+resonance and bistability ensues; for a self-defocusing
+$\alpha_3^\text{eff}<0$ (e.g.\ a cascade with $\Dom>0$), the same
+analysis with the opposite sign of $\delta_p$ applies.  The
+$|\delta_p|>\sqrt{3}\gamma_1/2$ inequality is the cusp condition.
+
+The snap-up power follows from the saddle-node bifurcation of the
+cubic.  At the cusp $|\delta_p|=\sqrt{3}\gamma_1/2$, the critical
+intracavity intensity is $|a_1|^{2}_\text{c}=|\delta_p|/|\alpha_3^\text{eff}|
+=\sqrt{3}\gamma_1/(2|\alpha_3^\text{eff}|)$, and the corresponding
+input power is
+\begin{equation}
+  |s_+|^{2}_\text{bist}\;\propto\;
+     \frac{\gamma_1^{2}\,|\delta_p|}{|\alpha_3^\text{eff}|\,\gamma_1^\text{rad}}
+     \;\propto\;\frac{\gamma_1^{2}}{|\alpha_3^\text{eff}|}
+     \quad\text{(at fixed }\delta_p/\gamma_1\text{).}
+  \label{eq:bist-threshold}
+\end{equation}
+Inversely proportional to the Kerr coefficient, so the architecture
+ratio is inverted relative to the phase shift:
+\begin{equation}
+  \boxed{\;\frac{|s_+|^{2,\,\text{A+B}}_\text{bist}}{|s_+|^{2,\,\text{A}}_\text{bist}}=\frac{1}{1+R}\;.}
+  \label{eq:bist-ratio}
+\end{equation}
+For LiNbO$_3$ ($R\sim 12$ at the nominal $\Dom=2\gamma_2$,
+Section~\ref{sec:numerical}), the cascade lowers the bistability
+threshold by $\sim\!13\times$ (and by $\sim\!26\times$ at the
+edge-of-adiabatic $\Dom\sim\gamma_2$).  Re-framed as an all-optical
+switching energy: biasing the system on the lower branch and applying
+a control pulse to push past the saddle-node, the minimum required
+control energy obeys
+\begin{equation}
+  \boxed{\;\frac{E_\text{switch}^{\text{A+B}}}{E_\text{switch}^{\text{A}}}=\frac{1}{1+R}\;.}
+\end{equation}
+The switching speed is set by the FM ringdown $1/\gamma_1$ (ps for
+$Q_1=10^{3}$); the readout is a direct power measurement on a
+photodiode.  \textbf{This is the canonical photonic-computing
+application.}
+
+% ............................................................
+\paragraph{4. Four-wave-mixing (FWM) wavelength conversion.}
+Driving with a strong pump at $\omega_p\approx\omega_1$ and a weak
+signal at $\omega_s=\omega_p-\Omega$ generates an idler at
+$\omega_i=2\omega_p-\omega_s=\omega_p+\Omega$.  In the cascade
+mechanism: the pump generates SH at $2\omega_p\approx\omega_2$, which
+then DFG-mixes with the signal to produce the idler at the FM cavity.
+
+\paragraph*{Derivation of the conversion efficiency.}
+Write the FM amplitude as $a_1=a_p+a_s\,e^{-i\Omega t}+a_i\,e^{+i\Omega t}$
+in the frame rotating at $\omega_p$, with $|a_s|,|a_i|\ll|a_p|$.
+Substituting into the effective FM equation
+$\dot a_1 = (-\gamma_1/2)\,a_1+i\,\alpha_3^\text{eff}|a_1|^{2}a_1
++\sqrt{\gamma_1^\text{rad}}s_+$ and collecting the $e^{+i\Omega t}$
+Fourier component generates an idler source
+\begin{equation*}
+  \mathcal{S}_i\;=\;i\,\alpha_3^\text{eff}\,a_p^{2}\,a_s^{*},
+\end{equation*}
+which is the standard FWM source proportional to pump${}^{2}\times$
+signal-conjugate.  Expanding $|a_1|^{2}a_1$ to first order in the
+small fields and collecting the $e^{+i\Omega t}$ Fourier component
+gives two pieces: $a_p^{2}\,a_s^{*}$ (the FWM source above) and a
+$2|a_p|^{2}a_i$ piece that renormalises the idler detuning -- a
+pump-induced XPM self-shift that adds a real part
+$\alpha_3^\text{eff}\,2|a_p|^{2}$ to the idler resonance condition.
+In the small-signal estimate below we drop this self-shift (it is
+$O(\alpha_3^\text{eff}|a_p|^2/\gamma_1)$ smaller than the propagator
+denominator $\gamma_1/2$ once the pump is below the bistability
+threshold of item~3).  The idler steady-state response is then
+\begin{equation*}
+  a_i \;=\; \frac{i\,\alpha_3^\text{eff}\,a_p^{2}\,a_s^{*}}{\gamma_1/2-i\Omega}
+       \;\stackrel{|\Omega|<\gamma_1/2}{\simeq}\;
+       \frac{i\,\alpha_3^\text{eff}\,a_p^{2}\,a_s^{*}}{\gamma_1/2},
+\end{equation*}
+and the idler output via the input--output relation
+$s_-^{(i)}=\sqrt{\gamma_1^\text{rad}}\,a_i$ gives an idler power
+$|s_-^{(i)}|^{2}=\gamma_1^\text{rad}|a_i|^{2}$ while the signal input
+generates an intracavity signal
+$|a_s|=2\sqrt{\gamma_1^\text{rad}}|s_+^{(s)}|/\gamma_1$.  Combining,
+\begin{equation}
+  \eta_\text{FWM}\;\equiv\;\frac{|s_-^{(i)}|^{2}}{|s_+^{(s)}|^{2}}
+  \;\propto\;\frac{|\alpha_3^\text{eff}|^{2}\,|a_p|^{4}}{(\gamma_1/2)^{2}}\,,
+  \label{eq:eta-FWM}
+\end{equation}
+\emph{quadratic} in the effective Kerr coefficient.  The architecture
+ratio is therefore
+\begin{equation}
+  \boxed{\;\frac{\eta_\text{FWM}^{\text{A+B}}}{\eta_\text{FWM}^{\text{A}}}=(1+R)^{2}\;.}
+\end{equation}
+For LiNbO$_3$ ($R\sim 12$ at the nominal $\Dom=2\gamma_2$), this is a
+factor of $\sim 170$ in conversion efficiency at the conservative
+operating point, and approaches $\sim 700$ if one operates at
+$\Dom\sim\gamma_2$.  Either way, FWM is the most strongly
+differentiating single-observable test of the cascade mechanism.
+
+\textbf{Bandwidth constraint.}  All three frequencies must lie within
+$\min(\gamma_1,\gamma_2)$.  For $Q_1\ll Q_2$ the FM linewidth bounds
+$\Omega$ via the $1/(\gamma_1/2-i\Omega)$ factor in $a_i$; for
+$Q_1\gtrsim Q_2$ the cascade bandwidth $\gamma_2$ takes over via the
+AC response \eqref{eq:alpha3-AC} of $\alpha_3^\text{eff}(\Omega)$.
+Cascade-FWM is therefore restricted to a frequency window
+$\Omega\lesssim\min(\gamma_1,\gamma_2)/(2\pi)\sim$~GHz at telecom
+$Q$'s.
+
+% --------------------------------------------------------------
+\subsection{Tier 2: cascade-only capabilities}
+
+These applications exploit aspects of the cascaded $\chithree_\text{eff}$
+that have no analogue in a native-$\chithree$ resonance: the
+$\Dom$-dependence of the coefficient itself, and the imaginary part
+$\gamma_3^\text{eff}=|\beta|^{2}(\gamma_2/2)/[\Dom_\text{SH}^{2}+(\gamma_2/2)^{2}]$
+which produces an intensity-dependent loss whose magnitude is
+\emph{also} $\Dom$-tunable.  Architecture A simply does not provide
+either knob.
+
+% ............................................................
+\paragraph{5. Sign-tunable saturable absorber.}
+Throughout this item we write $\Dom_\text{SH}\equiv\Dom=2\omega_1-\omega_2$
+for the SH detuning, to distinguish it visually from the FM pump
+detuning $\delta_p$ that appears in items 3 and 4 above; numerically
+they are the same quantity used since \S\ref{sec:tcmt}.
+
+Operating near the SH resonance ($|\Dom_\text{SH}|\lesssim\gamma_2$),
+take the imaginary part of \eqref{eq:chi3casc-tensor}.  Writing
+$1/(\Dom+i\gamma_2/2)=(\Dom-i\gamma_2/2)/[\Dom^{2}+(\gamma_2/2)^{2}]$,
+the imaginary part of $\chithree_\text{casc}$ is
+\begin{equation}
+  \mathrm{Im}\,\chithree_\text{casc}(\Dom)
+   \;=\;\frac{\eps_0\,\omega_1}{6}\cdot
+        \frac{|M|^{2}\,(\gamma_2/2)}{[\Dom^{2}+(\gamma_2/2)^{2}]\,\int|\f_1|^{4}\dthreer}.
+  \label{eq:Im-chi3casc}
+\end{equation}
+The corresponding TCMT loss coefficient (obtainable directly by
+keeping the imaginary part of the adiabatic-elimination step in
+Section~\ref{sec:adiab} without expanding for small $\gamma_2/\Dom$)
+is
+\begin{equation}
+  \gamma_3^\text{eff}(\Dom_\text{SH})
+   \;=\;\frac{|\beta|^{2}\,(\gamma_2/2)}{\Dom_\text{SH}^{2}+(\gamma_2/2)^{2}},
+  \label{eq:gamma3-Lorentzian}
+\end{equation}
+which is precisely $\gamma_\text{eff}^{(2)}=|\beta|^{2}\gamma_2/\Dom^{2}$
+of Section~\ref{sec:adiab}(ii) in the adiabatic limit $|\Dom|\gg\gamma_2$,
+and rises to a Lorentzian peak at $\Dom_\text{SH}=0$:
+\begin{equation}
+  \gamma_3^\text{eff}(\Dom_\text{SH}=0)\;=\;\frac{|\beta|^{2}}{\gamma_2/2}
+  \;=\;\frac{2\,Q_2}{\omega_2}\,|\beta|^{2}
+  \qquad(\text{Lorentzian, FWHM}=\gamma_2).
+  \label{eq:gamma3-peak}
+\end{equation}
+In the language of an effective material parameter, using
+\eqref{eq:Im-chi3casc} and the same $1/n_2^{\,2}$ analysis as in
+Section~\ref{sec:adiab} (replacing $\Dom$ by $\gamma_2/2$ in the
+denominator of the explicit form \eqref{eq:chi3casc_explicit}),
+\begin{equation}
+  \mathrm{Im}\,\chithree_\text{casc}\big|_{\Dom_\text{SH}=0}
+       \;\sim\;\frac{\omega_1}{3\,n_2^{\,2}\,\gamma_2}\,|\chitwo|^{2}\,\eta_\text{geom}
+       \;=\;\frac{Q_2}{6\,n_2^{\,2}}\,|\chitwo|^{2}\,\eta_\text{geom},
+  \label{eq:Im-chi3-explicit}
+\end{equation}
+where we used $\omega_1/\gamma_2 = Q_2/2$.  Compared with the real
+part at $\Dom=\gamma_2/2$ (where $|\mathrm{Re}\,\chithree_\text{casc}|
+=Q_2/(12 n_2^{\,2})\,|\chitwo|^{2}\eta_\text{geom}$ from
+\eqref{eq:chi3casc_explicit}), the peak imaginary part is a factor of
+$2$ larger -- the same Lorentzian peak-to-shoulder ratio that maps the
+dispersive real part to the absorptive imaginary part.
+This is a \emph{saturable absorption} channel (intensity-dependent
+loss) that, unlike intrinsic two-photon absorption in semiconductors,
+is \emph{detunable} away from resonance: shifting $\omega_2$ by
+$\gtrsim$ a few $\gamma_2$ (electro-optically, thermo-optically, or
+by strain) suppresses the loss by $1/\Dom_\text{SH}^{2}$ from
+\eqref{eq:gamma3-Lorentzian}.
+
+Comparison with SESAM (semiconductor saturable absorber mirror, the
+workhorse of pulsed-laser mode locking \cite{Keller1996}): SESAMs have
+a fixed, material-determined recovery time set by excited-state
+population dynamics; cascaded SA has recovery time $\sim 1/\gamma_2$
+(ps for
+$Q_2=4{\times}10^{3}$) and is all-optical, with no excited-state
+physics or thermal lifetime drift.  The trade-off is that cascaded SA
+requires a $\chitwo$-active substrate and double-resonance fabrication.
+
+% ............................................................
+\paragraph{6. All-optical amplitude modulator via $\Dom$ tuning.}
+Modulating $\Dom(t)=\Dom_0+\delta\Omega\cos(\Omega_\text{mod}t)$ via
+electro-optic, thermo-optic, or piezo-electric actuation of the SH
+cavity periodically modulates $\alpha_3^\text{eff}$, and therefore
+the FM transmission $|s_-/s_+|^{2}$ at fixed pump.  For small
+modulation $\delta\Omega\ll|\Dom_0|$ and $|\Dom_0|\gg\gamma_2/2$,
+the adiabatic-limit derivative
+\begin{equation}
+  \frac{\partial\alpha_3^\text{casc}}{\partial\Dom}\bigg|_{\Dom_0}
+   \;\simeq\;\frac{|\beta|^{2}}{\Dom_0^{2}}
+  \label{eq:dalpha-dDom}
+\end{equation}
+gives, in the DC limit ($\Omega_\text{mod}\to 0$), a fractional
+modulation $\delta\alpha_3^\text{casc}/\alpha_3^\text{casc}=\delta\Omega/\Dom_0$:
+a fractional SH-cavity detuning produces an equal fractional change
+in $\alpha_3^\text{casc}$.
+
+\paragraph*{Transfer function: low-pass plus AC band-pass.}
+For finite $\Omega_\text{mod}$ the cascaded coefficient cannot track
+the SH-cavity detuning instantaneously.  The correct response must be
+obtained from the \emph{time-dependent} SH equation with modulated
+detuning -- linearising
+$\Dom(t)=\Dom_0+\delta\Omega\cos(\Omega_\text{mod}t)$ in $\delta\Omega$
+and solving the SH equation in steady state gives, for the
+\emph{positive-frequency sideband} of $\delta a_2$,
+\begin{equation}
+  A_+(\Omega_\text{mod})
+   \;=\;\frac{(\delta\Omega/2)\,a_{2,0}}{\gamma_2/2+i(\Omega_\text{mod}-\Dom_0)},
+  \qquad a_{2,0}=\frac{-\beta\,a_1^{2}}{\Dom_0+i\gamma_2/2},
+  \label{eq:H-modulator}
+\end{equation}
+which is resonant at $\Omega_\text{mod}=\Dom_0$ (the sideband of
+$\Dom(t)$ matches the SH-cavity resonance in the rotating frame).
+The fractional $a_2$ modulation, which carries directly into the
+cascade contribution to $\alpha_3^\text{eff}$, is
+\begin{equation}
+  \left|\frac{\delta a_2}{a_{2,0}}\right|_{\Omega_\text{mod}}
+   \;=\;\frac{\delta\Omega/2}{\sqrt{(\gamma_2/2)^{2}+(\Omega_\text{mod}-\Dom_0)^{2}}}.
+\end{equation}
+Its values at the two limits are
+\begin{equation}
+  \left|\frac{\delta a_2}{a_{2,0}}\right|_\text{peak\,at\,}\Omega=\Dom_0
+   \;=\;\frac{\delta\Omega}{\gamma_2},
+  \qquad
+  \left|\frac{\delta a_2}{a_{2,0}}\right|_\text{DC}
+   \;=\;\frac{\delta\Omega}{\sqrt{\Dom_0^{2}+(\gamma_2/2)^{2}}},
+\end{equation}
+so the AC-peak enhancement over DC is
+\begin{equation}
+  \boxed{\;
+  \frac{|\delta\alpha_3^\text{eff}|_\text{peak\,at\,}\Omega_\text{mod}=\Dom_0}
+       {|\delta\alpha_3^\text{eff}|_\text{DC}}
+  \;=\;\frac{\sqrt{\Dom_0^{2}+(\gamma_2/2)^{2}}}{\gamma_2}
+  \;\xrightarrow[\Dom_0\gg\gamma_2]{}\;\frac{|\Dom_0|}{\gamma_2}.\;}
+  \label{eq:AC-peak-enhancement}
+\end{equation}
+At the conservative operating point $\Dom_0=2\gamma_2$ the AC peak is
+$\sqrt{4.25}\approx 2.06\times$ the DC modulation depth -- a modest
+but useful boost.  This number agrees with the TCMT measurement
+($1.92\times$ in the AM-modulator figure of the simulation
+report).  Note that this is the boost on the cascade-side
+$\alpha_3^\text{eff}$ modulation amplitude; the FM-port transmission
+modulation also picks up a factor $1/|\gamma_1/2 + i\Omega_\text{mod}|$
+from the FM-cavity filtering, which is close to unity at
+$\Omega_\text{mod}\!=\!2\gamma_2$ when $\gamma_1\gg 2\gamma_2$ (the
+worked-example regime).
+
+The transfer function from $\delta\Omega(t)$ to the FM transmission
+modulation therefore has two features:
+\begin{itemize}\setlength{\itemsep}{1pt}
+\item a low-pass response with roll-off at $\Omega_\text{mod}\sim\gamma_2/2$
+      (single-pole, set by the cascade bandwidth);
+\item a Lorentzian band-pass peak at $\Omega_\text{mod}=\Dom_0$ of
+      FWHM $\gamma_2$ and peak-to-DC ratio $4\Dom_0^{2}/\gamma_2^{2}$.
+\end{itemize}
+At telecom $Q_2=4{\times}10^{3}$ this gives a DC bandwidth
+$\lesssim\gamma_2/(2\pi)\!\simeq\!97$~GHz and an AC operating point at
+$\Omega_\text{mod}/(2\pi)=|\Dom_0|/(2\pi)\simeq 200$~GHz when
+$\Dom_0=2\gamma_2$.
+
+This is a genuinely novel capability: native-Kerr cavities have no
+mechanism for converting a detuning modulation into an amplitude
+modulation, since the bulk $\chithree$ is not detuning-dependent.
+
+% ............................................................
+\paragraph{7. Passive optical limiter via the parametric ceiling.}
+The cascade saturation $|\beta||a_1|\to|\Dom|$
+(Section~\ref{sec:validity}, item~2) is more than a small-signal-breakdown
+caveat: it is a \emph{hard, passive intensity clamp} at intracavity
+energy $|a_1|^{2}_\text{cap}\simeq(\Dom/\beta)^{2}$.  Above this
+threshold the trivial fixed point destabilises and the FM clamps at
+the cap regardless of further pump increase, with the excess input
+dissipated through the cascaded TPA channel.  In an integrated
+metasurface this is an all-optical \emph{power limiter} -- the same
+function that absorption-based limiters serve in laser safety glasses,
+but realised dispersively with no thermal load on the absorbing layer
+(loss is in the SH cavity, which can be heat-sunk separately).
+The ceiling is tunable by adjusting $\Dom$: at the design point
+$\Dom=2\gamma_2$ the clamp is set; sweeping $\Dom$ tunes the ceiling
+quadratically.  Native-$\chithree$ resonance has no such ceiling --
+intensity scales with input up to material damage.  See
+\S\ref{sec:adiab}--\S\ref{sec:validity} for the underlying mechanism.
+
+% ............................................................
+\paragraph{8. $\Dom$-readout transducer for sensing.}
+Inverting the previous: any process that shifts $\omega_2$
+(temperature, strain, applied electric field via Pockels effect on
+the SH cavity, adsorbed molecules, etc.)\ shifts $\Dom$, which shifts
+$\alpha_3^\text{eff}$, which shifts the SPM phase $\phi_\text{NL}$.
+The cascade thus provides a built-in transduction from arbitrary
+$\omega_2$-perturbations to a Kerr observable.
+
+The sensitivity follows from the chain rule
+$d\phi_\text{NL}/d\Dom=(8|s_+|^{2}/\gamma_1^{2})\cdot(d\alpha_3^\text{casc}/d\Dom)$
+(using $\phi_\text{NL}\propto\alpha_3^\text{eff}$ from
+\eqref{eq:phi-per-photon}).  Differentiating the Lorentzian
+$\alpha_3^\text{casc}(\Dom)=-|\beta|^{2}\Dom/[\Dom^{2}+(\gamma_2/2)^{2}]$
+of Section~\ref{sec:adiab} explicitly (with $b\equiv\gamma_2/2$):
+\begin{equation}
+  \frac{d\alpha_3^\text{casc}}{d\Dom}\;=\;-|\beta|^{2}\,
+        \frac{b^{2}-\Dom^{2}}{[\Dom^{2}+b^{2}]^{2}}\,.
+  \label{eq:dadDom}
+\end{equation}
+Solving $d|d\alpha/d\Dom|/d\Dom=0$ gives \emph{two} extrema: a global
+maximum at $\Dom=0$ and a smaller local maximum at $|\Dom|=b\sqrt{3}$
+(factor of $8$ below the global one).  The peak slope is therefore
+\begin{equation}
+  \boxed{\;
+    \left|\frac{d\alpha_3^\text{casc}}{d\Dom}\right|_{\Dom=0}
+     \;=\;\frac{|\beta|^{2}}{b^{2}}
+     \;=\;\frac{4\,|\beta|^{2}}{\gamma_2^{\,2}}
+     \;\propto\;Q_2^{\,2}\,,
+  \;}
+  \label{eq:dadDom-max}
+\end{equation}
+giving
+\begin{equation}
+   \left|\frac{d\phi_\text{NL}}{d\Dom}\right|_\text{max}
+     \;=\;\frac{32\,|s_+|^{2}\,|\beta|^{2}}{\gamma_1^{\,2}\,\gamma_2^{\,2}}
+     \;\propto\;Q_1^{\,2}\,Q_2^{\,2}\,.
+\end{equation}
+\textbf{The sensor sensitivity scales as} $Q_2^{\,2}$, not $Q_2$ --
+quadratically more sensitive in the SH cavity factor than the SPM
+phase shift itself, and gated by the FM cavity $Q_1^{\,2}$ in the
+usual way.  The extra power of $Q_2$ comes from the Lorentzian slope:
+a coefficient of amplitude $\sim |\beta|^{2}/\gamma_2$ varies over a
+width $\sim\gamma_2$, giving a derivative $\sim|\beta|^{2}/\gamma_2^{\,2}$.
+
+\textbf{Operating-point caveat.}  $\Dom=0$ is also exactly where the
+cascaded two-photon-like loss
+$\gamma_3^\text{eff}=|\beta|^{2}b/[\Dom^{2}+b^{2}]$ peaks
+(eq.~\eqref{eq:gamma3-Lorentzian}) -- the sensor's most sensitive
+point is its lossiest point.  Useful figures of merit therefore
+depend on the weighting: the ratio (slope)$/\gamma_3^\text{eff}$ is
+monotonic in $|\Dom|$ within each Lorentzian branch and asymptotes
+to $2/\gamma_2$ at both $\Dom\to 0$ and $|\Dom|\to\infty$; it has a
+minimum (zero) at $|\Dom|=b$ where the slope itself vanishes.  In
+practice the sensor should be biased a few $\gamma_2$ off-resonance
+-- enough to suppress TPA by $\sim(\gamma_2/\Dom)^{2}$ while
+accepting a slope smaller than \eqref{eq:dadDom-max} by a similar
+factor.  The fundamental $Q_2^{\,2}$ scaling survives this
+trade-off; the prefactor is reduced by an $O(1)$ amount depending
+on the chosen $\Dom/\gamma_2$.
+
+\textbf{Shot-noise-limited figure of merit.}  The $Q_2^{2}$ scaling
+applies to the raw slope $d\alpha_3^\text{casc}/d\Dom$.  For a
+shot-noise-limited readout the relevant figure of merit is
+slope$/\sqrt{\gamma_3^\text{eff}}$ (the loss sets the noise floor
+through the detected-photon shot noise), which scales as
+$Q_2/\sqrt{Q_2}=Q_2^{3/2}$.  Either scaling is faster than the linear
+$Q_2$ enhancement of the cascaded Kerr coefficient itself.  Pushing
+$Q_2$ continues to pay off, but the practical FoM exponent depends on
+which noise channel dominates.
+
+For a representative SH-cavity transducer in LiNbO$_3$
+($dn_e/dT\!\simeq\!4\!\times\!10^{-5}$/K~\cite{Nikogosyan2005} gives a
+bare $d\omega_2/dT\!\simeq\!-\omega_2\,(dn/dT)/n\!\sim\!2\pi\times
+7$~GHz/K; the meta-atom-mode coupling reduces this by the mode-volume
+overlap with the LiNbO$_3$, typically a factor $\!\sim\!3$--$5$, giving
+an effective $\!\sim\!2\pi\times 1$--$2$~GHz/K), with
+$\gamma_2/2\pi\!\sim\!100$~GHz at $Q_2=4{\times}10^{3}$, even after the
+TPA-penalised bias this resolves mK-scale temperature shifts at modest
+pump power and standard photodetector noise.  Applications
+include refractometric biosensing, strain mapping, integrated
+thermometry, and (with appropriate cavity design) electric-field
+sensing via the Pockels effect.
+
+\textbf{This may be the most useful application of the cascade
+framework}, because it converts a familiar Kerr-readout chain into a
+sensor whose figure of merit scales with $Q_2^{\,2}$ rather than the
+single-power-of-$Q$ ceiling familiar from linear-cavity sensors.
+
+% --------------------------------------------------------------
+\subsection{Tier 3: applications outside the present scope}
+
+The following applications use the cascade but require theoretical
+extensions we do not develop:
+
+\begin{itemize}\setlength{\itemsep}{2pt}
+  \item \emph{Pulse compression and GVD compensation.}  The
+    sign-tunable cascaded Kerr can compensate either sign of
+    group-velocity dispersion in subsequent free-space or fibre
+    propagation, leading to soliton-like compression or anti-soliton
+    chirp.  This is a \emph{propagation-level} effect; the metasurface
+    provides the local nonlinearity, but characterisation requires
+    convolution with downstream linear optics.  See \cite{Liu1999,Bache2007}.
+
+  \item \emph{Optical memory / flip-flop.}  Same physics as
+    all-optical switching (item~3 above); the "memory time" is the
+    upper-branch dwell time, limited by thermo-optic drift,
+    fabrication detuning, and slow background fluctuations rather than
+    by anything in the TCMT model.  Not a single-cavity TCMT effect to
+    formalise.
+
+  \item \emph{Logic gates.}  Two co-resonant control inputs driving
+    one bistable element implement AND/OR by threshold combinations.
+    This is a multi-port extension of bistability and requires the
+    multi-port input-output theory of \cite{SuhWangFan2004} rather
+    than the single-port TCMT used here.
+
+  \item \emph{Degenerate optical parametric oscillation (OPO) and
+    squeezed-light generation.}  Above the parametric threshold the
+    cascade system \emph{is} an OPO, with above-threshold conversion
+    efficiency and below-threshold squeezing of the appropriate
+    quadrature.  But OPO operation requires substantial
+    $\gamma_2^{(\text{rad})}$ at the SH port (to extract the
+    parametric output), which contradicts the cascade design choice
+    of suppressing SH out-coupling.  These are therefore
+    \emph{different devices} with conflicting design constraints
+    rather than alternative uses of the same metasurface.  Squeezed
+    light additionally requires quantum input-output theory beyond the
+    classical TCMT framework adopted in this note.
+
+  \item \emph{Kerr frequency combs.}  Single-mode cascaded $\chithree$
+    can in principle support a Lugiato--Lefever-type comb, but this
+    requires a multi-mode generalisation of the TCMT (one resonance
+    per comb tooth) together with dispersion engineering of the FM
+    family.  A substantial separate project.
+
+  \item \emph{Phase conjugation.}  The DFG step in the cascade is by
+    construction phase-conjugate to the FM input.  This is implicit in
+    the dynamics of $a_2$ and the back-action onto $a_1$; making it
+    explicit requires tracking the phase of the SH amplitude through
+    the cascade and is best handled in a dedicated treatment.
+\end{itemize}
+
+% --------------------------------------------------------------
+\subsection{Summary of observables}
+
+\begin{center}
+\renewcommand{\arraystretch}{1.2}
+\begin{tabular}{lcl}
+\toprule
+Observable & (A+B)/(A) ratio & Comment \\
+\midrule
+SPM phase shift                  & $1+R$       & Foundational \\
+XPM phase shift                  & $1+R$       & Same $R$; requires separate signal \\
+Bistability threshold $|s_+|^{2}$ & $1/(1+R)$  & Inverted scaling \\
+All-optical switching energy     & $1/(1+R)$   & Photonic-computing application \\
+FWM conversion efficiency        & $(1+R)^{2}$ & Most differentiating \\
+\midrule
+Saturable absorber rate          & n/a         & Cascade-only; $\Dom$-tunable \\
+AM modulator response            & n/a         & Cascade-only; $\Dom(t)$-driven \\
+Optical-limiter clamp $|a_1|^{2}_\text{cap}$ & $\sim(\Dom/\beta)^{2}$ &
+   Cascade-only; passive intensity ceiling \\
+Sensor sensitivity               & $\propto Q_2^{\,2}$ & Cascade-only; $\Dom$-readout, biased a few $\gamma_2$ off-resonance \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\noindent
+Tier 1 establishes the cascade as a quantitative replacement for
+bulk-Kerr-driven nonlinear optics, with leverage factors of
+$1+R$ to $(1+R)^{2}$ depending on observable.  Tier 2 establishes the
+cascade as a source of \emph{new} capabilities -- saturable
+absorption, amplitude modulation, intensity limiting, and sensing --
+that the native-$\chithree$ architecture cannot provide at any $Q_1$.
+Together the two tiers cover most of the experimental opportunities a
+doubly-resonant cascaded $\chithree$ metasurface opens up.
+
+% =======================================================================
+\section{Validity, caveats, and what to verify}\label{sec:validity}
+
+\begin{enumerate}
+  \item \textbf{Adiabatic-elimination breakdown.} The naive form
+        \eqref{eq:chi3casc} ($\chithree_\text{casc}\propto 1/\Dom$)
+        diverges as $\Dom\to 0$; the full Lorentzian
+        $-|\beta|^2/(\Dom+i\gamma_2/2)$ retained in
+        \eqref{eq:chi3casc-tensor} does not.  The cascaded-Kerr
+        description (\emph{adiabatic} elimination of $a_2$) is strictly
+        valid for $|\Dom|\gtrsim 2\gamma_2$; we quote results down to
+        $|\Dom|\sim\gamma_2$ as an extrapolation that doubles the
+        enhancement (real-part Lorentzian peaks at $|\Dom|=\gamma_2/2$,
+        so $R$ is bounded above by twice its $\Dom=2\gamma_2$ value).
+        At $|\Dom|=\gamma_2$ the loss-to-Kerr ratio
+        $\gamma_3^\text{eff}/|\alpha_3^\text{eff,casc}|=\gamma_2/(2|\Dom|)$
+        reaches $1/2$ and the slow-FM-modulation
+        ($|\dot a_1|\ll|\Dom|\,a_1$) requirement also tightens; below
+        $|\Dom|\!\sim\!\gamma_2$ one must keep $a_2$ as a dynamical
+        variable.  On resonance ($\Dom=0$) the steady-state SH amplitude
+        is bounded by $|a_2|=|\beta||a_1|^{2}/(\gamma_2/2)$.
+
+  \item \textbf{Pump depletion / saturation.} The derivation is
+        small-signal: it assumes $|a_2|\ll|a_1|$, equivalently
+        $|\beta||a_1|^{2}/|\Dom|\ll|a_1|$, i.e.\
+        $|\beta||a_1|\ll|\Dom|$.  Above this threshold the SH is no
+        longer slaved to the FM and the response saturates; in fact,
+        exactly at the saturation point one finds an analogue of the
+        parametric oscillation threshold.  The maximum useful FM
+        amplitude is therefore $|a_1|_\text{sat}=|\Dom|/|\beta|$,
+        which scales as $1/Q_2$ at fixed $\Dom/\gamma_2$ (because
+        $|\Dom|\propto\gamma_2\propto 1/Q_2$ while $|\beta|$ is set
+        by the modal overlap, independent of $Q_2$); equivalently,
+        the maximum stored energy $|a_1|^{2}_\text{sat}\propto
+        1/Q_2^{\,2}$.  High-$Q_2$ devices saturate at lower
+        powers.
+
+  \item \textbf{Two-photon-like loss.} The imaginary part of
+        $\alpha_3^\text{eff}$ -- the cascaded two-photon-absorption
+        analogue -- is unavoidable and bounded below by the same
+        overlap.  It does \emph{not} dump energy outside the system in
+        the limit $\gamma_2^\text{rad}\to 0$, but rather absorbs into
+        the SH mode and from there into the material.  This is
+        identical to two-photon absorption from an experimental
+        standpoint and limits the Kerr-driven phase shift before
+        bleaching.
+
+  \item \textbf{Thermo-optic and free-carrier nonlinearities} in
+        dielectric metasurfaces are notoriously easy to confuse with
+        ``Kerr''.  At the field intensities required to see a
+        measurable cascaded $\chithree$ phase shift (several
+        MW/cm$^{2}$ in the resonator), thermal effects in absorbing
+        materials (Si, GaAs near the band edge) often dominate.
+        LiNbO$_3$ is comparatively benign in this respect.
+
+  \item \textbf{Tensor-overlap evaluation.} The dimensionless overlap
+        $\eta_\text{geom}$ is assumption-driven in this note.  It must
+        be evaluated by full-wave simulation (e.g.\ COMSOL or MEEP
+        eigenmode solver, post-processing the tensor contraction in
+        the volume of the meta-atoms).  The $\sim 0.3$ figure is
+        plausible for a properly engineered qBIC pair but is by no
+        means generic -- random mode pairings typically give
+        $\eta_\text{geom}$ of order $10^{-3}$ or less, especially when
+        the SH-mode parity does not match the symmetric tensor
+        contraction $\f_1\f_1$ at unit-cell level.
+
+  \item \textbf{Avoid the ``single $n$'' simplification.} Use
+        $\epstilde(\ri,\omega_1)$ and $\epstilde(\ri,2\omega_1)$
+        separately in the energy normalisation \eqref{eq:Brillouin}.
+        The dispersion of $\chitwo$ between $\omega_1$ and $2\omega_1$
+        is a few percent in LiNbO$_3$ but should be carried explicitly
+        when comparing with experiment.
+
+  \item \textbf{Disorder and inhomogeneous broadening.}  The $Q_2$
+        quoted throughout is the \emph{element} quality factor.  In an
+        array of $N$ meta-atoms with fabrication scatter
+        $\sigma_{\omega_2}$ on the individual SH-resonance frequencies,
+        the collective response is inhomogeneously broadened with an
+        effective array linewidth
+        $\gamma_2^\text{(array)}\!\simeq\!\sqrt{\gamma_2^{2}+\sigma_{\omega_2}^{2}}$,
+        and the cascaded enhancement is set by $Q_2^\text{(array)}$,
+        not $Q_2^\text{(element)}$.  For $Q_2^\text{(element)}\sim
+        10^{4}$ at $\omega_2/2\pi\!\sim\!400$~THz, preserving the
+        cascade requires $\sigma_{\omega_2}/\omega_2\lesssim 10^{-4}$,
+        i.e.\ sub-nanometre control of meta-atom dimensions.  Mitigations
+        include post-fabrication trimming (electron-beam-induced
+        defects, photoresist trimming, thermal annealing), spatially
+        averaged readout that recovers only the homogeneous response,
+        or operating the SH cavity in an electro-optic feedback loop
+        that pulls each element onto resonance.
+\end{enumerate}
+
+% =======================================================================
+\section{Summary of the principal result}
+
+\begin{equation}
+  \boxed{\;\chithree_\text{casc}(\omega_1)
+        =-\frac{\eps_0\,\omega_1}{6\,\Dom}\;
+          \frac{\bigl|\!\int\!\chitwo_{ijk}(\ri)\,f_{2,i}^*\,f_{1,j}\,f_{1,k}\dthreer\bigr|^{2}}
+               {\int|\f_1(\ri)|^{4}\dthreer}
+        \;\sim\;-\frac{\omega_1}{6\,n_2^{\,2}\,\Dom}\;|\chitwo|^{2}\;\eta_\text{geom}\,,\;}
+\end{equation}
+valid for $\gamma_2/2\ll|\Dom|\ll\omega_1$ and $|\beta\,a_1|\ll|\Dom|$,
+with $\beta,\alpha_3$ as defined in Section~\ref{sec:tcmt}.  The first
+form is exact (within the model); the second is the order-of-magnitude
+form one obtains by inserting the energy-normalisation scaling
+$|\f_n|^2\sim 1/(\eps_0 n_n^{\,2}V_\text{eff})$ -- only $n_2$ (the SH-mode
+effective index) survives, all $n_1$ powers cancelling between
+numerator and denominator.
+
+Compared with the original derivation, this version:
+\begin{itemize}
+  \item uses the full vector mode profile with proper energy
+        normalisation (Brillouin) accounting for dispersion, rather
+        than a scalar $f(\ri)$ with a single $n$;
+  \item carries the tensorial $\chitwo_{ijk}$ (and $\chithree_{ijkl}$)
+        and gives an unambiguous overlap integral;
+  \item includes the factor $2$ in the DFG polarisation and the factor
+        $3$ in SPM, ensuring Manley--Rowe is satisfied and the SHG/DFG
+        couplings carry the same coupling constant $\beta$;
+  \item carries $\eps_0$ correctly through the polarisation--field
+        relation, so that the coupled-mode coefficients
+        $\beta\propto\eps_0\omega_1$ and $\alpha_3\propto 3\eps_0\omega_1$
+        are dimensionally clean; $\eps_0$ then cancels in the final
+        $\chithree_\text{casc}$, as it must for a material parameter;
+  \item makes the $1/n_2^{\,2}$ dependence explicit (the $n_1$ powers
+        cancel between $|\!\int\!\chitwo f_2^*f_1^2|^2$ and $\int|\f_1|^4$,
+        leaving only the SH-mode normalisation), correcting the
+        $1/n^3$ scaling of the original note;
+  \item includes both the cascaded Kerr \emph{and} the cascaded
+        two-photon-loss term, essential for the saturation behaviour;
+  \item exposes the bandwidth--enhancement sum rule, the correct
+        framing for comparison with bulk (or any non-resonant)
+        Kerr-equivalent processes;
+  \item adds the symmetry / phase-matching constraints that govern
+        $\eta$ in a metasurface platform.
+\end{itemize}
+
+Whether the resulting ``fast Kerr from slow SHG'' claim survives depends
+on the application: for narrowband, CW-pumped nonlinear photonics
+(bistability, frequency-comb interactions, low-threshold parametric
+oscillation) the metasurface route can outperform bulk by 1--2 orders of
+magnitude; for ultrafast applications the sum rule precludes any
+improvement over bulk.
+
+% =======================================================================
+\begin{thebibliography}{99}
+
+\bibitem{Ostrovskii1967}
+L.~A.~Ostrovskii,
+``Self-action of light in crystals,''
+\emph{JETP Lett.} \textbf{5}, 272 (1967).
+
+\bibitem{DeSalvo1992}
+R.~DeSalvo, D.~J.~Hagan, M.~Sheik-Bahae, G.~Stegeman, E.~W.~Van Stryland,
+``Self-focusing and self-defocusing by cascaded second-order effects in KTP,''
+\emph{Opt.\ Lett.} \textbf{17}, 28 (1992).
+
+\bibitem{Stegeman1996}
+G.~I.~Stegeman, D.~J.~Hagan, L.~Torner,
+``$\chi^{(2)}$ cascading phenomena and their applications to all-optical signal processing, mode-locking, pulse compression and solitons,''
+\emph{Opt.\ Quantum Electron.} \textbf{28}, 1691 (1996).
+
+\bibitem{Bache2007}
+M.~Bache, J.~Moses, F.~W.~Wise,
+``Scaling laws for soliton pulse compression by cascaded quadratic nonlinearities,''
+\emph{J.~Opt.\ Soc.\ Am.\ B} \textbf{24}, 2752 (2007).
+
+\bibitem{Boyd}
+R.~W.~Boyd, \emph{Nonlinear Optics}, 4th ed.\ (Academic Press, 2020).
+
+\bibitem{LandauLifshitz}
+L.~D.~Landau and E.~M.~Lifshitz,
+\emph{Electrodynamics of Continuous Media}, 2nd ed., \S 80.
+
+\bibitem{SuhWangFan2004}
+W.~Suh, Z.~Wang, S.~Fan,
+``Temporal coupled-mode theory and the presence of non-orthogonal modes in lossless multimode cavities,''
+\emph{IEEE J.~Quantum Electron.} \textbf{40}, 1511 (2004).
+
+\bibitem{Rodriguez2007}
+A.~Rodriguez, M.~Solja\v{c}i\'c, J.~D.~Joannopoulos, S.~G.~Johnson,
+``$\chi^{(2)}$ and $\chi^{(3)}$ harmonic generation at a critical power in inhomogeneous doubly resonant cavities,''
+\emph{Opt.\ Express} \textbf{15}, 7303 (2007).
+
+\bibitem{Liu1999}
+X.~Liu, L.~J.~Qian, F.~W.~Wise,
+``High-energy pulse compression by use of negative phase shifts produced by the cascaded $\chi^{(2)}{:}\chi^{(2)}$ nonlinearity,''
+\emph{Opt.\ Lett.} \textbf{24}, 1777 (1999).
+
+\bibitem{Kristensen2020}
+P.~T.~Kristensen, K.~Herrmann, F.~Intravaia, K.~Busch,
+``Modeling electromagnetic resonators using quasinormal modes,''
+\emph{Adv.\ Opt.\ Photon.} \textbf{12}, 612 (2020).
+
+\bibitem{Sauvan2013}
+C.~Sauvan, J.-P.~Hugonin, I.~S.~Maksymov, P.~Lalanne,
+``Theory of the spontaneous optical emission of nanosize photonic and plasmon resonators,''
+\emph{Phys.\ Rev.\ Lett.} \textbf{110}, 237401 (2013).
+
+\bibitem{Lalanne2018}
+P.~Lalanne, W.~Yan, K.~Vynck, C.~Sauvan, J.-P.~Hugonin,
+``Light interaction with photonic and plasmonic resonances,''
+\emph{Laser \& Photonics Reviews} \textbf{12}, 1700113 (2018).
+
+\bibitem{Hsu2016}
+C.~W.~Hsu, B.~Zhen, A.~D.~Stone, J.~D.~Joannopoulos, M.~Solja\v{c}i\'c,
+``Bound states in the continuum,''
+\emph{Nat.\ Rev.\ Mater.} \textbf{1}, 16048 (2016).
+
+\bibitem{Koshelev2018}
+K.~Koshelev, S.~Lepeshov, M.~Liu, A.~Bogdanov, Y.~Kivshar,
+``Asymmetric metasurfaces with high-$Q$ resonances governed by bound states in the continuum,''
+\emph{Phys.\ Rev.\ Lett.} \textbf{121}, 193903 (2018).
+
+\bibitem{Carletti2018}
+L.~Carletti, K.~Koshelev, C.~De~Angelis, Y.~Kivshar,
+``Giant nonlinear response at the nanoscale driven by bound states in the continuum,''
+\emph{Phys.\ Rev.\ Lett.} \textbf{121}, 033903 (2018).
+
+\bibitem{Koshelev2020}
+K.~Koshelev, S.~Kruk, E.~Melik-Gaykazyan, J.-H.~Choi, A.~Bogdanov, H.-G.~Park, Y.~Kivshar,
+``Subwavelength dielectric resonators for nonlinear nanophotonics,''
+\emph{Science} \textbf{367}, 288 (2020).
+
+\bibitem{Anthur2020}
+A.~P.~Anthur, H.~Zhang, R.~Paniagua-Dominguez, D.~A.~Kalashnikov, S.~T.~Ha,
+T.~W.~W.~Ma{\ss}, A.~I.~Kuznetsov, L.~Krivitsky,
+``Continuous wave second harmonic generation enabled by quasi-bound-states in the continuum on gallium phosphide metasurfaces,''
+\emph{Nano Lett.} \textbf{20}, 8745 (2020).
+
+\bibitem{KoshelevKivshar2021}
+K.~Koshelev, Y.~Kivshar,
+``Dielectric resonant metaphotonics,''
+\emph{ACS Photonics} \textbf{8}, 102 (2021).
+
+\bibitem{Bulgakov2017}
+E.~N.~Bulgakov, A.~F.~Sadreev,
+``Bloch bound states in the radiation continuum in a periodic array of dielectric rods,''
+\emph{Phys.\ Rev.\ A} \textbf{96}, 013841 (2017).
+
+\bibitem{DrummondWalls1980}
+P.~D.~Drummond, D.~F.~Walls,
+``Quantum theory of optical bistability. I.\ Nonlinear polarisability model,''
+\emph{J.\ Phys.\ A: Math.\ Gen.} \textbf{13}, 725 (1980).
+
+\bibitem{Keller1996}
+U.~Keller, K.~J.~Weingarten, F.~X.~K\"artner, D.~Kopf, B.~Braun, I.~D.~Jung, R.~Fluck, C.~H\"onninger, N.~Matuschek, J.~Aus der Au,
+``Semiconductor saturable absorber mirrors (SESAMs) for femtosecond to nanosecond pulse generation in solid-state lasers,''
+\emph{IEEE J.~Sel.\ Top.\ Quantum Electron.} \textbf{2}, 435 (1996).
+
+\bibitem{Nikogosyan2005}
+D.~N.~Nikogosyan, \emph{Nonlinear Optical Crystals: A Complete Survey} (Springer, 2005).
+
+\end{thebibliography}
+
+\end{document}
