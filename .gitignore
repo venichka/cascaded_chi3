@@ -1,32 +1,24 @@
-# ----------------------------
-
+# ---------------------------------------------------------------------
 # Python
-
-# ----------------------------
-
-# Byte-compiled files and caches
-
-**pycache**/
+# ---------------------------------------------------------------------
+__pycache__/
 *.py[cod]
 *$py.class
 
 # Virtual environments
-
 .venv/
 venv/
 env/
 ENV/
 
 # Packaging and build output
-
 build/
 dist/
 *.egg-info/
 .eggs/
 *.egg
 
-# Test, coverage, and type-checking caches
-
+# Test, coverage and type-checking caches
 .pytest_cache/
 .mypy_cache/
 .ruff_cache/
@@ -34,18 +26,12 @@ dist/
 .coverage.*
 htmlcov/
 
-# Jupyter notebook checkpoints
-
+# Jupyter checkpoints
 .ipynb_checkpoints/
 
-# ----------------------------
-
-# LaTeX
-
-# ----------------------------
-
-# Common build artifacts
-
+# ---------------------------------------------------------------------
+# LaTeX build artefacts
+# ---------------------------------------------------------------------
 *.aux
 *.bbl
 *.bcf
@@ -57,9 +43,6 @@ htmlcov/
 *.run.xml
 *.synctex.gz
 *.toc
-
-# Additional generated files
-
 *.acn
 *.acr
 *.alg
@@ -77,19 +60,13 @@ htmlcov/
 *.snm
 *.vrb
 *.xdv
-
-# LaTeX build directories
-
 _build/
 latexmk/
 output/
 
-# ----------------------------
-
+# ---------------------------------------------------------------------
 # Editors and operating systems
-
-# ----------------------------
-
+# ---------------------------------------------------------------------
 .vscode/
 .idea/
 *.swp
@@ -98,22 +75,24 @@ output/
 .DS_Store
 Thumbs.db
 
-# ----------------------------
+# ---------------------------------------------------------------------
+# Collaborator source material -- deliberately not redistributed here.
+#
+# Slide decks, raw full-wave exports and annotated review copies belong to
+# their authors and are unpublished. Only the parameters extracted from
+# them (data/*_parameters.md, data/*_spectrum.csv) and figures prepared
+# for our own documents are tracked.
+# ---------------------------------------------------------------------
+*.pptx
+*_AA.pdf
+data/**/*.mat
+data/**/*.m
 
-# Optional exclusions
-
-# ----------------------------
-
-# Uncomment to ignore generated PDFs:
-
-# *.pdf
-
-# Uncomment only if Markdown files should NOT be committed:
+# ---------------------------------------------------------------------
+# Local working notes, not part of the public record
+# ---------------------------------------------------------------------
 CLAUDE.md
 
-# *.md
-
-# Quarto rendered HTML (regenerable from .qmd)
+# Quarto rendered HTML (regenerable from the .qmd source)
 *.html
 *_files/
-
