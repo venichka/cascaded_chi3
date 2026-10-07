@@ -3,7 +3,7 @@
 Consumes the verified per-sample parameters of ``sample_params.py`` and the
 data-derived eta_geom(Domega) (from the COMSOL overlap arrays), then evaluates
 every observable that *survives* in the singly-resonant case
-(``Cascaded_chi3_SH_only_note.tex`` sections sec:chi3-1R .. sec:applications-1R):
+(``notes/Cascaded_chi3_SH_only_note.tex`` sections sec:chi3-1R .. sec:applications-1R):
 
   * chi3_casc(Domega)        Re (self-focus/defocus sign flip), Im (2-photon-like loss)
   * R^(1R) = |chi3_casc|/chi3_native
@@ -68,9 +68,14 @@ F_RAD = 0.5
 def E_loc_sq(p, I_in, T_geom=1.0):
     """|E_loc|^2 [V^2/m^2] inside the dielectric for incident intensity I_in [W/m^2].
 
-    note eq:Eloc-magnitude:  |E_loc|^2 = 2 T_geom^2 I_in / (eps0 c n1^2).
+    Boyd amplitude convention (E~ = E e^{-iwt} + c.c., I = 2 n eps0 c |E|^2):
+    |E_0|^2 = I_in / (2 eps0 c) in vacuum, |E_loc| = T_geom |E_0| / n1, so
+        |E_loc|^2 = T_geom^2 I_in / (2 eps0 c n1^2).
+    (Until 2026-10-06 this used the 1/2-convention value 2 T^2 I/(eps0 c n1^2),
+    4x larger; that error cancelled against the 4x-too-small chi3_casc in
+    phi_NL, induced_loss and eta_FWM, which are therefore unchanged.)
     """
-    return 2.0 * T_geom ** 2 * I_in / (EPS0 * C0 * p["n1"] ** 2)
+    return T_geom ** 2 * I_in / (2.0 * EPS0 * C0 * p["n1"] ** 2)
 
 
 def phi_NL(p, dop, I_in, T_geom=1.0):
@@ -98,17 +103,20 @@ def eta_FWM(p, dop, I_in, T_geom=1.0):
 def eta_SHG(p, dop, I_in, T_geom=1.0, f_rad=F_RAD):
     """SHG conversion efficiency P_SH/P_in (order-of-magnitude; bridge+coupling caveated).
 
-    |M~|^2 = eta_geom V_cell |chi2|^2 / (eps0 n2^2);  beta^ = (eps0 omega1/4) |E_loc|^2 M~;
-    |a2|^2 = |beta^|^2 / (Domega^2 + (gamma2/2)^2);   P_SH = f_rad gamma2 |a2|^2.
+    |M~|^2 = eta_geom V_cell |chi2|^2 / (eps0 n2^2)  (N2 = int eps0 eps |f2|^2 = 1);
+    beta^ = eps0 omega1 |E_loc|^2 M~ / N2;   |a2|^2 = |beta^|^2 / (Domega^2 + (gamma2/2)^2);
+    stored energy U2 = 2 N2 |a2|^2 (Boyd);   P_SH = f_rad gamma2 U2.
+    (Corrected 2026-10-06: the old chain beta^ = (eps0 w1/4)|E|^2 M~ with U2 = |a2|^2
+    underestimated P_SH by 2.)
     """
     eta = eta_geom(p, dop)
     V_cell = A_CELL * p["L_meta"]
     M2 = eta * V_cell * CHI2 ** 2 / (EPS0 * p["n2"] ** 2)        # |M~|^2
     Els = E_loc_sq(p, I_in, T_geom)
-    beta_abs = (EPS0 * p["omega1"] / 4.0) * Els * np.sqrt(M2)     # |beta^|
+    beta_abs = EPS0 * p["omega1"] * Els * np.sqrt(M2)            # |beta^|, N2 = 1
     domega = dop * p["gamma2"]
     a2_sq = beta_abs ** 2 / (domega ** 2 + (p["gamma2"] / 2.0) ** 2)
-    P_SH = f_rad * p["gamma2"] * a2_sq
+    P_SH = f_rad * p["gamma2"] * 2.0 * a2_sq                     # U2 = 2 N2 |a2|^2
     P_in = I_in * A_CELL
     return P_SH / P_in
 

@@ -6,7 +6,7 @@ Reads the designer's deliverables in ``data/sample1-4/``:
   - slide-1 table   : f0(2w), Q2, gamma, H1/H2/H_t, area, overlap(+-2g)
 
 and maps them onto the singly-resonant (SH-only) cascaded-chi3 model of
-``Cascaded_chi3_SH_only_note.tex``:
+``notes/Cascaded_chi3_SH_only_note.tex``:
 
     chi3_casc_1R(Domega) = - omega1 |chi2|^2 eta_geom
                             / [ 6 n2^2 (Domega + i gamma2/2) ]          (eq:chi3-1R-explicit, full complex)
@@ -201,7 +201,7 @@ def chi3_casc(p, domega_over_g, eta=None):
         eta = eta_geom(p, domega_over_g)
     domega = domega_over_g * p["gamma2"]
     denom = domega + 1j * p["gamma2"] / 2.0
-    return -p["omega1"] * CHI2 ** 2 * eta / (6.0 * p["n2"] ** 2 * denom)
+    return -2.0 * p["omega1"] * CHI2 ** 2 * eta / (3.0 * p["n2"] ** 2 * denom)  # prefactor 2/3 (2026-10-06 fix; was 1/6)
 
 
 # ----------------------------------------------------------------------

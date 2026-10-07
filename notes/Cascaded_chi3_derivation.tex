@@ -35,10 +35,11 @@
 % =======================================================================
 \section{Conventions}\label{sec:conventions}
 
-Real fields written as sums of complex envelopes,
+Real fields written as sums of complex envelopes (Boyd's convention, no
+prefactor $\tfrac12$),
 \begin{equation}
-  \mathcal{E}_i(\ri,t)=\tfrac12\sum_n\!\bigl[E_{n,i}(\ri,t)\,e^{-i\omega_n t}+\mathrm{c.c.}\bigr],\qquad
-  \mathcal{P}_i(\ri,t)=\tfrac12\sum_n\!\bigl[P_{n,i}(\ri,t)\,e^{-i\omega_n t}+\mathrm{c.c.}\bigr],
+  \mathcal{E}_i(\ri,t)=\sum_n\!\bigl[E_{n,i}(\ri,t)\,e^{-i\omega_n t}+\mathrm{c.c.}\bigr],\qquad
+  \mathcal{P}_i(\ri,t)=\sum_n\!\bigl[P_{n,i}(\ri,t)\,e^{-i\omega_n t}+\mathrm{c.c.}\bigr],
 \end{equation}
 with $E_{n,i},P_{n,i}$ slowly varying. The second-order polarisation
 \begin{equation}
@@ -95,12 +96,15 @@ Linear eigenmodes $\f_n(\ri),\h_n(\ri)$ satisfy
 \end{equation}
 with $\h_n=-i\nabla\!\times\!\f_n/(\omega_n\mu_0)$. Brillouin energy normalisation:
 \begin{equation}
-  \tfrac12\!\int\!\!\bigl[\,\eps_0\,\epstilde_n(\ri)\,|\f_n|^2+\mu_0|\h_n|^2\,\bigr]\dthreer=1,
+  \int\!\!\bigl[\,\eps_0\,\epstilde_n(\ri)\,|\f_n|^2+\mu_0|\h_n|^2\,\bigr]\dthreer=1,
   \qquad
   \epstilde_n(\ri)\equiv\left.\frac{\partial(\omega\,\eps_r(\ri,\omega))}{\partial\omega}\right|_{\omega=\omega_n}.
 \label{eq:Brillouin}
 \end{equation}
 Modal amplitude $a_n(t)$ defined by $E_{n,i}(\ri,t)=a_n(t)\,f_{n,i}(\ri)$; time-averaged energy in mode $n$ is $|a_n|^2$.
+Projection norm $N_n\equiv\tfrac12\int[\eps_0\epstilde_n|\f_n|^2+\mu_0|\h_n|^2]\dthreer$
+($=\int\eps_0\eps_r|\f_n|^2$ for non-dispersive media; $=\tfrac12$ here);
+in general the stored energy is $2N_n|a_n|^2$.
 
 % =======================================================================
 \section{Cascaded polarisation from $\chitwo\!\cdot G\!\cdot\chitwo$}\label{sec:tensorder}
@@ -158,7 +162,7 @@ with $\mathcal{F}\to 1$ for $\Delta k L\gg 1$ and $\mathcal{F}\to\Delta k L/2$ f
 Near an isolated SH quasi-normal mode,
 \begin{equation}
   G_{jl}(\ri,\ri';2\omega_1)=
-  \frac{c^2}{2\omega_2}\,
+  -\frac{\eps_0c^2}{2\omega_2N_2}\,
   \frac{f_{2,j}(\ri)\,f_{2,l}^*(\ri')}{\Dom+i\gamma_2/2}+(\text{bg}),
   \qquad \Dom=2\omega_1-\omega_2.
 \label{eq:G-QNM}
@@ -172,7 +176,7 @@ With $E_m(\ri,\omega_1)=a_1\,f_{1,m}(\ri)$, define
 \end{equation}
 Substituting \eqref{eq:G-QNM} into \eqref{eq:Pcasc-nonlocal} gives
 \begin{equation}
-  P_i^{\text{casc}}(\ri,\omega_1)\propto
+  P_i^{\text{casc}}(\ri,\omega_1)=-\frac{2\eps_0^2\omega_1}{N_2}\,
     \frac{M\,|a_1|^{2}\,a_1}{\Dom+i\gamma_2/2}\,
     \chitwo_{ijk}(\ri)\,f_{2,j}(\ri)\,f_{1,k}^{*}(\ri).
   \label{eq:Pcasc-modal}
@@ -181,7 +185,7 @@ Projecting onto $f_{1,i}^*$ and equating to the native-Kerr projection
 $\int f_{1,i}^* P_i^\text{nat}\dthreer=3\eps_0\,\chithree_\text{casc}\,|a_1|^2 a_1\!\int|\f_1|^4\dthreer$:
 \begin{equation}
   \boxed{\;\chithree_{\text{casc}}=
-    -\,\frac{\eps_0\,\omega_1}{6}\cdot
+    -\,\frac{2\,\eps_0\,\omega_1}{3\,N_2}\cdot
     \frac{|M|^2}{(\Dom+i\gamma_2/2)\!\int\!|\f_1|^4\dthreer}\;}
   \label{eq:chi3casc-tensor}
 \end{equation}
@@ -206,24 +210,30 @@ with $s_-=-s_++\sqrt{\gamma_1^{(\text{rad})}}\,a_1$, $\Dom\equiv 2\omega_1-\omeg
 \end{equation}
 which vanishes $\forall a_1,a_2$ iff $\beta^{(1)}=\beta$.
 
-\paragraph{Modal coefficients.} Substituting $\mathbf E(\ri,2\omega_1)=a_2(t)\f_2(\ri)$ in \eqref{eq:waveeq-SH}, in the slow-envelope limit:
-\begin{equation*}
-  \mathrm{LHS}=\bigl[\,-2i\omega_2\,\dot a_2 + 2\omega_2\Dom\,a_2\bigr]/\eps_0,
-\end{equation*}
-\begin{equation*}
-  \mathrm{RHS}=k_2^{2}\,a_1^{2}\!\int\!\chitwo_{ijk}\,f_{2,i}^{*}\,f_{1,j}\,f_{1,k}\,\dthreer=k_2^{2}\,a_1^{2}\,M.
-\end{equation*}
-Adopting the standard cavity-QED normalisation,
+\paragraph{Modal coefficients.} With $\mathcal E=a(t)\f_n e^{-i\Omega t}+\text{c.c.}$
+and a nonlinear polarisation $\mathbf P e^{-i\Omega t}+\text{c.c.}$, the
+slowly-varying projection of the wave equation onto $\f_n^*$ is
 \begin{equation}
-  \boxed{\;\beta=\frac{\eps_0\,\omega_1}{4}\!\int\!\chitwo_{ijk}(\ri)\,
+  \dot a=i(\Omega-\omega_n)\,a+\frac{i\Omega}{2N_n}\!\int\!\f_n^*\!\cdot\mathbf P\,\dthreer
+  \label{eq:projection}
+\end{equation}
+(the first-order perturbation formula $\delta\omega=-\tfrac{\omega}{2}\int\mathbf E^*\!\cdot\delta\mathbf P/\int\eps_0\eps_r|\mathbf E|^2$).
+The SHG source gives $\beta=\eps_0\omega_1M/N_2$; the DFG source (degeneracy $2$)
+gives the same coupling in \eqref{eq:a1} for $N_1=N_2$; the SPM source
+(degeneracy $3$) gives $\alpha_3$.  With $N_n=\tfrac12$:
+\begin{equation}
+  \boxed{\;\beta=\frac{\eps_0\,\omega_1}{N_2}\,M=2\,\eps_0\,\omega_1\!\int\!\chitwo_{ijk}(\ri)\,
                 f_{2,i}^*\,f_{1,j}\,f_{1,k}\,\dthreer\;}
 \label{eq:beta}
 \end{equation}
 \begin{equation}
-  \boxed{\;\alpha_3=\frac{3\,\eps_0\,\omega_1}{8}\!\int\!\chithree_{ijkl}(\ri)\,
+  \boxed{\;\alpha_3=\frac{3\,\eps_0\,\omega_1}{2N_1}\!\int\!\chithree_{ijkl}(\ri)\,
                   f_{1,i}^*\,f_{1,j}\,f_{1,k}\,f_{1,l}^*\,\dthreer\;}
 \label{eq:alpha3}
 \end{equation}
+(An earlier version used $\eps_0\omega_1/4$ and $3\eps_0\omega_1/8$ with
+$N_n=1$, each $4\times$ too small; $\chithree_\text{casc}\propto|\beta|^2/\alpha_3$
+was therefore $4\times$ too small.)
 
 % =======================================================================
 \section{Adiabatic elimination $\Rightarrow$ effective $\chithree$}\label{sec:adiab}
@@ -254,30 +264,25 @@ Substituting into \eqref{eq:a1}:
   \label{eq:gamma3-adiab}
 \end{equation}
 
-\textbf{Cascaded $\chithree$.} Inverting $\alpha_3=(3\eps_0\omega_1/8)\,\chithree_\text{eff}\!\int|\f_1|^4\dthreer$:
+\textbf{Cascaded $\chithree$.} Inverting $\alpha_3=(3\eps_0\omega_1/2N_1)\,\chithree_\text{eff}\!\int|\f_1|^4\dthreer$
+with the cascaded coefficient $-\eps_0^2\omega_1^2|M|^2/(N_1N_2\Dom)$:
 \begin{equation}
-  \chithree_{\text{casc}}=-\frac{|\beta|^2/\Dom}{(3\eps_0\omega_1/8)\!\int\!|\f_1|^4\dthreer}
-                      =-\frac{8}{3\eps_0\omega_1\Dom}\,
-                           \frac{|\beta|^2}{\int|\f_1|^4\dthreer}.
-\end{equation}
-With $\beta=\eps_0\omega_1\,I/4$, $I\equiv\int\chitwo_{ijk}\,f_{2,i}^*f_{1,j}f_{1,k}\dthreer$:
-\begin{equation}
-  \boxed{\;\chithree_{\text{casc}}=-\frac{\eps_0\,\omega_1}{6\,\Dom}\,
+  \boxed{\;\chithree_{\text{casc}}=-\frac{2\,\eps_0\,\omega_1}{3\,N_2\,\Dom}\,
        \frac{\bigl|\!\int\!\chitwo_{ijk}(\ri)\,f_{2,i}^*\,f_{1,j}\,f_{1,k}\dthreer\bigr|^{2}}
             {\int|\f_1|^4\dthreer}\;.}
 \label{eq:chi3casc}
 \end{equation}
 
-\paragraph{Explicit $n$-dependence.} Using $|\f_n|\sim 1/\sqrt{\eps_0 n_n^2 V_\text{eff}}$:
+\paragraph{Explicit $n$-dependence.} Using $|\f_n|\sim 1/\sqrt{2\eps_0 n_n^2 V_\text{eff}}$:
 \begin{align}
-  \int|\f_1|^4\dthreer&\sim\frac{\zeta_1}{\eps_0^{\,2}\,n_1^{\,4}\,V_\text{eff}},
+  \int|\f_1|^4\dthreer&\sim\frac{\zeta_1}{4\eps_0^{\,2}\,n_1^{\,4}\,V_\text{eff}},
   \\[2pt]
   \Bigl|\!\int\!\chitwo_{ijk}f_{2,i}^*f_{1,j}f_{1,k}\dthreer\Bigr|^{2}
-        &\sim\frac{|\chitwo|^{2}\,\widetilde\eta^{2}}{\eps_0^{\,3}\,n_2^{\,2}\,n_1^{\,4}\,V_\text{eff}}.
+        &\sim\frac{|\chitwo|^{2}\,\widetilde\eta^{2}}{8\eps_0^{\,3}\,n_2^{\,2}\,n_1^{\,4}\,V_\text{eff}}.
 \end{align}
 All $n_1$ powers cancel:
 \begin{equation}
-  \boxed{\;\chithree_{\text{casc}}\sim-\frac{\omega_1}{6\,n_2^{\,2}\,\Dom}\;|\chitwo|^{2}\;\eta_\text{geom},
+  \boxed{\;\chithree_{\text{casc}}\simeq-\frac{2\,\omega_1}{3\,n_2^{\,2}\,\Dom}\;|\chitwo|^{2}\;\eta_\text{geom},
         \quad \eta_\text{geom}\equiv\widetilde\eta^{2}/\zeta_1\;}
 \label{eq:chi3casc_explicit}
 \end{equation}
@@ -286,7 +291,7 @@ All $n_1$ powers cancel:
 Introduce dimensionless mode profiles $u_n(\ri)$ by stripping the
 dimensional scale from $\f_n$,
 \begin{equation}
-  \f_n(\ri)\equiv\frac{u_n(\ri)}{\sqrt{\eps_0\,n_n^{\,2}\,V_\text{eff}}},
+  \f_n(\ri)\equiv\frac{u_n(\ri)}{\sqrt{2\,\eps_0\,n_n^{\,2}\,V_\text{eff}}},
   \qquad
   \int|u_n(\ri)|^{2}\dthreer\;=\;V_\text{eff},
   \label{eq:dimless-modes}
@@ -299,9 +304,9 @@ vanish far from it. Inserting \eqref{eq:dimless-modes} into the integrals
 introduced for the scaling estimate,
 \begin{align}
   \int|\f_1|^{4}\dthreer
-    &=\frac{1}{\eps_0^{\,2}\,n_1^{\,4}\,V_\text{eff}^{\,2}}\!\int|u_1|^{4}\dthreer,\\[2pt]
+    &=\frac{1}{4\,\eps_0^{\,2}\,n_1^{\,4}\,V_\text{eff}^{\,2}}\!\int|u_1|^{4}\dthreer,\\[2pt]
   \Bigl|\!\int\!\chitwo_{ijk}\,f_{2,i}^{*}\,f_{1,j}\,f_{1,k}\,\dthreer\Bigr|^{2}
-    &=\frac{1}{\eps_0^{\,3}\,n_1^{\,4}\,n_2^{\,2}\,V_\text{eff}^{\,3}}\,
+    &=\frac{1}{8\,\eps_0^{\,3}\,n_1^{\,4}\,n_2^{\,2}\,V_\text{eff}^{\,3}}\,
        \Bigl|\!\int\!\chitwo_{ijk}\,u_{2,i}^{*}\,u_{1,j}\,u_{1,k}\,\dthreer\Bigr|^{2},
 \end{align}
 fixes the dimensionless geometric factors as
@@ -331,7 +336,7 @@ Brillouin-normalised $\f_n$,
   \eta_\text{geom}
    =\frac{\eps_0\,n_2^{\,2}\,
           \bigl|\!\int\!\chitwo_{ijk}(\ri)\,f_{2,i}^{*}\,f_{1,j}\,f_{1,k}\,\dthreer\bigr|^{2}}
-         {|\chitwo|^{2}\!\int|\f_1(\ri)|^{4}\dthreer},
+         {|\chitwo|^{2}\,N_2\!\int|\f_1(\ri)|^{4}\dthreer},
   \label{eq:eta-geom-f}
 \end{equation}
 which back-substituted into \eqref{eq:chi3casc_explicit} reproduces
@@ -374,13 +379,13 @@ $|\alpha_3^\text{eff}(\Omega)|^2$ is Lorentzian, FWHM $\gamma_2$, peak $4|\beta|
 At $|\Dom|\sim\gamma_2$, $|\alpha_3^\text{eff}|_\text{max}\sim|\beta|^2/\gamma_2$, $\Delta\Omega\sim\gamma_2$. With $\omega_1/\gamma_2=Q_2/2$:
 \begin{equation}
   |\chithree_\text{casc}|_\text{max}\sim
-       \frac{Q_2}{12\,n_2^{\,2}}\,|\chitwo|^2\,\eta_\text{geom}.
+       \frac{Q_2}{3\,n_2^{\,2}}\,|\chitwo|^2\,\eta_\text{geom}.
   \label{eq:chi3-max}
 \end{equation}
 Multiplying by $\Delta f_\text{usable}\sim\gamma_2/(2\pi)$:
 \begin{equation}
   \boxed{\;|\chithree_\text{casc}|_\text{max}\times\Delta f_\text{usable}
-          \lesssim\frac{\omega_1\,|\chitwo|^2\,\eta_\text{geom}}{12\pi\,n_2^{\,2}}
+          \lesssim\frac{\omega_1\,|\chitwo|^2\,\eta_\text{geom}}{3\pi\,n_2^{\,2}}
           \quad\text{($Q_2$-independent)}.\;}
   \label{eq:sum-rule}
 \end{equation}
@@ -461,7 +466,7 @@ Using $|s_-^{(i)}|^2=\gamma_1^\text{rad}|a_i|^2$ and $|a_s|=2\sqrt{\gamma_1^\tex
 From \eqref{eq:chi3casc-tensor}, writing $1/(\Dom+i\gamma_2/2)=(\Dom-i\gamma_2/2)/[\Dom^2+(\gamma_2/2)^2]$:
 \begin{equation}
   \mathrm{Im}\,\chithree_\text{casc}(\Dom)
-   =\frac{\eps_0\,\omega_1}{6}\cdot
+   =\frac{2\,\eps_0\,\omega_1}{3\,N_2}\cdot
         \frac{|M|^{2}\,(\gamma_2/2)}{[\Dom^{2}+(\gamma_2/2)^{2}]\,\int|\f_1|^{4}\dthreer},
 \end{equation}
 \begin{equation}
@@ -472,7 +477,7 @@ From \eqref{eq:chi3casc-tensor}, writing $1/(\Dom+i\gamma_2/2)=(\Dom-i\gamma_2/2
 At $\Dom=0$ (Lorentzian peak, FWHM $\gamma_2$):
 \begin{equation}
   \mathrm{Im}\,\chithree_\text{casc}\big|_{\Dom=0}
-       \sim\frac{Q_2}{6\,n_2^{\,2}}\,|\chitwo|^{2}\,\eta_\text{geom}.
+       \sim\frac{2\,Q_2}{3\,n_2^{\,2}}\,|\chitwo|^{2}\,\eta_\text{geom}.
 \end{equation}
 
 % =======================================================================
@@ -527,10 +532,10 @@ Using \eqref{eq:phi-per-photon},
 
 \begin{equation}
   \boxed{\;\chithree_\text{casc}(\omega_1)
-        =-\frac{\eps_0\,\omega_1}{6\,\Dom}\;
+        =-\frac{2\,\eps_0\,\omega_1}{3\,N_2\,\Dom}\;
           \frac{\bigl|\!\int\!\chitwo_{ijk}(\ri)\,f_{2,i}^*\,f_{1,j}\,f_{1,k}\dthreer\bigr|^{2}}
                {\int|\f_1(\ri)|^{4}\dthreer}
-        \;\sim\;-\frac{\omega_1}{6\,n_2^{\,2}\,\Dom}\;|\chitwo|^{2}\;\eta_\text{geom}\,,\;}
+        \;\simeq\;-\frac{2\,\omega_1}{3\,n_2^{\,2}\,\Dom}\;|\chitwo|^{2}\;\eta_\text{geom}\,,\;}
 \end{equation}
 valid for $\gamma_2/2\ll|\Dom|\ll\omega_1$, $|\beta a_1|\ll|\Dom|$.
 

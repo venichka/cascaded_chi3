@@ -1,0 +1,16 @@
+========================================================================
+Tests A/B  (doubly resonant, non-uniform layered cell)
+  Dw/W= 2e-02  A: a2_exact/a2_claim=1.01010   B: chi3_exact/claim=1.00774  /note=4.0310
+  Dw/W= 5e-03  A: a2_exact/a2_claim=1.00251   B: chi3_exact/claim=1.00190  /note=4.0076
+  Dw/W= 1e-03  A: a2_exact/a2_claim=1.00050   B: chi3_exact/claim=1.00038  /note=4.0015
+Test C  (singly resonant: prescribed uniform FM field, Bloch k = 0)
+  Dw/W= 2e-02  chi3_exact/claim=1.10867  /note=4.4347   (|Mt|^2 = 1.926e-05, band 2)
+  Dw/W= 5e-03  chi3_exact/claim=1.02622  /note=4.1049   (|Mt|^2 = 2.084e-05, band 2)
+  Dw/W= 1e-03  chi3_exact/claim=1.00519  /note=4.0208   (|Mt|^2 = 2.128e-05, band 2)
+Test D  (native Kerr: exact self-consistent nonlinear eigenfrequency)
+  |a|=5e-02: dw_exact/dw_claim = 0.99588   (note's alpha3 = 3w1/8 would give 3.9835)
+  |a|=1e-01: dw_exact/dw_claim = 0.99935   (note's alpha3 = 3w1/8 would give 3.9974)
+  |a|=2e-01: dw_exact/dw_claim = 0.99999   (note's alpha3 = 3w1/8 would give 4.0000)
+Test E  (uniform-medium limit vs bulk bound-wave)
+  exact/claim = 1.0112   exact/note = 4.0447   (residual = first order in n2-n1)
+========================================================================

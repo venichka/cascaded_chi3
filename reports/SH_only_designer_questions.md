@@ -1,6 +1,6 @@
 # Questions for the metasurface designer — SH-only samples 1–4
 
-We've run the singly-resonant cascaded-χ³ model on the four samples (`SH_only_sample_analysis.md`).
+We've run the singly-resonant cascaded-χ³ model on the four samples (`reports/SH_only_sample_analysis.md`).
 The **rankings, lineshapes, and Q/η scalings are already robust**; the items below pin the **absolute
 magnitudes** and refine the resonance/field model. Ordered by impact.
 

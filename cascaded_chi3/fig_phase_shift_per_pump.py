@@ -46,10 +46,10 @@ FIG_DIR = HERE / "figures"
 def enhancement_ratio(Q2: float, host: dict, eta: float = ETA_GEOM) -> float:
     """R = |chi^(3)_eff,casc| / |chi^(3)_native| at Delta omega = 2 gamma_2.
 
-    The prefactor 1/24 comes from omega_1/Delta omega = Q_2/4 at this
+    The prefactor 1/6 (corrected 2026-10-06, was 1/24) comes from omega_1/Delta omega = Q_2/4 at this
     conservative operating point (gamma_2 = omega_2/Q_2 = 2 omega_1/Q_2).
     """
-    return (Q2 / (24.0 * host["n"] ** 2)) * eta * host["chi2"] ** 2 / host["chi3"]
+    return (Q2 / (6.0 * host["n"] ** 2)) * eta * host["chi2"] ** 2 / host["chi3"]
 
 
 def phi_per_pump_native(Q1: float, host: dict) -> float:
@@ -118,7 +118,7 @@ def main():
     fig, axs = plt.subplots(1, 2, figsize=(13.0, 5.0), gridspec_kw={"wspace": 0.25})
 
     for ax, hosts_to_show, title in [
-        (axs[0], {"LiNbO3": cascade_hosts["LiNbO3"]}, r"(a) LiNbO$_3$: cascade $R\simeq 13$ at $Q_2=4{,}000$"),
+        (axs[0], {"LiNbO3": cascade_hosts["LiNbO3"]}, r"(a) LiNbO$_3$: cascade $R\simeq 51$ at $Q_2=4{,}000$"),
         (axs[1], {"AlGaAs": cascade_hosts["AlGaAs"]}, "(b) AlGaAs: native-Kerr wins at any practical $Q_2$"),
     ]:
         for name, host in hosts_to_show.items():

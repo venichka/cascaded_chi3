@@ -86,8 +86,11 @@ def main():
     # alpha_3 = +0.04 with Delta omega = -2 (constructive cascade: same
     # sign as native), so the combined coefficient is alpha_3 +
     # alpha_3^casc and XPM/SPM ratios give 1+R rather than |1-R|.
-    # R = 0.471 / 0.04 = 11.8 matches the worked example.
-    base = dict(gamma1=10.0, gamma1_rad=5.0, alpha3=0.04, delta1=0.0)
+    # R = 0.471 / 0.0096 = 49 matches the (corrected) worked example.
+    # 2026-10-06: recalibrated to the corrected worked example. With the
+    # corrected prefactor |chi3_casc| = Q_2/(6 n_2^2) eta |chi2|^2 at Delta omega
+    # = 2 gamma_2, R = 49 for LiNbO3 (was 12); alpha_3_native = 0.471/49 = 0.0096.
+    base = dict(gamma1=10.0, gamma1_rad=5.0, alpha3=0.0096, delta1=0.0)
     p_nat = TCMTParams(Domega=-2.0, beta=0.0, **base)
     p_cas = TCMTParams(Domega=-2.0, beta=1.0, **base)
 
@@ -141,7 +144,7 @@ def main():
     ratio_XPM_SPM_nat = np.abs(phi_XPM_nat) / np.abs(phi_SPM_nat)
     ratio_XPM_SPM_cas = np.abs(phi_XPM_cas) / np.abs(phi_SPM_cas)
 
-    R_predicted = 12
+    R_predicted = 49
     axs[1].semilogx(s_p_grid ** 2, ratio_arch, "o-", color="C0", ms=5,
                     mfc="none", mew=1.2,
                     label=r"$|\phi_{\rm cas}^{\rm XPM}| / |\phi_{\rm nat}^{\rm XPM}|$ (TCMT)")
@@ -159,14 +162,14 @@ def main():
     axs[1].set_xlabel(r"$|s_+^{(p)}|^2$  (pump power)")
     axs[1].set_ylabel(r"ratio")
     axs[1].set_title(r"(b) $(1+R)$ cascade/native and factor-2 XPM/SPM")
-    axs[1].set_ylim(0, max(35, ratio_arch.max() * 1.1))
+    axs[1].set_ylim(0, max(60, ratio_arch.max() * 1.1))
     axs[1].grid(True, which="both", alpha=0.3)
     axs[1].legend(loc="upper left", fontsize=9, ncol=1)
 
     fig.suptitle(
         r"XPM: cascade $\times(1+R)$ over native; XPM $\times 2$ over SPM "
-        r"-- $\Omega = 0.5\gamma_2$, $\widetilde\alpha_3 = +0.04$, "
-        r"$\Delta\omega = -2\gamma_2$ (constructive; $R\simeq 12$)",
+        r"-- $\Omega = 0.5\gamma_2$, $\widetilde\alpha_3 = +0.0096$, "
+        r"$\Delta\omega = -2\gamma_2$ (constructive; $R\simeq 49$)",
         fontsize=11.5, y=1.00,
     )
     fig.tight_layout()

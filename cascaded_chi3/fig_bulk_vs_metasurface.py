@@ -15,7 +15,7 @@ normalised to the host's bulk native chi^(3). For each scheme:
     The cavity boosts intracavity intensity (by Q_1^2) but does not
     change the local chi^(3) of the host material.
   - Cascaded doubly-resonant metasurface:
-    enhancement = (Q_2 / (12 n_2^2)) eta_geom |chi^(2)|^2 / chi^(3)_native,
+    enhancement = (Q_2 / (3 n_2^2)) eta_geom |chi^(2)|^2 / chi^(3)_native,
     bandwidth = gamma_2 / (2 pi) = 2 omega_1 / (2 pi Q_2).
 
 Three takeaways visible at a glance:
@@ -49,7 +49,7 @@ CHI3_NATIVE = 2e-21  # m^2/V^2, LiNbO3 native Kerr (Section 9)
 
 
 def metasurface_point(Q2):
-    enh = (Q2 / (12.0 * N2_REAL ** 2)) * ETA_GEOM * CHI2_REAL ** 2 / CHI3_NATIVE
+    enh = (Q2 / (3.0 * N2_REAL ** 2)) * ETA_GEOM * CHI2_REAL ** 2 / CHI3_NATIVE
     gamma2 = 2.0 * OMEGA1_REAL / Q2
     bw_hz = gamma2 / (2 * np.pi)
     return bw_hz, enh

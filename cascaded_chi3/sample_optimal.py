@@ -60,7 +60,7 @@ def verify():
     print("\n(ii) chi3 lineshape == analytic.py adiabatic forms (alpha3_eff, gamma_2pa)")
     p = samples[4]
     eta = 0.04
-    K = p["omega1"] * CHI2 ** 2 * eta / (6.0 * p["n2"] ** 2)
+    K = 2.0 * p["omega1"] * CHI2 ** 2 * eta / (3.0 * p["n2"] ** 2)
     worst = 0.0
     for dtil in np.linspace(-5, 5, 21):
         if abs(dtil) < 1e-6:
@@ -81,7 +81,7 @@ def verify():
     eta4 = eta_geom(p, DOP)
     domega = DOP * p["gamma2"]
     denom = abs(domega + 1j * p["gamma2"] / 2)
-    hand = p["omega1"] * CHI2 ** 2 * eta4 / (6 * p["n2"] ** 2 * denom)
+    hand = 2 * p["omega1"] * CHI2 ** 2 * eta4 / (3 * p["n2"] ** 2 * denom)
     code = abs(chi3_casc(p, DOP))
     print("\n(iv) sample 4 |chi3| @ +2gamma2:  eta=%.4f  hand=%.3e  code=%.3e  R=%.2f  -> %s"
           % (eta4, hand, code, code / CHI3_NATIVE, "PASS" if abs(hand - code) < 1e-30 else "FAIL"))

@@ -2,12 +2,12 @@
 
 From eq. (chi3casc_explicit) of the note:
 
-    |chi^(3)_casc| ~ (omega_1 / (6 n_2^2 |Domega|)) * |chi^(2)|^2 * eta_geom
+    |chi^(3)_casc| ~ (2 omega_1 / (3 n_2^2 |Domega|)) * |chi^(2)|^2 * eta_geom
 
 so the enhancement over the native chi^(3) scales linearly with eta_geom.
 At fixed Q_2 and design wavelength,
 
-    enhancement = (Q_2 / (12 n_2^2)) * eta_geom * |chi^(2)|^2 / |chi^(3)|_native.
+    enhancement = (Q_2 / (3 n_2^2)) * eta_geom * |chi^(2)|^2 / |chi^(3)|_native.
 
 Section 10(5) of the note: random mode pairings give eta ~ 1e-3, while a
 properly engineered qBIC pair gives ~0.3. The geometric overlap is the
@@ -38,7 +38,7 @@ CHI3_NATIVE = 2e-21
 
 
 def enhancement(Q2, eta):
-    return (Q2 / (12.0 * N2_REAL ** 2)) * eta * CHI2_REAL ** 2 / CHI3_NATIVE
+    return (Q2 / (3.0 * N2_REAL ** 2)) * eta * CHI2_REAL ** 2 / CHI3_NATIVE
 
 
 def main():

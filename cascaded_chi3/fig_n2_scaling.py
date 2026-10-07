@@ -3,10 +3,10 @@
 The note's "Explicit n-dependence" paragraph (Section 5):
 
     correct (the note's eq. chi3casc_explicit):
-        |chi^(3)_casc| ~ omega_1 / (6 n_2^2 |Domega|) * |chi^(2)|^2 * eta_geom
+        |chi^(3)_casc| ~ 2 omega_1 / (3 n_2^2 |Domega|) * |chi^(2)|^2 * eta_geom
 
     naive (the original-derivation form, single bulk index n):
-        |chi^(3)_casc|_naive ~ omega_1 / (6 n^3 |Domega|) * |chi^(2)|^2 * eta_geom
+        |chi^(3)_casc|_naive ~ 2 omega_1 / (3 n^3 |Domega|) * |chi^(2)|^2 * eta_geom
 
 The four powers of n_1 in the numerator and denominator cancel exactly --
 only n_2 survives, with two powers (the SH-mode normalisation). Setting
@@ -36,12 +36,12 @@ FIG_DIR = HERE / "figures"
 
 def chi3_correct(n2, omega1, Domega, eta):
     """note eq. (chi3casc_explicit). Only n_2 enters."""
-    return omega1 / (6.0 * n2 ** 2 * abs(Domega)) * CHI2_REAL ** 2 * eta
+    return 2.0 * omega1 / (3.0 * n2 ** 2 * abs(Domega)) * CHI2_REAL ** 2 * eta
 
 
 def chi3_naive(n_avg, omega1, Domega, eta):
     """Single-index plane-wave-style formula: 1/n^3."""
-    return omega1 / (6.0 * n_avg ** 3 * abs(Domega)) * CHI2_REAL ** 2 * eta
+    return 2.0 * omega1 / (3.0 * n_avg ** 3 * abs(Domega)) * CHI2_REAL ** 2 * eta
 
 
 def main():

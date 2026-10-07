@@ -1,6 +1,6 @@
 # cascaded_chi3 — TCMT simulations of the cascaded χ²:χ² → χ³ effect
 
-Numerical companion to `Cascaded_chi3_metasurface_note.md/.tex`. Each
+Numerical companion to `../notes/Cascaded_chi3_metasurface_note.tex`. Each
 script reproduces one phenomenon discussed in the note.
 
 ## Quick start

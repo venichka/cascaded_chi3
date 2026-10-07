@@ -377,8 +377,9 @@ def fig_R_landscape(dps):
                ms=13, color=COLORS["highlight"], mec="k", mew=0.6, zorder=5,
                label="PPLN demonstrated (Lu 2020)")
     ax[0].axhline(1.0, color="k", lw=0.9, ls=":")
-    for y, lab in ((12.0, r"metasurface note, $Q_2\!=\!4\times10^3$"),
-                   (2.5, "best SH-only sample (S4)")):
+    # metasurface references after the 2026-10-06 prefactor correction (x4)
+    for y, lab in ((49.0, r"metasurface note, $Q_2\!=\!4\times10^3$"),
+                   (10.0, "best SH-only sample (S4)")):
         ax[0].axhline(y, color=COLORS["linear"], lw=0.9, ls="-.")
         ax[0].text(1.05e4, y * 1.25, lab, fontsize=8.5,
                    color="0.35")
@@ -587,8 +588,8 @@ def fig_bistability(dps):
     #  only one is drawn; the optimal Domega is shown alongside.
     cases = [
         (+2.0, True, COLORS["tcmt"], r"cascade $\Delta\omega=+2\gamma_2$"),
-        (+3.7, True, COLORS["highlight"],
-         r"cascade $\Delta\omega=+3.7\gamma_2$ (optimum)"),
+        (+3.3, True, COLORS["highlight"],
+         r"cascade $\Delta\omega=+3.3\gamma_2$ (optimum)"),
     ]
     P = np.logspace(-8.0, -1.5, 1100)
     for xs, casc, col, lab in cases:
@@ -943,12 +944,14 @@ def summary(dps):
           f"   (FM cavity {q.kappa1/TWOPI/1e6:.0f} MHz -> cavity-limited)")
     th = ThermalModel()
     xs = np.linspace(0.9, 12.0, 600)
-    Pb, Pm = threshold_vs_detuning(q, xs)
-    ib, im = int(np.argmin(Pb)), int(np.argmin(Pm))
+    Pb, Pm = threshold_vs_detuning(q, xs)          # mi=False: Pm is None (Bogoliubov scan is slow)
+    ib = int(np.argmin(Pb))
     print(f"    optimal Domega (bistab.) : {xs[ib]:.2f} gamma2 -> "
           f"{Pb[ib]*1e6:.1f} uW  (at 2 gamma2: {Pb[np.argmin(abs(xs-2))]*1e6:.1f} uW)")
-    print(f"    optimal Domega (paramet.): {xs[im]:.2f} gamma2 -> "
-          f"{Pm[im]*1e6:.2f} uW")
+    if Pm is not None:
+        im = int(np.argmin(Pm))
+        print(f"    optimal Domega (paramet.): {xs[im]:.2f} gamma2 -> "
+              f"{Pm[im]*1e6:.2f} uW")
     n20 = n_selfconsistent(q, 20e-6, 0.0, D)
     print(f"    n at 20 uW (self-cons.)  : {n20:.3e}"
           f"   (linear formula {n_from_power(q, 20e-6):.3e})")

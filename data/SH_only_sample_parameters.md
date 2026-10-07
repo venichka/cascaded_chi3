@@ -1,8 +1,8 @@
 # SH-only sample parameter extraction → model inputs
 
 **Scope.** How the metasurface designer's deliverables (`data/sample1-4/` + slide-1 of
-`presentation/Presentation3.pptx`) are turned into inputs for the singly-resonant
-(SH-only) cascaded-χ³ model of `Cascaded_chi3_SH_only_note.tex`. Every number below is
+`data/sample1-4/Presentation3.pptx`) are turned into inputs for the singly-resonant
+(SH-only) cascaded-χ³ model of `notes/Cascaded_chi3_SH_only_note.tex`. Every number below is
 produced and cross-checked by `cascaded_chi3/sample_params.py` (run it to reproduce).
 
 The four files are **not** four different designs — they are the realised geometries for
@@ -203,21 +203,21 @@ array, trustworthy for |Δω| ≳ γ₂ (single-pole validity, note §`sec:valid
 
 ## 10. Preliminary derived outputs (baseline C_bridge = 1, Δω = +2γ₂)
 
-From `chi3_casc(Δω) = −ω₁|χ⁽²⁾|² η_geom / [6 n₂² (Δω + iγ₂/2)]` (`sample_params.py` §E):
+From `chi3_casc(Δω) = −2ω₁|χ⁽²⁾|² η_geom / [3 n₂² (Δω + iγ₂/2)]` (`sample_params.py` §E; prefactor 2/3 after the 2026-10-06 correction, previously 1/6, so all |χ³| and R below are 4× the values first recorded here):
 
 | Sample | η_geom(+2γ) | \|χ³_casc\| [m²/V²] | R = \|χ³_casc\|/χ³_native | Δf [GHz] | \|χ³\|·Δf |
 |---|---|---|---|---|---|
-| 1 | 0.0144 | 9.9×10⁻²² | **0.49** | 174.8 | 1.7×10⁻¹⁰ |
-| 2 | 0.0111 | 7.7×10⁻²² | **0.39** | 176.4 | 1.4×10⁻¹⁰ |
-| 3 | 0.0374 | 3.5×10⁻²¹ | **1.76** | 122.1 | 4.3×10⁻¹⁰ |
-| 4 | 0.0435 | 5.0×10⁻²¹ | **2.48** | 100.0 | 5.0×10⁻¹⁰ |
+| 1 | 0.0144 | 4.0×10⁻²¹ | **1.96** | 174.8 | 6.8×10⁻¹⁰ |
+| 2 | 0.0111 | 3.1×10⁻²¹ | **1.56** | 176.4 | 5.6×10⁻¹⁰ |
+| 3 | 0.0374 | 1.4×10⁻²⁰ | **7.04** | 122.1 | 1.7×10⁻⁹ |
+| 4 | 0.0435 | 2.0×10⁻²⁰ | **9.92** | 100.0 | 2.0×10⁻⁹ |
 
 Sign flip across Δω = 0 confirmed: Re χ³(+2γ) < 0 (defocusing), Re χ³(−2γ) > 0 (focusing); Im χ³ > 0
 (two-photon-like loss). **Ranking S4 > S3 > S1 > S2.**
 
 > **Headline caveat.** The data-derived η_geom (0.011–0.044) is **2–10× below** the note's *assumed*
-> η_geom^(1R) ≈ 0.1, so R^(1R) ≈ 0.4–2.5 rather than the note's ~4. The cascade is a **modest** material
-> enhancement for these designs (only S3, S4 beat native Kerr), and — as the note already warns — the
+> η_geom^(1R) ≈ 0.1, so R^(1R) ≈ 1.5–10 rather than the note's ~16. The cascade is a material
+> enhancement of a few to ten for these designs (all four beat native Kerr, S3 and S4 by 7–10×), and — as the note already warns — the
 > single-pass per-photon Kerr phase will be µrad-level. The most *observable* experiments are therefore
 > SHG conversion efficiency, the Re χ³ sign-flip vs detuning, and pulsed saturable absorption, not CW Kerr
 > phase. Quantifying all of these per sample is the next step.

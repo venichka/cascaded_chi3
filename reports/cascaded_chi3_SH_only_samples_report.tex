@@ -53,7 +53,7 @@
 \makeatother
 
 % Path to simulation figures (PDF)
-\graphicspath{{cascaded_chi3/figures/samples/}{cascaded_chi3/figures/}}
+\graphicspath{{../cascaded_chi3/figures/samples/}{../cascaded_chi3/figures/}}
 
 % =====================================================================
 \begin{document}
@@ -78,9 +78,11 @@ dispersion table; the full extraction and consistency checks are documented in
 $\chicasc(\Dom)$ and its sign-flip, the two-photon-like loss, the
 bandwidth-integrated strength, the single-pass Kerr phase, saturable absorption,
 FWM, and SHG conversion --- and locate the optimal operating detuning per sample.
-The headline is that the cascade is a \emph{modest material enhancement}
-($R^{(1\mathrm R)}\!=\!|\chicasc|/\chithree_{\rm native}\!\le\!2.5$, set by an
-overlap $2$--$10\times$ below the value assumed in the note), that no single-pass
+The headline is that the cascade is a \emph{material enhancement of a few to
+ten} ($R^{(1\mathrm R)}\!=\!|\chicasc|/\chithree_{\rm native}\!\approx\!1.5$--$10$,
+limited by an overlap $2$--$10\times$ below the value assumed in the note;
+these values include the October 2026 factor-$4$ correction of the cascaded
+prefactor, \S\ref{sec:spectra}), that no single-pass
 Kerr \emph{device} is observable, and that the highest-leverage design change is
 to raise the nonlinear overlap. All formulae are cross-checked against the
 note and an independent re-derivation (\S\ref{sec:verify}). Absolute magnitudes
@@ -150,10 +152,16 @@ value, sample~2 at $-2\gamma$, is a decimal typo: $0.9000\to0.0900$).
 
 With $\etag(\Dom)$ from the overlap data, the effective susceptibility is
 \begin{equation}
-  \chicasc(\Dom)\;=\;-\,\frac{\omega_1|\chitwo|^2\,\etag(\Dom)}
-                              {6\,n_2^2\,(\Dom+i\gamma_2/2)}\,,
+  \chicasc(\Dom)\;=\;-\,\frac{2\,\omega_1|\chitwo|^2\,\etag(\Dom)}
+                              {3\,n_2^2\,(\Dom+i\gamma_2/2)}\,,
   \label{eq:chi3}
 \end{equation}
+(prefactor $2/3$; earlier versions of this report and of the note used
+$1/6$, which was $4\times$ too small; the derivation and checks are in the
+note, \S5--6).  The single-pass phase, loss and FWM numbers below are
+unchanged by that correction: they were computed with a local-field
+intensity relation that was itself $4\times$ too large, and the two errors
+cancelled.
 the singly-resonant boxed result of the note (Eq.~\texttt{chi3-1R-explicit}).
 
 \begin{figure}[H]
@@ -162,8 +170,9 @@ the singly-resonant boxed result of the note (Eq.~\texttt{chi3-1R-explicit}).
   \caption{Cascaded $\chithree$ versus SH detuning $\Dom/\gamma_2$ for all four
   samples. (a)~$\mathrm{Re}\,\chicasc$ flips sign at $\Dom=0$ (self-focusing for
   $\Dom<0$, defocusing for $\Dom>0$). (b)~$\mathrm{Im}\,\chicasc$ (two-photon-like
-  loss). (c)~$R^{(1\mathrm R)}=|\chicasc|/\chithree_{\rm native}$; only S3, S4
-  clear the native-Kerr line. Dotted: conservative $\Dom=\pm2\gamma_2$.}
+  loss). (c)~$R^{(1\mathrm R)}=|\chicasc|/\chithree_{\rm native}$; all four
+  samples clear the native-Kerr line, S3 and S4 by $7$--$10\times$. Dotted:
+  conservative $\Dom=\pm2\gamma_2$.}
   \label{fig:spectra}
 \end{figure}
 
@@ -194,13 +203,14 @@ into the wings (Fig.~\ref{fig:spectra}c, \ref{fig:optimal}).
 \end{figure}
 
 \paragraph{Ranking.}
-$R^{(1\mathrm R)} =$ S4~$2.49 >$ S3~$1.76 >$ S1~$0.49 >$ S2~$0.39$. Only samples~3
-and 4 exceed native LiNbO$_3$ Kerr. The binding constraint is the overlap:
+$R^{(1\mathrm R)} =$ S4~$9.97 >$ S3~$7.04 >$ S1~$1.98 >$ S2~$1.54$. All four
+exceed native LiNbO$_3$ Kerr; S3 and S4 by a wide margin. The binding constraint is the overlap:
 $\etag=0.011$--$0.044$, a factor $2$--$10$ below the $\sim\!0.1$ assumed in the
 note (\S\ref{sec:rules}, R1).
 
 \paragraph{Bandwidth-integrated strength.}
-Even the best sample sits $\sim\!40$--$100\times$ below bulk PPLN in
+Even the best sample sits $\sim\!10$--$50\times$ below bulk PPLN (depending on the
+bulk bandwidth assumed, $2$--$10$\,THz) in
 $|\chicasc|\!\cdot\!\Delta f$. The metasurface case is chip-scale form factor and
 CW-threshold operation, not raw integrated nonlinear strength.
 
@@ -231,10 +241,10 @@ data-derived $\etag(\Dom)$:
     \toprule
     S & best defocus ($\Dom>0$) & best focus ($\Dom<0$) & gain over $+2\gamma_2$ \\
     \midrule
-    1 & $+5\gamma_2$, $R\,0.67$   & $-5\gamma_2$, $R\,0.55$   & $\times1.35$ (still $<1$) \\
-    2 & $+5\gamma_2$, $R\,0.56$   & $-5\gamma_2$, $R\,0.49$   & $\times1.46$ (still $<1$) \\
-    3 & $+1.9\gamma_2$, $R\,1.76$ & $-4.2\gamma_2$, $R\,1.55$ & $\times1.00$ \\
-    4 & $+3.2\gamma_2$, $R\,2.58$ & $-4.8\gamma_2$, $R\,2.66$ & $\times1.04$ \\
+    1 & $+5\gamma_2$, $R\,2.67$   & $-5\gamma_2$, $R\,2.21$   & $\times1.35$ \\
+    2 & $+5\gamma_2$, $R\,2.24$   & $-5\gamma_2$, $R\,1.94$   & $\times1.45$ \\
+    3 & $+1.9\gamma_2$, $R\,7.05$ & $-4.3\gamma_2$, $R\,6.18$ & $\times1.00$ \\
+    4 & $+3.3\gamma_2$, $R\,10.3$ & $-4.9\gamma_2$, $R\,10.6$ & $\times1.04$ \\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -346,7 +356,8 @@ thickness makes it phase-matching-free (full $\gamma_2$ bandwidth), useful as a
 \paragraph{SHG --- calibration only, not a target.}
 SHG is a $\chitwo$ process and \emph{not} an objective of this $\chithree$ study. We
 use it only because it shares the same overlap and SH resonance: measuring
-$\eta_{\rm SHG}$ ($\sim\!10^{-7}$ at 1\,GW/cm$^2$ baseline) vs.\ detuning and power
+$\eta_{\rm SHG}$ ($\sim\!10^{-7}$--$10^{-6}$ at 1\,GW/cm$^2$ baseline; $2\times$ the
+pre-October-2026 values, after correcting the SH stored-energy bookkeeping) vs.\ detuning and power
 \emph{pins the absolute $\chicasc$ scale} (the normalisation bridge, \S\ref{sec:open})
 and validates the cascade's first ($\chitwo$) step.
 
@@ -357,7 +368,7 @@ A closed-aperture Z-scan at each wavelength reads the sign of $n_2$ from the tra
 ordering --- valley$\to$peak $=$ self-focusing ($n_2\!>\!0$), peak$\to$valley $=$
 defocusing; the cascade is \textbf{odd in $\Dom$} and flips at $\Dom=0$ (Fig.~\ref{fig:spectra}a).
 Native LiNbO$_3$ Kerr is a constant positive background, so a \emph{full} reversal of
-the total $n_2$ needs $R>1$ (S3/S4); regardless, isolate the cascade as the
+the total $n_2$ needs $R>1$ (all four samples; S3/S4 with a wide margin); regardless, isolate the cascade as the
 \textbf{antisymmetric-in-$\Dom$} component. Only $\sim\!1$\,nm of pump tuning spans
 $\pm3\gamma_2$ at $Q_2\!\approx\!5000$. Equivalent probes: SPM/XPM spectral blue/red
 asymmetry, or spectral interferometry for the signed phase.
@@ -377,7 +388,7 @@ asymmetry, or spectral interferometry for the signed phase.
     Effect & Status in SH-only & Observable here? \\
     \midrule
     Sign flip (focus$\leftrightarrow$defocus) & $\chithree$, dispersive shape & \textbf{Yes, qualitatively} (scale-robust) \\
-    $\chicasc$ / $R$ (material)      & material property       & Indirect; S3/S4 only ($R\,1.8$--$2.5$) \\
+    $\chicasc$ / $R$ (material)      & material property       & Indirect; S3/S4 best ($R\,7$--$10$) \\
     Per-photon Kerr phase $\varphi_{\rm NL}$  & single-pass     & Only pulsed, $\sim$mrad; $\ll0.1$\,rad \\
     Saturable absorption $\Delta T/T$ & single-pass Im $\chithree$ & Only pulsed ($\sim\!10^{-3}$) \\
     Broadband FWM                    & single-pass             & Pulsed diagnostic \\
@@ -394,8 +405,9 @@ asymmetry, or spectral interferometry for the signed phase.
 \begin{enumerate}[label=\textbf{R\arabic*.},leftmargin=2.6em]
   \item \textbf{Maximise the nonlinear overlap (dominant, linear lever).}
         $\chicasc\propto\etag=|\text{overlap}|^2$. The samples sit at
-        $|\text{overlap}|\!\approx\!0.10$--$0.21$; reaching $R=4$ at S4's $Q$ needs
-        $|\text{overlap}|\!\approx\!0.26$, $R=10$ needs $\approx\!0.42$. Target
+        $|\text{overlap}|\!\approx\!0.10$--$0.21$; S4 already reaches $R\approx10$ at
+        $|\text{overlap}|\!\approx\!0.21$; at S4's $Q$, $R=20$ needs $\approx\!0.30$ and
+        $R=40$ needs $\approx\!0.42$. Target
         $|\text{overlap}|\!\gtrsim\!0.3$ at the operating detuning via stronger
         qBIC asymmetry (staying absorption-limited, where $|\text{overlap}|^2Q$
         grows with asymmetry), sub-domain (unit-cell) poling of $\chitwo$, or
@@ -438,7 +450,7 @@ prefactor-free identity $\mathrm{Re}/\mathrm{Im}\,\chicasc=-2(\Dom/\gamma_2)$ ho
 exactly; the lineshape matches the dimensionless adiabatic forms of
 \texttt{analytic.py} to $2.5\times10^{-16}$; units reduce to m$^2$/V$^2$
 ($\chicasc$) and rad ($\varphi_{\rm NL}$); and the sample-4 spot value
-$|\chicasc|=4.98\times10^{-21}$, $R=2.49$ was reproduced by hand. The Boyd
+$|\chicasc|=1.99\times10^{-20}$, $R=9.97$ was reproduced by hand. The Boyd
 degeneracy factors (3 for SPM/phase, $2\times$ for loss-vs-phase, cubic pump in
 FWM), the $\eps_0$ cancellation, and the squared overlap in $\etag$ are all
 correct. \textbf{No discrepancies.}

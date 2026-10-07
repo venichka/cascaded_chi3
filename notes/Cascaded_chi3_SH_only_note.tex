@@ -67,7 +67,7 @@ note, so the two boxed results can be compared term by term.
 
 \paragraph{Result preview.}
 The structural form
-$\chithree_{\text{casc}}\sim -\omega_1\,|\chitwo|^{2}\,\eta_\text{geom}/(6\,n_2^{2}\,\Dom)$
+$\chithree_{\text{casc}}\simeq -2\omega_1\,|\chitwo|^{2}\,\eta_\text{geom}/(3\,n_2^{2}\,\Dom)$
 \emph{survives} the loss of the FM resonance.  The geometric overlap
 $\eta_\text{geom}$ takes a different (typically smaller) value, set by how
 well the spatially-uniform incident pump can drive $\f_2$ through
@@ -77,12 +77,17 @@ metasurface, which loses the $Q_1^{2}$ build-up factor that doubly-resonant
 operation provides.  Section~\ref{sec:compare} makes this quantitative.
 
 \paragraph{Conventions.}
-Boyd field convention $\mathcal{E}=\tfrac12(E e^{-i\omega t}+\text{c.c.})$,
-SHG and DFG polarisations with degeneracies $1$ and $2$ respectively, SPM
-with degeneracy $3$, Kleinman symmetry, Brillouin energy normalisation
-$\tfrac12\!\int[\eps_0\epstilde_n|\f_n|^{2}+\mu_0|\h_n|^{2}]\dthreer=1$.
-All identical to the main note's \S 2--\S 3; we use them without further
-comment.  Frequency detuning $\Dom\equiv 2\omega_1-\omega_2$.
+Boyd field convention $\mathcal{E}=E e^{-i\omega t}+\text{c.c.}$ (no
+prefactor $\tfrac12$), SHG and DFG polarisations with degeneracies $1$
+and $2$ respectively, SPM with degeneracy $3$, Kleinman symmetry, Brillouin
+energy normalisation
+$\int[\eps_0\epstilde_n|\f_n|^{2}+\mu_0|\h_n|^{2}]\dthreer=1$, so that
+$|a_n|^2$ is the stored energy and the projection norm
+$N_n\equiv\tfrac12\int[\eps_0\epstilde_n|\f_n|^{2}+\mu_0|\h_n|^{2}]=\tfrac12$.
+All identical to the main note's \S 2--\S 3 (as corrected in October
+2026: an earlier version carried a factor-$4$ error in the cascaded
+prefactor, which this note inherited; see the main note, \S 5).
+Frequency detuning $\Dom\equiv 2\omega_1-\omega_2$.
 
 % =======================================================================
 \section{The FM field without a resonance}\label{sec:Eloc}
@@ -124,9 +129,10 @@ because the depth of the meta-atom is not deep in the quasi-static limit;
 we adopt $1/n_1$ as the conservative default and absorb $\mathcal O(1)$
 shape residuals into $T_\text{geom}$.)  The crucial point is the absence
 of any factor of $Q_1$: the linear FM response is broadband, and a
-plane-wave intensity $I_\text{in}=\tfrac12\eps_0 c n_\text{ext}|E_0|^{2}$
-($n_\text{ext}=1$ in air) translates to local energy density
-$\tfrac12\eps_0 n_1^{2}|\Einc|^{2}\sim T_\text{geom}^{2}\,I_\text{in}/c$
+plane-wave intensity $I_\text{in}=2\eps_0 c n_\text{ext}|E_0|^{2}$
+(Boyd's convention; $n_\text{ext}=1$ in air) translates to local electric
+energy density
+$\eps_0 n_1^{2}|\Einc|^{2}\sim T_\text{geom}^{2}\,I_\text{in}/(2c)$
 inside the dielectric, with no resonant enhancement.
 
 \paragraph{Polarisation pattern.}
@@ -162,19 +168,20 @@ doubly-resonant equation $\dot a_2=(i\Dom-\gamma_2/2)a_2+i\beta a_1^{2}$ is
 that the drive $\hat\beta$ is a c-number set by the incident pump --
 \emph{not} a quadratic function of a dynamical FM amplitude.  Explicitly,
 \begin{equation}
-  \boxed{\;\hat\beta\;=\;\frac{\eps_0\,\omega_1}{4}\!\int_{\VNL}\!
+  \boxed{\;\hat\beta\;=\;\frac{\eps_0\,\omega_1}{N_2}\!\int_{\VNL}\!
                 \chitwo_{ijk}(\ri)\,f_{2,i}^{*}(\ri)\,
                 E_{\text{loc},j}(\ri)\,E_{\text{loc},k}(\ri)\,\dthreer\,,\;}
   \qquad [\text{units}:\ \mathrm{J}^{1/2}\mathrm{s}^{-1}].
   \label{eq:betahat}
 \end{equation}
 This is the singly-resonant analogue of the main note's coupling
-$\beta=(\eps_0\omega_1/4)\!\int\chitwo f_2^{*}f_1 f_1\dthreer$
-(main note Eq.~(beta)).  The prefactor convention $\eps_0\omega_1/4$ is
-inherited from the same Brillouin/projection chain (see main note \S 5);
-factor-of-two ambiguities discussed there propagate identically here, so
-the $\hat\beta\leftrightarrow\beta$ correspondence is exact at the
-prefactor level.
+$\beta=(\eps_0\omega_1/N_2)\!\int\chitwo f_2^{*}f_1 f_1\dthreer$
+(main note Eq.~(beta)); with $N_2=\tfrac12$ the prefactor is
+$2\eps_0\omega_1$.  It follows from the same projection of Maxwell's
+equations onto $\f_2^{*}$ (main note Eq.~(projection)), so the
+$\hat\beta\leftrightarrow\beta$ correspondence is exact at the prefactor
+level.  (An earlier version used $\eps_0\omega_1/4$ at $N_2=1$, which is
+$4\times$ too small.)
 
 \paragraph{Steady-state SH amplitude.}
 Equation~\eqref{eq:a2-1R} is driven at frequency $2\omega_1$ (in the lab
@@ -248,7 +255,7 @@ even without an FM modal description.
 Using \eqref{eq:betahat} in \eqref{eq:Pcasc-1R-raw},
 \begin{multline}
   P_i^{\text{casc}}(\ri,\omega_1)\;=\;
-   -\,\frac{\eps_0^{2}\,\omega_1/2}{\Dom+i\,\gamma_2/2}\,\,
+   -\,\frac{2\eps_0^{2}\,\omega_1/N_2}{\Dom+i\,\gamma_2/2}\,\,
      \chitwo_{ikm}(\ri)\,f_{2,m}(\ri)\,E_{\text{loc},k}^{*}(\ri)\\
    \times\!\int_{\VNL}\!\chitwo_{jpq}(\ri')\,f_{2,j}^{*}(\ri')\,
                     E_{\text{loc},p}(\ri')\,E_{\text{loc},q}(\ri')\,d^{3}r'.
@@ -276,7 +283,7 @@ $\ri'$ integration in \eqref{eq:Pcasc-1R-explicit} produces \emph{one}
 factor of $\widetilde M$ multiplying the local pattern at $\ri$:
 \begin{equation}
   P_i^{\text{casc}}(\ri,\omega_1)\,\hat e_i
-   \;=\;-\,\frac{\eps_0^{2}\,\omega_1/2}{\Dom+i\,\gamma_2/2}\,
+   \;=\;-\,\frac{2\eps_0^{2}\,\omega_1/N_2}{\Dom+i\,\gamma_2/2}\,
         \,\widetilde M\,\,|E_\text{loc}|^{2}\,E_\text{loc}\,
         \,\bigl[\chitwo_{ikm}(\ri)\,f_{2,m}(\ri)\,\hat e_k\,\hat e_i\bigr],
   \label{eq:Pcasc-1R-collected}
@@ -302,7 +309,7 @@ $\hat{\bm e}$:
 \begin{align}
   \int_{\Vunit}\!P_i^{\text{casc}}(\ri,\omega_1)\,\hat e_i\,\dthreer
    &\;=\;
-   -\,\frac{\eps_0^{2}\,\omega_1\,/2}{\Dom+i\,\gamma_2/2}\,
+   -\,\frac{2\eps_0^{2}\,\omega_1/N_2}{\Dom+i\,\gamma_2/2}\,
       \,|\widetilde M|^{2}\,|E_\text{loc}|^{2}\,E_\text{loc}\,,
    \label{eq:Pcasc-1R-integrated}
 \end{align}
@@ -314,20 +321,20 @@ $\overline P^{(3)}_\text{eff}=3\eps_0\,\chicascOneR\,
 filling the same unit cell,
 \begin{equation}
   3\,\eps_0\,\chicascOneR\,|E_\text{loc}|^{2}E_\text{loc}\,\Vunit
-   \;=\;-\,\frac{\eps_0^{2}\,\omega_1\,/2}{\Dom+i\,\gamma_2/2}\,
+   \;=\;-\,\frac{2\eps_0^{2}\,\omega_1/N_2}{\Dom+i\,\gamma_2/2}\,
             \,|\widetilde M|^{2}\,|E_\text{loc}|^{2}E_\text{loc}\,,
 \end{equation}
 and dividing through,
 \begin{equation}
   \boxed{\;\chicascOneR(\omega_1)
-            \;=\;-\,\frac{\eps_0\,\omega_1}{6}\,
+            \;=\;-\,\frac{2\,\eps_0\,\omega_1}{3\,N_2}\,
               \frac{|\widetilde M|^{2}}{(\Dom+i\,\gamma_2/2)\,\Vunit}\,.\;}
   \label{eq:chi3-1R-boxed}
 \end{equation}
 This is the singly-resonant analogue of the doubly-resonant boxed result
 of the main note Eq.~(chi3casc),
 \begin{equation*}
-  \chicascTwoR\;=\;-\,\frac{\eps_0\,\omega_1}{6}\,
+  \chicascTwoR\;=\;-\,\frac{2\,\eps_0\,\omega_1}{3\,N_2}\,
        \frac{|M|^{2}}{(\Dom+i\gamma_2/2)\!\int\!|\f_1|^{4}\dthreer}\,.
 \end{equation*}
 The two formulas have \emph{exactly the same structure}; only the overlap
@@ -340,13 +347,13 @@ and the normalisation volume differ:
 \end{equation}
 
 \paragraph{Scaling out canonical units.}
-Using $|\f_2|^{2}\sim 1/(\eps_0\,n_2^{2}\,\Veff)$ from the Brillouin
-normalisation, $|\widetilde M|^{2}\sim|\chitwo|^{2}\VNL^{2}/(\eps_0 n_2^{2}\Veff)$,
-so $|\widetilde M|^{2}/\Vunit\sim|\chitwo|^{2}\VNL^{2}/(\eps_0 n_2^{2}\Veff\,\Vunit)$.
-Define the singly-resonant geometric overlap
+Using $|\f_2|^{2}\sim 1/(2N_2\,\eps_0\,n_2^{2}\,\Veff)$ from the Brillouin
+normalisation, $|\widetilde M|^{2}/N_2\sim|\chitwo|^{2}\VNL^{2}/(2N_2^2\eps_0 n_2^{2}\Veff)$;
+the combination $|\widetilde M|^2/N_2$ is independent of how $\f_2$ is
+normalised.  Define the singly-resonant geometric overlap
 \begin{equation}
   \eta_\text{geom}^{(1\mathrm R)}
-   \;\equiv\;\frac{|\widetilde M|^{2}}{\Vunit}
+   \;\equiv\;\frac{|\widetilde M|^{2}}{N_2\,\Vunit}
               \cdot\frac{\eps_0\,n_2^{2}}{|\chitwo|^{2}}
    \;\sim\;\frac{\VNL^{2}}{\Veff\,\Vunit}\,,
   \label{eq:eta-1R-def}
@@ -356,15 +363,18 @@ tightly confined to a fully nonlinear meta-atom that fills the unit
 cell), and reduces by the partial-filling factor $\VNL/\Vunit$ when the
 nonlinear region is smaller than the unit cell.  With this definition,
 \begin{equation}
-  \boxed{\;\chicascOneR(\omega_1)\;\sim\;
-        -\,\frac{\omega_1}{6\,n_2^{2}\,\Dom}\,|\chitwo|^{2}\,
+  \boxed{\;\chicascOneR(\omega_1)\;\simeq\;
+        -\,\frac{2\,\omega_1}{3\,n_2^{2}\,\Dom}\,|\chitwo|^{2}\,
         \eta_\text{geom}^{(1\mathrm R)}\,,\;}
   \label{eq:chi3-1R-explicit}
 \end{equation}
 identical in form to the doubly-resonant
-$\chicascTwoR\sim
--\omega_1|\chitwo|^{2}\eta_\text{geom}/(6 n_2^{2}\Dom)$, with the
-geometric overlap reinterpreted.
+$\chicascTwoR\simeq
+-2\omega_1|\chitwo|^{2}\eta_\text{geom}/(3 n_2^{2}\Dom)$, with the
+geometric overlap reinterpreted.  (The value of
+$\eta_\text{geom}^{(1\mathrm R)}$ for given fields is unchanged by the
+October 2026 correction; only the prefactor in front of it moved from
+$1/6$ to $2/3$.)
 
 % =======================================================================
 \section{What changes in $\eta_\text{geom}$}\label{sec:eta-compare}
@@ -484,16 +494,16 @@ $\eta_\text{geom}^{(1\mathrm R)}=0.1$, $|\chitwo|=5\!\times\!10^{-11}\,
 \begin{align}
   |\chicascOneR|
    &\;\simeq\;\frac{\omega_1\,|\chitwo|^{2}\,\eta_\text{geom}^{(1\mathrm R)}}
-                  {12\,n_2^{2}\,\gamma_2}
-   \;=\;\frac{Q_2\,|\chitwo|^{2}\,\eta_\text{geom}^{(1\mathrm R)}}{24\,n_2^{2}}\nonumber\\[2pt]
+                  {3\,n_2^{2}\,\gamma_2}
+   \;=\;\frac{Q_2\,|\chitwo|^{2}\,\eta_\text{geom}^{(1\mathrm R)}}{6\,n_2^{2}}\nonumber\\[2pt]
    &\;\sim\;\frac{4\times 10^{3}\,(5\!\times\!10^{-11})^{2}\,0.1}
-                  {24\,(2.26)^{2}}
-   \;\sim\;8\times 10^{-21}\,\mathrm{m^{2}/V^{2}}\,,
+                  {6\,(2.26)^{2}}
+   \;\sim\;3\times 10^{-20}\,\mathrm{m^{2}/V^{2}}\,,
 \end{align}
-i.e.\ about $4\times$ the native LiNbO$_3$ Kerr $\chithree\sim
-2\times 10^{-21}\,\mathrm{m^{2}/V^{2}}$.  Still a real enhancement at the
+i.e.\ about $16\times$ the native LiNbO$_3$ Kerr $\chithree\sim
+2\times 10^{-21}\,\mathrm{m^{2}/V^{2}}$.  A real enhancement at the
 \emph{material} level.  The doubly-resonant case at the same conditions
-gave $|\chicascTwoR|\sim 2\!\times\!10^{-20}\,
+gives $|\chicascTwoR|\sim 1\!\times\!10^{-19}\,
 \mathrm{m^{2}/V^{2}}$ (main note \S 10), a factor $\sim 3$ larger as
 expected from \eqref{eq:chi3-ratio}.
 
@@ -534,15 +544,15 @@ using the SVEA relation
 $d\varphi/dz=(\omega_1/(2 n_1 c))\cdot 3\,\chithree |E|^{2}$.
 Substituting
 \begin{equation*}
-  |E_\text{loc}|^{2}\;=\;\frac{2\,T_\text{geom}^{2}\,P_\text{in}}
-                              {\eps_0\,c\,n_1^{2}\,A_\text{cell}}
+  |E_\text{loc}|^{2}\;=\;\frac{T_\text{geom}^{2}\,P_\text{in}}
+                              {2\,\eps_0\,c\,n_1^{2}\,A_\text{cell}}
 \end{equation*}
 from \eqref{eq:Eloc-magnitude}, with $|s_+|^{2}=P_\text{in}$ the incident
 power per unit cell,
 \begin{equation}
   \varphi_\text{NL}^{(1\mathrm R)}
    \;\sim\;\frac{3\,\omega_1\,L_\text{meta}\,T_\text{geom}^{2}}
-               {\eps_0\,c^{2}\,n_1^{3}\,A_\text{cell}}\,
+               {4\,\eps_0\,c^{2}\,n_1^{3}\,A_\text{cell}}\,
            \chicascOneR\,|s_+|^{2}\,.
   \label{eq:phi-1R-pow}
 \end{equation}
@@ -564,9 +574,13 @@ For $Q_1=10^{3}$ (a modest qBIC), $\lambda_1=1.55\,\mu$m,
 $L_\text{meta}=400$\,nm, so $\omega_1 L_\text{meta}/c=2\pi
 L_\text{meta}/\lambda_1\simeq 1.62$ and the second factor is
 $(Q_1/1.62)^{2}\!\simeq\!3.8\!\times\!10^{5}$; with the geometry factor
-$\sim 3$ in front, $\varphi^{(2\mathrm R)}/\varphi^{(1\mathrm R)}\sim
-10^{6}$.  Equivalently, to reach the same nonlinear phase the
-singly-resonant metasurface needs $\sim 10^{6}\times$ more incident power.
+$\sim 3$ in front, and the $\mathcal O(1)$ prefactor
+$8\zeta_1V_\text{cell}/(n_1T_\text{geom}^2V_\text{eff})\approx 3.6$ that
+the scaling form \eqref{eq:phi-ratio} omits ($V_\text{eff}\approx
+V_\text{cell}$, $\zeta_1\approx1$),
+$\varphi^{(2\mathrm R)}/\varphi^{(1\mathrm R)}\sim 4\times10^{6}$.
+Equivalently, to reach the same nonlinear phase the singly-resonant
+metasurface needs $\sim 10^{6}$--$10^{7}\times$ more incident power.
 
 \paragraph{Why the gap is so large.}
 The cascade kernel $\chitwo G(2\omega_1)\chitwo$ is enhanced by the SH
@@ -590,7 +604,7 @@ the 1R case.
   \midrule
   SPM phase per photon
    & $\propto Q_1^{2}$
-   & $\sim 10^{-6}\times$ 2R; usable only at high peak power \\[2pt]
+   & $\sim 10^{-7}$--$10^{-6}\times$ 2R; usable only at high peak power \\[2pt]
   Cascaded Im $\chithree$ (saturable absorber)
    & $\propto Q_1^{2}$ (per photon)
    & survives as a material property; observable contrast tiny \\[2pt]
@@ -613,7 +627,7 @@ the 1R case.
 Observables that need an FM-resonance feedback loop (bistability, AM
 modulator, frequency-selective FWM) \emph{die} qualitatively; observables
 that depend only on the material $\chithree_\text{casc}$ (SPM phase,
-Im $\chithree$, broadband cascaded FWM) survive but with the $\sim 10^{6}$
+Im $\chithree$, broadband cascaded FWM) survive but with the $\sim 10^{6}$--$10^{7}$
 suppression of \eqref{eq:phi-ratio}.  The metasurface is then competing
 with bulk PPLN on raw nonlinear strength, not on the per-photon-phase axis
 where doubly-resonant cascading shines.
@@ -639,8 +653,8 @@ $R\equiv|\chicascTwoR|/|\chithree_\text{native}|$ as
   R^{(1\mathrm R)}\;\equiv\;\bigl|\chicascOneR\bigr|/\bigl|\chithree_\text{native}\bigr|\,.
 \end{equation*}
 For the LiNbO$_3$ design point of \S\ref{sec:numbers},
-$R^{(1\mathrm R)}\!\approx\!4$ vs.\ $R\!\approx\!12$ (both with
-$\eta_\text{geom}$-dependent prefactor uncertainty); the ratio
+$R^{(1\mathrm R)}\!\approx\!16$ vs.\ $R\!\approx\!49$ (both linear in
+their respective $\eta_\text{geom}$, which is the dominant uncertainty); the ratio
 $R^{(1\mathrm R)}/R\approx\eta_\text{geom}^{(1\mathrm R)}/\eta_\text{geom}\sim 1/3$.
 
 For each item we state the 2R result, give the 1R analogue, quote the
@@ -661,10 +675,10 @@ $\chithree_\text{eff}=\chithree_\text{native}+\chicascOneR$ and the same
 architecture form
 $(\varphi^\text{A+B}/\varphi^\text{A})^{(1\mathrm R)}=1+R^{(1\mathrm R)}$.
 Configuration ratio
-$\varphi^{(2\mathrm R)}/\varphi^{(1\mathrm R)}\!\sim\!10^{6}$ from
+$\varphi^{(2\mathrm R)}/\varphi^{(1\mathrm R)}\!\sim\!4\times10^{6}$ from
 \eqref{eq:phi-ratio}.
-\textbf{Architecture lever survives ($1+R^{(1\mathrm R)}\!\sim\!5$ vs.\
-$1+R\!\sim\!13$); absolute per-photon phase $Q_1^{2}$-suppressed and
+\textbf{Architecture lever survives ($1+R^{(1\mathrm R)}\!\sim\!17$ vs.\
+$1+R\!\sim\!50$); absolute per-photon phase $Q_1^{2}$-suppressed and
 unobservable at CW (see N3 of \S\ref{sec:numbers}).}
 
 \paragraph{2. Cross-phase modulation (XPM).}
@@ -792,12 +806,12 @@ giving sensor sensitivity
 $|d\varphi_\text{NL}/d\Dom|=32|s_+|^{2}|\beta|^{2}/(\gamma_1^{2}\gamma_2^{2})\propto Q_1^{2}Q_2^{2}$
 (main note \S 12 item 8); shot-noise-limited FoM
 slope$/\sqrt{\gamma_3^\text{eff}}\propto Q_2^{3/2}$.
-1R: differentiating $\chicascOneR=-\eps_0\omega_1|\widetilde M|^{2}/[6(\Dom+i\gamma_2/2)\Vunit]$,
+1R: differentiating $\chicascOneR=-2\eps_0\omega_1|\widetilde M|^{2}/[3N_2(\Dom+i\gamma_2/2)\Vunit]$,
 \begin{equation}
   \left|\frac{d\chicascOneR}{d\Dom}\right|_{\Dom=0}
-   \;=\;\frac{\eps_0\,\omega_1\,|\widetilde M|^{2}}{6\,(\gamma_2/2)^{2}\,\Vunit}
+   \;=\;\frac{2\,\eps_0\,\omega_1\,|\widetilde M|^{2}}{3\,N_2\,(\gamma_2/2)^{2}\,\Vunit}
    \;=\;\frac{2\,Q_2^{2}\,|\chitwo|^{2}\,\eta_\text{geom}^{(1\mathrm R)}}
-              {3\,\omega_2^{2}\,n_2^{2}}
+              {3\,\omega_1\,n_2^{2}}
    \;\propto\;Q_2^{2}\,,
   \label{eq:sensor-1R-slope}
 \end{equation}
@@ -897,14 +911,14 @@ sweep; in particular, there is no FM resonance to fall off.  This is
 $\gamma_1$.
 
 \textbf{Two-photon-like loss.}
-$\mathrm{Im}\,\chicascOneR\propto-(\gamma_2/2)/
+$\mathrm{Im}\,\chicascOneR\propto(\gamma_2/2)/
 (\Dom^{2}+\gamma_2^{2}/4)$ peaks at $\Dom=0$ with the same Lorentzian
 profile as in 2R.  Setting $\Dom=0$ in \eqref{eq:chi3-1R-boxed} and using
-$|\widetilde M|^{2}/\Vunit=\eta_\text{geom}^{(1\mathrm R)}|\chitwo|^{2}/(\eps_0 n_2^{2})$
+$|\widetilde M|^{2}/(N_2\Vunit)=\eta_\text{geom}^{(1\mathrm R)}|\chitwo|^{2}/(\eps_0 n_2^{2})$
 together with $\omega_1/\gamma_2=Q_2/2$,
 \begin{equation}
   \mathrm{Im}\,\chicascOneR\bigl|_{\Dom=0}
-   \;=\;\frac{Q_2\,|\chitwo|^{2}\,\eta_\text{geom}^{(1\mathrm R)}}{6\,n_2^{2}}\,,
+   \;=\;\frac{2\,Q_2\,|\chitwo|^{2}\,\eta_\text{geom}^{(1\mathrm R)}}{3\,n_2^{2}}\,,
   \label{eq:Im-chi3-1R}
 \end{equation}
 in $\mathrm{m^{2}/V^{2}}$, of the same magnitude as the doubly-resonant
@@ -915,7 +929,7 @@ Section~\ref{sec:compare}, requires extreme pump intensities.
 
 \textbf{Sum rule (modified).}  The doubly-resonant sum rule
 $|\chithree_\text{casc}|_\text{max}\!\times\!\Delta f\!\lesssim\!
-\omega_1|\chitwo|^{2}\eta_\text{geom}/(12\pi n_2^{2})$ generalises with
+\omega_1|\chitwo|^{2}\eta_\text{geom}/(3\pi n_2^{2})$ generalises with
 $\eta_\text{geom}\to\eta_\text{geom}^{(1\mathrm R)}$; the $Q_2$-independent
 peak$\times$bandwidth product survives because it is an SH-resonance
 property only.  The frequency-domain bandwidth at the design point is
@@ -939,11 +953,11 @@ From \eqref{eq:chi3-1R-explicit},
 \begin{equation}
   |\chicascOneR|
    \;\sim\;\frac{\omega_1\,|\chitwo|^{2}\,\eta_\text{geom}^{(1\mathrm R)}}
-                  {12\,n_2^{2}\,\gamma_2}
-   \;=\;\frac{Q_2}{24\,n_2^{2}}\,|\chitwo|^{2}\,\eta_\text{geom}^{(1\mathrm R)}
-   \;\simeq\;8\!\times\!10^{-21}\,\mathrm{m^{2}/V^{2}}\,,
+                  {3\,n_2^{2}\,\gamma_2}
+   \;=\;\frac{Q_2}{6\,n_2^{2}}\,|\chitwo|^{2}\,\eta_\text{geom}^{(1\mathrm R)}
+   \;\simeq\;3.3\!\times\!10^{-20}\,\mathrm{m^{2}/V^{2}}\,,
 \end{equation}
-a factor of $\sim 4$ above bulk LiNbO$_3$ Kerr, factor of $\sim 3$ below
+a factor of $\sim 16$ above bulk LiNbO$_3$ Kerr, factor of $\sim 3$ below
 the 2R prediction.
 
 \paragraph{Per-photon nonlinear phase.}
@@ -952,13 +966,19 @@ From \eqref{eq:phi-1R-pow} with $|s_+|^{2}=P_\text{in}=1\,$mW per unit cell
 benchmarking):
 \begin{equation}
   \varphi_\text{NL}^{(1\mathrm R)}
-   \;\sim\;\frac{3\,\omega_1\,L_\text{meta}}{\eps_0\,c^{2}\,n_1^{3}\,A_\text{cell}}\,
+   \;\sim\;\frac{3\,\omega_1\,L_\text{meta}}{4\,\eps_0\,c^{2}\,n_1^{3}\,A_\text{cell}}\,
             \chicascOneR\,P_\text{in}
    \;\sim\;5\!\times\!10^{-9}\,\text{rad}.
 \end{equation}
-Compare with the doubly-resonant case at the same per-cell power and
-$Q_1=10^{3}$: $\varphi_\text{NL}^{(2\mathrm R)}\sim 8\!\times\!10^{-3}\,$rad.
-Ratio $\sim 1.6\!\times\!10^{6}$, consistent with \eqref{eq:phi-ratio}.
+(This value is unchanged by the October 2026 correction: the factor $4$
+in $\chicascOneR$ is compensated by the Boyd-convention
+$|E_\text{loc}|^2$, which is $4\times$ smaller than the value used
+before.)  Compare with the doubly-resonant case at the same per-cell
+power and $Q_1=10^{3}$, from $\varphi^{(2\mathrm R)}=8|\beta|^2|s_+|^2/(\gamma_1^2\Dom)$
+with $\eta_\text{geom}=0.3$, $V_\text{eff}=V_\text{cell}$ and $\zeta_1=1$:
+$\varphi_\text{NL}^{(2\mathrm R)}\sim 2\!\times\!10^{-2}\,$rad.
+Ratio $\sim 4\!\times\!10^{6}$, consistent with \eqref{eq:phi-ratio}
+including its $\mathcal O(1)$ prefactor.
 
 \paragraph{Damage threshold check.}
 To reach $0.1$\,rad in 1R requires $P_\text{in}\sim 0.1/(5\!\times\!10^{-9})
@@ -980,13 +1000,13 @@ $|\chithree|\!\cdot\!\Delta f$.}
 At $\Delta f\sim\gamma_2/(2\pi)\simeq 97\,$GHz,
 \begin{equation}
   |\chicascOneR|\cdot\Delta f
-   \;\sim\;8\!\times\!10^{-21}\cdot 9.7\!\times\!10^{10}
-   \;\sim\;7.7\!\times\!10^{-10}\,\mathrm{m^{2}\,Hz/V^{2}}\,.
+   \;\sim\;3.3\!\times\!10^{-20}\cdot 9.7\!\times\!10^{10}
+   \;\sim\;3.2\!\times\!10^{-9}\,\mathrm{m^{2}\,Hz/V^{2}}\,.
 \end{equation}
 Bulk PPLN at conservative parameters gives
 $|\chithree_\text{casc,bulk}|\cdot\Delta f\sim 2\!\times\!10^{-8}\,
 \mathrm{m^{2}\,Hz/V^{2}}$ (main note \S 10, after the 2026-05 $1/n_2$
-correction; cm path length).  The 1R metasurface is a factor $\sim 30$
+correction; cm path length).  The 1R metasurface is a factor $\sim 6$
 \emph{below} bulk PPLN in this benchmark -- a gap that the doubly-resonant
 case can only \emph{partially} close (factor $\sim 3$ from $\eta_\text{geom}$).
 The metasurface's value proposition with one resonance only is therefore
@@ -1000,10 +1020,10 @@ $|\chithree|\!\cdot\!\Delta f$ competitiveness.
 \begin{equation*}
   \boxed{\;
    \chicascOneR(\omega_1)
-    \;=\;-\,\frac{\eps_0\,\omega_1}{6}\,
+    \;=\;-\,\frac{2\,\eps_0\,\omega_1}{3\,N_2}\,
          \frac{|\widetilde M|^{2}}{(\Dom+i\,\gamma_2/2)\,\Vunit}
-    \;\sim\;-\,\frac{\omega_1\,|\chitwo|^{2}\,\eta_\text{geom}^{(1\mathrm R)}}
-                    {6\,n_2^{2}\,\Dom}\,,
+    \;\simeq\;-\,\frac{2\,\omega_1\,|\chitwo|^{2}\,\eta_\text{geom}^{(1\mathrm R)}}
+                    {3\,n_2^{2}\,\Dom}\,,
    \;}
 \end{equation*}
 with the singly-resonant SHG overlap and geometric factor
@@ -1012,9 +1032,12 @@ with the singly-resonant SHG overlap and geometric factor
     \hat e_j\,\hat e_k\,\dthreer,
   \qquad
   \eta_\text{geom}^{(1\mathrm R)}\;\equiv\;\frac{|\widetilde M|^{2}\,\eps_0\,n_2^{2}}
-                                          {\Vunit\,|\chitwo|^{2}}
-  \;\sim\;0.05\!-\!0.2\,.
+                                          {N_2\,\Vunit\,|\chitwo|^{2}}
+  \;\sim\;0.05\!-\!0.2\,,
 \end{equation*}
+with $N_2=\tfrac12$ the projection norm of the energy-normalised SH mode
+(the prefactor $2/3$ replaces the $1/6$ of earlier versions, which was
+$4\times$ too small; see the main note, \S 5).
 
 \paragraph{Comparison table.}
 \begin{center}\small
@@ -1030,17 +1053,17 @@ with the singly-resonant SHG overlap and geometric factor
    & $\Vunit$ \\[2pt]
   Geometric overlap $\eta_\text{geom}$
    & $\widetilde\eta^{2}/\zeta_1\sim 0.1\!-\!0.5$
-   & $|\widetilde M|^{2}\eps_0 n_2^{2}/(\Vunit|\chitwo|^{2})\sim 0.05\!-\!0.2$ \\[2pt]
+   & $|\widetilde M|^{2}\eps_0 n_2^{2}/(N_2\Vunit|\chitwo|^{2})\sim 0.05\!-\!0.2$ \\[2pt]
   Structural form of $\chicasc$
-   & \multicolumn{2}{p{0.66\linewidth}}{\quad identical: $-\,\omega_1|\chitwo|^{2}\eta_\text{geom}/(6 n_2^{2}\Dom)$} \\[2pt]
+   & \multicolumn{2}{p{0.66\linewidth}}{\quad identical: $-\,2\omega_1|\chitwo|^{2}\eta_\text{geom}/(3 n_2^{2}\Dom)$} \\[2pt]
   Sign tunability by $\Dom$
    & yes
    & yes (broader tuning window) \\[2pt]
   Two-photon-like loss
-   & $\propto Q_2/(12 n_2^{2})$ at $\Dom=0$
+   & $2Q_2|\chitwo|^2\eta_\text{geom}/(3 n_2^{2})$ at $\Dom=0$
    & same prefactor with $\eta\to\eta^{(1\mathrm R)}$ \\[2pt]
   Sum rule $|\chicasc|\!\cdot\!\Delta f$
-   & $\sim\omega_1|\chitwo|^{2}\eta_\text{geom}/(12\pi n_2^{2})$
+   & $\sim\omega_1|\chitwo|^{2}\eta_\text{geom}/(3\pi n_2^{2})$
    & same with $\eta\to\eta^{(1\mathrm R)}$ \\[2pt]
   Per-photon $\varphi_\text{NL}$
    & $\propto Q_1^{2}\cdot Q_2$
@@ -1048,9 +1071,9 @@ with the singly-resonant SHG overlap and geometric factor
   Bistability, AM modulator
    & yes
    & no \\[2pt]
-  $|\chicasc|\!\cdot\!\Delta f$ vs.\ bulk PPLN
-   & factor $\sim 0.05$ (PPLN wins by $\sim 20\times$)
-   & factor $\sim 0.03$ (PPLN wins by $\sim 30\times$) \\
+  $|\chicasc|\!\cdot\!\Delta f$ vs.\ bulk PPLN ($2\!\times\!10^{-8}$, \S\ref{sec:numbers})
+   & factor $\sim 0.5$ (PPLN wins by $\sim 2\times$)
+   & factor $\sim 0.16$ (PPLN wins by $\sim 6\times$) \\
   \bottomrule
 \end{tabular}
 \end{center}
@@ -1082,9 +1105,9 @@ $P^{(2)}(\ri,2\omega_1)=\eps_0\chitwo\,E(\ri,\omega_1)\,E(\ri,\omega_1)$
 onto $\f_2^{*}$, with the \emph{local FM field} substituted for
 $E(\ri,\omega_1)$.  In the 1R case that field is $E_\text{loc}\,\hat{\bm e}$
 (uniform c-number, magnitude scaled out as $E_\text{loc}^{2}$ outside the
-integral), giving $\hat\beta=(\eps_0\omega_1/4)\,E_\text{loc}^{2}\widetilde M$;
+integral), giving $\hat\beta=(\eps_0\omega_1/N_2)\,E_\text{loc}^{2}\widetilde M$;
 in the 2R case it is $a_1\f_1(\ri)$ (modal, amplitude scaled out as
-$a_1^{2}$ outside), giving $\beta a_1^{2}=(\eps_0\omega_1/4)\,a_1^{2}M$.
+$a_1^{2}$ outside), giving $\beta a_1^{2}=(\eps_0\omega_1/N_2)\,a_1^{2}M$.
 
 Identifying $E_\text{loc}^{2}\leftrightarrow a_1^{2}$ and
 $\hat{\bm e}\hat{\bm e}\leftrightarrow\f_1(\ri)\f_1(\ri)/[\f_1\text{-normalisation}]$
@@ -1094,11 +1117,11 @@ $\Vunit$ in the cascade-back-projection denominator of
 $\int|\f_1|^{4}\dthreer$, the structural form
 \begin{equation*}
   \chicascOneR\;\longleftrightarrow\;
-   -\,\frac{\eps_0\,\omega_1}{6}\,
+   -\,\frac{2\,\eps_0\,\omega_1}{3\,N_2}\,
    \frac{|M|^{2}}{(\Dom+i\gamma_2/2)\!\int\!|\f_1|^{4}\dthreer}
    \;=\;\chicascTwoR\,,
 \end{equation*}
-matches the main note Eq.~(chi3casc).  The prefactor $\eps_0\omega_1/6$
+matches the main note Eq.~(chi3casc).  The prefactor $2\eps_0\omega_1/3N_2$
 and the denominator structure $\Dom+i\gamma_2/2$ are common to the two
 cases; what transforms together is the choice of \emph{local-FM-field
 parameterisation} (uniform-pump c-number vs.\ modal amplitude) and the

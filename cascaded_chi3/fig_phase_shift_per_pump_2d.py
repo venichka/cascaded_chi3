@@ -43,12 +43,12 @@ FIG_DIR = HERE / "figures"
 
 def enhancement(Q2, host, eta=ETA_GEOM):
     """R = |chi3_casc|/|chi3_native| at Delta omega = 2 gamma_2."""
-    return (Q2 / (24.0 * host["n"] ** 2)) * eta * host["chi2"] ** 2 / host["chi3"]
+    return (Q2 / (6.0 * host["n"] ** 2)) * eta * host["chi2"] ** 2 / host["chi3"]
 
 
 def Q2_crossover(host, eta=ETA_GEOM):
     """Q_2 at which R = 1, at Delta omega = 2 gamma_2."""
-    return 24.0 * host["n"] ** 2 * host["chi3"] / (eta * host["chi2"] ** 2)
+    return 6.0 * host["n"] ** 2 * host["chi3"] / (eta * host["chi2"] ** 2)
 
 
 def phi_cascade_grid(Q1_grid, Q2_grid, host):

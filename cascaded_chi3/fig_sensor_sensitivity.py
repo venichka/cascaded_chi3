@@ -27,7 +27,7 @@ cost of operating at Delta omega = 0, where the cascaded TPA peaks --
 practical sensors bias a few gamma_2 off-resonance, picking up an O(1)
 slope reduction in exchange for TPA suppression by 1/Delta omega^2.
 
-Three panels (layout from alternative_chi3/G2_B6, but with physical
+Three panels (layout from archive/alternative_chi3/G2_B6, but with physical
 Q_2 units in panel (b) for experimentalists):
 
   (a) d alpha_3^casc / d Delta omega vs Delta omega / gamma_2: clean

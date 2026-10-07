@@ -97,10 +97,13 @@ def main():
     # configuration): combined alpha_3^eff = alpha_3 + alpha_3^casc, and
     # FWM ~ |alpha_3^eff|^2 gives the clean (1+R)^2 ratio rather than the
     # cancellation case |1-R|^2.
-    # alpha_3 = 0.04 = LiNbO3 native chi^(3) in dim. TCMT units
+    # alpha_3 = 0.0096 = LiNbO3 native chi^(3) in dim. TCMT units
     # at the conservative design point |Delta omega| = 2 gamma_2,
-    # Q_2 = 4000 -- yields full-Lorentzian R = 0.471/0.04 = 11.8 ~ 12.
-    base = dict(gamma1=10.0, gamma1_rad=5.0, alpha3=0.04, delta1=0.0)
+    # Q_2 = 4000 -- yields full-Lorentzian R = 0.471/0.0096 = 49.
+    # 2026-10-06: recalibrated to the corrected worked example. With the
+    # corrected prefactor |chi3_casc| = Q_2/(6 n_2^2) eta |chi2|^2 at Delta omega
+    # = 2 gamma_2, R = 49 for LiNbO3 (was 12); alpha_3_native = 0.471/49 = 0.0096.
+    base = dict(gamma1=10.0, gamma1_rad=5.0, alpha3=0.0096, delta1=0.0)
 
     p_nat = TCMTParams(Domega=-2.0, beta=0.0, **base)
     p_cas = TCMTParams(Domega=-2.0, beta=1.0, **base)
@@ -120,8 +123,8 @@ def main():
         eta_nat[i] = abs(idler_n) ** 2 / s_s ** 2
         eta_cas[i] = abs(idler_c) ** 2 / s_s ** 2
 
-    # Predicted ratio: (1+R)^2 with R = 12 -> 13^2 = 169
-    R_predicted = 12
+    # Predicted ratio: (1+R)^2 with R = 49 -> 50^2 = 2500
+    R_predicted = 49
     ratio_predicted = (1 + R_predicted) ** 2
 
     fig, axs = plt.subplots(1, 2, figsize=(12.0, 4.7))
@@ -160,8 +163,8 @@ def main():
 
     fig.suptitle(
         r"FWM efficiency: cascade outperforms native by $(1+R)^{2}$"
-        r" -- $\Omega/\gamma_2 = 0.5$, $\widetilde{\alpha}_3 = +0.04$, "
-        r"$\Delta\omega = -2\gamma_2$ (constructive; $R\simeq 12$)",
+        r" -- $\Omega/\gamma_2 = 0.5$, $\widetilde{\alpha}_3 = +0.0096$, "
+        r"$\Delta\omega = -2\gamma_2$ (constructive; $R\simeq 49$)",
         fontsize=11.5, y=1.00,
     )
     fig.tight_layout()

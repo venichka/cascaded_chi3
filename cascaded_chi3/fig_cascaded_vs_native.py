@@ -5,13 +5,13 @@ operating point Delta omega = 2 gamma_2 (= 4 omega_1 / Q_2, since
 gamma_2 = omega_2/Q_2 = 2 omega_1/Q_2). For materials with chi^(2) != 0
 (non-centrosymmetric, cascade available) the simple-form ratio is
 
-    R(Q_2) = (Q_2 / (24 n_2^2)) * eta_geom * |chi^(2)|^2 / chi^(3)_native
+    R(Q_2) = (Q_2 / (6 n_2^2)) * eta_geom * |chi^(2)|^2 / chi^(3)_native
 
 grows linearly with Q_2 and crosses unity at
 
-    Q_2^crossover = (24 n_2^2 chi^(3)_native) / (|chi^(2)|^2 eta_geom).
+    Q_2^crossover = (6 n_2^2 chi^(3)_native) / (|chi^(2)|^2 eta_geom).
 
-The factor 1/24 comes from omega_1/Delta omega = Q_2/4 at this operating
+The factor 1/6 (= 2/3 x 1/4; prefactor corrected 2026-10-06, was 1/24) comes from omega_1/Delta omega = Q_2/4 at this operating
 point. (The often-quoted factor 1/12 corresponds to Delta omega ~ gamma_2,
 i.e. the edge of adiabatic validity, doubling R but coinciding with the
 peak of the cascaded TPA Lorentzian -- not a safe operating point.)
@@ -40,12 +40,12 @@ FIG_DIR = HERE / "figures"
 
 def enhancement(Q2: float, host: dict, eta: float = ETA_GEOM) -> float:
     """R at Delta omega = 2 gamma_2 (factor 24 in the prefactor)."""
-    return (Q2 / (24.0 * host["n"] ** 2)) * eta * host["chi2"] ** 2 / host["chi3"]
+    return (Q2 / (6.0 * host["n"] ** 2)) * eta * host["chi2"] ** 2 / host["chi3"]
 
 
 def Q2_crossover(host: dict, eta: float = ETA_GEOM) -> float:
     """Q_2 at which R = 1, at the same conservative operating point."""
-    return 24.0 * host["n"] ** 2 * host["chi3"] / (eta * host["chi2"] ** 2)
+    return 6.0 * host["n"] ** 2 * host["chi3"] / (eta * host["chi2"] ** 2)
 
 
 def main():
@@ -74,17 +74,20 @@ def main():
             ax.plot([Q2_x], [1.0], "v", color=host["color"], ms=9, mec="k",
                     mew=0.8)
             x_text = Q2_x * 1.25 if Q2_x < 1e5 else Q2_x * 0.06
+            # stagger labels: after the 2026-10 prefactor correction GaP, AlN
+            # and GaAs cross within a factor 1.6 of each other
+            y_text = {"AlN": 0.08, "GaAs": 0.035}.get(name, 0.2)
             ax.annotate(rf"$Q_2^{{\rm x}} \approx {Q2_x:.0f}$",
-                        xy=(Q2_x, 1.0), xytext=(x_text, 0.2),
+                        xy=(Q2_x, 1.0), xytext=(x_text, y_text),
                         fontsize=9, color=host["color"])
 
-    # Inversion-symmetric: annotation in the lower-right (data-free zone)
+    # Inversion-symmetric: annotation in the upper-left (data-free zone)
     if inv_sym_hosts:
         text = (r"Inversion-symmetric ($\chi^{(2)} \equiv 0$):" + "\n  "
                 + ", ".join(n for n, _ in inv_sym_hosts)
                 + "\n  cascade unavailable;" + "\n  native-Kerr only.")
-        ax.text(0.97, 0.04, text, transform=ax.transAxes,
-                fontsize=9, color="0.25", ha="right", va="bottom",
+        ax.text(0.03, 0.96, text, transform=ax.transAxes,
+                fontsize=9, color="0.25", ha="left", va="top",
                 bbox=dict(facecolor="white", edgecolor="0.7",
                           boxstyle="round,pad=0.35"))
 

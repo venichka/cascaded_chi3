@@ -26,7 +26,7 @@ a fixed, material-determined recovery time.  The trade-off is that
 cascaded SA requires a chi^(2)-active substrate and double-resonance
 fabrication.
 
-Three panels (layout from alternative_chi3/G2_B4):
+Three panels (layout from archive/alternative_chi3/G2_B4):
 
   (a) Cascade Kerr and TPA coefficients vs Delta omega / gamma_2.
       Both on the same axes, with the TPA peak at zero and the Kerr
@@ -91,7 +91,7 @@ def transmission_attractor(p: TCMTParams, s_p: float,
 def main():
     # FM cavity: over-coupled (gamma_1_rad = gamma_1, no intrinsic loss).
     # This makes the LINEAR-cavity transmission T_lin = 1 on resonance,
-    # matching the conventional SA convention used in alternative_chi3/G2_B4:
+    # matching the conventional SA convention used in archive/alternative_chi3/G2_B4:
     # adding cascade TPA pulls T DOWN from 1 toward critical coupling,
     # which is the conventional "intensity-dependent loss" picture.
     gamma_1 = 1.0

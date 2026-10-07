@@ -1,5 +1,7 @@
 # Cascaded $\chi^{(2)}{:}\chi^{(2)} \to \chi^{(3)}_\text{eff}$ in a Doubly-Resonant Dielectric Metasurface
 
+> **Out of date (noted 2026-10-06).** This Markdown rendering is an April 2026 snapshot. It predates the May 2026 review fixes and the October 2026 correction of the cascaded prefactor, under which $\beta$, $\alpha_3$ and the boxed $\chi^{(3)}_\text{casc}$ (and every enhancement ratio $R$) were $4\times$ too small. The boxed formulas and numbers below are superseded: the correct result is $\chi^{(3)}_\text{casc}\simeq-2\omega_1|\chi^{(2)}|^2\eta_\text{geom}/(3n_2^2\Delta\omega)$. `Cascaded_chi3_metasurface_note.tex` (14 sections) is authoritative; see also `paper/checks/PREFACTOR.md`.
+
 ## 1. Setting and goal
 
 The objective is to engineer a metasurface whose effective third-order nonlinear susceptibility, *driven only at the fundamental frequency* $\omega_1$, exceeds the bulk $\chi^{(3)}$ of the constituent material by orders of magnitude. The mechanism is the well-known *cascade* of two $\chi^{(2)}$ processes: $\omega_1+\omega_1\to 2\omega_1$ followed by $2\omega_1-\omega_1\to\omega_1$. When the second-harmonic (SH) channel is *off-resonant* (or phase-mismatched), the SH amplitude follows the fundamental adiabatically and its back-action produces a Kerr-like response on the fundamental [Ostrovskii 1967; DeSalvo *et al.* 1992; Stegeman *et al.* 1996].

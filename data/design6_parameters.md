@@ -3,7 +3,7 @@
 **Source deliverables** (received 2026-07-13, in `data/`): `design6.mat` (COMSOL spectra) and
 `design6.pptx` ("Design 6 — by Dee & Yajun", updated 2026-07-06). This file is the single
 authoritative, cross-checked parameter set for the SH-only cascaded-χ³ simulations of
-`Cascaded_chi3_SH_only_note.tex`. Every number is reproduced/verified by the promoted code
+`notes/Cascaded_chi3_SH_only_note.tex`. Every number is reproduced/verified by the promoted code
 `cascaded_chi3/design6_params.py` (extraction + verification report) and the observable suite
 `cascaded_chi3/design6_effects.py` (figures → `cascaded_chi3/figures/design6/`); the
 full-precision frequency sweep is in the companion `data/design6_spectrum.csv` (14 cols, 61
@@ -200,7 +200,8 @@ Items 3 and 5 are now resolved (3 by an effective-medium estimate, 5 by the expe
 
 ## 9. Derived outputs — the observable suite (`design6_effects.py`, C_bridge = 1)
 
-From `chi3_casc(Δω) = −ω₁|χ⁽²⁾|² η_geom / [6 n₂² (Δω + iγ₂/2)]` with the hybrid `n₂_eff = 2.177`.
+From `chi3_casc(Δω) = −2ω₁|χ⁽²⁾|² η_geom / [3 n₂² (Δω + iγ₂/2)]` with the hybrid `n₂_eff = 2.177`.
+*(Updated 2026-10-06: the cascaded prefactor is 2/3, not the 1/6 used when this section was first written; every χ³ and R below is therefore 4× the original entry. φ_NL, ΔT/T and η_FWM are unchanged, because the local-field intensity relation carried a compensating 4× error; η_SHG doubled. See `paper/checks/PREFACTOR.md`.)*
 All four correctness cross-checks pass (prefactor-free lineshape; analytic-form match to 4×10⁻¹⁶;
 units; hand spot-value). Figures in `cascaded_chi3/figures/design6/`.
 
@@ -209,17 +210,17 @@ units; hand spot-value). Figures in `cascaded_chi3/figures/design6/`.
 | quantity | value |
 |---|---|
 | η_geom(+2γ₂) / η_geom(−2γ₂) | 0.183 / 0.169 |
-| \|χ³_casc(+2γ₂)\| | 3.61×10⁻²¹ m²/V² |
-| **R = \|χ³_casc\|/χ³_native** | **1.81** |
-| Re χ³(+2γ₂) / Re χ³(−2γ₂) | −3.51×10⁻²¹ / +3.23×10⁻²¹ (sign flip ✅) |
-| Im χ³(+2γ₂) | +8.76×10⁻²² (two-photon-like loss) |
-| \|χ³\|·Δf | 1.33×10⁻⁹ m² Hz/V² |
+| \|χ³_casc(+2γ₂)\| | 1.45×10⁻²⁰ m²/V² |
+| **R = \|χ³_casc\|/χ³_native** | **7.23** |
+| Re χ³(+2γ₂) / Re χ³(−2γ₂) | −1.40×10⁻²⁰ / +1.29×10⁻²⁰ (sign flip ✅) |
+| Im χ³(+2γ₂) | +3.51×10⁻²¹ (two-photon-like loss) |
+| \|χ³\|·Δf | 5.34×10⁻⁹ m² Hz/V² |
 | φ_NL single-pass @ 1 / 10 GW cm⁻² | 2.2×10⁻⁶ / 2.2×10⁻⁵ rad (L = 150 nm) |
 | \|ΔT/T\| @ 1 GW cm⁻² | 1.1×10⁻⁶ |
-| η_FWM / η_SHG @ 1 GW cm⁻² | 5.2×10⁻¹² / 1.3×10⁻⁷ (order-of-mag) |
+| η_FWM / η_SHG @ 1 GW cm⁻² | 5.2×10⁻¹² / 2.6×10⁻⁷ (order-of-mag) |
 
 **Optimal detuning** (data-derived η over the single-pole window \|Δω\|/γ₂ ∈ [1,5]): overlap keeps
-rising into the wings, so \|χ³\| peaks at **R = 2.36 at Δω ≈ +4.5γ₂** (η ≈ 0.53), a ×1.31 gain over the
+rising into the wings, so \|χ³\| peaks at **R = 9.46 at Δω ≈ +4.5γ₂** (η ≈ 0.53), a ×1.31 gain over the
 +2γ₂ point. So — unlike samples 1–4 — detuning *is* a modest lever here (broad wing plateau), though ±2γ₂
 stays adiabatically clean.
 
@@ -229,10 +230,10 @@ ps (slight resonant overshoot, not suppression). This is the *opposite* of the h
 1 ps). The sign flip survives pulsing. So the ps laser (longest pulse 1–3 ps, confirmed reaching ~1.76 µm)
 is comfortably in the quasi-static regime for this design.
 
-**Reading.** Design 6 lands at **R ≈ 1.8** (up to ~2.4 in the wings) — comparable to the old best S3 (1.76)
-and approaching S4 (2.49). It gets there by the *opposite* trade: overlap ≈ 0.44 (vs ~0.21) at low Q₂ = 924
+**Reading.** Design 6 lands at **R ≈ 7.2** (up to ~9.5 in the wings) — comparable to S3 (7.0)
+and approaching S4 (10.0). It gets there by the *opposite* trade: overlap ≈ 0.44 (vs ~0.21) at low Q₂ = 924
 (vs 5633). Because R ∝ Q₂·η ∝ Q₂·overlap², the two effects nearly offset (Q₂·η ≈ 169, vs S3 ≈ 172, S4 ≈
-248). Still an **overlap-forward, modest** cascade — beats native Kerr but not by a large factor, and
+248). An **overlap-forward** cascade that beats native Kerr by ~7×, and
 (SH-only) has no CW-Kerr device use; single-pass Kerr phase is µrad-level. The most observable experiments
 remain the Re χ³ sign-flip vs detuning, pulsed saturable absorption, SHG efficiency, and broadband FWM.
 The absolute R carries the §7/§8 scale uncertainties (C_bridge, native χ³); the *ranking* and Q/η scaling

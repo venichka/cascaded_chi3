@@ -1,0 +1,137 @@
+% Outline of Supplement 1 to the Optica research article.
+\documentclass[9pt]{osa-supplemental-document}
+\setboolean{shortarticle}{false}
+
+\usepackage{booktabs}
+
+\newcommand{\chitwo}{\chi^{(2)}}
+\newcommand{\chithree}{\chi^{(3)}}
+\newcommand{\chicasc}{\chi^{(3)}_{\mathrm{casc}}}
+\newcommand{\chinat}{\chi^{(3)}_{\mathrm{nat}}}
+\newcommand{\Dom}{\Delta\omega}
+\newcommand{\etag}{\eta_{\mathrm{geom}}}
+\newcommand{\f}{\mathbf f}
+\newcommand{\figbox}[1]{%
+  \fbox{\parbox[c][#1][c]{0.9\linewidth}{\centering\small figure in preparation}}}
+
+\title{Resonant cascaded Kerr nonlinearity in $\chi^{(2)}$ metasurfaces: supplemental document}
+\author{}
+
+\begin{abstract}
+Derivation of the cascaded susceptibility of a resonator, its uniform-medium
+limit, the bandwidth sum rule and the thresholds, the host-material
+parameters, the coupled-mode simulations, the singly resonant metasurface,
+and the microring model.
+\end{abstract}
+
+\setboolean{displaycopyright}{false}
+
+\begin{document}
+
+\maketitle
+
+\section{Modal projection and coupling constants}
+
+Projection of the wave equation with dispersive permittivity onto a mode
+$\f_n$ with slowly varying amplitude $a_n$~\cite{johnson2002},
+\begin{equation*}
+  \dot a_n=i(\Omega-\omega_n)a_n+\frac{i\Omega}{2N_n}\int\f_n^*\!\cdot\mathbf P\,d^3r ,
+\end{equation*}
+with $N_n=\tfrac12\int(\varepsilon_0\tilde\varepsilon_n|\f_n|^2+\mu_0|\mathbf h_n|^2)\,d^3r$
+and $\tilde\varepsilon_n=\partial(\omega\varepsilon_r)/\partial\omega$ at
+$\omega_n$.  Applied to the second-harmonic, difference-frequency and
+self-phase-modulation sources, it gives the couplings
+\begin{equation*}
+  \beta=\frac{\varepsilon_0\omega_1M}{N_2},\qquad
+  \alpha_3=\frac{3\varepsilon_0\omega_1}{2N_1}\int\chithree_{ijkl}f^*_{1,i}f_{1,j}f_{1,k}f^*_{1,l}\,d^3r ,
+\end{equation*}
+the Manley--Rowe relations, and the stored energy $2N_n|a_n|^2$.
+
+\section{Quasinormal-mode Green's function and the cascaded kernel}
+
+Pole expansion of the Green's function at $2\omega_1$ for a leaky
+second-harmonic mode~\cite{sauvan2013,lalanne2018}, the nonlocal kernel
+$\chitwo\cdot G\cdot\chitwo$, and its reduction to Eq.~(1) of the main text
+when the pump is a single mode.  The same equation follows from adiabatic
+elimination of the second-harmonic amplitude in the coupled-mode
+equations, including the full Lorentzian dependence on $\Dom$.
+
+\section{Uniform-medium limit and a layered-cell test}
+
+Bound second-harmonic wave in a uniform medium, its longitudinal part,
+and the reduction of Eq.~(1) of the main text to the bulk susceptibility
+for $\etag=1$.  Comparison of the single-mode result with the full driven
+field of a one-dimensional layered Bloch cell (Fig.~\ref{fig:s-checks}).
+
+\begin{figure}[htbp]
+  \centering
+  \figbox{3.5cm}
+  \caption{(a)~Kerr coefficient of the pump mode from integration of the
+    two-mode equations (markers) and from the closed form (line) versus
+    $\Dom/\gamma_2$.
+    (b)~Second-harmonic amplitude from the full driven field of a layered
+    Bloch cell divided by the single-mode prediction, versus
+    $\Dom/2\omega_1$.}
+  \label{fig:s-checks}
+\end{figure}
+
+\section{Sum rule, loss and thresholds}
+
+Response of the cascade to a modulated pump, the peak and width of the
+cascaded coefficient, and the $Q_2$-independent product of
+Sec.~3 of the main text.  Loss-to-Kerr ratio, the conditions for
+bistability and parametric gain, and the onset of parametric instability
+at $|\beta a_1|\approx|\Dom|$~\cite{drummond1980}.  Comparison with
+phase-mismatched bulk cascading~\cite{bache2007ol}.
+
+\section{Host materials}
+
+Material constants and the resulting enhancement ratios
+(Table~\ref{tab:s-hosts}).
+
+\begin{table}[htbp]
+  \centering
+  \caption{\bf Cascaded Enhancement at $Q_2=4000$, $\Dom=2\gamma_2$ and $\etag=0.3$}
+  \label{tab:s-hosts}
+  \begin{tabular}{lccccc}
+    \toprule
+    Host & $|\chitwo|$ (pm/V) & $\chinat$ (m$^2$/V$^2$) & $n_2$ & $R$ & $Q_2$ at $R=1$\\
+    \midrule
+    LiNbO$_3$ & 50  & $2\times10^{-21}$   & 2.26 & 49   & 82 \\
+    GaP       & 100 & $1\times10^{-19}$   & 3.1  & 2.1  & $1.9\times10^3$ \\
+    AlN       & 10  & $2\times10^{-21}$   & 2.1  & 2.3  & $1.8\times10^3$ \\
+    GaAs      & 350 & $1.4\times10^{-18}$ & 3.5  & 1.4  & $2.8\times10^3$ \\
+    AlGaAs    & 100 & $1\times10^{-18}$   & 3.3  & 0.18 & $2.2\times10^4$ \\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\section{Coupled-mode simulations}
+
+Equations, integrator, tolerances, run lengths and convergence criterion
+for Figs.~3 and 4 of the main text and Fig.~\ref{fig:s-checks}, and the
+time-domain model for pulsed excitation used in Fig.~4(d) of the main
+text.
+
+\section{Singly resonant metasurface}
+
+Definition of $\widetilde M$, its extraction from full-wave fields, the
+unit-cell average, the parameters of the design, and the Z-scan model.
+
+\section{Microring}
+
+Photon-number form of the coupled-mode equations and the relation between
+the coupling rate and the normalised second-harmonic
+efficiency~\cite{lu2020,zhao2022}; the bistability threshold at the
+pump-frame mismatch; the multimode stability analysis for the parametric
+threshold; the thermal and photorefractive model~\cite{xu2021}; and the
+electro-optic tuning of $\Dom$.
+
+\section{Parameters}
+
+Material constants, mode parameters and design points used in all figures
+and tables.
+
+\bibliography{refs}
+
+\end{document}

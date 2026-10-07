@@ -25,7 +25,12 @@ with
 The main note's energy-normalised amplitudes are a_n^note = sqrt(hbar w_n) a_n,
 which maps the note's modal coupling beta onto g via
 
-    g = beta * sqrt(hbar w1 / 2).
+    g = beta * sqrt(hbar w1 / 2),
+
+with |a_n^note|^2 the stored energy (Boyd convention, normalisation
+int[eps0 eps~ |f|^2 + mu0 |h|^2] = 1) and, after the 2026-10-06 prefactor
+correction, beta = eps0 w1 M / N2 = 2 eps0 w1 M (N2 = 1/2).  Equivalently
+g = sqrt(hbar w_a^2 w_b / (8 eps0)) * overlap, the standard resonator formula.
 
 Detuning sign convention (identical to the main note):
 
@@ -267,13 +272,14 @@ def chi3_casc_eff(p: RingParams, Domega) -> np.ndarray:
 def eta_geom_implied(p: RingParams, Domega) -> np.ndarray:
     """Geometric overlap eta_geom implied by the main note's boxed formula.
 
-        chi3_casc = - w1 |chi2|^2 eta_geom / (6 n2^2 Domega)
+        chi3_casc = - 2 w1 |chi2|^2 eta_geom / (3 n2^2 Domega)
 
-    Inverting gives eta_geom = 6 n2^2 |Domega| |chi3_casc| / (w1 |chi2|^2).
-    A sanity bound: eta_geom must be <= 1.
+    (prefactor 2/3 after the 2026-10-06 correction; was 1/6).  Inverting gives
+    eta_geom = 3 n2^2 |Domega| |chi3_casc| / (2 w1 |chi2|^2).  A sanity
+    bound: eta_geom must be <= 1 (= 1 is the bulk bound-wave limit).
     """
     D = np.abs(np.asarray(Domega, dtype=float))
-    return (6.0 * p.n2**2 * D * np.abs(chi3_casc_eff(p, Domega))
+    return (1.5 * p.n2**2 * D * np.abs(chi3_casc_eff(p, Domega))
             / (p.omega1 * p.chi2**2))
 
 
@@ -303,19 +309,20 @@ def g_from_eta_norm(p: RingParams, eta_norm: float) -> float:
 def g_geometric(p: RingParams, overlap: float = 1.0, qpm: bool = True) -> float:
     """First-principles estimate of g from chi2 and the mode volume.
 
-    From the main note's beta = (eps0 w1/4) * Int chi2 f2* f1 f1 with
-    |f_n| ~ 1/sqrt(eps0 n_n^2 V) and g = beta sqrt(hbar w1/2):
+    Standard resonator coupling (corrected chain, 2026-10-06; see
+    paper/checks/PREFACTOR.md): g = (eps0 w1 / 2) sqrt(hbar w1) M with modes
+    normalised to int eps0 eps |f|^2 = 1, i.e. |f_n| ~ 1/sqrt(eps0 n_n^2 V):
 
-        g ~ (w1 |chi2| / (4 sqrt(eps0) n2 n1^2 sqrt(V))) * sqrt(hbar w1/2)
+        g ~ (w1 |chi2| / (2 sqrt(eps0) n2 n1^2 sqrt(V))) * sqrt(hbar w1)
             * overlap * (2/pi if quasi-phase-matched)
 
-    NOTE this inherits the O(1) prefactor ambiguity flagged in note Sec. 10
-    (eps0 w1/4 vs eps0 w1/2 -> factor 2 in g).  It is a cross-check, not the
-    anchor; the anchor is `g_from_eta_norm` on a measured efficiency.
+    (= sqrt(hbar w_a^2 w_b / (8 eps0 eps_a^2 eps_b V)) |chi2| overlap.)  The
+    pre-correction version was 2 sqrt(2) smaller.  It is a cross-check, not
+    the anchor; the anchor is `g_from_eta_norm` on a measured efficiency.
     """
     fac = (2.0 / np.pi) if qpm else 1.0
-    return (p.omega1 * p.chi2 * np.sqrt(HBAR * p.omega1 / 2.0)
-            / (4.0 * np.sqrt(EPS0) * p.n2 * p.n1**2 * np.sqrt(p.V_eff))
+    return (p.omega1 * p.chi2 * np.sqrt(HBAR * p.omega1)
+            / (2.0 * np.sqrt(EPS0) * p.n2 * p.n1**2 * np.sqrt(p.V_eff))
             * overlap * fac)
 
 
@@ -549,7 +556,7 @@ def verify(p: RingParams | None = None) -> None:
           f"   [paper: 343.8 MHz]")
 
     # ---- 3. geometric estimate of g ---------------------------------
-    print("\n[3] First-principles g vs anchored g (O(1) prefactor check)")
+    print("\n[3] First-principles g vs anchored g (corrected chain; consistency check)")
     for q in (lu, ppln):
         g_perf = g_geometric(q, overlap=1.0, qpm=True)
         print(f"    {q.label:32s} g_geom(perfect overlap, QPM)/2pi = "

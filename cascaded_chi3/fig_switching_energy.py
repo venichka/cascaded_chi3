@@ -1,9 +1,10 @@
 """All-optical switching: control-pulse energy required to flip the
 bistable element from lower to upper branch.
 
-Tier 1, item 3 of the note's Section 13. The cascade has a 1/(1+R) =
-1/13 lower bistability threshold (for LiNbO_3 at the conservative
-operating point Delta omega = 2 gamma_2, R ~ 12) than the native-Kerr
+Tier 1, item 3 of the note's Section 12. The cascade has a 1/(1+R) =
+1/50 lower bistability threshold (for LiNbO_3 at the conservative
+operating point Delta omega = 2 gamma_2, R ~ 49 after the 2026-10-06
+prefactor correction; the figure itself uses a generic R) than the native-Kerr
 architecture, and the same factor applies to the minimum energy of
 the control pulse required to switch between branches.
 

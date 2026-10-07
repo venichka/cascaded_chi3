@@ -3,7 +3,7 @@
 Consumes the verified Design-6 parameters (design6_params.build_design6) and the
 data-derived eta_geom(Domega) (volume-normalised COMSOL overlap), then evaluates the
 same observables that survive in the singly-resonant case as for samples 1-4
-(Cascaded_chi3_SH_only_note.tex, sec:chi3-1R .. sec:applications-1R):
+(notes/Cascaded_chi3_SH_only_note.tex, sec:chi3-1R .. sec:applications-1R):
 
   * chi3_casc(Domega)  Re (self-focus/defocus sign flip), Im (2-photon-like loss), R^(1R)
   * sum rule |chi3_casc| * Df
@@ -70,12 +70,12 @@ def _save(fig, name):
 def eta_SHG(p, dop, I_in, T_geom=1.0, f_rad=F_RAD):
     eta = eta_geom(p, dop)
     V_cell = p["volume"]                              # = A_cell * L_meta = V_LN
-    M2 = eta * V_cell * CHI2 ** 2 / (EPS0 * p["n2"] ** 2)
+    M2 = eta * V_cell * CHI2 ** 2 / (EPS0 * p["n2"] ** 2)       # |M~|^2 for N2 = 1
     Els = E_loc_sq(p, I_in, T_geom)
-    beta_abs = (EPS0 * p["omega1"] / 4.0) * Els * np.sqrt(M2)
+    beta_abs = EPS0 * p["omega1"] * Els * np.sqrt(M2)          # beta^ = eps0 w1 E^2 M~ / N2
     domega = dop * p["gamma2"]
     a2_sq = beta_abs ** 2 / (domega ** 2 + (p["gamma2"] / 2.0) ** 2)
-    P_SH = f_rad * p["gamma2"] * a2_sq
+    P_SH = f_rad * p["gamma2"] * 2.0 * a2_sq                    # U2 = 2 N2 |a2|^2 (Boyd)
     P_in = I_in * p["A_cell"]
     return P_SH / P_in
 
@@ -100,7 +100,7 @@ def verify(p):
     # (ii) match to analytic.py adiabatic dimensionless forms (constant eta)
     print("\n(ii) chi3 lineshape == analytic.py forms (alpha3_eff, gamma_2pa)")
     eta = 0.18
-    K = p["omega1"] * CHI2 ** 2 * eta / (6.0 * p["n2"] ** 2)
+    K = 2.0 * p["omega1"] * CHI2 ** 2 * eta / (3.0 * p["n2"] ** 2)
     worst = 0.0
     for dtil in np.linspace(-5, 5, 21):
         if abs(dtil) < 1e-6:
@@ -120,7 +120,7 @@ def verify(p):
     # (iv) hand spot value at +2 gamma2
     e = eta_geom(p, DOP)
     denom = abs(DOP * p["gamma2"] + 1j * p["gamma2"] / 2)
-    hand = p["omega1"] * CHI2 ** 2 * e / (6 * p["n2"] ** 2 * denom)
+    hand = 2 * p["omega1"] * CHI2 ** 2 * e / (3 * p["n2"] ** 2 * denom)
     code = abs(chi3_casc(p, DOP))
     print("\n(iv) |chi3| @ +2gamma2: eta=%.4f hand=%.3e code=%.3e R=%.2f -> %s"
           % (e, hand, code, code / CHI3_NATIVE, "PASS" if abs(hand - code) < 1e-30 else "FAIL"))

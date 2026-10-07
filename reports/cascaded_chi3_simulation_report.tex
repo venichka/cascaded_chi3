@@ -56,7 +56,7 @@
 \makeatother
 
 % Path to simulation figures (PDF)
-\graphicspath{{cascaded_chi3/figures/}}
+\graphicspath{{../cascaded_chi3/figures/}}
 
 % =====================================================================
 \begin{document}
@@ -119,10 +119,17 @@ with input--output relation $s_- = -s_+ + \sqrt{\grad}\, a_1$.
 
 The tensor coupling (note's eq.~(beta)) is
 \begin{equation}
-  \beta = \frac{\eps_0\, \omega_1}{4} \int \chitwo_{ijk}(\ri)\,
-            f_{2,i}^{*}(\ri)\, f_{1,j}(\ri)\, f_{1,k}(\ri)\,\dthreer.
+  \beta = \frac{\eps_0\, \omega_1}{N_2} \int \chitwo_{ijk}(\ri)\,
+            f_{2,i}^{*}(\ri)\, f_{1,j}(\ri)\, f_{1,k}(\ri)\,\dthreer,
   \label{eq:beta}
 \end{equation}
+with $N_2$ the projection norm of the SH mode ($N_2=\tfrac12$ for
+energy-normalised modes, so the prefactor is $2\eps_0\omega_1$).  This
+corrects the $\eps_0\omega_1/4$ of earlier versions, which made $\beta$,
+the bare $\alpha_3$ and hence $\chithree_\text{casc}$ and every $R$
+$4\times$ too small (note \S5).  The TCMT simulations are dimensionless
+($\beta=1$) and are unaffected; only the physical-unit conversions
+(the values of $R$) change.
 
 \paragraph{Adiabatic elimination.}
 For $|\Dom| \gg \gamma_2/2$ and $|\dot a_2| \ll |\Dom\, a_2|$, set
@@ -140,10 +147,10 @@ Far off-resonance, $\alpha_3^{\effc} \to -|\beta|^2/\DSH$.
 
 \paragraph{Final boxed cascaded susceptibility.}
 Inverting the definition of $\alpha_3$ from the FM mode normalisation
-and using $|\f_n|^2 \sim 1/(\eps_0 n_n^{2}\, V_{\rm eff})$ (note \S6):
+and using $|\f_n|^2 \sim 1/(2\eps_0 n_n^{2}\, V_{\rm eff})$ (note \S6):
 \begin{equation}
-  \chithree_{\rm casc} \sim
-       -\frac{\omega_1}{6\, n_2^{2}\, \Dom}\, |\chitwo|^{2}\, \eta_\geom,
+  \chithree_{\rm casc} \simeq
+       -\frac{2\,\omega_1}{3\, n_2^{2}\, \Dom}\, |\chitwo|^{2}\, \eta_\geom,
   \label{eq:chi3casc}
 \end{equation}
 with $\eta_\geom \in [10^{-3},\, 0.5]$ a purely geometric overlap.
@@ -550,7 +557,7 @@ $\Dom/\gamma_2$ via eq.~(\ref{eq:chi3casc}):
 \begin{equation}
   \text{enh}(\Dom/\gamma_2)
    = \frac{Q_2}{n_2^{2}}\,
-     \frac{(\Dom/\gamma_2)^{-1}}{6}\,
+     \frac{(\Dom/\gamma_2)^{-1}}{3/2}\,
      \frac{\eta_\geom\, |\chitwo|^{2}}{|\chithree|_{\rm native}},
    \quad
    \Delta f = \frac{\gamma_2}{2\pi} = \frac{2\omega_1}{2\pi Q_2}.
@@ -581,27 +588,31 @@ the metasurface single-resonance result.  See main note eq.~(chi3casc-bulk).)
 \toprule
 $\Dom/\gamma_2$ & prefactor & $R(Q_2{=}4\,000)$ & $R(Q_2{=}10^{4})$ & $\Delta f$ [GHz] \\
 \midrule
-$1/2$ (BW-optimal)      & $Q_2/(6\, n_2^{2})$  & $49$ & $122$ & $97$ \\
-$1$ (edge of adiabatic) & $Q_2/(12\, n_2^{2})$ & $25$ & $61$  & $97$ \\
-$2$ (conservative)      & $Q_2/(24\, n_2^{2})$ & $12$ & $30$  & $97$ \\
+$1/2$ (BW-optimal)      & $Q_2/(3\, n_2^{2})$        & $98$ & $245$ & $97$ \\
+$1$ (edge of adiabatic) & $0.8\,Q_2/(3\, n_2^{2})$   & $78$ & $196$ & $97$ \\
+$2$ (conservative)      & $0.47\,Q_2/(3\, n_2^{2})$  & $46$ & $115$ & $97$ \\
 \bottomrule
 \end{tabular}
 \caption{Cascaded-$\chithree$ enhancement at three operating points,
 LiNbO\textsubscript{3} at telecom ($n_2 = 2.26$, $\eta_\geom = 0.3$,
 $|\chitwo| = 5\!\times\!10^{-11}$ m/V,
 $|\chithree|_\text{native} = 2\!\times\!10^{-21}$ m$^{2}$/V$^{2}$,
-$\gamma_2 = \omega_2/Q_2 = 2\omega_1/Q_2$).  $\Delta f = \gamma_2/(2\pi)$
+$\gamma_2 = \omega_2/Q_2 = 2\omega_1/Q_2$).  Prefactors and $R$ use the
+full Lorentzian $\Dom/[\Dom^2+(\gamma_2/2)^2]$; the far-detuned form
+$1/\Dom$ used in the note's worked example gives $Q_2/(6n_2^2)$ and
+$R\simeq49$ at $\Dom=2\gamma_2$ (within $6\%$) but would double the
+$\Dom=\gamma_2/2$ value, where it is not valid.  (Earlier versions of
+this table used the far-detuned form throughout and carried the
+factor-$4$ prefactor error, quoting 49/25/12.)  $\Delta f = \gamma_2/(2\pi)$
 quoted at $Q_2 = 4\,000$; it depends on $Q_2$, not on $\Dom$. The
 summary table and Fig.~\ref{fig:bulk} use the conservative point
-throughout for consistency; the $\Dom=\gamma_2$ row is included
-because the often-quoted ``$R\!\sim\!25$ for LiNbO$_3$'' figure
-originates there, at the edge of adiabatic validity.}
+throughout for consistency.}
 \label{tab:opppoint}
 \end{table}
 
 Sum-rule constant from the metasurface family at the conservative
 operating point:
-$\text{enh} \cdot \Delta f({\rm Hz}) = 1.16\!\times\!10^{12}$.
+$\text{enh} \cdot \Delta f({\rm Hz}) \simeq 4.7\!\times\!10^{12}$.
 Pulling $\Dom$ down to $\gamma_2$ doubles the constant
 (at the cost of edge-of-adiabatic operation); pulling further to
 $\gamma_2/2$ doubles again.  The hyperbola is the same; only its
@@ -612,15 +623,15 @@ With the corrected $1/n_2$ scaling, the bulk PPLN $|\chithree_{\rm casc}|$
 in LiNbO$_3$ at $\Delta k\!=\!3\!\times\!10^{5}$~m$^{-1}$ is
 $\sim\!10^{-20}$~m$^2$/V$^2$, roughly $5\times$ native -- not
 ``comparable'' to native as the earlier draft claimed.  The
-metasurface at $Q_2=4{,}000$ delivers $\sim 25\times$ native at the
-bandwidth-optimal point ($\Delta\omega=\gamma_2/2$) or $\sim 12\times$
+metasurface at $Q_2=4{,}000$ delivers $\sim 100\times$ native at the
+bandwidth-optimal point ($\Delta\omega=\gamma_2/2$) or $\sim 49\times$
 at the conservative operating point ($\Delta\omega=2\gamma_2$),
-so the metasurface still wins the $|\chithree|$ comparison by
-$\sim 2\text{--}5\times$ at routine $Q_2$.  In the
-$|\chithree|\cdot\Delta f$ product, however, bulk leads by $\sim 20$--$40\times$
+so the metasurface wins the $|\chithree|$ comparison by
+$\sim 10\text{--}20\times$ at routine $Q_2$.  In the
+$|\chithree|\cdot\Delta f$ product, however, bulk leads by $\sim 5$--$10\times$
 because its $\sim 10$~THz bandwidth dwarfs the cascade's $\lesssim 100$~GHz
-bandwidth.  The metasurface trades $\sim 0.5\text{--}1$ order of magnitude
-in $|\chithree_{\rm eff}|$ for $\sim 2\text{--}3$ orders of magnitude in
+bandwidth.  The metasurface gains $\sim 1$ order of magnitude in
+$|\chithree_{\rm eff}|$ and gives up $\sim 2$ orders of magnitude in
 bandwidth.  Both regimes are best-in-class for their respective
 applications: high-$Q$ metasurfaces for CW-pumped bistability,
 parametric thresholds, and frequency-comb stabilisation;
@@ -638,8 +649,8 @@ broadband all-optical switching.
   log--log, for two $Q_2$ values. Random mode pairing
   ($\eta_\geom \sim 10^{-3}$, red shaded) gives sub-native cascading
   even at $Q_2 = 10^{4}$. Engineered qBIC pair
-  ($\eta_\geom \sim 0.3$, green shaded) recovers $25$--$60\times$
-  enhancement.}
+  ($\eta_\geom \sim 0.3$, green shaded) recovers $\sim 100$--$250\times$
+  enhancement (at $\Dom=\gamma_2$, far-detuned form).}
   \label{fig:overlap}
 \end{figure}
 
@@ -791,10 +802,9 @@ that native does not.
   reference (its tiny bare Kerr barely deflects it); cascade peels
   below and saturates at $|a_1|^2 \to |\Dom|^2$. (b) Magnitudes of the
   nonlinear phase shift on $a_1$. At small signal, the cascade phase
-  is $\sim 12\times$ larger than the native phase, matching the
-  predicted ratio $R = 12$ (LiNbO\textsubscript{3} conservative
-  operating point, $\Dom = 2\gamma_2$, factor-24 prefactor) within a
-  few percent.}
+  is $\sim 49\times$ larger than the native phase, matching the
+  predicted ratio $R \simeq 49$ (LiNbO\textsubscript{3} conservative
+  operating point, $\Dom = 2\gamma_2$) within a few percent.}
   \label{fig:archresponse}
 \end{figure}
 
@@ -803,27 +813,27 @@ Both architectures share the same FM cavity ($\gamma_1, \grad$) and
 identical input $s_+$ on resonance ($\delta_p = 0$). The native run
 uses $\beta = 0$ (no SH coupling); cascaded uses $\beta = 1$ and
 $\Dom = 2\gamma_2$. Both runs carry the same bare Kerr
-$\widetilde\alpha_3 = 0.04$, the LiNbO\textsubscript{3} dimensionless
+$\widetilde\alpha_3 = 0.0096$, the LiNbO\textsubscript{3} dimensionless
 native Kerr at the worked-example operating point ($\Dom = 2\gamma_2$,
 $Q_2 = 4{,}000$; calibrated so $|\alpha_3^{\rm eff,casc}|/\alpha_3 =
-R \approx 12$, see \S\ref{sec:setup}).  For each $|s_+|^{2} \in
+R \approx 49$, see \S\ref{sec:setup}).  For each $|s_+|^{2} \in
 [10^{-3}, 200]$ we integrate to steady state with state continuation
 and extract $|a_1|^{2}$, $|a_2|^{2}$, and the phase
 $\phi_{\rm NL}=\arg(a_1)$.
 
 \paragraph{Parameters.}
 $\Dom/\gamma_2 = 2$, $\gamma_1/\gamma_2 = 10$, $\grad/\gamma_1 = 0.5$,
-$\widetilde\alpha_3 = 0.04$ (LiNbO\textsubscript{3} dimensionless
+$\widetilde\alpha_3 = 0.0096$ (LiNbO\textsubscript{3} dimensionless
 native Kerr at the conservative operating point $\Dom = 2\gamma_2$,
 $Q_2 = 4{,}000$; chosen so $\alpha_3^{\rm eff,casc}/\alpha_3
-\approx 12$ matches the worked-example $R$ of
+\approx 49$ matches the worked-example $R$ of
 Section~\ref{sec:hostsurvey}), $\delta_p = 0$.
 
 \paragraph{Result.}
 Numerically, $|\phi_{\rm cas}/\phi_{\rm nat}|_{|s_+|^2 = 1} \approx
-12$, matching the analytic $R \approx 12$ from the explicit form
-\eqref{eq:chi3casc} at $\Dom = 2\gamma_2$ within a few percent.  The
-residual deficit is the small ($\sim 6\%$) $\gamma_2/2$ correction to
+49.4$, matching $0.471/\widetilde\alpha_3=49.0$ to $1\%$.  The
+far-detuned explicit form \eqref{eq:chi3casc} would give $52$; the
+difference is the small ($\sim 6\%$) $\gamma_2/2$ correction to
 the simple $-1/\Dom$ form: at $\Dom = 2\gamma_2$, the full Kerr
 coefficient is $\Dom/(\Dom^2 + (\gamma_2/2)^2) = 0.471$ vs.\ the
 simple $1/\Dom = 0.5$, exactly $-5.8\,\%$.  The cascaded curve clearly
@@ -859,16 +869,17 @@ The dimensionless enhancement ratio
 \begin{equation}
   R(Q_2) \equiv
   \frac{|\chithree_{\rm eff,casc}|}{|\chithree_{\rm native}|}
-  = \frac{Q_2}{24\, n_2^{2}}\,
+  = \frac{Q_2}{6\, n_2^{2}}\,
     \frac{\eta_\geom\, |\chitwo|^{2}}{|\chithree_{\rm native}|},
   \label{eq:Rdef}
 \end{equation}
 linear in $Q_2$ at fixed $\Dom/\gamma_2 = 2$ and $\eta_\geom = 0.3$.
-The factor $1/24$ comes from $\omega_1/\Dom = Q_2/4$ at the
-conservative operating point $\Dom = 2\gamma_2 = 4\omega_1/Q_2$.
+The factor $1/6$ is $\tfrac23\times\tfrac14$, from $\omega_1/\Dom = Q_2/4$
+at the conservative operating point $\Dom = 2\gamma_2 = 4\omega_1/Q_2$
+(it was $1/24$ before the prefactor correction).
 Crossover Q given by $R = 1$:
 \begin{equation}
-  Q_2^{\rm crossover} = \frac{24\, n_2^{2}\, |\chithree_{\rm native}|}
+  Q_2^{\rm crossover} = \frac{6\, n_2^{2}\, |\chithree_{\rm native}|}
                               {\eta_\geom\, |\chitwo|^{2}}.
 \end{equation}
 Hosts: LiNbO\textsubscript{3}, GaP, AlGaAs, AlN, GaAs (cascade
@@ -888,11 +899,11 @@ $n$: see Table~\ref{tab:hosts}.
 Host & $|\chitwo|$ [m/V] & $|\chithree_{\rm native}|$ [m$^{2}$/V$^{2}$]
      & $n$ & $Q_2^{\rm crossover}$ \\
 \midrule
-LiNbO\textsubscript{3} & $5\!\times\!10^{-11}$ & $2\!\times\!10^{-21}$ & 2.21 & 313 \\
-GaP        & $1\!\times\!10^{-10}$ & $1\!\times\!10^{-19}$ & 3.05 & 7\,442 \\
-GaAs       & $3.5\!\times\!10^{-10}$ & $1.4\!\times\!10^{-18}$ & 3.50 & 11\,200 \\
-AlN        & $1\!\times\!10^{-11}$ & $2\!\times\!10^{-21}$ & 2.10 & 7\,060 \\
-AlGaAs     & $1\!\times\!10^{-10}$ & $1\!\times\!10^{-18}$ & 3.30 & 87\,120 \\
+LiNbO\textsubscript{3} & $5\!\times\!10^{-11}$ & $2\!\times\!10^{-21}$ & 2.21 & 78 \\
+GaP        & $1\!\times\!10^{-10}$ & $1\!\times\!10^{-19}$ & 3.05 & 1\,860 \\
+GaAs       & $3.5\!\times\!10^{-10}$ & $1.4\!\times\!10^{-18}$ & 3.50 & 2\,800 \\
+AlN        & $1\!\times\!10^{-11}$ & $2\!\times\!10^{-21}$ & 2.10 & 1\,764 \\
+AlGaAs     & $1\!\times\!10^{-10}$ & $1\!\times\!10^{-18}$ & 3.30 & 21\,780 \\
 \midrule
 Si         & $\equiv 0$ & $4\!\times\!10^{-18}$ & 3.50 & --- \\
 Si\textsubscript{3}N\textsubscript{4} & $\sim 0$ & $2.5\!\times\!10^{-21}$ & 2.00 & --- \\
@@ -906,9 +917,11 @@ at $\eta_\geom = 0.3$.}
 \paragraph{Result.}
 At the note's design point ($Q_2 = 4{,}000$, $\eta_\geom = 0.3$,
 $\Dom = 2\gamma_2$):
-LiNbO\textsubscript{3} $R = 12.8$, GaP $R = 0.54$, GaAs $R = 0.36$,
-AlN $R = 0.57$ (updated with $|\chitwo|=10$~pm/V), $R_\text{AlGaAs}
-= 0.046$. The crossover Q values span three orders of magnitude.
+LiNbO\textsubscript{3} $R = 51$, GaP $R = 2.2$, GaAs $R = 1.4$,
+AlN $R = 2.3$ (with $|\chitwo|=10$~pm/V), $R_\text{AlGaAs}
+= 0.18$. The crossover Q values span three orders of magnitude.
+(The corrected prefactor moves GaP, AlN and GaAs from slightly below to
+slightly above break-even at $Q_2=4\,000$; AlGaAs still loses.)
 
 \paragraph{Interpretation.}
 A host wins for cascading when its native $\chithree$ is small relative
@@ -931,8 +944,8 @@ resonance.
   Cascade is a 2-D region bounded by B$_{\rm I}$ (red dotted,
   slope $-2$, parallel to A but vertically offset by $R$) and B$_{\rm II}$
   (blue dashed, slope $-1$, the sum-rule line). (a) LiNbO\textsubscript{3}:
-  $R \approx 13$, cascade wins across the plotted range.
-  (b) AlGaAs: $R \approx 0.05$, native wins.}
+  $R \approx 51$, cascade wins across the plotted range.
+  (b) AlGaAs: $R \approx 0.18$, native wins.}
   \label{fig:phasebw}
 \end{figure}
 
@@ -964,11 +977,11 @@ $\min(\gamma_1, \gamma_2)$ flips which decay rate is the bandwidth
 bottleneck (the artificial cliffs in the unfiltered version).
 
 \paragraph{Result.}
-LiNbO\textsubscript{3}: B$_{\rm I}$ sits $R \approx 13\times$ above A
+LiNbO\textsubscript{3}: B$_{\rm I}$ sits $R \approx 51\times$ above A
 across the plotted range; B$_{\rm II}$ runs through them with slope
-$-1$, intersecting A at very narrow bandwidth ($\sim$1\,GHz) that is
-off the right edge of the experimentally relevant range. AlGaAs:
-B$_{\rm I}$ sits $R \approx 0.05\times$ \emph{below} A; the cascade does
+$-1$, intersecting A only at very narrow bandwidth ($\sim$7\,GHz), at
+the narrow-band edge of the plotted range. AlGaAs:
+B$_{\rm I}$ sits $R \approx 0.18\times$ \emph{below} A; the cascade does
 not compete at any practical bandwidth.
 
 \paragraph{Interpretation.}
@@ -1013,11 +1026,11 @@ AlGaAs material parameters from Table~\ref{tab:hosts}; shared colour
 limits set to the min/max across both panels.
 
 \paragraph{Result.}
-LiNbO\textsubscript{3} (left): the red crossover line sits at $Q_2 = 156$
-near the bottom edge; nearly the entire plotted $(Q_1, Q_2)$ rectangle
-is in the cascade-wins region. The design point at $(10^{3}, 4\!\times\!10^{3})$
-sits comfortably above the crossover. AlGaAs (right): the crossover line
-sits at $Q_2 \approx 12\,600$, cutting the plot horizontally; the design
+LiNbO\textsubscript{3} (left): the crossover $Q_2 = 78$ lies below
+the plotted range, so the entire $(Q_1, Q_2)$ rectangle is in the
+cascade-wins region. The design point at $(10^{3}, 4\!\times\!10^{3})$
+sits far above the crossover. AlGaAs (right): the crossover line
+sits at $Q_2 \approx 21\,800$, cutting the plot horizontally; the design
 point at $(10^{3}, 4\!\times\!10^{3})$ falls \emph{below} -- native is
 the right architecture there.
 
@@ -1149,7 +1162,7 @@ double-dip at high power &
 Most diagnostic scan \\
 \midrule
 Arch.\ response & Fig.~\ref{fig:archresponse} &
-$\phi_{\rm cas}/\phi_{\rm nat} = R \approx 12$ (numerical) &
+$\phi_{\rm cas}/\phi_{\rm nat} = R \approx 49$ (numerical) &
 Validates Section~11 of the note \\
 Host survey & Fig.~\ref{fig:hostsurvey} &
 $Q_2^{\rm cross}\propto n^{2}\chithree_{\rm nat}/|\chitwo|^{2}$ &
@@ -1297,20 +1310,19 @@ percent. Two alternative operating points are worth keeping in mind:
 \toprule
 $\Dom/\gamma_2$ & $R$ & Cascade strength & When to choose it \\
 \midrule
-$2$ (conservative) & $\sim 12$ &
+$2$ (conservative) & $\sim 49$ &
 moderate ($\alpha_3^{\rm casc} \approx 0.47$ in dim TCMT) &
 \textbf{Default for narrowband CW devices.} Adiabatic SH elimination
 is clean; TPA penalty suppressed by $(\gamma_2/2\Dom)^2 = 1/16$ vs.\
 the Kerr; saturation cap $|a_1|^2 \approx 4$ leaves several decades
 of linear pump range. \\
-$1$ (edge of adiabatic) & $\sim 25$ &
+$1$ (edge of adiabatic) & $\sim 80$ &
 strong ($\alpha_3^{\rm casc} \approx 0.80$) &
-Pulls another factor of 2 in $R$, recovers the historical
-``$R \sim 25$ for LiNbO\textsubscript{3}'' quote. The cost: the
+Pulls another factor of $\sim\!1.7$ in $R$. The cost: the
 adiabatic approximation $|\Dom| \gg \gamma_2/2$ becomes marginal;
 TPA / Kerr ratio $\sim 0.5$; saturation cap halves. Use if you can
 tolerate TPA loss and a narrower bistable / linear window. \\
-$0.5$ (peak of $\alpha_3^{\rm casc}$) & $\sim 50$ &
+$0.5$ (peak of $\alpha_3^{\rm casc}$) & $\sim 100$ &
 maximum (peak Lorentzian, $\alpha_3^{\rm casc} = |\beta|^2/\gamma_2$) &
 The mathematical maximum of the cascade-Kerr coefficient -- and the
 peak of the cascaded-TPA loss simultaneously, with the two equal in
@@ -1325,27 +1337,27 @@ The Tier 1 ratios scale strictly as the relevant power of $(1+R)$
 regardless of which operating point one picks, but the
 \emph{absolute} magnitudes and the practically achievable linear pump
 range differ.  Reproducing the figures in this report at $\Dom = \gamma_2$
-amounts to halving $\widetilde\alpha_3$ from $0.04$ to $0.02$ in the
-relevant scripts and adjusting the predicted $1+R$ accordingly.
+amounts to setting \texttt{Domega}$\,=\pm1$ in the relevant scripts at
+fixed $\widetilde\alpha_3=0.0096$ (so $R\simeq0.80/0.0096\approx80$) and
+adjusting the predicted $1+R$ accordingly.
 
 The cleanest experimental statement is the cascade-vs-native ratio
 itself, which is dimensionless and independent of the operating
 point's absolute scale -- this is what Figs.~\ref{fig:archresponse}--%
 \ref{fig:bistability} are designed to display.
 
-\paragraph{Prefactor uncertainty (and what the numbers do not say).}
-The $R$ values quoted throughout this report inherit an $O(1)$
-multiplicative uncertainty from the convention dependence of the
-modal coupling $\beta=(\eps_0\omega_1/4)\,M$ (see note \S5 discussion
-preceding eq.~(beta)): the alternative $\eps_0\omega_1/2$ normalisation
-would shift $|\beta|^{2}$ -- and therefore $R$ -- by a factor of $4$.
-Together with the $\eta_\geom\!\sim\!0.3$ assumption, the absolute
-$R$ values for LiNbO\textsubscript{3} ($R\!\sim\!12$ at the conservative
-operating point) should be read as \emph{order-of-magnitude}
-predictions.  Settling the prefactor requires a full-wave evaluation
-of the modes and the overlap integral for a specific meta-atom design.
-What is robust is the \emph{ratio} of cascade-to-native (which carries
-the same prefactor in both) and the $Q$-scaling exponents.
+\paragraph{What the numbers do and do not say.}
+The prefactor of $\chithree_\text{casc}$ is now fixed: it is derived
+twice in the note and reproduces the exact bulk bound-wave cascade in
+the uniform-medium limit (note \S\S4--6).  Earlier versions of this
+report quoted $R\!\sim\!12$ with an ``$O(1)$ prefactor uncertainty'';
+that value was $4\times$ too small, because $\beta$ and $\alpha_3$ had
+both been taken $4\times$ too small.  The remaining uncertainty in the
+absolute $R$ for LiNbO\textsubscript{3} ($R\!\sim\!49$ at the
+conservative operating point) is the assumed $\eta_\geom\!\sim\!0.3$,
+which requires a full-wave evaluation of the modes and the overlap
+integral for a specific meta-atom design.  The $Q$-scaling exponents,
+the lineshapes and the leverage laws in powers of $(1+R)$ are exact.
 
 \subsection{Plausible-looking ideas that do not work}
 
@@ -1360,7 +1372,7 @@ the same prefactor in both) and the $Q$-scaling exponents.
   regime.
 \item \emph{Add the bulk Kerr for free.} The bulk $|\chithree|$ in
   LiNbO\textsubscript{3} is $\sim 2 \!\times\! 10^{-21}$
-  m$^{2}$/V$^{2}$, $\sim 12\times$ below the cascaded value at the
+  m$^{2}$/V$^{2}$, $\sim 49\times$ below the cascaded value at the
   conservative operating point. The bulk contribution is a few-percent
   correction at the design point; it only matters near the
   zero-crossing of the total Kerr (Fig.~\ref{fig:sign_flip}, red

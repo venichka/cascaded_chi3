@@ -60,6 +60,7 @@ htmlcov/
 *.snm
 *.vrb
 *.xdv
+*Notes.bib
 _build/
 latexmk/
 output/
@@ -85,6 +86,9 @@ Thumbs.db
 # ---------------------------------------------------------------------
 *.pptx
 *_AA.pdf
+
+# Reference material: an unpublished collaborator draft and a publisher PDF.
+references/
 data/**/*.mat
 data/**/*.m
 

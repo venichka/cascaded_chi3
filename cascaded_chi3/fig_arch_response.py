@@ -65,10 +65,13 @@ def main():
     # rather than cancels native, giving the clean (1+R) phase ratio.
     # The bare-Kerr value alpha_3_native = 0.04 is calibrated so that the
     # full-Lorentzian cascade coefficient |alpha_3^casc| = 0.471 (beta=1,
-    # gamma_2=1, |Delta omega|=2) yields R = 0.471/0.04 = 11.8, matching
-    # the worked-example R = 12 from |chi3_casc| = Q_2/(24 n_2^2) eta
+    # gamma_2=1, |Delta omega|=2) yields R = 0.471/alpha_3_native, matching
+    # the worked-example R from |chi3_casc| = Q_2/(6 n_2^2) eta
     # |chi^(2)|^2.
-    alpha_3_native = 0.04
+    # 2026-10-06: recalibrated to the corrected worked example. With the
+    # corrected prefactor |chi3_casc| = Q_2/(6 n_2^2) eta |chi2|^2 at Delta omega
+    # = 2 gamma_2, R = 49 for LiNbO3 (was 12); alpha_3_native = 0.471/49 = 0.0096.
+    alpha_3_native = 0.0096
     base = dict(Domega=-2.0, gamma1=10.0, gamma1_rad=5.0,
                 alpha3=alpha_3_native, delta1=0.0)
     p_nat = TCMTParams(**base, beta=0.0)
@@ -104,7 +107,7 @@ def main():
     axs[0].loglog(s2_grid, n1_linear, "-", color="0.6", lw=1.4,
                   label="linear cavity (no NL)")
     axs[0].loglog(s2_grid, n1_nat, "o", color="C2", ms=5, mfc="C2", mew=0,
-                  label=r"native ($\beta = 0$, $\widetilde\alpha_3=0.04$)")
+                  label=r"native ($\beta = 0$, $\widetilde\alpha_3=0.0096$)")
     # Cascade: split stable (filled) vs past saturation (open)
     axs[0].loglog(s2_grid[~unstable_cas], n1_cas[~unstable_cas], "s",
                   color="C0", ms=5, mfc="C0", mew=0,
@@ -143,8 +146,8 @@ def main():
 
     fig.suptitle(
         r"Native vs cascade-added -- same FM cavity, same input "
-        r"($\widetilde{\alpha}_3 = +0.04$, $\Delta\omega = -2\gamma_2$, "
-        r"constructive cascade; $R\simeq 12$, ratio $\simeq 1+R\simeq 13$)",
+        r"($\widetilde{\alpha}_3 = +0.0096$, $\Delta\omega = -2\gamma_2$, "
+        r"constructive cascade; $R\simeq 49$, ratio $\simeq 1+R\simeq 50$)",
         fontsize=11.5, y=1.02,
     )
     fig.tight_layout()
@@ -160,7 +163,7 @@ def main():
     ratio = np.abs(phi_cas[np.argmin(np.abs(s2_grid - 1.0))]) / \
             np.abs(phi_nat[np.argmin(np.abs(s2_grid - 1.0))])
     print(f"  cascaded/native phase ratio at |s+|^2 = 1: {ratio:.2f} "
-          f"(expected ~12 from R = 0.471 / 0.04 at Delta omega = 2 gamma_2)")
+          f"(expected ~49 from R = 0.471 / 0.0096 at Delta omega = 2 gamma_2)")
     plt.close(fig)
 
 

@@ -38,7 +38,7 @@
 \newcommand{\etanorm}{\eta_{\text{SHG}}}
 
 \captionsetup{labelfont={small,bf}, font=small, labelsep=period}
-\graphicspath{{cascaded_chi3/figures/ring/}{cascaded_chi3/figures/}}
+\graphicspath{{../cascaded_chi3/figures/ring/}{../cascaded_chi3/figures/}}
 
 \setlength{\parskip}{0.4em}
 
@@ -109,14 +109,16 @@ $2\omega_1$, with the SH adiabatically eliminated to leave a Kerr-like
 term on the fundamental.  The same two-mode structure describes a
 doubly-resonant $\chitwo$ microring, and the derivation carries over
 essentially unchanged.  What changes is the \emph{numbers}, and they
-change by three orders of magnitude.
+change by two to three orders of magnitude.
 
 The reason is structural.  The metasurface enhancement was
 $R\propto Q_2$ with $Q_2\sim4\times10^3$ realistically available in a
 quasi-BIC; the four fabricated SH-only samples and Design~6 delivered
-$R^{(1\mathrm R)}=0.4$--$2.5$ once the true modal overlaps were measured.
-A thin-film LN microring routinely reaches $Q_2\sim3$--$6\times10^5$ at
-the SH wavelength, two orders of magnitude higher, and the modal overlap
+$R^{(1\mathrm R)}=1.5$--$10$ once the true modal overlaps were measured
+(values after the October 2026 correction of the metasurface note's
+cascaded prefactor, which raised every metasurface $R$ by $4\times$).
+A thin-film LN microring can reach $Q_2\sim3$--$6\times10^5$ at
+the SH wavelength (with precedent), two orders of magnitude higher, and the modal overlap
 problem is solved by a different mechanism --- quasi-phase matching via
 periodic poling, which recovers the full $d_{33}$ over the entire
 circumference.
@@ -211,11 +213,21 @@ $a_n^{\text{note}}=\sqrt{\hbar\omega_n}\,a_n$.  Substituting into the
 note's TCMT equations and matching term by term gives
 \begin{equation}
   \boxed{\;g=\beta\sqrt{\hbar\omega_1/2}\;},\qquad
-  \beta=\frac{\eps_0\omega_1}{4}\!\int\!\chitwo_{ijk}(\bvec r)\,
+  \beta=\frac{\eps_0\omega_1}{N_2}\!\int\!\chitwo_{ijk}(\bvec r)\,
         f^*_{2,i}f_{1,j}f_{1,k}\,d^3r ,
   \label{eq:g-beta}
 \end{equation}
-where $\beta$ is Eq.~(beta) of the main note.  The apparent asymmetry
+where $\beta$ is Eq.~(beta) of the main note, $N_2=\tfrac12$ is the
+projection norm of its energy-normalised SH mode (so the prefactor is
+$2\eps_0\omega_1$), and $|a_n^{\text{note}}|^2$ is the stored energy.
+Equivalently,
+$g=\sqrt{\hbar\omega_a^2\omega_b/8\eps_0}\,
+\bigl|\int\chitwo_{ijk}E_{a,i}E_{a,j}E_{b,k}^*\bigr|/
+\bigl(\int\eps_a|\mathbf E_a|^2\sqrt{\int\eps_b|\mathbf E_b|^2}\bigr)$,
+the standard resonator coupling rate~\cite{Zhao2021}.  (Before the
+October 2026 correction the main note used $\beta=(\eps_0\omega_1/4)M$
+at $N_2=1$, which made $g$ inferred from first principles $2\sqrt2$ too
+small.)  The apparent asymmetry
 between the two equations of motion below (a factor $2$ in the FM
 equation, none in the SH equation) is the same asymmetry that
 $\omega_2=2\omega_1$ hides in the energy normalisation; both forms
@@ -326,32 +338,28 @@ setting $\delta_a=\delta_b=0$ and $\omega_b=2\omega_p$ gives
 the whole normalisation chain, and it is the reason the numbers in this
 note do not inherit the metasurface note's prefactor ambiguity.
 
-\paragraph{What the measured $g$ says about the metasurface note's
-prefactor.}  Inserting $|f_n|\sim1/\sqrt{\eps_0n_n^2\Veff}$ into
-\eqref{eq:g-beta} gives the first-principles estimate
+\paragraph{A first-principles cross-check of $g$.}  Inserting
+$|f_n|\sim1/\sqrt{2\eps_0n_n^2\Veff}$ (the energy normalisation of the
+main note) into \eqref{eq:g-beta} gives the estimate
 \begin{equation}
-  g\;\sim\;\frac{\omega_1|\chitwo|}{4\sqrt{\eps_0}\,n_2n_1^2\sqrt{\Veff}}
-          \sqrt{\frac{\hbar\omega_1}{2}}\;\times\;\frac{2}{\pi}\,\Theta ,
+  g\;\sim\;\frac{\omega_1|\chitwo|}{2\sqrt{\eps_0}\,n_2n_1^2\sqrt{\Veff}}
+          \sqrt{\hbar\omega_1}\;\times\;\frac{2}{\pi}\,\Theta ,
   \label{eq:g-geom}
 \end{equation}
 where $2/\pi$ is the first-order quasi-phase-matching factor for
 $50\%$-duty-cycle poling and $\Theta\le1$ is the transverse overlap.
 For the device of Ref.~\cite{Lu2020} ($R=70\,\mu$m, $\Aeff\simeq1\,\mu$m$^2$)
-this gives $g/2\pi=0.56$~MHz at $\Theta=1$, a factor $2.1$ below the
-measured $1.2$~MHz; on the alternative $\beta=(\eps_0\omega_1/2)M$
-branch flagged in \S10 of the main note it gives $1.12$~MHz.
-
-\emph{This does not settle the prefactor question,} and we do not claim
-that it does.  A scalar $\Aeff$ estimate omits the vector-mode
-normalisation, the tensor contraction, the poling duty cycle and the
-transverse profile overlap, each an $O(1)$ factor; Ref.~\cite{Lu2020}'s
-own full calculation for the same device predicts $1.78$~MHz against the
-$1.2$~MHz they fit, so even a careful device-specific calculation
-carries a $1.5\times$ spread in $g$ (a factor $2.2$ in $g^2$).  The
-observation is recorded only as a direction worth checking: settling it
-requires a full-wave vector-mode overlap evaluation on a known geometry,
-not an effective-area estimate.  Nothing in this note depends on it,
-because every microring number below is anchored on the measured $g$.
+this gives $g/2\pi=1.58$~MHz at $\Theta=1$, against $1.78$~MHz from
+Ref.~\cite{Lu2020}'s own full calculation and $1.2$~MHz measured, i.e.\
+$\Theta\simeq0.75$.  This is consistent.  (An earlier version of this
+note, built on the main note's pre-correction prefactor, found $0.56$~MHz
+here, a factor $2.1$ below the measurement, and flagged it as an open
+question; the main note's prefactor has since been corrected and checked
+independently, and the tension disappears.)  A scalar $\Aeff$ estimate
+still omits the vector-mode normalisation, the tensor contraction and the
+transverse profile, each an $O(1)$ factor, so it is a cross-check only.
+Nothing in this note depends on it, because every microring number below
+is anchored on the measured $g$.
 
 Throughout this note we use the \emph{measured} $g$ and do not rely on
 \eqref{eq:g-geom}.
@@ -465,9 +473,10 @@ margin.
   \caption{(a) Cascaded enhancement $R$ versus SH quality factor at the
   reference operating point $\Dom=2\gamma_2$, for the poled and unpoled
   designs, with the demonstrated device marked.  The horizontal
-  reference lines are the metasurface note's $R\simeq12$ at
+  reference lines are the metasurface note's $R\simeq49$ at
   $Q_2=4\times10^3$ and the best fabricated SH-only sample
-  ($R^{(1\mathrm R)}=2.5$).  (b) The operating-point trade-off: $R$ falls
+  ($R^{(1\mathrm R)}\simeq10$), both after the October 2026 prefactor
+  correction.  (b) The operating-point trade-off: $R$ falls
   as $1/\Dom$ while the cascaded loss-to-Kerr ratio $\rho$ falls at the
   same rate, and bistability is lost above $\rho=1/\sqrt3$.}
   \label{fig:Rlandscape}
@@ -526,14 +535,14 @@ low-loss, TPA-free host at telecom.
 
 \paragraph{Consistency with the metasurface note.}  Inverting the main
 note's boxed result
-$\chithree_{\text{casc}}=-\omega_1|\chitwo|^2\eta_{\text{geom}}/(6n_2^2\Dom)$
-with the numbers above returns $\eta_{\text{geom}}=0.93$ for Design~B
-and $0.006$ for Design~C.  The unpoled value is squarely in the range
-found for the fabricated metasurface samples ($0.01$--$0.04$); the
-poled value sits at the physical ceiling $\eta_{\text{geom}}\le1$, which
-is again the prefactor question of Section~\ref{sec:anchor} (on the
-larger-prefactor branch it becomes $\simeq0.23$, a comfortable value for
-quasi-phase-matched interaction).  Either way the ordering is the
+$\chithree_{\text{casc}}=-2\omega_1|\chitwo|^2\eta_{\text{geom}}/(3n_2^2\Dom)$
+with the numbers above returns $\eta_{\text{geom}}=0.23$ for Design~B
+and $0.002$ for Design~C.  The poled value is a comfortable value for a
+quasi-phase-matched interaction ($\eta_\text{geom}=1$ is the
+uniform-medium bulk limit); the unpoled value lies below even the
+fabricated metasurface samples ($0.01$--$0.04$).  (Before the October
+2026 correction of the main note's prefactor the poled ring appeared to
+sit at the physical ceiling, $\eta_{\text{geom}}=0.93$.)  The ordering is the
 message: \textbf{periodic poling over a full circumference is what a
 metasurface meta-atom cannot do}, and it is worth a factor of $\sim100$
 in $R$.
@@ -830,10 +839,10 @@ under a sign change of $\Dom$, at fixed power, is the measurement.}
   \caption{(a) Bistability and parametric thresholds versus $Q_2$,
   cascaded and native, with the photorefractive onset reported in
   Ref.~\cite{Lu2020} shaded.  (b) Threshold versus operating point,
-  showing the shallow optimum near $\Dom\simeq3.7\gamma_2$ and the
-  divergence at $\Dom=\tfrac{\sqrt3}{2}\gamma_2$; the dotted curve is
-  the idealisation with the cascaded loss switched off, whose gap to the
-  solid curve is the price of $\rho$.  (c) Drive power and intracavity
+  showing the shallow optimum near $\Dom\simeq3.3\gamma_2$ (the plotted
+  grid resolves $3.4\gamma_2$), and the frozen-coefficient model (dotted),
+  which diverges at $\Dom=\tfrac{\sqrt3}{2}\gamma_2$ where the exact
+  threshold stays finite.  (c) Drive power and intracavity
   energy for a one-linewidth shift.}
   \label{fig:thresholds}
 \end{figure}
@@ -1158,7 +1167,8 @@ removes it.
   $Q_1,Q_2$ (loaded and intrinsic) in the same run.
 \item \textbf{Map $\Dom$.}  Temperature-tune to bring $\Dom$ through
   zero, identified by the maximum of SH power, and calibrate
-  $d\Dom/dT$ ($\sim0.9$~GHz/K) and $d\Dom/dV$ against it.
+  $d\Dom/dT$ (estimated $-0.34$ to $+1.6$~GHz/K, sign and magnitude
+  uncertain, Section~\ref{sec:signflip}) and $d\Dom/dV$ against it.
 \item \textbf{The sign-flip measurement.}  At fixed pump power
   ($10$--$50\,\mu$W), with the pump locked to the FM resonance
   ($\delta_1=0$, see Section~\ref{sec:competing}), dither $\Dom$
@@ -1171,7 +1181,8 @@ removes it.
   Sweep power to confirm linearity in $n$, and sweep $\Dom$ to trace the
   full dispersive lineshape of Figure~\ref{fig:signflip}(a).
 \item \textbf{Bistability.}  Raise the power to $\sim50\,\mu$W at
-  $\Dom\simeq+3.7\gamma_2$ and $\delta_1<0$; verify hysteresis, then
+  cold-cavity $\Dom\simeq+3.3\gamma_2$ and $\delta_1<0$ (pump-frame
+  $\Delta_\text{eff}\simeq3.7\gamma_2$); verify hysteresis, then
   reverse $\Dom$ and verify the hysteresis appears on the other side of
   the resonance.  This is the qualitative result no thermal mechanism
   can imitate.
@@ -1252,8 +1263,8 @@ extrapolation (Section~\ref{sec:caveats}).
 \midrule
 $Q_2$                          & $4\times10^3$ & $0.9$--$5.6\times10^3$ & $3$--$6\times10^5$\\
 overlap mechanism              & meta-atom & meta-atom & QPM over $2\pi R$\\
-$R$ at $\Dom=2\gamma_2$        & $\sim12$ & $0.4$--$2.5$ & $\bm{1.8\times10^3}$\\
-absolute scale known?          & prefactor $\times4$ & $+\,C_{\text{bridge}}$ & \textbf{yes, from} $\etanorm$\\[1pt]
+$R$ at $\Dom=2\gamma_2$        & $\sim49$ & $1.5$--$10$ & $\bm{1.8\times10^3}$\\
+absolute scale known?          & $\eta_\text{geom}$ modelled & $+\,C_{\text{bridge}}$ & \textbf{yes, from} $\etanorm$\\[1pt]
 bandwidth bottleneck           & SH ($\gamma_2<\gamma_1$) & SH & \textbf{FM cavity}\\
 CW Kerr device?                & marginal & no ($\mu$rad) & \textbf{yes, at $\mu$W}\\
 sign flip observable?          & yes & yes (ps $Z$-scan) & \textbf{yes, CW + lock-in}\\
@@ -1311,8 +1322,9 @@ In rough order of how much they could move the headline:
 \item \textbf{The thermal model is lumped and order-of-magnitude}
   ($R_{\text{th}}=3\times10^4$~K/W, absorbed fraction $0.05$--$0.3$ of
   the intrinsic loss, single time constant).  It is used only to
-  establish that the thermal background is comparable to or larger than
-  the cascaded Kerr, which is robust across that whole parameter range;
+  establish that the thermal background is comparable to the cascaded
+  Kerr (within a factor of two either way), which is robust across that
+  whole parameter range;
   none of the cascade physics depends on it.
 \item \textbf{Photorefractive drift is a real and unquantified risk} at
   exactly the $\gtrsim10\,\mu$W powers of interest~\cite{Lu2020}.  It
@@ -1324,14 +1336,14 @@ In rough order of how much they could move the headline:
   rigorously, but the FM/SH free-spectral-range walk-off makes the
   cascade mode-selective, so a genuine comb calculation requires the
   multimode $\chitwo$ model, not the effective Kerr used here.
-\item \textbf{The $\eta_{\text{geom}}=0.93$ implied by the metasurface
-  note's formula sits at its physical ceiling}
-  (Section~\ref{sec:R}), which points either to the larger
-  $\beta$-prefactor branch or to an overestimated $\Aeff$; as
-  Section~\ref{sec:anchor} says, a scalar estimate cannot separate the
-  two.  It does not affect any microring number in this note, all of
-  which are anchored on the measured $g$, but it does need resolving
-  before the two notes are quoted side by side.
+\item \textbf{The cross-check with the metasurface note is now
+  consistent.}  With the main note's corrected prefactor the poled ring
+  implies $\eta_{\text{geom}}=0.23$ and the first-principles $g$ agrees
+  with the measurement to within the transverse-overlap factor
+  (Sections~\ref{sec:anchor}, \ref{sec:R}).  The earlier apparent tension
+  ($\eta_{\text{geom}}=0.93$, $g$ low by $2.1\times$) came from the main
+  note's former factor-$4$ prefactor error.  No microring number depends
+  on this, since all are anchored on the measured $g$.
 \item \textbf{Equal three-wave couplings are assumed} across every mode
   triplet in the multimode calculation, and for the XPM factor of two.
   In a real ring $g_{12c}\neq g_{11b}$ because the frequencies, transverse
@@ -1346,17 +1358,19 @@ In rough order of how much they could move the headline:
   ($Q_1^{\text{load}}\sim10^6$, $Q_1^{\text{int}}\sim2\times10^6$) with
   the demonstrated coupling $g/2\pi\simeq1.2$--$1.4$~MHz yields
   $R\simeq1.8\times10^3$ at $\Dom=2\gamma_2$, i.e.\
-  $n_2^{\text{eff}}\simeq-3.3\times10^{-16}$~m$^2$/W.  This is three
-  orders of magnitude better than anything the metasurface route
-  delivered, and the reason is $Q_2$ and quasi-phase matching, not luck.
+  $n_2^{\text{eff}}\simeq-3.3\times10^{-16}$~m$^2$/W.  This is two
+  orders of magnitude above the fabricated metasurface designs
+  ($R\le10$) and $\sim40\times$ above the idealised doubly-resonant
+  metasurface ($R\simeq49$), and the reason is $Q_2$ and quasi-phase
+  matching, not luck.
 \item \textbf{Periodic poling is the enabling step.}  Without it,
   $R\simeq13$ --- the same order as the metasurface --- and the
   crossover $Q_2$ rises from $164$ to $2.4\times10^4$.
 \item The absolute scale is measurable, not modelled: $\etanorm$ in
   \%/W fixes $g$ through \eqref{eq:etaSHG}.  This removes the
-  $C_{\text{bridge}}$ unknown that limited the SH-only sample analysis,
-  and incidentally provides the first external evidence on the main
-  note's $\beta$-prefactor ambiguity, favouring the larger branch.
+  $C_{\text{bridge}}$ unknown that limited the SH-only sample analysis;
+  the measured $g$ is also consistent with the main note's corrected
+  prefactor (Section~\ref{sec:anchor}).
 \item Design rules: bistability and single-pair parametric gain both
   need the \emph{pump-frame} ratio $\rho=\kappa_2/|\Delta_{\text{eff}}|$
   to satisfy $\rho<1/\sqrt3$ --- a condition on $\Delta_{\text{eff}}=\Dom-2\delta_1$,
@@ -1429,6 +1443,11 @@ J.~Lu, M.~Li, C.-L.~Zou, A.~Al~Sayem, and H.~X.~Tang,
 niobate microring resonators,''
 \emph{Optica} \textbf{7}, 1654--1659 (2020); arXiv:2007.07411.
 
+\bibitem{Zhao2021}
+M.~Zhao and K.~Fang,
+``InGaP quantum nanophotonic integrated circuits with 1.5\% nonlinearity-to-loss
+ratio,'' arXiv:2105.12705 (2021), Eq.~(1).
+
 \bibitem{Lu2019}
 J.~Lu, J.~B.~Surya, X.~Liu, A.~W.~Bruch, Z.~Gong, Y.~Xu, and H.~X.~Tang,
 ``Periodically poled thin-film lithium niobate microring resonators with
@@ -1452,7 +1471,7 @@ S.-W.~Huang, and Y.-P.~Huang,
 ``Broadband frequency comb generation through cascaded quadratic
 nonlinearity in thin-film lithium niobate microresonators,''
 \emph{Opt.\ Lett.} \textbf{49}, 2449--2452 (2024);
-doi:10.1364/OL.518722.
+doi:10.1364/OL.523920.
 
 \bibitem{DeSalvo1992}
 R.~DeSalvo, D.~J.~Hagan, M.~Sheik-Bahae, G.~Stegeman, E.~W.~Van~Stryland,
