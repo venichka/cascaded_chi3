@@ -902,7 +902,7 @@ def summary(dps):
         Ut = U + q.U_native
         Pb = bistability_threshold_exact(q, D)[0]
         Pm = mi_threshold_bogoliubov(q, D, 10e6 * TWOPI, q_max=40,
-                                     d1_grid=41)[0]
+                                     d1_grid=81)[0]
         print(f"{q.label:<30}{q.g_rate/TWOPI/1e6:>9.2f}{q.Q2_load:>9.0f}"
               f"{float(R_ratio(q, D)):>9.0f}{U/TWOPI:>11.0f}"
               f"{Pb*1e6:>11.2f}{Pm*1e6:>10.2f}")

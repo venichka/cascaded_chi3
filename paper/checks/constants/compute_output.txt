@@ -1,0 +1,62 @@
+== Refractive indices ==
+LiNbO3 (Zelmon, cong.)  n_e(1.55)=2.1376  n_e(0.775)=2.1784  n_o(1.55)=2.2111  n_o(0.775)=2.2587
+GaP    (Bond 1965)      n(1.55)=3.0536  n(0.775)=3.1953
+AlN    (Pastrnak 1966)  n_e(1.55)=2.1602  n_e(0.775)=2.1830  n_o(1.55)=2.1199  n_o(0.775)=2.1399
+Al0.2Ga0.8As (Gehrsitz, 20 C)  n(1.55)=3.2672  n(0.775)=3.5329  [model E0 = 1.7148 eV]
+LiNbO3 n_e(1.064) = 2.1555 (Bache & Schiek used 2.1558)
+Al0.2Ga0.8As Gehrsitz gap parameter E0 = 1.715 eV -> SH is 115 meV below it
+Al0.2Ga0.8As Eg(300 K, Adachi 1985) = 1.673 eV (741 nm); SH photon 1.600 eV -> 74 meV below gap; half-gap 0.837 eV (1.482 um), pump 0.800 eV -> 37 meV below half-gap
+
+== Second-order coefficients, Miller's rule to SHG of 1.55 um ==
+LiNbO3 d33: 19.5 @1.313 -> 18.75 pm/V ; 25.2 @1.064 -> 22.67 pm/V  (Miller, Zelmon n_e)
+AlN d33: 4.3 @1.030 -> 4.04 pm/V (Miller, Pastrnak n_e)
+GaP d14: 70.6 @1.064 -> 56.14 pm/V (Miller, Bond n)
+   [unverified 36.8 @1.313 would give 33.65 pm/V]
+LN d33 @4.135 (Miller from 25.2@1.064) = 17.08; from 27@1.064 (Skauli's reference) = 18.30
+GaAs d14 @4.135 = 5.01 x 17.08 = 85.6 pm/V (Skauli/Pinguet quote 94 +- 10 with d33(LN)=27 @1.064)
+Al0.2Ga0.8As d14 @1.55: 92.6 pm/V (from 85.6); 101.7 pm/V (from 94)  [Miller across x: Ohashi 1993]
+   GaAs index check @4.135/2.0675: Skauli 3.3020/3.3356; Gehrsitz x=0 3.3081/3.3415
+
+== Tensor norm checks: |chi2| / (2 d_ref) ==
+LN 3m  d33=18.9 d31=+3.0 d22=+0.0: norm/(2 d33) = 1.0000
+LN 3m  d33=18.9 d31=+3.0 d22=+2.0: norm/(2 d33) = 1.0000
+LN 3m  d33=18.9 d31=+3.0 d22=-2.0: norm/(2 d33) = 1.0000
+LN 3m  d33=18.9 d31=+3.0 d22=+3.0: norm/(2 d33) = 1.0000
+LN 3m  d33=18.9 d31=-3.0 d22=+0.0: norm/(2 d33) = 1.0000
+LN 3m  d33=18.9 d31=-3.0 d22=+2.0: norm/(2 d33) = 1.0000
+LN 3m  d33=18.9 d31=-3.0 d22=-2.0: norm/(2 d33) = 1.0000
+LN 3m  d33=18.9 d31=-3.0 d22=+3.0: norm/(2 d33) = 1.0000
+AlN 6mm d31=+0.089: norm/(2 d33) = 1.0000
+AlN 6mm d31=-0.089: norm/(2 d33) = 1.0000
+43m: norm/(2 d14) = 1.15470  (2/sqrt3 = 1.15470)
+
+== LiNbO3 n2_I: two-band (Sheik-Bahae) scaling, e-pol ==
+Eg=3.8 eV: n2(1.55)/n2(1.064)=0.828 -> 3.20e-19 m^2/W ; n2(2.05)/n2(1.064)=0.765 -> 2.95e-19 (Jankowski 2020 quote 2.6e-19 at 2.05)
+      with f_R=0.5 Raman part held fixed: 3.53e-19 m^2/W
+Eg=4.0 eV: n2(1.55)/n2(1.064)=0.842 -> 3.25e-19 m^2/W ; n2(2.05)/n2(1.064)=0.783 -> 3.02e-19 (Jankowski 2020 quote 2.6e-19 at 2.05)
+      with f_R=0.5 Raman part held fixed: 3.56e-19 m^2/W
+
+== Figure of merit (Q2 = 4000, eta = 0.3) ==
+host            d(pm/V)   |chi2|    nSH     n0      n2_I    chi_nat         F        R   Q2(R=1)
+LiNbO3            18.75     37.5  2.178  2.138  1.80e-19  2.911e-21 1.018e-01     20.4       197
+GaP               56.14    129.7  3.195  3.054  1.10e-17  3.630e-19 4.535e-03    0.907  4.41e+03
+AlN                4.04      8.1  2.140  2.160  3.50e-19  5.781e-21 2.468e-03    0.494   8.1e+03
+Al0.2Ga0.8As      92.60    213.9  3.533  3.267  2.60e-17  9.823e-19 3.731e-03    0.746  5.36e+03
+
+== Spread: F range from the source spread ==
+LiNbO3         d   18.7-  22.7 pm/V, n2_I 9.10e-20-3.20e-19:  F 0.0572-0.294,  R 11.4-58.9,  Q2(R=1) 67.9-349
+GaP            d   50.0-  56.1 pm/V, n2_I 7.00e-18-1.40e-17:  F 0.00283-0.00713,  R 0.565-1.43,  Q2(R=1) 2.81e+03-7.08e+03
+AlN            d    3.8-   4.3 pm/V, n2_I 2.30e-19-3.50e-19:  F 0.00214-0.0043,  R 0.427-0.86,  Q2(R=1) 4.65e+03-9.36e+03
+Al0.2Ga0.8As   d   78.7- 111.9 pm/V, n2_I 1.50e-17-2.60e-17:  F 0.0027-0.00944,  R 0.539-1.89,  Q2(R=1) 2.12e+03-7.42e+03
+
+== LiNbO3 sensitivity: R at Q2=4000, eta=0.3 (Q2(R=1) in brackets) ==
+d33 \ n2_I    9.10e-20   1.80e-19   3.20e-19
+ 18.75 pm/V   40.3 [  99]   20.4 [ 197]   11.4 [ 349]
+ 22.67 pm/V   58.9 [  68]   29.8 [ 134]   16.7 [ 239]
+ 25.20 pm/V   72.8 [  55]   36.8 [ 109]   20.7 [ 193]
+
+== Current Supplement table inputs, recomputed ==
+LiNbO3   F=0.245  R=48.9  Q2(R=1)=81.7
+GaP      F=0.0104  R=2.08  Q2(R=1)=1.92e+03
+AlN      F=0.0113  R=2.27  Q2(R=1)=1.76e+03
+AlGaAs   F=0.000918  R=0.184  Q2(R=1)=2.18e+04

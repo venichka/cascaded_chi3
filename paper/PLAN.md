@@ -1,6 +1,6 @@
 # Paper plan: resonant cascaded χ⁽²⁾:χ⁽²⁾ Kerr nonlinearity in metasurfaces (and microrings)
 
-*Created 2026-10-06. Owners: Nikita Nefedkin (theory), Sedigheh Esfahani (metasurface design, completion). Status: plan for approval; nothing drafted yet.*
+*Created 2026-10-06. Owners: Nikita Nefedkin (theory), Sedigheh Esfahani (metasurface design, completion). Status (2026-10-21): the draft is an outline plus a filled theory part, edited for logic and language on 2026-10-21. §0 and §10 are current. §§1–9 and 11–12 are the long-form plan of 2026-10-06, kept as background; where their numbers differ from §0, §7 and the manuscript, the manuscript is right.*
 
 **Decisions already taken (2026-10-06):**
 
@@ -81,20 +81,123 @@ The paper goes to **Optica as a Research Article** first. The long-form structur
 
 ### 0.4 Cover letter (250 words), points to make
 
-1. A resonance at the second harmonic replaces the phase mismatch of bulk cascading, which gives a sign-tunable Kerr response in χ⁽²⁾ hosts, with one closed formula from bulk to resonators.
-2. For LiNbO₃ the cascade exceeds the native Kerr response by ~50 in a doubly resonant metasurface and ~10³ in a poled microring. The sum rule says where this helps: narrowband/CW, not ultrafast.
-3. A concrete metasurface design and a picosecond Z-scan protocol that isolates the cascade from the native response.
+1. A resonance at the second harmonic replaces the phase mismatch of bulk cascading, which gives a sign-tunable Kerr response in χ⁽²⁾ hosts, with one closed formula from bulk to resonators (overlap η ≤ 1, exact bulk limit). This extends the resonant idea of Khurgin and Ding (1994–95) from surface-emitting structures to arbitrary resonators.
+2. Two rules follow for any resonator: the strength–bandwidth product does not depend on Q₂, and the gain over the native Kerr response depends on the host only through F. For LiNbO₃ the cascade exceeds the native response by ~20 in a doubly resonant metasurface (Q₂ = 4000, η = 0.3) and by 400–3000 in poled microrings, at bandwidths of 0.1 THz and below 1 GHz. In a microring the cascaded shift follows from the measured SHG efficiency with no free parameter (Eq. 7), which makes a direct test possible on existing poled rings.
+3. A concrete metasurface design and a picosecond Z-scan protocol that isolates the cascade (the part odd in Δω) from the native response. *This point needs the design and its detectability budget.*
 4. Relevance to metasurface nonlinear optics, integrated LiNbO₃ photonics and all-optical switching.
 
 ### 0.5 Decisions this adds
 
+- **Material constants.** **Decided 2026-10-07: sourced 1.55-µm values** (see §7 and `checks/constants/`). The LiNbO₃ headline is R ≈ 20; the abstract says "about 20".
 - **Corresponding author.** **Decided 2026-10-06: Andrea Alù** (aalu@gc.cuny.edu; set in `main.tex` and `main_prapplied.tex`). Optica requires exactly one, and Nikita leaves CUNY on 10-26.
 - **Spelling.** Optica Publishing Group's style guide does not fix British versus American spelling. The outline keeps British spelling consistently, as in the notes.
 - **Data availability.** The default is "available on reasonable request". Depositing the scripts (e.g. on figshare/Zenodo) and citing them would strengthen it.
+- **Review of 2026-10-08 (`checks/REVIEW_2026-10-08.md`), decided by Nikita:**
+  1. *Prior art is flagged.* Khurgin–Ding 1994–95 (`khurgin1994`, `lee1995`) proposed a SH resonance in place of Δk; cavity effective Kerr (Drummond, Majumdar, Fryett, Gustin) and LiNbO₃ cavities/waveguides at 10³–10⁴× (Musgrave, Nie, Li 2026) are cited. The abstract and introduction now present the work as the general resonator formulation (vector overlap, η ≤ 1, bulk limit, F, strength–bandwidth relation) and its metasurface implementation. A `% FLAG (positioning)` comment marks the spot in the intro.
+  2. *Venue, the concrete design, absolute figures of merit and the Z-scan SNR budget are Sedigheh's* (review items A2 and A5; see §10).
+  3. *Fig. 3(c) moved to γ₁ = γ₂* (was 10γ₂). The SH then stores 0.5–0.8× the pump energy at the folds, and the native cross terms are ≤ 0.16|Δω|. Validity condition (main §2, supplement §4.B): cascaded shift ≪ |Δω|(R/2)^{1/2}.
+  4. *Microring R is quoted as a range:* 400–3000 in the abstract, 6×10²–2.8×10³ (A) and 4×10²–1.8×10³ (B) in §5, from g taken from η_SHG versus the fitted lineshape.
+- **Status:** the paper is a draft with an outline and a filled theory part; the design, Fig. 1, the introduction prose and Section 6 are open.
+
+### 0.6 Story check for Optica (2026-10-21)
+
+**The story in four steps.** The introduction (item 4) and the discussion follow it, and the cover letter should too.
+
+1. In a bulk crystal the cascaded Kerr response is set by the material phase mismatch, cΔk/n₂ ≈ 0.04ω₁ in LiNbO₃. A detuned SH resonance replaces it with a designed detuning, Δω ≈ 10⁻³ω₁ at Q₂ = 4000 and Δω = 2γ₂.
+2. One closed formula (Eq. 3) covers bulk crystals, metasurfaces and rings. Its overlap η ≤ 1 equals 1 in the bulk limit, so it is the fraction of the bulk bound-wave coupling that a resonator keeps.
+3. Two rules follow for any resonator. The product of strength and bandwidth is fixed (Eq. 5), and the gain over the native Kerr response is R ≈ Q₂ηF/6, where the host enters only through F (0.1 for LiNbO₃, about 4×10⁻³ for the III–V hosts).
+4. The platforms are different points of the same trade-off (Table 1):
+   - metasurface: R ≈ 20 at 0.1 THz;
+   - microring: R ≈ 400–3000 below 1 GHz;
+   - bulk: R ≈ 2 above 10 THz.
+
+   The metasurface is the free-space, sub-micrometre, picosecond option, and a Z-scan of the part odd in Δω isolates its cascade.
+
+**Verdict.** The logic from §2 to §6 holds: formula, then the bound and F, then the two platforms, then the comparison. The weak point for Optica is the gap between the title and the evidence.
+- **The metasurface results are the least concrete.** The title and abstract lead with metasurfaces, but the doubly resonant result rests on an assumed Q₂ = 4000 and η = 0.3, and the singly resonant case is a placeholder. The ring has the larger numbers and the only CW device, and its physics is prior art.
+- **The metasurface does not win on size.** |χ_casc| ≈ 6×10⁻²⁰ m²/V² is below the native χ⁽³⁾ of Si or GaP, and bulk cascading has the larger |χ|Δf. What it offers is a Kerr sign set by Δω (tunable in situ), in a sub-µm free-space layer at picosecond speed, plus a parity measurement that isolates the cascade. The text now argues this (intro item 4, §6), but the argument needs a design and a detectability number to convince a referee.
+- **Optica therefore depends on two deliverables.**
+  1. One real design with M̃ computed from its fields. It fills Fig. 4(a), §4.2 and row 4 of Table 1.
+  2. The Z-scan signal of that design in absolute units: phase per GW/cm², substrate background and SNR.
+
+  With both, Optica is a reasonable attempt. Without them this is a theory paper with idealised metasurface numbers, better sent to Optics Express or PR Applied; the text carries over unchanged.
+
+**Recommendations, not applied (decide before submission):**
+- **Title (D3).** Keep the metasurface title only if the design arrives. Otherwise use a general one, e.g. *Cascaded Kerr nonlinearity at a second-harmonic resonance: from metasurfaces to microrings*.
+- **Positioning.** Confirm the wording with J. Khurgin, since his 1994–95 papers are the direct precedent for replacing Δk by a resonance (intro item 2, `% FLAG`).
+- ~~**li2026.** Check its mechanism.~~ Done 2026-11-09, see §0.7.
+- **Measurement.** Weigh the alternative measurement (the pump-resonance shift versus Δω in a doubly resonant sample), which the 10-08 review rated more sensitive than the singly resonant Z-scan.
+
+### 0.7 Literature check of the open items (2026-11-09)
+
+Five parallel searches, with full texts where accessible. All new `refs.bib` entries were checked against Crossref or the arXiv API. Main, supplement and the fallback build clean (main 11 pp, supplement 12 pp).
+
+**Closed and applied:**
+- **li2026.** arXiv:2512.10462 full text: the mechanism is cascaded SHG–DFG, analysed as phase matched, in a straight 1-cm PPLN TFLN waveguide with CW pumps. n₂,eff is fitted from the FWM idler efficiency with an assumed seed, Pᵢ(0) = 10⁻⁸ W, and no sign or Δk dependence is reported. It is not an R comparable to ours.
+  - Table 1 row replaced by the measured AlN microring of cui2025: SPM tuned −2.7 to +4.7× intrinsic, so R = 3.7; Q₂ = 1.8×10⁵; pump linewidth 0.33 GHz. li2026 is kept in intro item 3 with the scoped wording.
+  - Fallback `main_prapplied.tex` fixed the same way.
+- **musgrave2026 / nie2026** are free-space bulk-PPLN cavities, not microresonators. eLight is doubly resonant, with the Lorentzian SH-detuning form; Nat. Commun. is singly resonant, with the sinc-Δk form. Their ">10³" and ">100×" are model ratios. Intro item 3 now says "estimated at 10² to above 10³ times … drives dissipative quadratic solitons".
+- **cui2022 / cui2025** used unpoled AlN rings, with g calculated from an assumed χ⁽²⁾ ≈ 1 pm/V. Cui 2022 measured the FWM enhancement, not a shift; Cui 2025 measured the SPM shift versus Δ, with no SHG efficiency reported. **No experiment has yet measured both η_SHG and the cascaded shift on one device**, which is the opening for the ring section (see the microring discussion).
+- **Positioning against Khurgin–Ding.**
+  - What they have (1997 JOSA B 14, 1977 full text; 1994–97 abstracts): the SH-only resonance taken exactly on resonance, with χ⁽²⁺²⁾ ∝ Q_i, scalar unbounded overlaps, and "the enhancement … is equal to the Q factor of the intermediate wave". There is no detuning dependence or sign change, η ≤ 1 bound, closed bulk limit, sum rule or F.
+  - Applied: intro item 2 now adds "with an enhancement … of the order of the quality factor of that resonance [khurgin1997]", and the FLAG comment lists what is and is not in their papers.
+  - Applied: `khurgin2023` (Nat. Photon. 17, 545, "Nonlinear optics from the viewpoint of interaction time": resonant enhancement limited by bandwidth) is cited next to Eq. (5).
+  - Still open: confirm the wording with Khurgin; the 1994/95 formulas are paywalled.
+- **Scoop check (2024 to Nov 2026): no direct scoop** of the metasurface cascaded Kerr, the sum rule or the odd-in-Δω Z-scan. Newly cited: `liu2019ol` (OL 44, 1456: cascaded effective FWM in an LNOI microdisk, the earliest LN microcavity case) and `musgrave2026opo` (arXiv:2604.03474, sign-tunable effective Kerr above 10³ in a doubly resonant OPO).
+  - Candidates not added:
+    - Son & Chekhova, arXiv:2601.23137 (in a bare thin χ⁽²⁾ layer, direct χ⁽³⁾ SFWM beats the cascade; supports our gap);
+    - Panov, OL 50, 5849 (2025) (GaP metasurface effective n₂ about 700× bulk, native);
+    - Skryabin, JOSA B 37, 2604 (2020) (CMT for QPM χ⁽²⁾ rings);
+    - Talenti 2025, JEOS-RP;
+    - Gutierrez/Marandi, arXiv:2610.30079.
+  - Coverage of 2026 Optica and Nature-family journals was weak (bot walls). Rerun a manual search before submission.
+- **LiNbO₃ n₂ᴵ now has primary sources.**
+  - He et al., Optica 6, 1138 (2019) inferred 1.8e-19 from an OPO threshold, ordinary polarisation.
+  - Shams-Ansari et al., APL Photon. 7, 081301 (2022) measured 1.74e-19 (extraordinary) and 1.61e-19 (ordinary) by XPM at 1550 nm, with the cascade estimated below 10% and not subtracted.
+  - Supplement §5 cites both. The adopted 1.8e-19 and every number stay.
+  - Details are in `checks/constants/constants.md`.
+- **Q₂ limits of the SH BIC (main §4.1, literature text).**
+  - Q_dis ∝ σ⁻² (kuhne2021, maslova2021) and Q_fin ∝ N² (bulgakov2017).
+  - Measured Q: ~10⁴ for Si₃N₄ near 740 nm (hsu2013), 800 for the GaN SH mode at 775 nm (wang2020), >8×10³ for LNOI metasurfaces at 1.55 µm (difrancescantonio2025). Q₂ = 4000 at 775 nm has not been reported in LN.
+  - **New design constraint:** a Γ-point BIC above the diffraction threshold is not symmetry protected (cerjan2021). On silica the SH needs p < 535 nm, where a first-order Γ-point pump mode would need n_eff > 2.9, out of reach in LN. The doubly resonant LN design therefore needs a period-doubled pump mode (weak SH leakage ∝ δ²) or a membrane (p < 775 nm). **The singly resonant design is not affected**, which supports putting the measurement there. Stated in §4.1, with a `FOR THE DESIGN` note for Sedigheh.
+
+**Microring section reframed (2026-11-09, user decision): the ring is now the place where the theory can be tested quantitatively.**
+- **Main §5 rewritten (about 380 words).** It leads with the new **Eq. (7)**: δω_casc/κ₁ = η_SHG P_in κ₂Δω/(Δω² + κ₂²) at critical coupling and locked pump, to first order. Other couplings multiply it by (κ₁/2κ₁ᵉ)(κ₂/2κ₂ᵉ).
+  - Eq. (7) has no overlap, material constant or mode volume. It is ρ written with the measured SH power.
+  - Lu 2020 device: 0.09 half-widths = 17 MHz at 5 µW and Δω = 2γ₂, against 0.03 MHz native. That is below its parametric and photorefractive limits. The fitted g gives 4.7× more.
+  - Claim: "to our knowledge, no device has been characterised by both η_SHG and the cascaded shift". The odd-in-Δω EO-dither extraction is tied to the §4.2 Z-scan.
+  - Kept: R ranges and the parametric threshold 8 µW (vs 9 mW native, below 37 µW bistability).
+  - Moved out of the main text (still in supplement §8): the response-time 4%, 8 fJ switching and the thermal numbers.
+- **Supplement §8, new subsection "Cascaded shift from measured quantities".**
+  - Exact relation δω_casc = (Δω/κ₂)·P_SH^tot/(2W₁), valid for any resonator within the elimination.
+  - Eq. (S-shift-eta) with the general coupling factors. Lu device: coupling ratios 0.70 / 0.22, factor 1.59.
+  - The locked-pump nonlinear-loss correction is 0.96 at 2γ₂ and 0.76 at |Δω| = κ₂.
+  - All numbers checked numerically, including the energy form, which reproduces −U n exactly.
+- **Fig. 5 now has two panels** (`figures/fig5_ring.py`):
+  - (a) R vs Q₂ with a band between the two g values for design B, unpoled C, the Lu device at both g, and the AlN point of cui2025 (3.7 at |Δω| = γ₂/2, scaled by 8/17 to 1.7 at 2γ₂);
+  - (b) predicted shift vs Δω for the Lu device at 5 µW, from Eq. (7) and from the locked-pump steady state.
+  - The old threshold-vs-Q₂ panel was dropped; its numbers stay in Table S2.
+- **Table 1.** The last column is now "CW threshold": bistability / bistability / none / – / "8 µW, parametric". The AlN R is 1.7 at 2γ₂, with a footnote giving the measured range. The footnote also records White's pump-resonant cavity and the 37 µW bistability.
+- **Intro item 4** adds: "In a microring the cascaded shift follows from the measured second-harmonic efficiency, so the formula can be tested with no free parameter."
+- Main is now 12 pp, supplement 12 pp; both build clean.
+
+**Final check before Overleaf and the handoff (2026-11-09, later).** Four independent reviews (theory analytics and numerics; microring; claims, citations and consistency; language) plus mechanical checks: every `refs.bib` DOI verified against Crossref (title, volume, first page, year, first author), all `\cite` keys present, writing-rule grep clean. Everything below is applied; main 12 pp, supplement 12 pp, fallback 9 pp, all clean.
+- **Numerics corrected:** pulsed Z-scan window "within 7%" → "within 8%" (the reduction factor peaks at 1.073 at γ₂τ = 2.25); "overestimates R by 6%" → "by one part in 16"; ring modulation bandwidth at 20 µW "8%" → "7%"; Table 1 ring row R = 4×10²–1.8×10³ (design B; 2.8×10³ belongs to design A); Table S2 footnote and §8.E cross-references moved to 8.E/8.F after the new subsection.
+- **Analytics sharpened:** Eq. (7) holds "when the nonlinear loss is neglected" (exact in the shift for a locked pump); its Lu-device numbers include the coupling factor 1.6, now stated; Eq. (7) described as the SH power measuring the loss and ρ converting it; "a further fraction equal to the cascaded shift divided by |Δω|"; the quasi-static bound sentence no longer calls Δf ≤ |Δω+iγ₂/2|/2π "the quasi-static range"; the bulk strength–bandwidth comparison says Eq. (5) does not bound the bulk response (no single pole; the η = 1 bound would be 3.8e-8 against the quoted >5e-8).
+- **Claims scoped:** "thermal and photorefractive shifts comparable with or larger than" (design A at 5 µW: 0.6κ₁ vs 0.09κ₁); "we have found no report of Q₂ = 4000 at 775 nm in LiNbO₃"; N² scaling marked as one-dimensional; Cui 2025 extremes "at the extrema of the tuning curve, |Δω| = γ₂/2"; Fig. 4(b) "an illustrative value R = 3"; gorbounova1996 "appear in" (bandwidth trade-off only implicit in its abstract). Verified and kept: White 1996 is monolithic; Lu 2023 reports neither η_SHG nor a measured shift, so "no device characterised by both" stands; khurgin1997 does state enhancement ≈ Q.
+- **Consistency:** Table 1 bandwidth footnote names which resonance (SH for the metasurface, pump for the rings); Discussion says the SH linewidth sets the response time; "intrinsic" → "native" for the Kerr response throughout; Table 1 caption in `\bf` like the supplement tables; Fig. 3(c) result sentence moved from the caption into §4.1; Fig. 3(d) "for Δω < 0"; Fig. S1 drive given as |s|² = 10⁻⁴γ₂³/|β|²; `fig3_double.py` docstring fixed.
+- **Language:** abstract 122 → 113 words; ~60 line edits (long sentences split, Oxford commas removed, duplicate intro phrases cut, "Here we" dropped, measurements put in the conditional, supplement symbols Q₂/δ₁/R/D₂ defined at first use, supplement equation references as "Eq. (S\,n)", the standard g formula displayed, subsection "Electro-optic and thermal tuning of Δω").
+- **refs.bib:** pastrnak1966 → Phys. Status Solidi B; Nat. Photonics and APL Photonics spelled as in the other entries. fathi2026 has no volume yet (Crossref, 2026-09-02).
+- **Left as found (the user's own edits since 10-21):** the corresponding author is now Nefedkin (nnefedkin@gc.cuny.edu) with a comment to discuss the order with Alù and Khurgin; Data availability reads "Write here something."; Funding is empty; "See Supplement for supporting content." These must be settled before Sedigheh sees the file.
+
+**Still open after the check:**
+- **GaP d₁₄.** Search-engine extracts of Shoji 1997 Table 11 suggest 36.8 pm/V at 1.313 µm, which gives 34 pm/V at 1.55 µm and F 2.8× lower. Unverified; needs a library copy (Sedigheh has CUNY access). The paper's "upper estimate" wording is safe either way.
+- **Positioning wording:** confirm with Khurgin.
+- **Funding statement** (grant numbers from Alù), **title** (D3), **venue** and **data deposit**: decisions, not research.
 
 ## 1. The paper in one paragraph
 
-Cascading two χ⁽²⁾ processes (SHG, then DFG) produces an effective Kerr response on the pump. In bulk crystals the strength of this cascade is set by the phase mismatch, χ³_casc ∝ 1/Δk. **We replace the phase mismatch with a resonance:** a dark (bound-state-in-the-continuum) second-harmonic mode detuned by Δω = 2ω₁ − ω₂ gives χ³_casc ∝ Q₂/Δω. We derive a closed, normalisation-invariant expression for χ³_casc in an arbitrary resonator from two independent routes. One is the χ⁽²⁾·G·χ⁽²⁾ Green's-function route; the other is temporal coupled-mode theory with exact elimination of the SH. In the uniform-medium limit the expression reduces exactly to the textbook bulk result. The resonant cascade is sign-tunable through Δω and comes with a fixed loss partner, ρ = γ₂/(2|Δω|). It obeys a bandwidth–enhancement sum rule, so a resonance redistributes cascaded nonlinear action rather than creating it, which places it in the narrowband/CW niche. In LiNbO₃, whose native Kerr is weak, a doubly-resonant BIC metasurface beats the native χ⁽³⁾ by R ≈ 50 at a conservative operating point. Even a fabricable singly-resonant design reaches R of order 5–10, with an unambiguous fingerprint: the nonlinear refraction reverses sign as Δω crosses zero. For a periodically poled thin-film LN microring, the same theory reduces to the cavity expression already used to demonstrate sign-tunable cascaded self-phase modulation in AlN rings (Cui, Zhang & Fan 2022, 2025). Applied there quantitatively, it gives R ≈ 10³ and microwatt-level CW bistability, switching and parametric thresholds. Δω can be set electro-optically, and a measurement antisymmetric in Δω separates the cascade from thermal and photorefractive shifts.
+Cascading two χ⁽²⁾ processes (SHG, then DFG) produces an effective Kerr response on the pump. In bulk crystals the strength of this cascade is set by the phase mismatch, χ³_casc ∝ 1/Δk. **We replace the phase mismatch with a resonance:** a dark (bound-state-in-the-continuum) second-harmonic mode detuned by Δω = 2ω₁ − ω₂ gives χ³_casc ∝ Q₂/Δω. We derive a closed, normalisation-invariant expression for χ³_casc in an arbitrary resonator from two independent routes. One is the χ⁽²⁾·G·χ⁽²⁾ Green's-function route; the other is temporal coupled-mode theory with exact elimination of the SH. In the uniform-medium limit the expression reduces exactly to the textbook bulk result. The resonant cascade is sign-tunable through Δω and comes with a fixed loss partner, ρ = γ₂/(2|Δω|). It obeys a bandwidth–enhancement sum rule, so a resonance redistributes cascaded nonlinear action rather than creating it, which places it in the narrowband/CW niche. In LiNbO₃, whose native Kerr is weak, a doubly-resonant BIC metasurface beats the native χ⁽³⁾ by R ≈ 20 (11–30 across the reported constants) at a conservative operating point *(updated 2026-10-21; was 50 with the pre-10-07 constants)*. A singly-resonant design gives a smaller R, to be computed for the chosen design, and its fingerprint is that the nonlinear refraction reverses sign as Δω crosses zero. For a periodically poled thin-film LN microring, the same theory reduces to the cavity expression already used to demonstrate sign-tunable cascaded self-phase modulation in AlN rings (Cui, Zhang & Fan 2022, 2025). Applied there quantitatively, it gives R ≈ 400–3000 and microwatt-level CW bistability, switching and parametric thresholds. Δω can be set electro-optically, and a measurement antisymmetric in Δω separates the cascade from thermal and photorefractive shifts.
 
 **Working titles** (decide later, D3):
 
@@ -110,9 +213,9 @@ Cascading two χ⁽²⁾ processes (SHG, then DFG) produces an effective Kerr re
 |---|---|---|
 | M1 | **Resonant lever.** χ³_casc = −(2ε₀ω₁/3)·\|M\|²/[N₂(Δω + iγ₂/2)∫\|f₁\|⁴] is exact within single-mode theory, has two independent derivations, and reduces to the bulk bound-wave cascade in the uniform limit. | Theory §2; Fig. 2 |
 | M2 | **Built-in limits.** The response is sign-tunable (odd in Δω) and its loss partner is even in Δω. The sum rule says \|χ³_casc\|·Δf is independent of Q₂. A parametric-instability ceiling sets in at \|βa₁\| ~ \|Δω\|. The niche is narrowband and CW, not ultrafast. | §3; Fig. 2c |
-| M3 | **Host selection.** R ∝ Q₂·η·\|χ²\|²/(n₂²χ³_nat), so χ⁽²⁾ hosts with weak native Kerr win (LiNbO₃). III–V hosts lose at telecom because of band-edge Kerr. | §4; Table 1; Fig. 3 |
+| M3 | **Host selection.** R ∝ Q₂·η·\|χ²\|²/(n₂²χ³_nat), so χ⁽²⁾ hosts with weak native Kerr win (LiNbO₃, F = 0.1). III–V hosts, with their band-edge Kerr, reach R = 1 only at Q₂ ≈ 4–8×10³ (F ≈ 4×10⁻³). | §4; Table 1; Fig. 3 |
 | M4 | **Metasurfaces (centre of mass).** A dark SH BIC is the natural resonant lever. The doubly-resonant device gives device-level leverage, (1+R) on phase and (1+R)² on FWM. The singly-resonant metasurface is the fabricable first step, and its sign flip can be measured by a picosecond Z-scan versus pump detuning, the resonant analogue of DeSalvo 1992. The signature must be defined as the part that is **odd in Δω = 2ω₁ − ω₂ at fixed FW detuning**: native χ⁽³⁾ alone can invert the effective n₂ near a Mie resonance (Panov 2020). | §5; Figs. 4–5 |
-| M5 | **Microrings: the same theory, quantified.** Sign-tunable cascaded Kerr in χ⁽²⁾ rings is established experimentally (Cui *et al.* 2022, 2025, AlN; Lu *et al.* 2023, PPLN). Our contribution is quantitative and protocol-level, for poled TFLN: R ~ 10³ against the same ring's native Kerr (≈13 unpoled); thresholds evaluated at Δ_eff with multimode Bogoliubov stability; electro-optic Δω tuning; and an antisymmetric-in-Δω lock-in, valid only at δ₁ = 0, that rejects thermal and photorefractive backgrounds. | §6; Fig. 6 |
+| M5 | **Microrings: the same theory, quantified.** Sign-tunable cascaded Kerr in χ⁽²⁾ rings is established experimentally (Cui *et al.* 2022, 2025, AlN; Lu *et al.* 2023, PPLN). Our contribution is quantitative and protocol-level, for poled TFLN: R ≈ 400–3000 against the same ring's native Kerr (≈13 unpoled); thresholds evaluated at Δ_eff with multimode Bogoliubov stability; electro-optic Δω tuning; and an antisymmetric-in-Δω lock-in, valid only at δ₁ = 0, that rejects thermal and photorefractive backgrounds. | §6; Fig. 6 |
 
 ---
 
@@ -365,17 +468,18 @@ Page estimates assume a two-column Phys. Rev.-style layout. "Source" points to e
 
 ## 7. Numbers the paper will quote
 
-All values are after F1. **(V)** = verified; **(A)** = assumption to state.
+**Updated 2026-10-07: host constants are now sourced 1.55-µm values** (user decision). Provenance: `checks/constants/constants.md`; the numbers are reproduced by `checks/constants/compute.py`. **(V)** = verified; **(A)** = assumption to state.
 
 | Quantity | Value | Note |
 |---|---|---|
-| LN design point | Q₂ = 4000 (A), η = 0.3 (A), Δω = 2γ₂ → R ≈ 50 (V given A), Δf ≈ 97 GHz | Present R(Q₂, η) as a map rather than one point |
-| Host survey | Table above (V given material constants (A)) | Material constants from note §11 (AlN corrected 2026-05) |
-| 1R chosen design | R⁽¹ᴿ⁾ from the M̃ that Sedigheh computes directly (no C_bridge) | D6 at C_bridge = 1 would give ≈ 7 (≈ 9 in the wings) |
-| Bulk comparison | Bulk wins \|χ³\|·Δf by ≈ 10×; the metasurface wins on thickness (~100 nm) and CW threshold | Replaces "≈40×" |
-| Microring, both designs (D9) | **A, demonstrated** (Lu *et al.* 2020, measured g, no extrapolation): R ≈ 2.8×10³, P_bist 73 µW, P_MI 20 µW. **B, target ring** (g extrapolated): R ≈ 1.8×10³, P_bist 32–37 µW, P_MI 8.4 µW, switching 8.4 fJ / 13 µW. Native, same ring: 14 mW / 9.4 mW. | Unchanged by F1 (anchored on the measured g). |
-
----
+| LiNbO₃ constants | 2d₃₃ = 37.5 pm/V (Shoji 1997, Miller-scaled from 1.313 µm), n₂ = n_e(775) = 2.178, n₂ᴵ = 1.8×10⁻¹⁹ m²/W → χ_nat = 2.9×10⁻²¹ m²/V², F = 0.10 | n₂ᴵ = 1.8×10⁻¹⁹ is the thin-film value quoted by Kovach 2020, but **no primary measurement was found**. The estimates used span 1.8–3.2×10⁻¹⁹. The 0.91×10⁻¹⁹ Z-scan is excluded because it includes the bulk cascade. With d₃₃ between 18.8 and 22.7 pm/V, R spans 11–30, as stated in the paper. |
+| LN design point | Q₂ = 4000 (A), η = 0.3 (A), Δω = 2γ₂ → **R ≈ 20** from Q₂ηF/6 (19 with the full Lorentzian), Q₂ at R = 1 ≈ 200; Δf = γ₂/2π ≈ 0.1 THz | Was R ≈ 49 with the 1.064-µm d₃₃, χ_nat = 2×10⁻²¹ and n_o. The notes, reports, code and decks still use the old constants. |
+| Host survey | F: GaP 4.5×10⁻³, AlN 2.5×10⁻³, Al₀.₂Ga₀.₈As 3.7×10⁻³ → Q₂ at R = 1 between 4×10³ and 8×10³; the three cannot be ranked within their spreads | |χ²| is the tensor norm: (2/√3)·2d₁₄ for zincblende. GaAs is dropped, since its SH at 775 nm lies above the gap. **GaP is an upper estimate:** d₁₄ = 70.6 pm/V at 1.064 µm, with its SH above the indirect gap. Shoji's 1.313-µm value, reportedly 36.8 pm/V, would give F = 1.6×10⁻³ and Q₂(R=1) ≈ 1.2×10⁴. **Check Shoji 1997 Table 11 in a library copy.** |
+| Bulk comparison | Bulk LN \|χ_casc\| ≈ 5×10⁻²¹ m²/V², bandwidth > 10 THz → product > 5×10⁻⁸; metasurface bound (Eq. 5) 1×10⁻⁸ m²V⁻²Hz | Bulk R ≈ 2 |
+| 1R designs | **Removed from the text 2026-10-08** (was "0.6–4", the samples report × 0.39, undocumented designs). The main text and Table 1 now carry a design placeholder. | To be computed for the chosen design with η⁽¹⁾ of Supplement §7 (projection onto e₁, ∫_NL\|e₁\|⁴; with a substrate, e₁^rec replaces e₁* in one factor) |
+| Microring, both designs (D9) | **A, demonstrated** (Lu *et al.* 2020): R ≈ 2.8×10³ with the fitted g = 1.2 MHz, ≈600 with g = 0.56 MHz from η_SHG; P_bist 73 µW, P_MI 19 µW. **B, target ring**: R ≈ 1.8×10³ (≈400 with g from η_SHG), P_bist 32–37 µW, P_MI 8.0 µW (spread < 2% for D₂/2π = 1–50 MHz; 11.6 µW for D₂/2π = −10 MHz). Shift by κ₁ costs 8.4 fJ intracavity (native 15 pJ). At 7 µW (below P_MI): bandwidth −4% vs instantaneous Kerr, thermal shift 1.1κ₁ vs cascaded 0.7κ₁. Native, same ring: 14 mW / 9.4 mW. **Quoted range: R = 400–3000.** | Uses n₂ᴵ = 1.8×10⁻¹⁹, the same value as above. Operating points are now below the parametric threshold (Fig. 5b at 7 µW); the old 20–30 µW points were above it. |
+| Bistability penalty | Threshold falls by (1+R)/4.7 (R = 10), (1+R)/5.2 (R = 20), (1+R)/5.8 (R → ∞) at Δω = −2γ₂, ρ = 1/4 | `checks/bistability_penalty.py`; supplement §4.C |
+| Bulk check | Bulk cascade at 1.064 µm (d₃₃ = 25.2 pm/V, Zelmon n_e) = −3.0×10⁻¹⁹ m²/W; + native 3.9×10⁻¹⁹ → 0.89×10⁻¹⁹ vs DeSalvo's measured 0.91×10⁻¹⁹ | `checks/bulk_desalvo_check.py`; supplement §5 |
 
 ## 8. What Sedigheh needs to deliver for §5.3 (design checklist)
 
@@ -418,13 +522,64 @@ The constraints come from the vault plan: Boulder trip ~10-10 to 10-15; CUNY las
 
 ## 10. Handoff package for Sedigheh (by Fri 10-23)
 
-- `main.tex` with Sections 1–3, 4.1 and 5 drafted and a Section 4.2 skeleton; `supplement.tex` with S1–S6 and S8 drafted.
-- This plan, updated with the decisions taken.
-- The reference script for M̃/η⁽¹ᴿ⁾ and the generalised design pipeline (one command from her COMSOL export to Fig. 4 and the R value).
-- A short "how the numbers are produced" note: which script produces which figure and table. Existing pointer: `cascaded_chi3/README.md`.
-- Open-items list with owners.
+### Status of the manuscript (2026-10-08)
 
----
+**The manuscript is a draft: an outline plus a filled theory part.** The six-agent review of 2026-10-08 (`checks/REVIEW_2026-10-08.md`) has been applied except for the items assigned to Sedigheh below.
+
+**Written (theory, checked by independent referee agents):**
+- Main text: Sections 2–3.
+- Supplement:
+  - §1–4 (derivations, the uniform limit, the layered-cell test, response time, loss, bistability and parametric gain);
+  - §5 (sourced host constants);
+  - §7 (singly resonant theory, plus the recipe for extracting M̃ and η⁽¹⁾ from full-wave fields);
+  - §8 (microring: photon-number form, g from η_SHG, designs A/B/C with all thresholds, bistability at the pump-frame Δω, the multimode parametric threshold, response time, thermal and photorefractive shifts, antisymmetric extraction, tuning of Δω).
+- Fig. S1 is plotted by `figures/fig_s1_checks.py`. Every microring number reproduces from `cascaded_chi3/ring_effects.summary()`.
+
+**Draft figures (2026-10-08):**
+- Figs. 2–5 are generated by `figures/fig{2_limits,3_double,4_single,5_ring}.py` with the shared style `figures/paperstyle.py` (Times/STIX to match the main template, TrueType fonts, 300 dpi, 5.25 in wide; Fig. S1 stays Palatino). Run each with `conda run -n ml_base python <script>`; Fig. 5 takes a few minutes for the parametric thresholds.
+- Panels 3(a) and 4(a) are placeholders for the chosen design.
+- Fig. 4 uses a draft R = 3 at |Δω| = 2γ₂; replace it with the design's value.
+- **Physics noted while drawing Fig. 3(c):** with cascaded loss at ρ = 1/4 the bistability threshold falls by (1+R)/5 to (1+R)/6, not 1+R. Main §4.1 and supplement §4.C are corrected. The notes and the derivation still say 1/(1+R).
+- Fig. 3(c) now uses γ₁ = γ₂ (cold mismatch 2.4γ₂; folds at 7.2/7.8 vs native 22.6/27.3 in γ₂³/|β|²). Fig. 5(b) is at 7 µW, below the parametric threshold.
+
+**Editing pass of 2026-10-21 (main text and supplement; both build clean, main 11 pp, supplement 11 pp):**
+- **Introduction.** It stays an enumerated outline. Item 1 adds that the native sign is fixed by the material. Item 3 now runs from cavities to metasurfaces and ends on the gap ("to our knowledge"). Item 4 states the contribution relative to Khurgin–Ding and lists the two rules (strength–bandwidth, F), the LiNbO₃ numbers with their bandwidths, and the Z-scan.
+- **Abstract.** It reads "a second-harmonic quality factor of 4000" instead of the undefined "Q = 4000".
+- **§3 reordered.** The order is now response time and Eq. (5), bulk comparison, R and hosts, then loss and stability, so Fig. 2 is discussed in panel order and the stability paragraph sits next to §4.1, which uses it. The cascaded shift S is defined in the main text.
+- **§4.1.** R ≈ 20 comes first, then the observables; added that for Δω > 0 the net Kerr response reverses sign when R > 1.
+- **§4.2.** It now says why the singly resonant structure suits the measurement (pump field and native response flat across the Δω scan). The parity sentence no longer says "fixed pump detuning", since there is no pump resonance.
+- **§5.** The thresholds sentence now names its ring (design B). The 8 fJ figure now carries the 15 pJ native value, and the comb sentence is separate.
+- **§6 and Table 1.** The discussion closes on Eq. (5) ordering the platforms by bandwidth. The "CW device" column became "Bistability" (in a cavity / – / predicted / no / 37 µW); the waveguide's "no" was unsupported.
+- **§2.** The validity condition gives both bounds (|Δω|R/4 and |Δω|(R/2)^{1/2}).
+- **Supplement.** S is defined at first use (§4.B), "by a factor" was added (§4.C), the DeSalvo paragraph was reordered (§5), and the two extraction conditions are labelled first and second (§8.G); a few repeated "same" were removed.
+
+**Still Nikita's (before 10-26):**
+- Section 1 (introduction prose from the outline items; the items were rewritten 2026-10-21).
+- Fig. 1 (concept); polish of the draft Figs. 2, 3 and 5.
+- Supplement §6 (simulation methods) and the TCMT part of §9.
+- Optional: a reference script that takes a COMSOL field export to M̃, η⁽¹⁾ and R⁽¹⁾, following the recipe in supplement §7.
+
+**Sedigheh's (the design part, marked `% FOR THE DESIGN` in the sources):**
+- Main §4.1, design paragraph: unit cell, symmetry, selection rules for d₃₃, and how Δω is tuned.
+- Main §4.2: the chosen singly resonant design. Give its geometry, Q₂, M̃, η⁽¹⁾, and R⁽¹⁾ at Δω = ±2γ₂, computed with the supplement §7 recipe. That replaces the bracketed placeholder in §4.2 and the "design" cells of Table 1.
+- **From the 2026-10-08 review (items A2 and A5), Sedigheh's to decide or add:**
+  - venue: the simulated referee would reject at Optica without a concrete 3D design, absolute figures of merit and an SNR-budgeted proposal; fallbacks are PR Applied (`main_prapplied.tex`), Optics Express, ACS Photonics, Nanophotonics, or a condensed Optics Letters;
+  - absolute figures of merit next to R: |χ_casc| ≈ 6×10⁻²⁰ m²/V² is below the native χ⁽³⁾ of Si, GaP and AlGaAs, and bulk wins on |χ|Δf;
+  - Z-scan detectability budget: phase per GW/cm² (~10⁻⁴ rad at 10 GW/cm²), substrate background (10–50× the film's native phase), beam waist versus mode nonlocality and SH diffraction orders, ps source, damage;
+  - SH diffraction: at 1.55 µm on silica the SH lies above the first diffraction order, which limits Q₂;
+  - reciprocity with a substrate (supplement §7 now states the condition e₁^rec ∝ e₁*);
+  - the alternative measurement: pump-resonance shift and tilt of a doubly resonant sample versus Δω (metasurface analogue of Cui 2025); relations δω/Γ_SH = Δω/γ₂ and φ′_max = η_SH,gen(0)/4;
+  - the OR+EO background (≈ −5×10⁻²¹ m²/V², flat in Δω, shifts the native baseline) for the chosen crystal cut.
+- Fig. 4: unit cell and SH mode; χ_casc(Δω); simulated Z-scan for ±Δω; pulse-length dependence.
+- Supplement §7 design paragraph and Z-scan model.
+- Supplement §9 metasurface parameters.
+- Then integration, the cover letter (points in §0.4), and submission with Andrea as corresponding author.
+
+**Handoff items:**
+- This plan.
+- `checks/` (prefactor and constants provenance).
+- `figures/` scripts.
+- `cascaded_chi3/README.md`, for which script produces which number.
 
 ## 11. Open decisions (for Nikita)
 

@@ -1,7 +1,3 @@
-% Outline of the Optica research article on resonant cascaded Kerr nonlinearity.
-% Section texts are short descriptions of the intended content; figures are
-% placeholders with draft captions.  Target length: 6-8 journal pages, i.e.
-% about 11 pages of this template (template pages x 0.6 = journal pages).
 \documentclass{optica-article}
 
 \journal{opticajournal}
@@ -26,61 +22,87 @@
 
 \title{Resonant cascaded Kerr nonlinearity in $\chi^{(2)}$ metasurfaces}
 
-\author{Nikita Nefedkin,\authormark{1} Sedigheh Esfahani,\authormark{1} Jacob B. Khurgin,\authormark{2} and Andrea Al\`u\authormark{1,*}}
+% please discuss the authors' order with Andrea and Jacob
+\author{Nikita Nefedkin,\authormark{1,*} Sedigheh Esfahani,\authormark{1} Jacob B. Khurgin,\authormark{2} and Andrea Al\`u\authormark{1}}
 
 \address{\authormark{1}Photonics Initiative, Advanced Science Research Center, City University of New York, New York, New York 10031, USA\\
 \authormark{2}Department of Electrical and Computer Engineering, Johns Hopkins University, Baltimore, Maryland 21218, USA}
 
-\email{\authormark{*}aalu@gc.cuny.edu}
+\email{\authormark{*}nnefedkin@gc.cuny.edu}
 
 \begin{abstract*}
-Cascaded second-harmonic and difference-frequency generation produces an
-effective Kerr response whose strength in bulk crystals is set by the
-phase mismatch.  We show that a second-harmonic resonance detuned by
-$\Dom$ from twice the pump frequency takes the place of the phase
-mismatch, and derive the resulting susceptibility in closed form.  It
-changes sign with $\Dom$, carries a nonlinear loss, and obeys a bandwidth
-sum rule.  In LiNbO$_3$ it exceeds the native Kerr susceptibility by about
-50 in a doubly resonant metasurface and about $10^3$ in a poled microring.
-We propose a picosecond Z-scan to detect the sign change in a singly
-resonant metasurface.
+A detuned second-harmonic resonance can replace the phase mismatch that
+sets the cascaded Kerr nonlinearity of bulk crystals.  We derive the
+cascaded susceptibility of a general resonator, with an overlap bounded by
+one and the bulk result as a limit.  Its sign follows the detuning $\Dom$,
+it carries a nonlinear loss, and its product with the bandwidth does not
+depend on the quality factor.  In doubly resonant LiNbO$_3$ metasurfaces
+with a second-harmonic quality factor of 4000 it is about 20 times the
+native Kerr response, and in poled microrings 400 to 3000 times.  For a
+singly resonant metasurface we propose a picosecond Z-scan that isolates
+the part of the response odd in $\Dom$.
 \end{abstract*}
 
-% =====================================================================
+
 \section{Introduction}
-% about 0.8 journal page
 
 \begin{enumerate}
 \item Kerr nonlinearity underlies all-optical switching, optical
   bistability, parametric oscillation and frequency combs.  The native
   $\chithree$ of low-loss dielectrics is small, about
-  $2\times10^{-21}$~m$^2$/V$^2$ in LiNbO$_3$, and field enhancement in
-  resonant nanostructures increases the nonlinear phase per unit power
-  without changing the material susceptibility.
+  $3\times10^{-21}$~m$^2$/V$^2$ in LiNbO$_3$ (Supplement 1, Section 5), and
+  its sign is set by the material.  Field enhancement in resonant
+  nanostructures increases the nonlinear phase per unit power without
+  changing either~\cite{khurgin2013}.
 \item Two cascaded second-order processes act on the pump as a Kerr
   medium.  The effect was predicted by Ostrovskii~\cite{ostrovskii1967},
   observed in KTP as a nonlinear refraction that changes sign with the
-  phase mismatch~\cite{desalvo1992}, reviewed in Ref.~\cite{stegeman1996},
+  phase mismatch~\cite{desalvo1992}, reviewed in Ref.~\cite{stegeman1996}
   and described microscopically as a collective effect~\cite{khurgin1997}.  In bulk crystals its
-  strength scales as $1/\Delta k$, and it is used for soliton
-  compression~\cite{bache2007josab,bache2010}.
-\item Metasurfaces with bound states in the continuum enhance
-  second-harmonic generation~\cite{carletti2018,koshelev2018,koshelev2020,anthur2020,fedotova2020},
-  and cascaded second-order processes in metasurfaces have produced
-  third-harmonic light~\cite{gennaro2022}, while the back-conversion of the
-  second harmonic has been treated as pump depletion~\cite{tu2024}.  In
-  $\chitwo$ microresonators the cascaded Kerr response has been tuned
-  through the detuning of the second-harmonic mode~\cite{cui2022,cui2025}.
-  We are not aware of a treatment of the metasurface cascade as a Kerr
-  response on the pump that compares it with the native response of the
-  host.
-\item Here a detuned second-harmonic resonance replaces the phase mismatch,
-  so that the cascaded susceptibility scales as $Q_2/\Dom$ and changes sign
-  with $\Dom$.  A single expression covers bulk crystals, metasurfaces and
-  microrings, and with it we identify the hosts and resonators in which the
-  cascade exceeds the native Kerr response.  For LiNbO$_3$ the factor is
-  about 50 in a doubly resonant metasurface and about $10^3$ in a poled
-  microring, within a bandwidth set by the second-harmonic linewidth.
+  strength scales as $1/\Delta k$, with $\Delta k$ the phase mismatch, and
+  it is used for soliton compression~\cite{bache2007josab,bache2010,zhou2012}.
+  Khurgin and co-workers proposed a second-harmonic resonance in place of
+  $\Delta k$ for surface-emitting structures~\cite{khurgin1994,lee1995},
+  with an enhancement over the native response of the order of the quality
+  factor of that resonance~\cite{khurgin1997}.
+\item In $\chitwo$ cavities the eliminated second harmonic acts on the pump
+  as a Kerr term with a nonlinear
+  loss~\cite{drummond1980,majumdar2013,fryett2015,gustin2025}.  In a
+  LiNbO$_3$ microdisk and in AlN microrings this term produced four-wave
+  mixing~\cite{liu2019ol,cui2022}, and in an AlN microring the
+  detuning of the second-harmonic mode tuned the self-phase modulation from
+  $-2.7$ to $+4.7$ times its native value~\cite{cui2025}.  In
+  free-space cavities around periodically poled LiNbO$_3$ crystals, an
+  effective Kerr response estimated at $10^2$ to above $10^3$ times the
+  native one drives dissipative quadratic
+  solitons~\cite{nie2026,musgrave2026,musgrave2026opo}.  Four-wave
+  mixing in a poled thin-film waveguide corresponds to an effective Kerr
+  index $1.6\times10^4$ times the native value~\cite{li2026}.  In nanoresonators
+  and metasurfaces, quasi-bound states in the continuum enhance
+  second-harmonic generation~\cite{carletti2018,koshelev2020,vabishchevich2018,liu2019,anthur2020},
+  also in LiNbO$_3$~\cite{fedotova2020}, and cascaded second-order processes
+  have produced third-harmonic light~\cite{celebrano2019,gennaro2022}.  The
+  back-conversion of the second harmonic in a metasurface has been treated
+  as pump depletion~\cite{tu2024}; to our knowledge, the Kerr response it
+  produces on the pump has not been evaluated or compared with the native
+  response of the host.
+\item We extend the resonant replacement of $\Delta k$ to a general
+  resonator with vector modes.  The cascaded susceptibility takes one closed
+  form with a geometric overlap $\etag\le1$.  It scales as
+  $\omega_1/\Dom$, that is as the quality factor $Q_2$ of the
+  second-harmonic mode at a fixed ratio of $\Dom$ to its linewidth, and
+  changes sign with $\Dom$ [Fig.~\ref{fig:concept}(a)].  For any resonator,
+  the product of strength and bandwidth depends on neither $Q_2$ nor
+  $\Dom$, and the ratio $R$ of the cascaded to the native Kerr response of
+  the same mode depends on the host through a single figure of merit.  In
+  LiNbO$_3$, $R$ is about 20 in a doubly resonant metasurface with $Q_2=4000$
+  and $\etag=0.3$, with a bandwidth of 0.1~THz, and 400 to 3000 in poled
+  microrings, with bandwidths below 1~GHz.  In a microring the cascaded
+  shift follows from the measured second-harmonic efficiency, so the
+  formula can be tested with no free parameter.  For a singly resonant
+  metasurface, where the native response does not vary across the
+  second-harmonic resonance, we propose a picosecond Z-scan that isolates the
+  part of the response odd in $\Dom$.
 \end{enumerate}
 
 \begin{figure}[htbp]
@@ -94,258 +116,520 @@ resonant metasurface.
     meta-atom.
     (c)~Periodically poled microring with pump and second-harmonic modes.
     (d)~Real (solid) and imaginary (dashed) parts of $\chicasc$ versus
-    $\Dom/\gamma_2$, normalised to the value at $\Dom=2\gamma_2$.}
+    $\Dom$ in units of the second-harmonic linewidth $\gamma_2$, normalised to
+    $|\mathrm{Re}\,\chicasc|$ at $\Dom=2\gamma_2$.}
   \label{fig:concept}
 \end{figure}
 
-% =====================================================================
-\section{Cascaded susceptibility at a second-harmonic resonance}\label{sec:theory}
-% about 1.2 journal pages
 
-With real fields written as $\mathbf E e^{-i\omega t}+\mathrm{c.c.}$, the
-second-harmonic and difference-frequency polarisations are
-$\varepsilon_0\chitwo\mathbf E_1\mathbf E_1$ and
-$2\varepsilon_0\chitwo\mathbf E_2\mathbf E_1^*$, and self-phase modulation
-is $3\varepsilon_0\chithree|\mathbf E_1|^2\mathbf E_1$~\cite{boyd2020}.  The
-second-harmonic field driven by $\varepsilon_0\chitwo\mathbf E_1\mathbf E_1$
-is written with the Green's function of the structure, whose pole term dominates near an isolated
-quasinormal mode~\cite{sauvan2013,lalanne2018}.  The same result follows
-from coupled-mode equations for the pump and second-harmonic
-modes~\cite{rodriguez2007}, in which the second-harmonic amplitude follows
-the pump algebraically in steady state.  Both derivations give
+\section{Cascaded susceptibility at a second-harmonic resonance}\label{sec:theory}
+
+A pump at frequency $\omega_1$ excites a mode $\f_1$ of the structure, with
+resonance frequency $\omega_a$ and energy decay rate
+$\gamma_1=\omega_a/Q_1$, and its second harmonic falls near a mode $\f_2$
+with frequency $\omega_2$ and decay rate
+$\gamma_2=\omega_2/Q_2\simeq2\omega_1/Q_2$.  Real fields are written as
+$\mathbf E e^{-i\omega t}+\mathrm{c.c.}$, so that with $\mathbf E_1$ and
+$\mathbf E_2$ the complex amplitudes at $\omega_1$ and $2\omega_1$ the
+second-harmonic, difference-frequency and self-phase-modulation
+polarisations are
+$\varepsilon_0\chitwo\mathbf E_1\mathbf E_1$,
+$2\varepsilon_0\chitwo\mathbf E_2\mathbf E_1^*$ and
+$3\varepsilon_0\chithree|\mathbf E_1|^2\mathbf E_1$~\cite{boyd2020}.
+Under Kleinman symmetry one tensor $\chitwo_{ijk}(\mathbf r)$ describes both
+second-order processes.  For the field
+$a_1\f_1e^{-i\omega_1t}+a_2\f_2e^{-2i\omega_1t}+\mathrm{c.c.}$, mode $n$
+stores the energy $2N_n|a_n|^2$, with
+$N_n=\tfrac12\int(\varepsilon_0\tilde\varepsilon_n|\f_n|^2+\mu_0|\mathbf h_n|^2)\,d^3r$,
+$\mathbf h_n$ the magnetic profile and
+$\tilde\varepsilon_n=\partial(\omega\varepsilon_r)/\partial\omega$ at the
+resonance frequency of mode $n$.  Projecting Maxwell's equations onto the two modes for slowly
+varying amplitudes~\cite{johnson2002,rodriguez2007} gives
+\begin{align}
+  \dot a_1&=\bigl(i\delta_1-\tfrac{\gamma_1}{2}\bigr)a_1
+    +i\beta_1^*a_1^*a_2+i\alpha_3|a_1|^2a_1+\sqrt{\gamma_1^{\mathrm e}/2N_1}\,s,\label{eq:cmt1}\\
+  \dot a_2&=\bigl(i\Dom-\tfrac{\gamma_2}{2}\bigr)a_2+i\beta a_1^2,\label{eq:cmt2}
+\end{align}
+with the pump detuning $\delta_1=\omega_1-\omega_a$, the second-harmonic
+detuning $\Dom=2\omega_1-\omega_2$, and $\gamma_1^{\mathrm e}$ the decay
+rate into the channel of an incident wave of power $|s|^2$.  The couplings are
+$\beta=\varepsilon_0\omega_1M/N_2$ and $\beta_1=\varepsilon_0\omega_1M/N_1$,
+with the overlap $M=\int\chitwo_{ijk}f^*_{2,i}f_{1,j}f_{1,k}\,d^3r$, and
+the native Kerr coefficient is
+$\alpha_3=(3\varepsilon_0\omega_1/2N_1)\int\chithree_{ijkl}f^*_{1,i}f_{1,j}f_{1,k}f^*_{1,l}\,d^3r$.
+The factor 2 of difference-frequency generation makes
+$N_1\beta_1=N_2\beta$, so that the energy
+$2(N_1|a_1|^2+N_2|a_2|^2)$ is conserved in the absence of loss and drive
+(Supplement 1, Section 1).
+
+When the pump envelope varies slowly on the time scale
+$|\Dom+i\gamma_2/2|^{-1}$, Eq.~\eqref{eq:cmt2} gives
+$a_2=-\beta a_1^2/(\Dom+i\gamma_2/2)$.  Inserted into
+Eq.~\eqref{eq:cmt1}, this adds the term
+$i\alpha_{\mathrm{casc}}|a_1|^2a_1$ with
+$\alpha_{\mathrm{casc}}=-\beta_1^*\beta/(\Dom+i\gamma_2/2)$, which has the
+form of the native Kerr term.  Writing
+$\alpha_3=(3\varepsilon_0\omega_1/2N_1)\chinat\int_{\mathrm{NL}}|\f_1|^4d^3r$
+defines the native susceptibility $\chinat$ of the second-order material,
+where $\int_{\mathrm{NL}}$ extends over that material, and the analogous
+relation between $\alpha_{\mathrm{casc}}$ and $\chicasc$ defines the
+cascaded susceptibility,
 \begin{equation}
   \chicasc=-\frac{2\varepsilon_0\omega_1}{3N_2}\,
-    \frac{|M|^2}{(\Dom+i\gamma_2/2)\int|\f_1|^4\,d^3r}
-  \simeq-\frac{2\omega_1}{3n_2^2\Dom}\,|\chitwo|^2\,\etag ,
+    \frac{|M|^2}{(\Dom+i\gamma_2/2)\int_{\mathrm{NL}}|\f_1|^4d^3r}
+  =-\frac{2\omega_1|\chitwo|^2\etag}{3n_2^2\,(\Dom+i\gamma_2/2)} ,
   \label{eq:chi3casc}
 \end{equation}
-with $\f_{1,2}$ the mode profiles, $M=\int\chitwo_{ijk}f^*_{2,i}f_{1,j}f_{1,k}\,d^3r$,
-$N_2$ the norm of the second-harmonic mode, $\gamma_2$ its energy decay
-rate and $n_2$ its effective index, and the geometric overlap
-\begin{equation*}
-  \etag=\frac{\varepsilon_0n_2^2|M|^2}{|\chitwo|^2N_2\int|\f_1|^4\,d^3r}\le1 .
-\end{equation*}
-The derivations are given in Supplement 1.
+where $n_2$ is the smallest principal refractive index of the
+second-order material at $2\omega_1$, $|\chitwo|$ is the largest value of
+$|\chitwo_{ijk}u^*_iv_jv_k|$ over unit vectors ($2d_{33}$ for LiNbO$_3$;
+Supplement 1, Section 1), and
+\begin{equation}
+  \etag=\frac{\varepsilon_0n_2^2\,|M|^2}{|\chitwo|^2N_2\int_{\mathrm{NL}}|\f_1|^4d^3r}\le1
+  \label{eq:eta}
+\end{equation}
+is a geometric overlap that does not depend on the normalisation of the
+modes.  The bound follows from the Cauchy--Schwarz inequality for modes
+with normal dispersion (Supplement 1, Section 1).  The real part of
+$\chicasc$ is odd in $\Dom$; for $\Dom>0$ it is negative and shifts the
+pump resonance to higher frequency [Fig.~\ref{fig:concept}(d)].  The
+imaginary part is even in $\Dom$ and positive, and describes an
+intensity-dependent loss of pump power into the second-harmonic mode, the
+cascaded analogue of two-photon absorption~\cite{gustin2025}.
 
-For phase-matched plane waves in a uniform medium, $\etag=1$ and
-Eq.~\eqref{eq:chi3casc} becomes the bulk bound-wave susceptibility
-$-2|\chitwo|^2/[3(n_2^2-n_1^2)]$, with the frequency mismatch $\Dom$ in the
-role of the wavevector mismatch $\Delta k$.  The expression assumes one
-second-harmonic mode, $|\Dom|\gtrsim\gamma_2$ and an undepleted pump, and a
-pump bandwidth small compared with $|\Dom+i\gamma_2/2|$.  Cascaded optical
-rectification with the electro-optic effect~\cite{bosshard1995} and the
-longitudinal part of the bound second harmonic add a background that is
-not resonantly enhanced.
+Equation~\eqref{eq:chi3casc} also follows without a coupled-mode equation
+for the second harmonic.  Its field is the Green's function of the
+structure at $2\omega_1$ integrated against the source
+$\varepsilon_0\chitwo\mathbf E_1\mathbf E_1$, and inserting it into the
+difference-frequency polarisation gives a cascaded polarisation with the
+nonlocal kernel $\chitwo(\mathbf r)G(\mathbf r,\mathbf r';2\omega_1)\chitwo(\mathbf r')$.
+Near an isolated mode the pole term of
+$G$~\cite{sauvan2013,lalanne2018} factorises the kernel into the overlaps
+$M$ and $M^*$, and projection onto $\f_1$ returns
+Eq.~\eqref{eq:chi3casc} (Supplement 1, Section 2).
 
-% =====================================================================
+For a uniform medium with refractive indices $n_1$ and $n_2$ at
+$\omega_1$ and $2\omega_1$ (isotropic, or with fields along the axis of
+smallest index) filling a periodic box, the pump mode at
+wavevector $k_1$ couples only to the second-harmonic mode at $2k_1$.  When
+dispersion within the second-harmonic band is neglected, its frequency is
+$\omega_2=2\omega_1n_1/n_2$ and $\etag=1$ for aligned polarisations.
+Equation~\eqref{eq:chi3casc} then becomes $-2|\chitwo|^2/[3(n_2^2-n_1^2)]$
+to first order in $n_2-n_1$.  This is the susceptibility carried by the
+bound second-harmonic wave of a bulk crystal, which for
+$\Delta k=2\omega_1(n_2-n_1)/c$ equals the bulk result
+$-2\omega_1|\chitwo|^2/(3cn_2\Delta k)$~\cite{desalvo1992,stegeman1996}
+(Supplement 1, Section 3).  A resonator thus replaces the material
+mismatch $c\Delta k/n_2$, $0.04\,\omega_1$ in LiNbO$_3$, by $\Dom$,
+$10^{-3}\omega_1$ for $Q_2=4000$ and $\Dom=2\gamma_2$; $\etag$
+is the fraction of the bound-wave coupling that the two modes retain.
+
+Equation~\eqref{eq:chi3casc} assumes a single second-harmonic mode, a
+stable steady state and a slowly varying pump envelope.  Equations
+\eqref{eq:cmt1} and \eqref{eq:cmt2} omit the native self- and cross-phase
+modulation that involve the second-harmonic mode.  For comparable overlaps
+these stay small as long as the cascaded shift of the pump resonance is small
+compared with both $|\Dom|R/4$ and $|\Dom|(R/2)^{1/2}$, with $R$ of
+Eq.~\eqref{eq:R} (Supplement 1, Section 4).  Other second-harmonic modes, cascaded optical rectification
+with the electro-optic effect~\cite{bosshard1995} and the longitudinal part
+of the bound second harmonic~\cite{kolleck2004} add a background that varies
+little with $\Dom$ across the resonance.
+
+
 \section{Limits and host materials}\label{sec:limits}
-% about 1 journal page
 
-The imaginary part of $\chicasc$ is even in $\Dom$ and the real part is
-odd; their ratio $\rho=\gamma_2/(2|\Dom|)$ is $1/4$ at $\Dom=2\gamma_2$,
-and bistability and parametric gain both require $\rho<1/\sqrt3$.  The
-peak susceptibility grows as $Q_2$ and its bandwidth falls as $\gamma_2$,
-so that
-$|\chicasc|_{\max}\,\Delta f\lesssim\omega_1|\chitwo|^2\etag/(3\pi n_2^2)$
-independently of $Q_2$ [Fig.~\ref{fig:limits}(a)].  Trade-offs between
-strength and bandwidth of resonant nonlinear enhancement have been
-discussed for plasmonic and native nonlinearities~\cite{khurgin2013}, for
-harmonic generation~\cite{shcherbakov2019}, and for a cavity-enhanced
-cascaded frequency shifter~\cite{gorbounova1996}.  Pump depletion sets in
-when the second-harmonic coupling rate approaches $|\Dom|$, beyond which
-the steady state becomes parametrically unstable~\cite{drummond1980}.
+The second-harmonic mode sets the response time of the cascade.  A
+component of $a_1^2(t)$ at frequency $\Omega$ measured from $2\omega_1$ enters
+Eq.~\eqref{eq:cmt1} with the cascaded susceptibility
+$-C/(\Dom+\Omega+i\gamma_2/2)$, where
+$C=2\omega_1|\chitwo|^2\etag/(3n_2^2)$ (Supplement 1, Section 4).  This
+response has a single pole at $\Omega=-\Dom-i\gamma_2/2$ and is
+quasi-static for modulation frequencies small compared with
+$|\Dom+i\gamma_2/2|$.  At $\Dom=2\gamma_2$ it stays between 0.81 and 1.30 of
+its static value over a band of full width $\gamma_2/2\pi$, which is 0.1~THz for
+$Q_2=4000$ at a pump wavelength of 1.55~\textmu m.  The static value obeys
+$|\chicasc|\,|\Dom+i\gamma_2/2|=C$ for any $Q_2$ and $\Dom$, so raising $Q_2$
+at fixed $\Dom/\gamma_2$ increases $|\chicasc|$ and lowers its bandwidth
+$\Delta f$ in the same proportion.  For any modulation band narrower than
+the distance of the pole from the origin,
+$\Delta f\le|\Dom+i\gamma_2/2|/2\pi$, this identity gives
+\begin{equation}
+  |\chicasc|\,\Delta f\le\frac{\omega_1|\chitwo|^2\etag}{3\pi n_2^2},
+  \label{eq:sumrule}
+\end{equation}
+whose right-hand side depends on neither $Q_2$ nor $\Dom$
+[Fig.~\ref{fig:limits}(a)].  The pole also gives the sum rule
+$\int\mathrm{Im}\,\chicasc(\Omega)\,d\Omega=\pi C$ over the modulation
+frequency, so the integrated nonlinear absorption does not depend on the
+linewidth.  Trade-offs between the
+strength and the bandwidth of resonantly enhanced nonlinearities have been
+discussed for slow-light and resonant nonlinear
+devices~\cite{khurgin2005,khurgin2010,khurgin2023} and for harmonic
+generation~\cite{shcherbakov2019}, and appear in a cavity-enhanced cascaded
+frequency shifter~\cite{gorbounova1996}.
 
-Phase-mismatched bulk PPLN gives about $10^{-20}$~m$^2$/V$^2$ over
-10~THz, and a doubly resonant metasurface with $Q_2=4000$ gives about
-$10^{-19}$~m$^2$/V$^2$ over 100~GHz, so bulk cascading is ahead in
-$|\chithree|\,\Delta f$ by about an order of magnitude while the
-metasurface uses a sub-micron layer and continuous-wave pumping.
+Bulk LiNbO$_3$ at its natural phase mismatch has
+$|\chicasc|\approx5\times10^{-21}$~m$^2$/V$^2$.  In bulk crystals the cascaded
+response is nonlocal in time on a scale set by the phase and
+group-velocity mismatches~\cite{bache2007ol}, and for strong phase
+mismatch it is ultrafast and spans an octave~\cite{zhou2012}, so its
+bandwidth exceeds 10~THz.  A doubly resonant LiNbO$_3$ metasurface with
+$Q_2=4000$ and $\etag=0.3$ reaches about $6\times10^{-20}$~m$^2$/V$^2$
+over 0.1~THz.  The product $|\chicasc|\,\Delta f$ of bulk cascading, above
+$5\times10^{-8}$~m$^2\,$V$^{-2}\,$Hz, therefore exceeds the bound of
+Eq.~\eqref{eq:sumrule} for this metasurface,
+$1\times10^{-8}$~m$^2\,$V$^{-2}\,$Hz; the bound itself does not apply to
+the bulk response, which has no single pole.  The resonator is preferable
+when the nonlinear element must be a sub-micrometre layer or must change
+sign over a small detuning.
 
-The enhancement over the native response,
-$R=|\chicasc|/|\chinat|=Q_2|\chitwo|^2\etag/(6n_2^2\chinat)$ at
-$\Dom=2\gamma_2$, depends on the host through $|\chitwo|^2/(n_2^2\chinat)$.
-With $\etag=0.3$, $R=1$ is reached at $Q_2\approx80$ in LiNbO$_3$, near
-$2\times10^3$ in GaP, AlN and GaAs, and near $2\times10^4$ in AlGaAs, whose
-native response is enhanced near the band edge
-[Fig.~\ref{fig:limits}(b); parameters in Supplement 1].
+The cascaded and native Kerr terms act on the same pump mode, so the field
+enhancement of the pump resonance cancels in their ratio
+$R=|\mathrm{Re}\,\alpha_{\mathrm{casc}}|/\alpha_3=|\mathrm{Re}\,\chicasc|/\chinat$.
+At $\Dom=2\gamma_2$,
+\begin{equation}
+  R\simeq\frac{Q_2\,\etag}{6}\,F,\qquad F=\frac{|\chitwo|^2}{n_2^2\chinat},
+  \label{eq:R}
+\end{equation}
+which neglects $(\gamma_2/2\Dom)^2$ and overestimates $R$ by one part in 16.  The host
+enters only through the dimensionless figure of merit $F$.  With the
+constants of Supplement 1, Section 5, $F$ is 0.10 for LiNbO$_3$ and between
+$2.5\times10^{-3}$ and $4.5\times10^{-3}$ for GaP, AlN and
+Al$_{0.2}$Ga$_{0.8}$As, where the GaP value is an upper estimate.  With $\etag=0.3$, $R=1$ is reached at
+$Q_2\approx200$ in LiNbO$_3$ and between 4000 and 8000 in
+the three semiconductors [Fig.~\ref{fig:limits}(b)].  Estimates of the native
+Kerr index of LiNbO$_3$ at 1.55~\textmu m span a factor of 1.8 and those of
+$d_{33}$ span 20\%; together they place $R$ at $Q_2=4000$ between 11 and 30.  GaAs is not included because its second
+harmonic at 775~nm lies above the band gap.
+
+The imaginary part of Eq.~\eqref{eq:chi3casc} fixes the ratio of nonlinear
+loss to nonlinear refraction.  It is
+$\rho=|\mathrm{Im}\,\chicasc/\mathrm{Re}\,\chicasc|=\gamma_2/(2|\Dom|)$,
+which is $1/4$ at $\Dom=2\gamma_2$.  A Kerr resonator with this loss is
+bistable for some pump detuning only if $\rho<1/\sqrt3$, and the same
+condition governs parametric gain of a pair of sidebands (Supplement 1,
+Section 4).  When the cascaded term dominates, both therefore require
+$|\Dom|>\sqrt3\gamma_2/2$; otherwise $\rho$ must be evaluated for the sum of the
+cascaded and native terms.  Bistability also needs a pump detuning
+$|\delta_1|$ above $\sqrt3\gamma_1/2$ without nonlinear loss and above $1.75\gamma_1$
+at $\rho=1/4$.  Because $\Dom$ is defined with the pump frequency, the cold
+resonator must then be built with the mismatch
+$2\omega_a-\omega_2=\Dom-2\delta_1$.
+
+The second-harmonic mode stores the energy of the pump mode multiplied by
+$S/|\Dom|$, where $S=|\mathrm{Re}\,\alpha_{\mathrm{casc}}||a_1|^2$ is the
+cascaded shift of the pump resonance.  In a continuous-wave steady state the
+elimination of $a_2$ is exact at any power.  The steady state of
+Eqs.~\eqref{eq:cmt1} and \eqref{eq:cmt2} can, however, lose stability through
+self-pulsing~\cite{drummond1980} once $S/|\Dom|$ exceeds a value between
+about 1 and 10 that depends on $\gamma_1$ and $\delta_1$.
 
 \begin{figure}[htbp]
   \centering
-  \figbox{3.5cm}
-  \caption{(a)~Peak $|\chicasc|$ (circles, left axis) and its bandwidth
-    (squares, right axis) versus $Q_2$ for LiNbO$_3$ at $\Dom=2\gamma_2$
-    and $\etag=0.3$.
-    (b)~$R$ versus $Q_2$ at $\Dom=2\gamma_2$ and $\etag=0.3$ for
-    LiNbO$_3$, GaP, AlN, GaAs and AlGaAs (line styles); triangles mark
-    $R=1$.}
+  \includegraphics[width=\linewidth]{figures/fig2_limits.pdf}
+  \caption{(a)~$|\chicasc|$ of LiNbO$_3$ at $\Dom=2\gamma_2$ (circles, left
+    axis) and the bandwidth $\gamma_2/2\pi$ (squares, right axis) versus
+    $Q_2$, for $\etag=0.3$ and a pump wavelength of 1.55~\textmu m.
+    (b)~$R$ from Eq.~\eqref{eq:R} versus $Q_2$ at $\Dom=2\gamma_2$ and
+    $\etag=0.3$ for the hosts of Supplement 1, Section 5 (line styles);
+    triangles and the horizontal line mark $R=1$.}
   \label{fig:limits}
 \end{figure}
 
-% =====================================================================
+
 \section{Metasurface implementation}\label{sec:meta}
-% about 2.2 journal pages
 
 \subsection{Doubly resonant metasurface}
+% FOR THE DESIGN (Sedigheh): first paragraph = unit cell, symmetry of the two
+% modes, selection rules for the d33 orientation, how Domega is tuned.
 
-A symmetry-protected bound state in the continuum near $2\omega_1$ has a
-quality factor limited by absorption and fabrication~\cite{koshelev2018},
-and a quasi-bound state at $\omega_1$ couples the pump from free
-space~\cite{carletti2018,koshelev2020}; doubly resonant cavities of this
-kind have been used for second-harmonic
-generation~\cite{minkov2019,wang2020}.  The overlap $M$ is nonzero only
+In a doubly resonant metasurface a quasi-bound state at $\omega_1$ couples
+the pump from free space~\cite{koshelev2018}, and a symmetry-protected bound
+state in the continuum near $2\omega_1$ holds the second harmonic
+[Figs.~\ref{fig:concept}(b) and \ref{fig:double}(a)].  Symmetry protects
+the latter only while the second harmonic lies below the first diffraction
+order of the substrate and the cladding~\cite{hsu2016,cerjan2021}.  For a
+pump at 1.55~\textmu m on silica this requires a period below 535~nm, at
+which a first-order pump resonance at the $\Gamma$ point of the Brillouin
+zone would need an effective
+index above 2.9, out of reach in LiNbO$_3$.  The pump mode then has to be
+folded to $\Gamma$ by a perturbation that doubles the period, as in
+Ref.~\cite{wang2020}, and this perturbation opens weak second-harmonic
+diffraction channels; a suspended film raises the limit on the period to
+775~nm.  A doubly resonant cavity of this kind was
+proposed~\cite{minkov2019} and demonstrated~\cite{wang2020} for
+second-harmonic generation.  The overlap $M$ is nonzero only
 if the unit-cell symmetry of $\f_2$ matches that of $\chitwo$ contracted
 with $\f_1\f_1$, which sets selection rules for the $d_{33}$ orientation of
 a LiNbO$_3$ film~\cite{fedotova2020}.  At normal incidence both modes lie
-at the $\Gamma$ point, which removes the bulk phase-matching condition,
-and $\Dom$ is tuned by temperature or by the electro-optic effect.
-Disorder and finite array size lower the collective quality factor of the
-second-harmonic mode, and we estimate both from supercell simulations.
+at $\Gamma$, which removes the bulk phase-matching condition.  The mismatch
+$\Dom$ can be tuned by temperature or by the electro-optic effect.
+Random variations of size and position lower the quality factor of the
+second-harmonic mode as the inverse square of their
+amplitude~\cite{kuhne2021,maslova2021}, and an array of $N_p$ periods limits
+it to a value that grows as $N_p^2$ for a one-dimensional
+array~\cite{bulgakov2017}.  The array and the pump spot must therefore span
+many periods.  Measured quality factors of such modes are about $10^4$ in
+Si$_3$N$_4$ slabs near 740~nm~\cite{hsu2013}, 800 for the second-harmonic
+mode of a GaN cavity at 775~nm~\cite{wang2020} and above 8000 in
+LiNbO$_3$-on-insulator metasurfaces at 1.55~\textmu m~\cite{difrancescantonio2025};
+we have found no report of $Q_2=4000$ at 775~nm in LiNbO$_3$.
 
-With a common pump resonance the cascaded and native architectures share
-the field enhancement, and each observable scales with a fixed power of
-$1+R$: self-phase modulation as $1+R$, the bistability threshold and
-switching energy as $1/(1+R)$, and four-wave mixing as $(1+R)^2$
-[Fig.~\ref{fig:double}].  For a LiNbO$_3$ design with $Q_2=4000$,
-$\etag=0.3$ and $\Dom=2\gamma_2$, $R\approx49$.  Cascaded bistability has
-been observed in a monolithic LiNbO$_3$ resonator with a phase-mismatched
-second harmonic~\cite{white1996}.
+For $Q_2=4000$, $\etag=0.3$ and $|\Dom|=2\gamma_2$, Eq.~\eqref{eq:R} gives
+$R\approx20$ in LiNbO$_3$ [Fig.~\ref{fig:double}(b)].  For $\Dom<0$ the
+cascaded and native terms add: self-phase modulation scales as $1+R$, and
+four-wave mixing between sidebands within $|\Dom+i\gamma_2/2|$ of the pump
+scales as $(1+R)^2$ [Fig.~\ref{fig:double}(d)].  For $\Dom>0$ they subtract,
+and the net Kerr response reverses sign when $R>1$.  The pump energy needed
+for a given shift scales as $1/(1+R)$; the second harmonic stores a further
+fraction equal to the cascaded shift divided by $|\Dom|$
+(Section~\ref{sec:limits}), which is small for a shift of one pump
+linewidth when $\gamma_1\ll|\Dom|$ and reaches 0.5 to 0.8 at the folds of
+Fig.~\ref{fig:double}(c), where $\gamma_1=\gamma_2$.
+The bistability threshold falls by less, by a factor of about $(1+R)/5$ for
+$R$ between 10 and 100 at $|\Dom|=2\gamma_2$, because the cascaded loss
+raises the pump detuning needed for bistability [Fig.~\ref{fig:double}(c);
+Supplement 1, Section 4].  Cascaded bistability
+has been observed with a phase-mismatched second harmonic in a monolithic
+MgO:LiNbO$_3$ resonator pumped by a continuous-wave laser~\cite{white1996},
+and few-photon bistability in doubly resonant $\chitwo$ nanocavities has
+been analysed~\cite{fryett2015}.
 
 \begin{figure}[htbp]
   \centering
-  \figbox{4cm}
+  \includegraphics[width=\linewidth]{figures/fig3_double.pdf}
   \caption{Doubly resonant LiNbO$_3$ metasurface.
     (a)~Unit cell with the pump and second-harmonic mode profiles.
-    (b)~$R$ versus $Q_2$ and $\etag$, with the design point marked.
+    (b)~$R$ from Eq.~\eqref{eq:R} versus $Q_2$ and $\etag$ at
+    $\Dom=2\gamma_2$ (colour scale), with contours at $R=1$, 10 and 100; the
+    star marks $Q_2=4000$, $\etag=0.3$.
     (c)~Stored pump energy versus input power for increasing and
-    decreasing sweeps, with (solid) and without (dashed) the
-    second-harmonic mode, from two-mode coupled-mode simulations at
-    $\Dom=-2\gamma_2$ and $\gamma_1=10\gamma_2$.
-    (d)~Ratio of four-wave-mixing efficiencies with and without the
-    second-harmonic mode, with $(1+R)^2$ as a dashed line.}
+    decreasing sweeps of Eqs.~\eqref{eq:cmt1} and \eqref{eq:cmt2}, with
+    (solid) and without (dashed) the second-harmonic mode, for
+    $N_1=N_2=\tfrac12$, $\Dom=-2\gamma_2$, $\gamma_1=\gamma_2$,
+    $\gamma_1^{\mathrm e}=\gamma_1/2$, $\alpha_3$ chosen for $R=20$, and in
+    each case a pump detuning 1.3 times the minimum for bistability (a cold
+    mismatch of $2.4\gamma_2$ in the cascaded case).
+    (d)~Ratio of four-wave-mixing efficiencies $\eta_{\mathrm{FWM}}$ with and
+    without the second-harmonic mode at equal intracavity pump energy,
+    $|\alpha_3+\alpha_{\mathrm{casc}}|^2/\alpha_3^2$ (solid), and $(1+R)^2$
+    with $R$ evaluated at each $\Dom$ (dashed), versus $\Dom/\gamma_2$ for
+    $\Dom<0$ and the same $\alpha_3$.}
   \label{fig:double}
 \end{figure}
 
-\subsection{Singly resonant metasurface and proposed measurement}
+\subsection{Singly resonant metasurface and proposed measurement}\label{sec:single}
 
 Without a pump resonance the pump field in the meta-atom is fixed by the
-incident wave.  The overlap becomes
-$\widetilde M=\int\chitwo_{ijk}f^*_{2,i}e_{1,j}e_{1,k}\,d^3r$, with
-$\mathbf e_1$ the linear pump field per unit incident amplitude, and the
-unit-cell volume replaces $\int|\f_1|^4$ in Eq.~\eqref{eq:chi3casc}.  The
-per-photon phase loses the $Q_1^2$ factor of the pump resonance and
-bistability is absent, so this structure serves as a measurement of the
-cascaded susceptibility.  We evaluate one fabricable LiNbO$_3$ design with
-full-wave simulations, compute $\widetilde M$ from its fields, and give
-$\chicasc(\Dom)$, $R$ and the single-pass phase; designs simulated so far
-reach $R$ between 2 and 10.  % to be updated for the chosen design
+incident wave.  With $\mathbf e_1$ the linear pump field per unit incident
+amplitude, the elimination of Section~\ref{sec:theory} applies with $\f_1$
+replaced by $\mathbf e_1$.  The overlap becomes
+$\widetilde M=\int\chitwo_{ijk}f^*_{2,i}e_{1,j}e_{1,k}\,d^3r$.  For a
+meta-atom much thinner than the wavelength, where $\mathbf e_1$ has a
+uniform phase, $R$ takes the form of Eq.~\eqref{eq:R} with $\etag$ replaced
+by $\eta^{(1)}$, defined as in Eq.~\eqref{eq:eta} with $\widetilde M$ and
+$\mathbf e_1$ in place of $M$ and $\f_1$ [Fig.~\ref{fig:single}(b);
+Supplement 1, Section 7].  The
+nonlinear phase per unit incident power loses the factor $Q_1^2$ of a pump
+resonance, and there is no bistability.  The local pump field and the
+native response then change little while $\Dom$ is scanned across the
+second-harmonic resonance, which makes this structure suited to measuring
+the cascaded susceptibility.
+% FOR THE DESIGN (Sedigheh): the chosen design [Fig. 4(a)]: geometry, Q2,
+% M-tilde, eta^(1), R at Domega = +-2 gamma2 (recipe in Supplement 1,
+% Section 7), the single-pass phase, and the absolute figures of merit and
+% detectability budget
+\textit{[Design: geometry, $Q_2$, $\widetilde M$, $\eta^{(1)}$, $R$ at
+$\Dom=\pm2\gamma_2$ and the single-pass phase; Fig.~\ref{fig:single}(a).]}
 
-The sign change would be measured with a closed-aperture Z-scan as a
-function of pump wavelength, which moves $2\omega_1$ across $\omega_2$, in
-analogy with the angle-tuned measurement in KTP~\cite{desalvo1992}.  The
-pulse must be longer than the second-harmonic lifetime $1/\gamma_2$, and
-its bandwidth must stay below about $2\gamma_2$.  Near a Mie resonance the
-native response alone can change the sign of the effective nonlinear
-index~\cite{panov2020}; the cascaded part is the component odd in $\Dom$ at
-fixed pump detuning, which is well defined when the pump transmission is
-flat across the scan.  The second-harmonic conversion efficiency of the
-same sample would fix the absolute value of $\widetilde M$.
+The part of the response odd in $\Dom$ would be measured with a
+closed-aperture Z-scan [Fig.~\ref{fig:single}(c)] as a function of the pump
+wavelength, which moves $2\omega_1$ across $\omega_2$, in analogy with the
+angle-tuned measurement in KTP~\cite{desalvo1992}.  The cascaded phase stays
+within 8\% of its continuous-wave value for pulses longer than
+$1.5/\gamma_2$ (intensity FWHM), about 2.5~ps for $Q_2=4000$ at
+1.55~\textmu m [Fig.~\ref{fig:single}(d)].  The beam must be wide enough
+that its angular spread stays within the angular bandwidth of the
+second-harmonic mode~\cite{overvig2022}.  Near a Mie resonance the native
+response alone can change the sign of the effective nonlinear
+index~\cite{panov2020}.  That contribution follows the pump response,
+so the cascaded part is the component odd in $\Dom$ when the pump
+transmission is flat across the scan.  The second-harmonic conversion efficiency of the
+same sample, together with the radiative part of $\gamma_2$ and the
+collection efficiency, would fix $|\widetilde M|$.
 
 \begin{figure}[htbp]
   \centering
-  \figbox{4cm}
+  \includegraphics[width=\linewidth]{figures/fig4_single.pdf}
   \caption{Singly resonant LiNbO$_3$ metasurface.
     (a)~Unit cell and second-harmonic mode profile.
-    (b)~Real (solid) and imaginary (dashed) parts of $\chicasc$ versus
-    $\Dom/\gamma_2$.
-    (c)~Simulated closed-aperture Z-scan transmission for $\Dom=\pm2\gamma_2$
-    (solid and dashed).
-    (d)~Z-scan phase for picosecond pulses, relative to its
-    continuous-wave value, versus pulse duration.}
+    (b)~Real (solid) and imaginary (dashed) parts of $\chicasc/\chinat$
+    versus $\Dom/\gamma_2$ for an illustrative value $R=3$ at
+    $|\Dom|=2\gamma_2$; the dotted line
+    is the native response.
+    (c)~Closed-aperture Z-scan transmission change of a thin
+    sample~\cite{sheikbahae1990,liu2001}, in units of the native phase
+    $\Delta\Phi_{\mathrm{nat}}$, versus the sample position $z$ in units of the
+    Rayleigh range $z_0$ ($z<0$ before the focus), for $\Dom=+2\gamma_2$
+    (solid), $\Dom=-2\gamma_2$ (dashed) and the native response alone
+    (dotted), including the nonlinear absorption of the cascade.
+    (d)~Intensity-squared-weighted Z-scan phase of the cascaded response for
+    Gaussian pulses, relative to its continuous-wave value, versus the
+    intensity FWHM of the pulse at $\Dom=2\gamma_2$, for $Q_2=10^3$ (solid)
+    and $4\times10^3$ (dashed), at a pump wavelength of 1.55~\textmu m.
+    Horizontal lines mark 0 and 1.}
   \label{fig:single}
 \end{figure}
 
-% =====================================================================
-\section{Microring resonators}\label{sec:ring}
-% about 0.8 journal page
 
-The same elimination applies to a doubly resonant $\chitwo$ microring,
-where it reproduces the cavity expression of
-Refs.~\cite{cui2022,cui2025}, and the measured second-harmonic efficiency
-fixes the coupling rate~\cite{lu2019,lu2020,zhao2022}.  For periodically
-poled thin-film LiNbO$_3$, $R\approx2.8\times10^3$ for the device of
-Ref.~\cite{lu2020} and about 13 without poling.  Since $Q_2<2Q_1$, the
-second-harmonic linewidth exceeds the pump linewidth and the modulation
-bandwidth is reduced by a few percent.  Bistability and parametric
-oscillation move from about 14~mW and 9~mW for the native response of the
-same ring to about 35~$\mu$W and 8~$\mu$W [Fig.~\ref{fig:ring}].  Thermal
-and photorefractive shifts~\cite{xu2021} are comparable to the cascaded
-shift at these powers; to leading order they are even in $\Dom$, and an
-electro-optic dither of $\Dom$ with lock-in detection at zero pump
-detuning would separate them from the odd cascaded shift.  The ring
-supports continuous-wave switching at femtojoule intracavity energy,
-cancellation of its native Kerr response, and a choice of the sign of the
-Kerr term for modulation instability and combs~\cite{tang2024,bruch2021}.
+\section{Microring resonators}\label{sec:ring}
+
+In a doubly resonant $\chitwo$ microring [Fig.~\ref{fig:concept}(c)] the
+elimination of Section~\ref{sec:theory} reproduces the cavity expression of
+Refs.~\cite{cui2022,cui2025}, measured in AlN, with the coupling rate $g$
+of the pump and second-harmonic modes in place of the overlap $M$
+(Supplement 1, Section 8).  The same rate sets the second-harmonic
+efficiency $\eta_{\mathrm{SHG}}=P_{\mathrm{SH}}/P_{\mathrm{in}}^2$ on double
+resonance, which is reported for such devices~\cite{lu2019,lu2020,zhao2022}, and
+eliminating $g$ expresses the cascaded shift of the pump resonance through
+measured quantities.  For a pump locked to its resonance and both modes
+critically coupled to the bus waveguide,
+\begin{equation}
+  \frac{\delta\omega_{\mathrm{casc}}}{\kappa_1}
+  =\eta_{\mathrm{SHG}}P_{\mathrm{in}}\,\frac{\kappa_2\Dom}{\Dom^2+\kappa_2^2}
+  \label{eq:ringshift}
+\end{equation}
+when the nonlinear loss is neglected, where $\kappa_n=\gamma_n/2$ are the
+half-widths, $P_{\mathrm{in}}$ is the input power and a positive
+$\delta\omega_{\mathrm{casc}}$ raises the resonance frequency.  Other
+couplings multiply the right-hand side by
+$(\kappa_1/2\kappa_1^{\mathrm e})(\kappa_2/2\kappa_2^{\mathrm e})$, where
+$\kappa_n^{\mathrm e}$ are the rates of coupling to the bus.
+Equation~\eqref{eq:ringshift} contains no overlap, material constant or
+mode volume: the second-harmonic power measures the nonlinear loss, and the
+ratio $\rho$ of Section~\ref{sec:limits} converts it into the shift.  For
+the periodically poled thin-film LiNbO$_3$ ring of Ref.~\cite{lu2020}, with
+$\eta_{\mathrm{SHG}}=5\times10^6$\%/W and a coupling factor of 1.6, it
+gives 0.09 half-widths, or
+17~MHz, against 0.03~MHz for the native response, at 5~\textmu W and
+$\Dom=2\gamma_2$ [Fig.~\ref{fig:ring}(b)].  This power lies below the
+parametric threshold of the ring and below the power at which
+photorefraction lowers the efficiency~\cite{lu2020}; the coupling rate
+fitted to the lineshape of the ring would give a shift 4.7 times larger.
+To our knowledge, no device has been characterised by
+$\eta_{\mathrm{SHG}}$ and the cascaded shift together; measuring the two on
+one ring would test Eq.~\eqref{eq:chi3casc} without a fitted parameter.
+Thermal and photorefractive shifts~\cite{sun2017,xu2021} are comparable
+with or larger than the cascaded shift at these powers, but even in $\Dom$
+to leading order.  An electro-optic dither of $\Dom$ with lock-in detection
+would separate the odd cascaded part (Supplement 1, Section 8), as the
+Z-scan of Section~\ref{sec:single} would in a metasurface.
+
+Relative to the native Kerr response of the same ring, $R$ lies between
+$6\times10^2$ and $2.8\times10^3$ for the device of Ref.~\cite{lu2020},
+depending on whether $g$ is taken from $\eta_{\mathrm{SHG}}$ or from the
+lineshape, and between $4\times10^2$ and $1.8\times10^3$ for a ring with
+$Q_1=10^6$ and $Q_2=3\times10^5$.  Without poling it is about 13
+[Fig.~\ref{fig:ring}(a)].  In the latter ring the parametric threshold
+falls from 9~mW for the native response to 8~\textmu W, below the
+bistability threshold of 37~\textmu W (Supplement 1, Section 8).  Because
+the sign of the Kerr term follows that of $\Dom$, one ring can provide
+either sign for modulation instability and comb
+formation~\cite{leo2016,lu2023,tang2024}.
 
 \begin{figure}[htbp]
   \centering
-  \figbox{3.5cm}
-  \caption{Periodically poled LiNbO$_3$ microring.
-    (a)~$R$ versus $Q_2$ at $\Dom=2\gamma_2$ for poled (solid) and unpoled
-    (dashed) rings; the star marks the device of Ref.~\cite{lu2020}.
-    (b)~Transmission at 30~$\mu$W input for $\Dom=+2\gamma_2$ (solid),
-    $\Dom=-2\gamma_2$ (dashed) and the native response (dotted).
-    (c)~Bistability (circles) and parametric (squares) thresholds versus
-    $Q_2$, cascaded (filled) and native (open).}
+  \includegraphics[width=\linewidth]{figures/fig5_ring.pdf}
+  \caption{Microrings.
+    (a)~$R$ versus $Q_2$ at a cold mismatch of $2\gamma_2$ for a periodically
+    poled LiNbO$_3$ ring (design B of Supplement 1, Table S2) with the
+    coupling rate scaled from the fitted value of Ref.~\cite{lu2020} (upper
+    solid line) or from its measured efficiency (lower solid line), and
+    without poling (design C, dashed), with intrinsic $Q_2$ twice the loaded
+    value.  Stars: the device of Ref.~\cite{lu2020} for the two coupling
+    rates.  Diamond: the AlN ring of Ref.~\cite{cui2025}, from its measured
+    tuning of the self-phase modulation scaled to $\Dom=2\gamma_2$.  The
+    horizontal line marks $R=1$.
+    (b)~Cascaded shift of the pump resonance of the device of
+    Ref.~\cite{lu2020} versus $\Dom$ at 5~\textmu W input, from
+    Eq.~\eqref{eq:ringshift} with the coupling factor of the device and the
+    measured efficiency (solid) and with
+    the efficiency implied by the fitted coupling rate (dashed).  Circles:
+    steady state with the pump locked to the shifted resonance, including
+    the nonlinear loss.  The pump half-width is
+    $\kappa_1/2\pi=178$~MHz.}
   \label{fig:ring}
 \end{figure}
 
-% =====================================================================
+
 \section{Discussion and conclusion}\label{sec:discussion}
-% about 0.6 journal page
 
 \begin{table}[htbp]
-  \caption{Cascaded Kerr Response on Four Platforms ($R$ at $\Dom=2\gamma_2$)}
+  \caption{\bf Cascaded Kerr Response on Five Platforms ($R$ at $\Dom=2\gamma_2$)}
   \label{tab:platforms}
   \centering
   \small
+  \setlength{\tabcolsep}{4pt}
   \begin{tabular}{llcccc}
     \hline
-    Platform & Set by & $Q_2$ & $R$ & Bandwidth & CW device \\
+    Platform & Set by & $Q_2$ & $R$ & Bandwidth & CW threshold \\
     \hline
-    Bulk PPLN & $\Delta k$ & -- & $\approx5$ & $\approx10$~THz & no \\
-    Doubly resonant metasurface & $\Dom$ & $4\times10^3$ & $\approx50$ & $\approx100$~GHz & marginal \\
-    Singly resonant metasurface & $\Dom$ & $10^3$--$6\times10^3$ & 2--10 & 0.1--0.4~THz & no \\
-    Poled LiNbO$_3$ microring & $\Dom$ & $3\times10^5$ & $\approx2\times10^3$ & $\approx0.2$~GHz & yes \\
+    Bulk LiNbO$_3$ & $\Delta k$ & -- & $\approx2$ & $>10$~THz & bistability \\
+    Doubly resonant metasurface & $\Dom$ & $4\times10^3$ & $\approx20$ & $\approx0.1$~THz & bistability \\
+    Singly resonant metasurface & $\Dom$ & design & design & design & none \\
+    AlN microring~\cite{cui2025} & $\Dom$ & $1.8\times10^5$ & $1.7$\,$^a$ & $\approx0.3$~GHz & -- \\
+    Poled LiNbO$_3$ microring & $\Dom$ & $3\times10^5$ & $4\times10^2$--$1.8\times10^3$ & $\approx0.2$~GHz & 8~\textmu W, parametric \\
     \hline
   \end{tabular}
+
+  \smallskip
+  \footnotesize Bandwidth: response bandwidth for the bulk crystal and the
+  linewidth of the narrower resonance otherwise, which is the
+  second-harmonic mode for the metasurface and the pump mode for the rings.
+  $R$ assumes $\etag=0.3$ for the doubly resonant metasurface and spans the
+  two values of the coupling rate for the microring.  CW threshold: the
+  continuous-wave instability that appears first, observed for bulk
+  LiNbO$_3$ in a cavity resonant at the pump~\cite{white1996} and predicted
+  for the metasurface.  For the microring the entry gives the input power at
+  the parametric threshold; its bistability threshold is 37~\textmu W.
+  $^a$From the measured tuning of the self-phase modulation, $-2.7$ to
+  $+4.7$ times its calculated native value at the extrema of the tuning
+  curve, $|\Dom|=\gamma_2/2$~\cite{cui2025}, scaled to $\Dom=2\gamma_2$.
 \end{table}
 
-The platforms in Table~\ref{tab:platforms} differ in what sets the cascade
-and in the bandwidth that remains.  Engineered second-order media raise
-$R$ through $|\chitwo|^2$, as in coupled quantum wells with an interband
-$\chitwo$ above $10^3$~pm/V~\cite{ramesh2026} and quantum-well
-metasurfaces~\cite{fathi2026}, provided the native third-order response,
-which is resonantly enhanced in intersubband systems~\cite{sirtori1992},
-stays small.  A detuned second-harmonic resonance turns the cascaded
-second-order response into a Kerr nonlinearity of either sign whose
-strength in LiNbO$_3$ metasurfaces and microrings exceeds the native
-response by one to three orders of magnitude.
+A detuned second-harmonic resonance gives a cascaded Kerr nonlinearity of
+either sign, whose strength is set by $Q_2$, $\Dom$ and $\etag$ and which
+depends on the host only through $F$.  In LiNbO$_3$ we estimate it at about 20 times the
+native response in a doubly resonant metasurface and several hundred to a
+few thousand times in a poled microring (Table~\ref{tab:platforms}).
+Because Eq.~\eqref{eq:sumrule} bounds the product of strength and
+bandwidth, a larger $R$ comes with a narrower bandwidth.  The
+second-harmonic linewidth, which sets the response time of the cascade, is
+about 1~GHz in the ring and 0.1~THz in the metasurface, and bulk cascading,
+which is weaker, extends beyond 10~THz.  Of the three, the metasurface is
+the only sub-micrometre layer addressed from free space, and its response
+is fast enough for picosecond pulses.
+% FOR THE DESIGN (Sedigheh): outlook on applications (picosecond all-optical
+% modulation with a sign set by Domega, thin films with cancelled or reversed
+% Kerr response) once the design and its absolute figures of merit are known.
+Engineered second-order media would raise $R$ through
+$|\chitwo|^2$, as in coupled quantum wells with an interband $\chitwo$ above
+$10^3$~pm/V~\cite{ramesh2026} and quantum-well
+metasurfaces~\cite{fathi2026}, provided the native response and the
+absorption near the band edge~\cite{sheikbahae1991}, which also limit the
+second harmonic, stay small.
 
-% =====================================================================
 \begin{backmatter}
 \bmsection{Funding}
-% generated from Prism at submission
 
 \bmsection{Disclosures}
 The authors declare no conflicts of interest.
 
 \bmsection{Data availability}
-Data underlying the results presented in this paper are not publicly
-available at this time but may be obtained from the authors upon
-reasonable request.
+Write here something.
 
 \bmsection{Supplemental document}
-See Supplement 1 for supporting content.
+See Supplement for supporting content.
 \end{backmatter}
 
 \bibliography{refs}
